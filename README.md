@@ -70,7 +70,8 @@ to its host system, to keep bitrot to a minimum; and that interface
 must be completely defined in a human-readable form, so that, even
 after bitrot has happened, it is possible to recover from it.  So its
 codebase must be written in a very different fashion from ordinary
-codebases.
+codebases.  It's something more like a demoscene diskmag than a modern
+software development project.
 
 explorable explanations
 -----------------------
@@ -118,7 +119,7 @@ although probably a factor of three in that is due to me hacking the
 PDF renderer together over the course of a few days without
 understanding the PDF format or the ReportLab library very well.
 
-[a popular video on there of J Balvin performing Rojo]: https://youtu.be/_tG70FWd1Ds
+[a popular video on there of J Balvin performing a song called Rojo]: https://youtu.be/_tG70FWd1Ds
 
 This tight download budget makes it fairly easy to download copies of
 Dercuano, and reduces the temptation to delete them to save space; and
