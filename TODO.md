@@ -1,3 +1,5 @@
+Here's the plan based on my previous BubbleOS notes:
+
 - import a snapshot of Yeso to get started on drawing something
     - prune stuff I won't use, like the Python binding
 - bottom-up approach:
@@ -70,47 +72,3 @@ It's not clear exactly what the top-down view looks like, either.  I'm
 pretty sure I want something mostly web-browserish for the user
 interface, but without so much cruft; maybe IMGUI will simplify
 matters somewhat.
-
-How about a pure functional approach?  An image is, perhaps, a
-function from (x, y) to (r, g, b), perhaps augmented with an aspect
-ratio (max x?); an animation is a function from time to images; a
-function is some code and some closed-over data; a graphical user
-interface state is an image or, perhaps, an animation, and a function
-from input events (such as mouse and keyboard events, but perhaps also
-idle time and timer expiry) to new states.  Such definitions permit
-caching, checkpointing, undo, rendering frames in parallel,
-interrupting computations, and resampling, but no real composition ---
-no way to provide a GUI state as a parameter to another GUI state.
-
-The function to render a character-cell display is pretty simple:
-
-    def pixat(x, y):
-        row, xoff = divmod(x * cols, 1)
-        col, yoff = divmod(y * rows, 1)
-        glyph = font[text[row][col]]
-        return glyph[round(xoff * font.height)][round(yoff * font.width)]
-
-This is closed over variables `cols`, `rows`, `font`, and `text`.
-
-For composition of computations with arbitrary machine code, we need
-ways for a computation to produce more output than just an image and
-take more diverse input than just keyboard and mouse events.  A
-capability to spawn child computations --- write output files, in
-effect --- would go some distance, but that only supports fanout, not
-the much more ubiquitous fanin.  You need some kind of way to provide
-an existing computation as an argument to another computation, and the
-user interface affordances for this need to work in a more efficient
-way than simply iterating over all computations that exist, querying
-each one in turn.
-
-A simple approach would be Golang-interface-like duck typing, where to
-request an object as input you specify a list of method names (or
-method type signatures) you want the object to support, and only
-objects supporting all of these methods are offered to the user as
-options.  In some cases these may just be things like "asString" or
-"asImage".  To support backward compatibility, you might be able to
-accept N different interfaces instead of just one.
-
-A potentially more satisfying approach would be to make data files,
-rather than stateful computations, the fundamental objects of the
-world, but prescribe a FlatBuffers-like layout.
