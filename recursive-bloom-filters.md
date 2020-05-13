@@ -77,7 +77,7 @@ typical values of *k* are also about 2 to 16.
     bloom = lambda m, k, e: ([1 if any(bh(i, ej) % m == p
                                        for i in range(k) for ej in e) else
                               0 for p in range(m)], k)
-    in_bloom = lambda (bits, k), e: all(hash((i+1)*hash(e)) % len(bits) == 1
+    in_bloom = lambda (bits, k), e: all(bh(i, e)) % len(bits) == 1
                                         for i in range(k))
 
 As [Norm Hardy explains][1], there are a lot of nice tricks you can do
