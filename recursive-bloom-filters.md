@@ -60,24 +60,35 @@ that contains the single line with that hashtag.
 Bloom filter background
 -----------------------
 
-A Bloom filter is a bit vector.  An _m_-bit Bloom filter for _n_ keys
-_e_₀, … _e_ₙ₋₁ with _k_ independent hash functions _h_₀, … _h_ₖ₋₁ such
-that ∀_i_, _j_: _hᵢ_(_eⱼ_) ∈ [0, _m_) is a vector of _m_ bits _bₚ_
-which are 1 precisely when ∃_i_, _j_: _hᵢ_(_eⱼ_) = _p_, but 0
-otherwise.  That’s all!  You can see that if the _hᵢ_ are random
-enough and _m_ is large enough, then for some key _d_ not in the set,
+A Bloom filter is a bit vector.  An *m*-bit Bloom filter for *n* keys
+*e*₀, … *e*ₙ₋₁ with *k* independent hash functions *h*₀, … *h*ₖ₋₁ such
+that ∀*i*, *j*: *hᵢ*(*eⱼ*) ∈ [0, *m*) is a vector of *m* bits *bₚ*
+which are 1 precisely when ∃*i*, *j*: *hᵢ*(*eⱼ*) = *p*, but 0
+otherwise.  That’s all!  You can see that if the *hᵢ* are random
+enough and *m* is large enough, then for some key *d* not in the set,
 you can usually find some bit in the filter that is 0, but would have
-been 1 if _d_ were in the set; but some false-positive probability
-always exists, depending on _k_ and the load factor _f_ (the fraction
-of 1 bits), specifically _f<sup>k</sup>_.  Typical values of the
-bits-per-element parameter _c_ = _m_/_n_ range from 2 to 16, and
-typical values of _k_ are also about 2 to 16.
+been 1 if *d* were in the set; but some false-positive probability
+always exists, depending on *k* and the load factor *f* (the fraction
+of 1 bits), specifically *f<sup>k</sup>*.  Typical values of the
+bits-per-element parameter *c* = *m*/*n* range from 2 to 16, and
+typical values of *k* are also about 2 to 16.
+
+    bh = lambda i, e: hash((i+1)*hash(e))  # circumvent Python's weak hash()
+    bloom = lambda m, k, e: ([1 if any(bh(i, ej) % m == p
+                                       for i in range(k) for ej in e) else
+                              0 for p in range(m)], k)
+    in_bloom = lambda (bits, k), e: all(hash((i+1)*hash(e)) % len(bits) == 1
+                                        for i in range(k))
 
 As [Norm Hardy explains][1], there are a lot of nice tricks you can do
 with Bloom filters.  Two of the relevant ones are unioning and
 folding.
 
 [1]: http://www.cap-lore.com/code/BloomTheory.html
+
+    def bloom_union((bits_a, k_a), (bits_b, k_b)):
+        assert k_a == k_b
+        return [ai | bi for ai, bi in zip(bits_a, bits_b)], k_a
 
 You can OR several Bloom filters together, with or without a bit shift
 or bit rotation; the result is a Bloom filter with a higher load
