@@ -16,6 +16,18 @@ Cortés rode into Tenochtitlán.  It might be more like Cambodia’s
 experience of the Vietnam War than the US’s.  Things may change more
 than you expect.  The US may not survive.
 
+As [Annalee Newitz writes in the New York Times of the Bronze Age
+Collapse](https://www.nytimes.com/2020/05/11/opinion/sunday/coronavirus-inequality-history.html):
+
+> When their cities were swallowed by fire, the Bronze Age ruling
+> classes lost everything, including the subjects they once
+> controlled.  Greece’s population dropped by roughly 50 percent
+> during this time, probably because of a combination of war, drought
+> and migration, according to Sarah Murray, a classics professor at
+> the University of Toronto and author of “The Collapse of the
+> Mycenaean Economy.”  Mr. Cline believes that plagues may have driven
+> people into the hinterlands, too.
+
 It’s hard to estimate the probability of such a country-destroying
 disaster, so it’s tempting to just dismiss the possibility out of hand
 as outlandish — nothing like that could possibly happen, since the US
