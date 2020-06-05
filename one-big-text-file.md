@@ -31,7 +31,8 @@ searching for the field name followed by square brackets — everything
 on top of that is added by the askSam query language.  A full-text
 index makes relatively powerful queries acceptably fast.
 
-Darius Bacon’s Doe and Halp systems automatically re-evaluate all the
+Darius Bacon’s Alph (A literate programming hack)
+and Halp systems automatically re-evaluate all the
 specially-marked code in a document upon demand, placing the resuls of
 each snippet after the snippet itself.
 
@@ -82,16 +83,95 @@ difficult to version-control with systems like Git, it’s awkward to
 reuse code, and normally you have to start out the notebook with a
 bunch of preliminary noise like module imports.
 
-ObservableHQ is an exploration of how the notebook interface could be
+"Explorable explanations" are, mostly, web pages containing
+interactive visualizations of algorithms; the best ones I've seen are
+Amit Patel's, for example his [visualization of A* pathfinding][0] or
+of [generating terrain with Perlin noise][1].  Mike Bostock, the
+author of d3.js, has written [many excellent explorable explanations
+as well][2].  The objective is to explain how a given algorithm works
+by means of exhibiting its internal functioning on example data.  Bret
+Victor has explored much of this territory as well, for example with
+his visualization of Nile, and articulated guiding principles for the
+field: that people engaging in creativity should be able to get
+instant feedback on the implications and results of their ideas.
+
+[0]: https://www.redblobgames.com/???XXX
+[1]: https://www.redblobgames.com/???XXX
+[2]: https://bl.ocks.org/???XXX
+
+ObservableHQ is Mike Bostock's exploration
+of how the notebook interface could be
 improved.  It uses a slight extension of JS as its language, its cells
 each define a single value, and like Lotus 1-2-3, they are evaluated
 in dependency order.
 
-R-Markdown XXX
+Yihui Xie's R-Markdown is a system (included in the free-software R
+Studio, but also invocable from the command line) which extends
+Markdown with embedded chunks of code in the R statistical programming
+language and textual and graphical output produced by that code; the
+code is optionally not visible in the output (echo=FALSE).  By
+default, this "knitting" of the source R-Markdown document into a PDF
+or HTML output with the graphics is a batch process, but for some time
+R Studio has also had the option to evaluate these embedded code
+blocks interactively with control-shift-enter, sending its output to
+the R Studio console pane.  Because the chunks are normally run in
+order, it is up to the author to track the dependencies between them
+and topologically sort them in the file and to re-execute dependent
+chunks when changing a thing they depend on.
 
-Explorable explanations XXX
+However, recent version of R Studio have added an "R Notebook" mode
+which displays the outputs of code blocks inline in an R-Markdown
+document (whether textual or graphical), instead of in a separate
+pane.  Rerunning the code and thus updating these outputs after
+changing the code continues to require an explicit run-current-chunk
+command, so the author is still responsible for keeping track of the
+dependencies.
 
-make XXX
+Unlike Jupyter, R Studio stores the output from the embedded code in a
+separate file: an "R notebook" named foo.Rmd will have an accompanying
+foo.nb.html which includes the text and graphics generated from it,
+while foo.Rmd itself contains only the human-authored source code.
+Xie's explicit ambition is to improve the reproducibility of
+computational research.
+
+Stu Feldman's `make` program, included with the UNIX operating system
+for the PDP-11, is directed at accelerating the feedback programmers
+need to improve their programs: by caching the results of compiling
+parts of the program, automatically determining which parts of the
+program have been edited since they were last compiled, `make` can
+greatly accelerate the process of rebuilding the program after a small
+change.  It does this in an almost wholly compiler-agnostic fashion:
+like ObservableHQ, it only knows how to produce each of the
+intermediate results in the build process by invoking some opaque
+code, and what the inputs to that code are.  `make` does this at the
+granularity of files and batch program invocations, while ObservableHQ
+does it at the granularity of variables and snippets of code, but
+modern software like Lucet can reduce the overhead of starting and
+stopping a program to under 100μs, while modern software like
+FlatBuffers or HDF can reduce the overhead of a program consulting
+serialized input data structures to a minimum.
+
+A limitation of `make` is that its knowledge of dependencies is not
+reliable --- it relies on the programmer to describe the dependencies
+in a "Makefile", but usually the Makefile fails to capture the full
+dependency graph.  For example, it is common for `make` to be unaware
+that an object-code file depends on header files within a project
+describing the ABI of other object-code files, a case for which
+various "makedepend" systems have been devised; also, though, the
+object-code files depend on system header files external to the
+project and on the version of the compiler used, in the sense that
+different object code would be emitted if the compiler or system
+header files had been a different version.  The fallback response to
+all of these problems is `make clean`, a conventional phony build
+target whose "build rule" deletes all the files created by the whole
+build process so that a subsequent execution of `make` will regenerate
+everything from the virgin source code.
+
+Other build systems, such as Apollo DSEE, its imitation Vesta, their
+imitation ClearCase, Nix/Guix, Gitlab-CI, Urbit, and the popular
+Docker, instead run the build steps in an environment more or less
+isolated from anything that isn't explicitly provided to that build
+step as an input.  XXX
 
 Design
 ------
