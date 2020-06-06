@@ -1,8 +1,8 @@
 Watching the YouTube channel of Espacio de César, I was amused to see
-him describe a "homemade 8-bit variac" ("variac casero de 8 bits").
+him describe a “homemade 8-bit variac” (“variac casero de 8 bits”).
 He suggests winding 8 secondaries of different sizes on a single
 transformer whose primary is connected to 240 VAC: one that produces 1
-VAC, one that produces 2 VAC, and so on up to 128 VAC.  (He's using a
+VAC, one that produces 2 VAC, and so on up to 128 VAC.  (He’s using a
 microwave-oven transformer, but recommends using a smaller one
 instead.)  By connecting these to 8 pairs of banana-plug terminals in
 a metal box, you get a sort of variac; for example, if you want 42
@@ -35,7 +35,7 @@ segments are 1 V and 2 V, you get 1, 2, and 3 VAC with three
 terminals; a second winding with three terminals whose two segments
 are 7 and 14 volts gives you all voltages from 1 to 24 volts AC; a
 third winding of 49 and 98 volts gives you all voltages from 1 to 171
-VAC.  That's 9 terminals; a fourth center-tapped winding, with 343 and
+VAC.  That’s 9 terminals; a fourth center-tapped winding, with 343 and
 686 volts in its segments, bringing us to 12 terminals as before,
 might then bring us from 1 to 1200 volts AC in one-volt steps.  Or we
 could use a fourth 343-volt winding with no center-tap and get up to
@@ -49,7 +49,7 @@ volts between its six different pairs of terminals.  A second
 four-terminal winding with 13, 39, and 26 volts on its segments gets
 us 1-84 volts.  A third winding with 169, 507, and 338 volts on its
 segments gets us 1-1098 volts, with the same 12 terminals that would
-give us 1-64 volts with César's binary scheme, 1-364 volts with the
+give us 1-64 volts with César’s binary scheme, 1-364 volts with the
 balanced-ternary scheme, or 1-1200 volts with the single-center-tapped
 scheme.
 
@@ -60,11 +60,11 @@ though, and it uses less jumper wires: you can reach any voltage up to
 1098 volts with only two jumpers instead of the three you might need
 with the single center-tap.
 
-One-volt precision is maybe more important when you're at 2 or 3 volts
-than when you're at 950 volts, so it would be nice if we could
+One-volt precision is maybe more important when you’re at 2 or 3 volts
+than when you’re at 950 volts, so it would be nice if we could
 separate the voltage levels a bit more at higher voltages;
 unfortunately, the voltages on the various secondary windings do sum
-linearly, so you can't avoid this completely.  But if you have one
+linearly, so you can’t avoid this completely.  But if you have one
 winding with segments of 1, 3, and 2 V and a second one with segments
 of 15 and 30 V, then you can do any one-volt voltage from 1-6 volts,
 9-21 volts, 24-36 volts, and 39-51 volts, with just seven terminals
@@ -82,7 +82,7 @@ and a single jumper.
     combos([subs([1, 3, 2]), subs([13, 39, 26]), subs([169, 507, 338])]
         ) == set(range(-1098, 1099))
 
-I don't think we can do better by connecting triples of windings
+I don’t think we can do better by connecting triples of windings
 together in a Y configuration, like some BLDC motors, because the
 1-3-2 setup already gives us six distinct voltages for the six
 distinct pairs of terminals, and they cover a contiguous range of
@@ -115,7 +115,7 @@ and low voltages by putting two separate transformers in the box, one
 fed from the power line with two to four terminals on its secondary
 brought out to the front panel, and a second transformer connected
 only to front-panel terminals, perhaps with two windings with three or
-four terminals each, either of which can be connected as a "primary"
+four terminals each, either of which can be connected as a “primary”
 to the secondary of the first transformer.  One reasonable winding
 configuration for the second transformer might be turns numbers of
 1n-3n-2n on one winding and 10n-18n on the other.  This affords 18
@@ -175,9 +175,9 @@ Or, as decimal approximations:
                                                1])))
 
 Note that this still requires only 10 terminals: three on the main
-transformer's secondary winding, four on the auxiliary transformer's
-low-turns winding, and three on the auxiliary transformer's high-turns
-winding.  Like the single-transformer "practical" configuration
+transformer’s secondary winding, four on the auxiliary transformer’s
+low-turns winding, and three on the auxiliary transformer’s high-turns
+winding.  Like the single-transformer “practical” configuration
 described above, it also requires four windings and at most two
 jumpers; it can produce fewer distinct voltages (only 111 instead of
 153) but they are spaced out in a much more useful fashion: no more
@@ -194,11 +194,11 @@ The above ignores the possibility of using the windings on the second
 transformer in autotransformer mode, so a larger number of
 configurations is actually possible; for example, you could hook up 14
 volts to the 10n-turn winding segment and get 25.2 volts off the
-18n-turn winding segment, a number which isn't in the above list.
+18n-turn winding segment, a number which isn’t in the above list.
 This relies on the primary transformer to provide galvanic isolation,
 which ought to be fine.
 
-It's somewhat dubious whether you'd really want to use the higher
+It’s somewhat dubious whether you’d really want to use the higher
 voltages on such a gadget; they might need to be insulated to a degree
 that would make them impractical for the high currents encountered at
 low voltages.
@@ -221,7 +221,7 @@ This possibility of 1n, 8n, 57n, and 64n turns on the primary could be
 seen as a selectable multiplier of the secondary voltage: respectively
 64, 8, 64/57 (about 1.12), and 1.  Suppose that when the primary side
 is set to 8x, the medium voltage, the secondary side is like the
-low-voltage setup described above under "A practical configuration": a
+low-voltage setup described above under “A practical configuration”: a
 first winding of segments of ½, 1½, and 1 volts and a second winding
 of segments of 8, 24, and 16 volts.  This gives you ½-volt resolution
 for 0-3 volts, 5-11 volts, and 13-19 volts, and 2-volt-or-better
@@ -232,23 +232,23 @@ the same secondary-side configurations give you 62.5-millivolt
 resolution from 0-375 mV, 625 mV-1.375 V, and 1.625-2.375 V, and
 ¼-volt-or-better resolution up to 6.375 volts.
 
-Or, if you set the primary side to 64x --- connecting only the middle
-segment of the primary winding --- you get 4-volt resolution for 0-24
+Or, if you set the primary side to 64x — connecting only the middle
+segment of the primary winding — you get 4-volt resolution for 0-24
 volts, 40-88 volts, and 104-152 volts, and 16-volt-or-better
 resolution up to 408 VAC.  Ideally this 64x setting would be protected
-somehow so you didn't do it by accident.  There's probably a reason
-they don't make power variacs with two sliders...
+somehow so you didn’t do it by accident.  There’s probably a reason
+they don’t make power variacs with two sliders...
 
 Since 63 millivolts to 408 volts is an unreasonably large range for a
-single apparatus --- 100 watts at 408 volts is only 250 mA, while at
-63 millivolts it would be SIXTEEN HUNDRED AMPS --- maybe a better
+single apparatus — 100 watts at 408 volts is only 250 mA, while at
+63 millivolts it would be **sixteen hundred amps** — maybe a better
 choice is to use a single four-terminal winding on the secondary side.
 It could be wired, say, 2-5-4, which can produce multipliers [2, 4, 5,
 7, 9, 11], and windings on the primary side could be configured, say,
 5n-2n-11n, providing divisors of 2n, 7n, 13n, and 18n, since 11n and
 5n are inaccessible with the two-lightswitch configuration.  This
-design is amusingly analogous to a trucker's 4×6 gearshift, except
-that truckers' gear ratios are a lot closer together.
+design is amusingly analogous to a trucker’s 4×6 gearshift, except
+that truckers’ gear ratios are a lot closer together.
 
 If we set the lowest available voltage here to 1 VAC (2 on the
 secondary, 18n on the primary), then our 23 available voltages are
@@ -259,7 +259,7 @@ secondary, 18n on the primary), then our 23 available voltages are
     sorted([round(9*v/d, 2) for v in subs([2, 5, 4]) for d in [2, 7, 13, 18]])
 
 This is an entirely reasonable set of voltages for a ghettobotics lab
-benchtop power supply, except that they're AC voltages.  If you
+benchtop power supply, except that they’re AC voltages.  If you
 rectify these voltages and charge capacitors with them, they get
 higher by a factor of 2<sup>½</sup>: 1.41, 1.96, 2.83, 3.54, 3.64,
 3.92, 4.9, 4.95, 6.36, 6.85, 7.27, 7.78, 8.81, 9.09, 10.77, 12.73,
@@ -269,20 +269,20 @@ This approach is also a lot more windings-efficient than the approach
 of varying only the secondary windings: it never uses less than 11% of
 the primary windings nor less than 18% of the secondary windings, so
 the transformer never needs to be more than about six times bigger
-than the minimal 50Hz transformer for whatever you're doing at the
+than the minimal 50Hz transformer for whatever you’re doing at the
 moment.  By contrast, with windings of 1V, 3V, 9V, and 27V, the
 balanced ternary approach is using 2.5% of its secondary windings when
-it's outputting 1V.  Normally the primary and secondary windings need
+it’s outputting 1V.  Normally the primary and secondary windings need
 to be about the same size because their cross-sectional areas per turn
 vary in nearly exact proportion to their numbers of turns, so at 1 V
 it can only carry 1/40 of its maximum power.
 
-What's the actual turns ratio n?  If our input is 240VAC, it's about
+What’s the actual turns ratio n?  If our input is 240VAC, it’s about
 26.67: say, 133 turns, 53 turns, and 293 turns in the three segments
 of the primary, if the secondary is actually wired with 2 turns, 5
-turns, and 4 turns.  If you're winding the transformers by hand, using
+turns, and 4 turns.  If you’re winding the transformers by hand, using
 an additional stepdown transformer (or two!) would be a great idea,
-just so you don't have to thread a wire through your transformer core
+just so you don’t have to thread a wire through your transformer core
 over 900 times.  This, though, suggests a return to the approach of
 the previous section, wherein each winding gives you an opportunity to
 reconfigure.
@@ -301,7 +301,7 @@ hook up the output socket to it.  No jumper wires and no possibility
 of shorting a winding with them.  What does *that* look like?  What
 kind of turns ratios can it give us?
 
-I'm tired of designing, so I generated the random configuration ([25,
+I’m tired of designing, so I generated the random configuration ([25,
 9, 32], [5, 2, 11], [25, 24, 28], [7, 2, 12]).  That is, the first
 transformer has a primary winding with a 25-turn segment, an 9-turn
 segment, and a 32-turn segment, and a secondary winding with a 5-turn
@@ -322,7 +322,7 @@ core.)  What possibilities does this offer?
 
     config(20), config(10), config(20), config(10)
 
-I'm tired of calculating too, so I wrote code to calculate.
+I’m tired of calculating too, so I wrote code to calculate.
 
     spdt = lambda (a, b, c): sorted([b, a+b, b+c, a+b+c])
 
@@ -374,7 +374,7 @@ Specifically, the output voltages are 0.189 0.280 0.297 0.304 0.367
     ' '.join('%.3f' % float(f) for f in rs)
 
 This randomly generated configuration is maybe not a super great
-design but it's in some sense reasonable.  Half the values are below
+design but it’s in some sense reasonable.  Half the values are below
 12 volts, there are 256 distinct values, the values are mostly only a
 couple percent apart in the middle of the range, and the range covers
 over three orders of magnitude.  Over most of the range the design has
@@ -384,5 +384,5 @@ error on the mains voltage.
 This is kind of overkill, although the transformers are much more
 manageable.  Maybe a single SPDT per winding with a single center tap
 on each winding and two center taps on the final output would be
-adequate: three lightswitches to "select a range" and then four output
+adequate: three lightswitches to “select a range” and then four output
 terminals to give you six voltages simultaneously, 48 settings in all.
