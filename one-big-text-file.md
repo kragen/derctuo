@@ -260,6 +260,12 @@ allows ideas to gradually be solidified and explored: from
 back-of-the-envelope calculations through sketches and simple
 simulations through to refactoring into reusable parameterized models.
 
+A crucial question for navigation is how interactive searching of
+outputs works.  If you stick to searching only the source-code form of
+the file, searching can be very fast, but in many cases you will be
+missing the most interesting data.  On the other hand, that data can
+be immense and full of things that are essentially random noise.
+
 Interactivity and persistence
 -----------------------------
 
@@ -311,6 +317,10 @@ could even be sufficient for taking photos.  (There’s no reason the
 fragment needs to be limited in size like URL fragments traditionally
 are.)
 
+The fragment itself is part of the source format document, just a part
+that can be edited by the widget’s embedded code, subject to the
+restrictions above about undo and the like.
+
 Methods other than “paint” and “react” could provide requested layout
 sizes or render the “widget” as a series of boxes rather than a single
 window onto a canvas.
@@ -325,6 +335,14 @@ for further calculations elsewhere in the document!  And you want to
 be able to feed the circuit you’ve modeled to other analysis functions
 that you write on the fly.  You want the data to be open and
 accessible, not sealed inside an opaque Actor.
+
+Darius Bacon points out that if the “fragment” state is some more
+structured thing, such as a state of, say, a relational database, it
+might be easier to deal with the opacity problem.  Maybe it would be
+easy enough to say something like `drawing2.points[3].x` elsewhere in
+the document.  (Formats other than relational data might be usable
+too, such as JSON structures, but they tend to vary more over time as
+navigational data is included.)
 
 ### Blossoming forms ###
 
