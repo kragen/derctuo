@@ -137,8 +137,8 @@ that the comment was heard, “I feel like this is designing a weapon or
 something.”
 
 A Galaxy A10 (30 million sold in 02019) has 2 GiB of RAM and eight
-Cortex-A cores running at 1.35 to 1.6 GHz, capable in all of a bit
-over 10 billion 64-bit multiply-accumulate operations per second, plus
+Cortex-A cores running at 1.35 to 1.6 GHz, capable in all of perhaps
+20 billion 64-bit multiply-accumulate operations per second, plus
 a Mali-G71 MP2 GPU, which I think is about 50 gigaflops on two cores.
 A 1980s video-game might have 1 MiB of RAM and execute a million
 16-bit multiply-accumulates per second.  So the performance overhead
@@ -424,6 +424,10 @@ Disassembly shows that GCC compiles the switch with a jump table.  (I
 admit I spent another half hour after those 96 minutes looking to see
 why it was so slow...)
 
+However, an important caveat here: because this virtual machine
+implementation does not bounds-check memory accesses, it fails to be
+deterministic.
+
 In theory, someone implementing Veskeno will not have to write and
 debug the Fibonacci program and other test programs as they are
 writing their virtual machine, much less revise the definitions of the
@@ -431,7 +435,7 @@ instructions as they go; instead they can, hopefully, assume that the
 instruction set is adequate, the test cases are correct, and any bugs
 are in their interpreter.  This should speed up their programming.  In
 the past when I’ve implemented simple virtual machines such as Chifir
-and Brainfuck, it’s taken me under an hour.  (Well, but my Chifir
+and Brainfuck, it’s taken me under an hour.  (But, well, my Chifir
 implementation had a bug I didn’t notice for months, and it might
 still have others.)
 
@@ -496,8 +500,8 @@ No vector-valued registers
 
 Numpy can typically easily achieve about 20% of C performance on
 mainstream hardware today, despite the slowness of the CPython
-interpreter, because the inner loops are in C.  One design considered
-for Veskeno used vector-valued registers and RAM — each register or
+interpreter, because the inner loops are in C.  [One design considered
+for Veskeno](vector-vm.md) used vector-valued registers and RAM — each register or
 memory cell could hold a vector of very large size, and Veskeno would
 provide SIMD instructions like Numpy’s operations.  Thus the
 interpretive overhead of a simple bytecode interpreter loop would be
@@ -520,6 +524,16 @@ The plan is currently not to take this direction, for three reasons:
    slowdown, and Veskeno is aimed at an interpretive slowdown of
    131072× or less.
 
+Not counted here is the serial-computation slowdown, which [is
+estimated](vector-vm.md) at 32×.  Above I estimated that a Samsung
+Galaxy A10, for example, can do about 70 billion multiply-accumulate
+operations per second, but single-threaded unvectorized code on it
+won't get more than about 1.6 billion, 44 times slower; out-of-order
+processors with more execution units close the gap a little.  It would
+not be surprising for a virtual machine that exploits such data
+parallelism to exceed the speed of optimized single-threaded
+unvectorized C.
+
 Multiplication and division?
 ----------------------------
 
@@ -527,11 +541,13 @@ I’m not yet sure whether Veskeno should have a multiplication
 instruction or instructions.  Most modern processors have a
 single-cycle multiplier, and replacing that with a subroutine call is
 a heavy performance penalty for programs that do a lot of
-multiplication.
+multiplication, on the order of 32× to 64×.
 
 However, multiplication can and often does overflow (a whole word’s
-worth of bits rather than just one), and signed and unsigned
-multiplication are different, so supporting multiplication is not as
+worth of bits rather than just one), requiring separate instructions
+for the low and high word of the results,
+and signed and unsigned
+multiplication are different; so supporting multiplication is not as
 low-risk as supporting addition or subtraction.
 
 Veskeno probably should not have a division instruction for several
@@ -554,6 +570,20 @@ has good compiler support may be the best approach.  Supporting 64–128
 distinct instructions may be enough, perhaps even using very simple
 techniques that in effect simulate the registers and flags of the
 target processor.
+
+I/O operations and determinism
+------------------------------
+
+PGP and GnuPG have historically used I/O operations to generate
+cryptographically random key bits: for example, by measuring the
+latency of electromechanical disk requests, which are influenced by
+turbulence inside the disk drive, they can produce XXX
+
+timers
+
+games
+
+keystrokes
 
 Related work
 ------------
