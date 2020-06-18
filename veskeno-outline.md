@@ -136,19 +136,6 @@ tradeoffs, one so alien to modern mainstream virtual machine design
 that the comment was heard, “I feel like this is designing a weapon or
 something.”
 
-A Galaxy A10 (30 million sold in 02019) has 2 GiB of RAM and eight
-Cortex-A cores running at 1.35 to 1.6 GHz, capable in all of perhaps
-20 billion 64-bit multiply-accumulate operations per second, plus
-a Mali-G71 MP2 GPU, which I think is about 50 gigaflops on two cores.
-A 1980s video-game might have 1 MiB of RAM and execute a million
-16-bit multiply-accumulates per second.  So the performance overhead
-budget here is about a factor of 2048 in space and a factor of some
-131072 in time, though of course greater speed and less overhead would
-be desirable, since it would make much more elaborate computations
-reproducible.  Typical straightforward low-level virtual machines can
-achieve time overhead factors of 3–20 and space overhead of 1.1–4, but
-we don’t have to come close to that.
-
 ****
 
 † Conventionally these results are stated for batch-mode algorithms
@@ -161,6 +148,41 @@ report) and eventually produces a new state and perhaps some output.
 interrupt-driven I/O is less straightforward but in principle possible
 by treating these new sources of nondeterminism as more kinds of input
 events.)
+
+A note about hardware performance
+---------------------------------
+
+A Galaxy A10 (30 million sold in 02019) has 2 GiB of RAM and eight
+Cortex-A cores running at 1.35 to 1.6 GHz, capable in all of perhaps
+20 billion 64-bit multiply-accumulate operations per second, plus
+a Mali-G71 MP2 GPU, which I think is about 50 gigaflops on two cores.
+A 1980s video-game might have 1 MiB of RAM and execute a million
+16-bit multiply-accumulates per second.
+
+So the *throughput* performance overhead
+budget here is about a factor of 2048 in space and a factor of some
+131072 in time, though of course greater speed and less overhead would
+be desirable, since it would make much more elaborate computations
+reproducible.  Typical straightforward low-level virtual machines can
+achieve time overhead factors of 3–20 and space overhead of 1.1–4, but
+we don’t have to come close to that; moreover Veskeno is serial,
+imposing another factor of 16–64 of overhead on the throughput unless
+some kind of parallelism is possible.  This leaves us some 128× of
+performance headroom.
+
+A typical 1980s video-game might run on a 6502 like the 1.79MHz one in
+a Nintendo; [a multiply routine for the 6502] takes 130 CPU clock
+cycles to multiply 8 bits by 8 bits and get a 16-bit result, while a
+version using a table of squares takes 79–83 cycles.  At the 6502's
+max of 3 MHz this might give us 38000 8-bit multiplies per second, or
+only about 22000 on the Nintendo, working out to about 5000 16-bit
+multiplies per second; typically, though, 6502-based video-games
+paired the CPU with sprite hardware to do compositing of video-game
+characters onto a background, thus reducing the load on the CPU.  By
+the end of the 1980s, though, some video-games ran on CPUs that were
+some 256 times faster, obviating the need for sprite hardware.
+
+[a multiply routine for the 6502]: https://www.lysator.liu.se/~nisse/misc/6502-mul.html
 
 Predictable and unpredictable failure
 -------------------------------------
@@ -560,6 +582,11 @@ division instruction is less severe — both because the gap in
 performance will be smaller than for multiplication and because
 programs are already written to avoid division in hot loops whenever
 possible.
+
+I think probably the right choice is to omit multiplication from an
+initial Protoveskeno and see how far we get, then possibly add
+multiplication instructions if the lack is a sufficiently large
+performance loss.
 
 Instruction-set translation
 ---------------------------
