@@ -13,8 +13,8 @@ more orthogonal approach.
 
 Exploring this, I think I found a way to write a featureful and
 adequately fast multitasking system with memory protection on
-microcontrollers, perhaps similar to Liedtke's pre-L4 designs
-("ELAN"?); it ought to straightforwardly support paradigms like
+microcontrollers, perhaps similar to Liedtke's pre-L4 designs,
+L3 and Eumel; it ought to straightforwardly support paradigms like
 transactional shared memory, ACID transactions, and access to
 filesystem snapshots, and even helps to support clustering.
 
@@ -271,7 +271,7 @@ the instructions.  Arrays are instead treated as a separate class of
 object whose `#at:` and `#at:put:` methods are "primitives", handled
 by native code linked into the virtual machine.
 
-Smalltalk does not have a notion of "pointer-free data"; its integers,
+Smalltalk does not have a notion of "pointer-free data"; its SmallIntegers,
 characters, booleans, and symbols ("selectors") are treated as
 full-fledged objects and nominally accessed by sending them messages,
 although some of them normally are implemented by storing all their
@@ -279,9 +279,35 @@ although some of them normally are implemented by storing all their
 CPython.  Some selectors like `#ifTrue:ifFalse:` are special-cased by
 the virtual machine.
 
+(Hmm, actually maybe Smalltalk does have such a notion: "bits"
+fields.)
+
 So in a sense this is a simplification of the Smalltalk model, with
 just one uniform kind of node for instance variables, local variables,
 etc., but with storage for pointer-free bytes slapped onto the side.
+
+Kaehler & Krasner's 1982 LOOM paper describes an approach that is very
+similar in many ways, maintaining an in-RAM cache of up to
+2<sup>15</sup> "resident" objects linked together with 16-bit short
+Oops, out of a possible total of 2<sup>31</sup> objects on disk
+(occupying a maximum of 2<sup>33</sup> bytes, since it was 1982),
+linked together with 32-bit long Oops.  Nonresident objects'
+ambassadors in RAM are called "leaves".  They mention that the average
+object in their system consumes 13 words in memory (26 bytes), plus
+perhaps a couple more words in the Resident Object Table.  To save
+RAM, some short-Oop fields are just 0 ("lambda") instead of pointing
+at leaf objects, requiring LOOM to refetch the on-disk object to find
+the long Oop they're supposed to refer to.
+
+Their short-Oop mechanism is table-based, unlike HotSpot's short-Oop
+mechanism, which represents a 64-bit object pointer as a 36-bit (?)
+offset from a global heap base address, shifted right by 4 (?) bits
+and thus stored in a 32-bit word.  This permits relocation of objects
+when their 4-word leaves are replaced by full-fledged resident objects
+after being brought in from disk.
+
+It's unclear to me how LOOM's on-disk garbage collection was supposed
+to work.
 
 Running on microcontrollers
 ---------------------------
@@ -348,6 +374,26 @@ runnable processes can be migrated to whatever processor is idle, like
 on SMP.  (You could presumably do the same thing on a Linux-like
 system with a SAN, running MESI at page granularity; has anybody tried
 this?  Maybe Amoeba?)
+
+Normally, in MESI, if a cache line is in Modified or Exclusive state,
+a request from another cache to read it immediately transitions it to
+Shared state, guaranteeing forward progress.  But there are possible
+alternatives; for example, you could "lock" a block or node for
+writing, so that attempts by other processes (on the same processor or
+not) to access that block or node will have to wait until you unlock
+it.  Or, all blocks and nodes might be "copy-on-write" in the sense
+that each process writing to them has its own private copy, and all
+shared data might be immutable, with keys to new data transmitted
+explicitly via some kind of IPC mechanism, or some small safety valve
+for mutable data.  Or, writes might use compare-and-swap semantics:
+multiple processes might be writing to the same page or node at the
+same time, but when the first of them commits its write, the others
+are aborted, either immediately or when they attempt to commit.
+(Presumably they can then be automatically retried.)
+
+It's tempting to suggest that these mechanisms would make it easy to
+build highly concurrent shared mutable data structures, but history
+has not been kind to such optimistic statements.
 
 I'm not sure what the connectivity between multiple processors and the
 "disk" should look like; I²C tends to be only 400kbps, which would
