@@ -640,6 +640,72 @@ will be compiled by such compilers.  For Veskeno, the above-described
 level of nondeterminism is absolutely intolerable, even merely FMA, so
 taking advantage of hardware floating point is not an option.
 
+Exhaustive testing is desirable but probably too slow in the target scenario
+----------------------------------------------------------------------------
+
+Single-operand arithmetic instructions are feasible to test
+exhaustively; dual-operand instructions less so.  Consider this Python
+program:
+
+    #!/usr/bin/python3
+    import hashlib
+
+    def add16(a, b):
+        return (a + b) & 0xFfFf
+
+    def test_add16():
+        h = hashlib.sha256()
+        for a in range(1<<16):
+            for b in range(1<<16):
+                s = add16(a, b)
+                h.update(bytes([s & 0xff, s >> 8]))
+            if not ((a+1) & 0xf):
+                print(a)
+
+        return h.hexdigest()
+
+    if __name__ == '__main__':
+        print(test_add16())
+
+This eventually produces the output:
+
+    ca284820199ced0d15c967098f8ffc59e583a8b4120375b09ef1da4366786ca0
+
+This amounts to a compact summary of the overall behavior of the
+`add16` function; if a different function produced the same hash, we
+could be reasonably confident that its behavior on 16-bit unsigned
+numbers was the same as add16's.  And by using Merkle trees we could
+detect deviations without finishing the whole test, and, more
+important, localize them in particular parts of the input.  (A
+cross-cutting Hamming-code-like hashing strategy would permit pinpoint
+localization: with 33 hashes for different subsets of these
+2<sup>32</sup> test cases --- one for odd-numbered test cases, one for
+test cases whose ordinal number is odd when divided by 2 rounding
+downward, and so on --- we can easily determine which case is failing
+if only one is.)
+
+But this test takes 13 hours and 49 minutes of CPU time to produce
+this output on this netbook, thus testing only some 86000 addition
+operations per second.  CPython3 on this netbook is pretty close to
+Veskeno's target performance of a million multiply-accumulates per
+second, although they are 32-bit rather than 16-bit.
+
+It's conceivable that this test could be optimized by up to about an
+order of magnitude, but not by two orders of magnitude; and it's more
+likely that a similar test in Veskeno would be *much slower*, because
+SHA-256 isn't a basic operation like addition.  The corresponding
+exhaustive test for a two-operand 32-bit math operation would require
+ten orders of magnitude more computation; as mentioned before,
+2<sup>64</sup> microseconds is some 585 millennia.
+
+So exhaustive testing of, say, 32-bit addition, is probably not
+feasible at the target performance level within the target six-hour
+timeframe.  Even exhaustive testing of 32-bit negation would take
+hours.  Instead, randomized tests are probably a better fit.
+
+This is not to say that exhaustive testing has no role, just that
+faster kinds of testing are needed.
+
 No vector-valued registers
 --------------------------
 
