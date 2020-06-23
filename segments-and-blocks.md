@@ -299,15 +299,15 @@ RAM, some short-Oop fields are just 0 ("lambda") instead of pointing
 at leaf objects, requiring LOOM to refetch the on-disk object to find
 the long Oop they're supposed to refer to.
 
-Their short-Oop mechanism is table-based, unlike HotSpot's short-Oop
+Their short-Oop mechanism is table-based, unlike HotSpot's compressed-Oop
 mechanism, which represents a 64-bit object pointer as a 36-bit (?)
 offset from a global heap base address, shifted right by 4 (?) bits
 and thus stored in a 32-bit word.  This permits relocation of objects
 when their 4-word leaves are replaced by full-fledged resident objects
 after being brought in from disk.
 
-It's unclear to me how LOOM's on-disk garbage collection was supposed
-to work.
+LOOM used reference counting for garbage collection, both on disk and
+in RAM.
 
 Running on microcontrollers
 ---------------------------
