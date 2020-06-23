@@ -1975,20 +1975,20 @@ As I wrote in "bytecode interpreters for tiny computers" in 2008:
   virtual machine itself was 300 bytes of 6502 assembly, implementing
   these instructions; here "#" means "[0-F]".
 
->    0x1# SET: load immediate               0x2# LD: copy register to accumulator
->    0x3# ST: copy accumulator to register  0x4# LD: load byte indirect w/ increment
->    0x5# ST: store byte indirect w/incr    0x6# LDD: load two bytes ind w/incr
->    0x7# STD: store two bytes ind w/incr   0x8# POP: load byte indirect w/predecr
->    0x9# STP: store byte ind w/predecr     0xA# ADD: add register to accum
->    0xB# SUB: subtract register from acc   0xC# POPD: load 2 bytes ind w/predecr
->    0xD# CPR: compare register w/acc       0xE# INR: increment register
->    0xF# DCR: decrement register           0x00 RTN to 6502 mode
->    0x01 BR unconditional branch           0x02 BNC branch if no carry
->    0x03 BC branch if carry                0x04 BP branch if positive
->    0x05 BM branch if minus                0x06 BZ branch if zero
->    0x07 BNZ branch if nonzero             0x08 BM1 branch if -1
->    0x09 BNM1 branch if not -1             0x0A BK break (software interrupt)
->    0x0B RS return from sub (R12 is SP)    0x0C BS branch to sub (R12 is SP)
+>     0x1# SET: load immediate               0x2# LD: copy register to accumulator
+>     0x3# ST: copy accumulator to register  0x4# LD: load byte indirect w/ increment
+>     0x5# ST: store byte indirect w/incr    0x6# LDD: load two bytes ind w/incr
+>     0x7# STD: store two bytes ind w/incr   0x8# POP: load byte indirect w/predecr
+>     0x9# STP: store byte ind w/predecr     0xA# ADD: add register to accum
+>     0xB# SUB: subtract register from acc   0xC# POPD: load 2 bytes ind w/predecr
+>     0xD# CPR: compare register w/acc       0xE# INR: increment register
+>     0xF# DCR: decrement register           0x00 RTN to 6502 mode
+>     0x01 BR unconditional branch           0x02 BNC branch if no carry
+>     0x03 BC branch if carry                0x04 BP branch if positive
+>     0x05 BM branch if minus                0x06 BZ branch if zero
+>     0x07 BNZ branch if nonzero             0x08 BM1 branch if -1
+>     0x09 BNM1 branch if not -1             0x0A BK break (software interrupt)
+>     0x0B RS return from sub (R12 is SP)    0x0C BS branch to sub (R12 is SP)
 
 > 0x01-0x09 and 0x0C have a second byte which is a signed 8-bit
   displacement. If you want a 16-bit jump, you can push it on the
