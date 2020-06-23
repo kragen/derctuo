@@ -1,6 +1,8 @@
 An outline of the design process leading up to the Veskeno virtual machine
 ==========================================================================
 
+> ¿Ves que no?
+
 The primary goal of Derctuo is to present some calculations and
 computational simulations in a reproducible fashion, so that it is
 possible for other people to build on them.  Unfortunately, and quite
@@ -427,7 +429,7 @@ machine has 11 instructions and word-addressed memory, but I think
 Veskeno itself will have more like 16 instructions and byte-addressed
 memory.
 
-    /* Simple little RISCy bytecode interpreter as a sort of quick spike
+    /* XIS: simple little RISCy bytecode interpreter as a sort of quick spike
      * to see how fast or slow it goes.  Answer: about 20× slower than
      * GCC on the same machine.
      */
@@ -576,6 +578,9 @@ However, an important caveat here: because this virtual machine
 implementation does not bounds-check memory accesses, it fails to be
 deterministic.
 
+This program is about 20× slower than native code on my amd64 OoO
+laptop and about 40× slower on my i386 Atom in-order netbook.
+
 In theory, someone implementing Veskeno will not have to write and
 debug the Fibonacci program and other test programs as they are
 writing their virtual machine, much less revise the definitions of the
@@ -586,6 +591,29 @@ the past when I’ve implemented simple virtual machines such as Chifir
 and Brainfuck, it’s taken me under an hour.  (But, well, my Chifir
 implementation had a bug I didn’t notice for months, and it might
 still have others.)
+
+Fixed- or variable-length instructions
+--------------------------------------
+
+Variable-length instructions are more space-efficient --- the usual
+reason for them, irrelevant here --- and make it easy to include
+immediate constants of the full width of a register, thus avoiding the
+lit16/low16 hack in XIS, the RISCy spike above.
+
+Fixed-length instructions have other advantages.  They can make it
+impossible to represent invalid program-counter values, which would
+otherwise be a potential source of divergent behavior among
+implementations.  They facilitate conditional-skip instructions, which
+permit the decoupling of conditional types (equality versus ordering)
+from jump types (direct or indirect).  By making them extremely wide,
+as Chifir does, they too can contain register-sized immediate
+contents.  And they facilitate having an opcode field of less than a
+full byte, which reduces the number of tests needed for invalid
+opcodes.
+
+As with variable-length instructions, the most important advantage of
+fixed-length instructions in hardware is irrelevant for Veskeno: that
+they enormously simplify pipelined instruction decoding.
 
 No floating point
 -----------------
@@ -1095,17 +1123,900 @@ is; they say:
 
 ### Corewar Redcode ###
 
-### Wirth RISC ###
+Corewar is a game in which a multithreaded processor "MARS" runs two
+programs that try to kill each other, alternating instructions.  Like
+the Burroughs 5000, MARS tags memory words as instructions or data; a
+program that attempts to execute a data word dies.
+
+The textual Redcode assembly language is the standard format for
+specifying these programs; there is no binary program format.  The
+determinism of MARS is intentionally limited: programs are loaded at
+random starting addresses.  (Absent this measure, whichever program
+started running first could win by using its first instruction to
+store a data word in the other program's first-executed location.)
+
+### Wirth-the-RISC ###
+
+In the 1990s, Wirth became interested in the potential of FPGAs for
+realizing processor designs, especially designs simplified so as to be
+easy to teach, without losing practicality.  He produced a series of
+progressively more complex designs in Verilog, unfortunately called
+RISC0, RISC1, RISC2, RISC3, RISC4, and RISC5, and ported the Oberon
+system to run on them.  Lacking a better name, I will just call them
+"Wirth-the-RISC".
+
+Wirth-the-RISC is admirably simple, with four condition-code flags for
+conditional jumps; 16 conditions for jumps (including "always"), which
+can optionally be indirect and/or save a return address; 16
+register-to-register ALU instructions, some of which have two variants
+--- signed versus unsigned MUL, for example, and ADD with or without
+carry; load and store instructions with offsets; and, for the RISC5
+processor's interrupts, an instruction to enable or disable
+interrupts, and an instruction to return from them.  Four of the ALU
+instructions are floating-point, though my impression is that the
+processor does not rise to the level of being practical for
+floating-point work --- it has no double-precision and no square-root
+instruction.
+
+The fact that Wirth-the-RISC successfully runs the Oberon GUI is a
+testament to the practicality of this design.
+
+### SOD32 ###
 
 ### Brainfuck ###
 
-### Urbit ###
+Brainfuck is a virtual machine of Urban Müller's design; it was not
+the first of the "esoteric programming languages" (that would be
+INTERCAL) --- or even, I think, the second --- but it was in a sense
+the one that established esoteric programming languages as a genre,
+inspiring the current profusion.  The Brainfuck virtual machine is,
+like INTERCAL, deliberately difficult to program in, but unlike
+INTERCAL, implementing it is extremely easy.  One day in 2014 I sat
+down to implement it from the spec, which I think took about an hour:
+
+    /*
+     * Brainfuck interpreter.
+     */
+
+    #include <sys/types.h>
+    #include <sys/stat.h>
+    #include <fcntl.h>
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <unistd.h>
+
+    int main(int argc, char **argv) {
+      char program[10000];
+      int fd = open(argv[1], O_RDONLY);
+      if (fd < 0) {
+        perror(argv[1]);
+        return 1;
+      }
+
+      int progsize = read(fd, program, sizeof(program));
+      close(fd);
+
+      unsigned char memory[30001];
+      int pc = 0, mp = 0;
+      while (pc < progsize) {
+        /* printf("[%d]", pc); */
+        /* fflush(stdout); */
+        switch (program[pc]) {
+        case '>': mp++; pc++; break;
+        case '<': mp--; pc++; break;
+        case '+': memory[mp]++; pc++; break;
+        case '-': memory[mp]--; pc++; break;
+        case ',': read(0, &memory[mp], 1); pc++; break;
+        case '.': write(1, &memory[mp], 1); pc++; break;
+        case '[':
+          if (memory[mp]) {
+            pc++;
+            break;
+          }
+          int bc = 0;
+          do {
+            if (program[pc] == '[') bc++;
+            if (program[pc] == ']') bc--;
+            pc++;
+            if (pc >= progsize) {
+              fprintf(stderr, "unmatched [\n");
+              return 1;
+            }
+          } while (bc);
+          break;
+        case ']':
+          if (!memory[mp]) {
+            pc++;
+            break;
+          }
+          int bbc = 0;
+          do {
+            if (program[pc] == ']') bbc++;
+            if (program[pc] == '[') bbc--;
+            pc--;
+            if (pc < 0) {
+              fprintf(stderr, "unmatched ]\n");
+              return 1;
+            }
+          } while (bbc);
+          pc++;
+          pc++;
+          break;
+        default:                    /* comment! */
+          pc++;
+          break;
+        }
+      }
+      return 0;
+    }
+
+After testing some simple examples, I downloaded Linus Åkesson's
+implementation of Conway's Game of Life (pbuh, QEPD):
+
+                Linus Akesson presents:
+                       The Game Of Life implemented in Brainfuck
+
+           +>>++++[<++++>-]<[<++++++>-]+[<[>>>>+<<<<-]>>>>[<<<<+>>>>>>+<<-]<+
+       +++[>++++++++<-]>.[-]<+++[>+++<-]>+[>>.+<<-]>>[-]<<<++[<+++++>-]<.<<[>>>>+
+     <<<<-]>>>>[<<<<+>>>>>>+<<-]<<[>>>>.+<<<++++++++++[<[>>+<<-]>>[<<+>>>>>++++++++
+     +++<<<-]<[>+<-]>[<+>>>>+<<<-]>>>[>>>>>>>>>>>>+>+<<     <<<<<<<<<<<-]>>>>>>>>>>
+    >>[-[>>>>+<<<<-]>[>>>>+<<<<-]>>>]>      >>[<<<+>>  >-    ]<<<[>>+>+<<<-]>[->[<<<
+    <+>>>>-]<[<<<  <+>      >>>-]<<<< ]<     ++++++  ++       +[>+++++<-]>>[<<+>>-]<
+    <[>---<-]>.[- ]         <<<<<<<<< <      <<<<<< <         -]++++++++++.[-]<-]>>>
+    >[-]<[-]+++++           +++[>++++        ++++<     -     ]>--.[-]<,----------[<+
+    >-]>>>>>>+<<<<< <     <[>+>>>>>+>[      -]<<<      <<   <<-]>++++++++++>>>>>[[-]
+    <<,<<<<<<<->>>> >    >>[<<<<+>>>>-]<<<<[>>>>+      >+<<<<<-]>>>>>----------[<<<<
+    <<<<+<[>>>>+<<<      <-]>>>>[<<<<+>>>>>>+<<-      ]>[>-<-]>++++++++++[>+++++++++
+    ++<-]<<<<<<[>>>      >+<<<<-]>>>>[<<<<+>>>>>      >+<<-]>>>>[<<->>-]<<++++++++++
+    [>+<-]>[>>>>>>>      >>>>>+>+<<<<      <<<<<      <<<<-]>>> >>     >>>>>>>[-[>>>
+    >+<<<<-]>[>>>>       +<<<<-]>> >       ]>> >           [<< <        +>>>-]+<<<[>
+    >>-<<<-]>[->[<      <<<+>>>>-]         <[ <            < <           <+>>>>-]<<<
+    <]<<<<<<<<<<<, [    -]]>]>[-+++        ++               +    +++     ++[>+++++++
+    ++++>+++++++++ +    +<<-]>[-[>>>      +<<<-      ]>>>[ <    <<+      >>>>>>>+>+<
+    <<<<-]>>>>[-[> >    >>+<<<<-]>[>      >>>+< <    <<-]> >    >]>      >>[<<<+>>>-
+    ]<<<[>>+>+<<< -     ]>[->[<<<<+>      >>>-] <    [<<< <    +>>       >>-]<<<<]<<
+    <<<<<<[>>>+<< <     -]>>>[<<<+>>      >>>>> +    >+<< <             <<-]<<[>>+<<
+    -]>>[<<+>>>>>      >+>+<<<<<-]>>      >>[-[ >    >>>+ <            <<<-]>[>>>>+<
+    <<<-]>[>>>>+<      <<<-]>>]>>>[ -    ]<[>+< -    ]<[ -           [<<<<+>>>>-]<<<
+    <]<<<<<<<<]<<      <<<<<<<<++++ +    +++++  [   >+++ +    ++++++[<[>>+<<-]>>[<<+
+    >>>>>++++++++ +    ++<<<     -] <    [>+<- ]    >[<+ >    >>>+<<<-]>>>[<<<+>>>-]
+    <<<[>>>+>>>>  >    +<<<<     <<      <<-]> >    >>>>       >>>[>>+<<-]>>[<<+<+>>
+    >-]<<<------ -    -----[     >>      >+<<< -    ]>>>       [<<<+> > >>>>>+>+<<<<
+    <-]>>>>[-[>> >    >+<<<<    -] >     [>>>> +    <<<<-       ]>>> ]  >>>[<<<+>>>-
+    ]<<<[>>+>+<< <    -]>>>     >>           > >    [<<<+               >>>-]<<<[>>>
+    +<<<<<+>>-                  ]>           >     >>>>>[<             <<+>>>-]<<<[>
+    >>+<<<<<<<                  <<+         >      >>>>>-]<          <<<<<<[->[<<<<+
+    >>>>-]<[<<<<+>>>>-]<<<<]>[<<<<<<    <+>>>      >>>>-]<<<<     <<<<<+++++++++++[>
+    >>+<<<-]>>>[<<<+>>>>>>>+>+<<<<<-]>>>>[-[>     >>>+<<<<-]>[>>>>+<<<<-]>>>]>>>[<<<
+    +>>>-]<<<[>>+>+<<<-]>>>>>>>[<<<+>>>-]<<<[     >>>+<<<<<+>>-]>>>>>>>[<<<+>>>-]<<<
+    [>>>+<<<<<<<<<+>>>>>>-]<<<<<<<[->[< <  <     <+>>>>-]<[<<<<+>>>>-]<<<<]>[<<<<<<<
+    +>>>>>>>-]<<<<<<<<<+++++++++++[>>> >        >>>+>+<<<<<<<<-]>>>>>>>[-[>>>>+<<<<-
+    ]>[>>>>+<<<<-]>>>]>>>[<<<+>>>-]<<< [       >>+>+<<<-]>>>>>>>[<<<+>>>-]<<<[>>>+<<
+    <<<+>>-]>>>>>>>[<<<+>>>-]<<<[>>>+<        <<<<<<<<+>>>>>>-]<<<<<<<[->[<<<<+>>>>-
+     ]<[<<<<+>>>>-]<<<<]>[<<<<<<<+>>>>>      >>-]<<<<<<<----[>>>>>>>+<<<<<<<+[>>>>>
+     >>-<<<<<<<[-]]<<<<<<<[>>>>>>>>>>>>+>+<<<<<<<<<<<<<-][   lft@df.lth.se   ]>>>>>
+       >>>>>>>[-[>>>>+<<<<-]>[>>>>+<<<<-]>[>>>>+<<<<-]>>]>>>[-]<[>+<-]<[-[<<<<+>>
+           >>-]<<<<]<<<<<<[-]]<<<<<<<[-]<<<<-]<-]>>>>>>>>>>>[-]<<]<<<<<<<<<<]
+
+            Type for instance "fg" to toggle the cell at row f and column g
+                       Hit enter to calculate the next generation
+                                     Type q to quit
+
+As with INTERCAL, Brainfuck ignores anything it does not understand,
+so the textual comments do not interfere with the execution of the
+program.
+
+This was a delightful experience, because by virtue of writing 68
+lines of C, I had implemented a virtual machine capable of running any
+Brainfuck program, and had transformed the ASCII-art textphile above
+into a running implementation of the Game of Life!  In principle, the
+C program above could compute any computable function, as long as it
+didn't require more than 30001 bytes of memory.
+
+Brainfuck itself, though, is a finger pointing at the moon; it is not
+the moon.  It has no subroutine-call mechanism, it cannot run code
+generated at runtime, a straightforward implementation of it is
+absurdly inefficient, the encoding of its programs is also absurdly
+inefficient, and there have been several different incompatible
+semantics (for example, for the overflow of a memory location, and of
+course for the size of memory), so some Brainfuck programs are
+incompatible with some Brainfuck implementations.
+
+Also, the issue of I/O is swept under the rug.  The above Life
+implementation is interactive on a terminal; it draws the gameboard
+using ASCII art.  You can correct your input errors with backspace
+only thanks to the line-editing capabilities provided by default by
+the kernel or the C library; by the same token, Brainfuck programs
+running in the above C implementation in the same way as Life cannot
+provide so much as tab-completion and overstrikes, much less mouse,
+key-release, and graphics handling.  To emulate video-games, even with
+a sufficiently powerful implementation, Brainfuck would need a mapping
+between streams of input and output bytes and the input and output
+events of interest; this mapping, too, would need to be standardized
+for such an emulation to be portable among implementations.
+
+Here's a sample dialogue with the Life program, using this
+implementation of Brainfuck:
+
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----------
+    e----------
+    f----------
+    g----------
+    h----------
+    i----------
+    j----------
+    >de
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----*-----
+    e----------
+    f----------
+    g----------
+    h----------
+    i----------
+    j----------
+    >df
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----**----
+    e----------
+    f----------
+    g----------
+    h----------
+    i----------
+    j----------
+    >fe
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----**----
+    e----------
+    f----*-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >ee
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----**----
+    e----*-----
+    f----*-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >ed
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d----**----
+    e---**-----
+    f----*-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c----------
+    d---***----
+    e---*------
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c----*-----
+    d---**-----
+    e--*--*----
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c---**-----
+    d---***----
+    e--*--*----
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c---*-*----
+    d--*--*----
+    e--*--*----
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c----*-----
+    d--**-**---
+    e--*--*----
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----------
+    c---***----
+    d--**-**---
+    e--*--**---
+    f---**-----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b----*-----
+    c--**-**---
+    d--*-------
+    e--*---*---
+    f---***----
+    g----------
+    h----------
+    i----------
+    j----------
+    >
+     abcdefghij
+    a----------
+    b---***----
+    c--****----
+    d-**--**---
+    e--*-**----
+    f---***----
+    g----*-----
+    h----------
+    i----------
+    j----------
+    >q
+
+These 8 generations of 10×10 Life required 98 CPU seconds on this
+netbook (with the Brainfuck implementation compiled with `cc -O5
+-fomit-frame-pointer -Wall -std=gnu99` using GCC 4.8.4), illustrating
+the efficiency problems of Brainfuck.  I took a couple of hours to
+write the following C version of Åkesson's awesome program, which,
+compiled the same way, was able to do 80000 generations in 1.424 CPU
+seconds, an efficiency difference of some 700k×, suggesting that the
+Brainfuck slowdown in this case is about 5 or 6 orders of magnitude.
+
+    #include <stdio.h>
+
+    enum { ww = 10, hh = 10 };
+
+    int board[3][hh][ww];
+
+    /* From the cells in `from`, compute a parallel array with the sum of
+       cells above and to the left of that cell, including that cell
+       itself.  For example:
+
+        >>> x
+        array([[1, 0, 1],
+               [0, 2, 1],
+               [1, 1, 1]])
+        >>> x.cumsum(axis=0).cumsum(axis=1)
+        array([[1, 1, 2],
+               [1, 3, 5],
+               [2, 5, 8]])
+     */
+    void sum(int from[hh][ww], int to[hh][ww])
+    {
+        for (int x = 0; x < ww; x++) {
+            to[0][x] = from[0][x];
+            for (int y = 1; y < hh; y++) to[y][x] = to[y-1][x] + from[y][x];
+        }
+        for (int y = 0; y < hh; y++) {
+            int total = to[y][0];
+            for (int x = 1; x < ww; x++) to[y][x] = total += to[y][x];
+        }
+    }
+
+    /* Return total neighbors in the neighborhood that includes (xmin+1,
+       ymin+1), (xmin+2, ymin+1), ... (xmax, ymin+1), (xmin+1, ymin+2),
+       ... (xmax, ymax).  xmin and/or ymin will be negative if the
+       neighborhood is intended to encompass the leftmost and/or topmost
+       cells; xmax may be >=ww-1 and/or ymax may be >=hh-1 if it is intended
+       to encompass the rightmost and/or bottommost cells.
+     */
+    static inline int rect(int sums[hh][ww], int xmin, int xmax, int ymin, int ymax)
+    {
+        if (xmax > ww-1) xmax = ww-1;
+        if (ymax > ww-1) ymax = hh-1;
+        int ul = xmin < 0 ? 0 : ymin < 0 ? 0 : sums[ymin][xmin];
+        int ur = ymin < 0 ? 0 : sums[ymin][xmax];
+        int ll = xmin < 0 ? 0 : sums[ymax][xmin];
+        int lr = sums[ymax][xmax];
+        return lr - ur - ll + ul;
+    }
+
+    /* Return total cells in the 3×3 neighborhood centered on (x, y). */
+    static inline int neighborhood(int sums[hh][ww], int x, int y)
+    {
+        return rect(sums, x-2, x+1, y-2, y+1);
+    }
+
+    static inline int should_live(int cells[hh][ww], int sums[hh][ww], int x, int y)
+    {
+        int n = neighborhood(sums, x, y);
+        return cells[y][x] ? 3 <= n && n <= 4 : n == 3;
+    }
+
+    void generation(int from[hh][ww], int to[hh][ww], int scratch[hh][ww])
+    {
+        sum(from, scratch);
+        for (int y = 0; y < hh; y++) {
+            for (int x = 0; x < ww; x++) {
+                to[y][x] = should_live(from, scratch, x, y);
+            }
+        }
+    }
+
+    void print_board(int cells[hh][ww])
+    {
+        putchar(' ');
+        for (int x = 0; x < ww; x++) putchar('a' + x);
+        putchar('\n');
+
+        for (int y = 0; y < hh; y++) {
+            putchar('a' + y);
+            for (int x = 0; x < ww; x++) putchar(cells[y][x] ? '*' : '-');
+            putchar('\n');
+        }
+    }
+
+    /* Returns 1 if we should do another generation, 0 to quit */
+    int prompt(int cells[hh][ww])
+    {
+        for (;;) {
+            print_board(cells);
+
+            putchar('>');
+            fflush(stdout);
+
+            int c1 = getchar();
+            if (c1 == 'q' || c1 == EOF) return 0;
+            if (c1 == '\n') return 1;
+
+            int c2 = getchar();
+            int newline = getchar();
+            if (c2 == EOF || newline == EOF) return 0;
+
+            int *cell = &cells[c1-'a'][c2-'a'];
+            *cell = !*cell;
+        }
+    }
+
+    int main()
+    {
+        int which = 0;
+        for (;;) {
+            if (!prompt(board[which])) return 0;
+            generation(board[which], board[!which], board[2]);
+            which = !which;
+        }
+    }
+
+### Urbit's Nock ###
+
+Urbit is Mencius Moldbug's effort to establish an internet with a
+feudal, authoritarian structure, which he believes to be the ideal
+structure for a society.  The basic foundation of Urbit is a
+deterministic, reproducible virtual machine called Nock, named after a
+political propagandist Moldbug admires despite Nock's private contempt
+for Jewish people.  Nock implements a combinator-graph-reduction
+instruction set encoded as integers.  The rest of the Urbit
+distributed computation system is built atop Nock.
+
+Nock's basic instruction repertoire is too limited to be usably
+efficient for many of the tasks required for a distributed-computing
+system like Urbit; this is partly compensated using a mechanism called
+"jets".  The Nock implementation recognizes certain pieces of Nock
+code at runtime and, rather than evaluating them instruction by
+instruction, instead invokes a "jet" --- a subroutine written in C
+that is hoped to produce an equivalent result.  Perhaps the most
+egregious example is an implementation of the Markdown document markup
+language, where a C implementation of Markdown is shamelessly
+substituted when a particular Nock implementation of Markdown is
+encountered.
+
+Jets offer an apparent escape from the tradeoff between simplicity of
+specification and usable levels of efficiency.  And, in theory, they
+provide an unambiguous behavior specification for the native code to
+adhere to.  However, they aren't a viable option for Veskeno, both
+because they means that a practically usable implementation requires
+an enormous amount of code whose contents must be guessed at by the
+implementor, and because in practice that code will be buggy in all
+modern implementations, since we don't yet have sufficiently powerful
+formal methods for people to use them routinely, so if Veskeno used
+jets, no Veskeno results would be reproducible in practice.
+
+Consequently Nock is less suitable than even Brainfuck as a basis for
+Veskeno.
 
 ### Simplicity ###
+
+Simplicity is Russell O'Connor's verifiable smart-contract language,
+designed for Ethereum.  It is a very interesting project, but like
+Nock, it relies on jets to reach usable efficiency.  It's capable of
+expressing only finitary computations --- those that could in
+principle be expressed by a finite table of input-to-output mappings,
+although Simplicity is designed to be able to practically express
+finitary computations whose tables, though finite, would be too large
+to construct explicitly.  Simplicity programs are guaranteed to
+terminate because, like Bitcoin Script, it lacks an iteration
+construct, relying on code repetition to achieve finite iteration.
+
+For these reasons, Simplicity is even less suitable as a basis for
+Veskeno than Nock.
 
 ### Wasm ###
 
 ### Smalltalk-78 ###
+
+### The LuaJIT "bytecode" format ###
+
+Lua's register-based "bytecode" format --- really a wordcode --- is
+famous for its efficiency.  Considering this program in C:
+
+    fib(n) { return n < 2 ? 1 : fib(n-1) + fib(n-2); }
+    main(int c, char **v) { printf("%d\n", fib(atoi(v[1]))); }
+
+And its Lua equivalent:
+
+    function fib(n) if n < 2 then return 1 else return fib(n-1)+fib(n-2) end end
+    print(fib(tonumber(arg[1])))
+
+Compiling with `gcc -O -fomit-frame-pointer fib.c -o fib` with GCC
+4.8.4, on this Atom netbook, it takes 101-116 ms to compute 3524578
+with `./fib 32` and 399-406 ms to compute 14930352 with `./fib 35`.
+Under PUC Lua 5.2.3, `fib.lua 32` takes 2.809-2.839 s and `fib.lua 35`
+takes 11.856-12.211 s, both with the same results.  Under LuaJIT
+2.0.2, `fib.lua 32` takes 196-212 ms and `fib.lua 35` takes
+1.132-1.133 s.
+
+So we can say that, on this crude microbenchmark, PUC Lua is 29-31
+times slower than C, while LuaJIT is 1.6-2.9 times slower than C.
+Reputedly LuaJIT 2's "bytecode" interpreter, which Mike Pall wrote in
+assembly, is faster than many high-level languages' compiled code;
+unfortunately there does not seem to be an option to disable the JIT
+compiler for easy microbenchmarking.
+
+It's somewhat to be expected that the extra type checks Lua must do
+will slow down the process, especially in software, especially on an
+in-order processor like this Atom.  Perhaps that accounts for the
+speed difference between XIS, the RISCy spike above (1/20 native), and
+PUC Lua (1/30).
+
+CPython is the usual contrast here.  In CPython 2.7.6, this program
+takes 4.963-5.176 s to compute fib(32), 42-51 times slower than C:
+
+    #!/usr/bin/python
+    import sys
+    fib = lambda n: 1 if n < 2 else fib(n-1) + fib(n-2)
+    print(fib(int(sys.argv[1])))
+
+LuaJIT uses its own slightly different "bytecode" format.  [As
+explained in the LuaJIT Wiki], the LuaJIT bytecode, like the PUC Lua
+bytecode, has a fixed 32-bit-wide format with 8-bit fields. The opcode
+is the least significant 8 bits; the 2-operand instructions have a
+16-bit field as the second operand, which is usually an index into a
+constant table.  There are 16 comparison ops (which conditionally skip
+the following instruction, which is always a JMP), 4 unary ops, 17
+"binary" ops (one of which, string concatenation, is actually
+variadic), 6 constant ops, 7 "upvalue" and function ops, 11 ops for
+manipulating Lua tables (like the GSET, GGET, and TGETB operations
+above), 8 calling and iteration ops (like CALL and CALLM above), 4
+return ops (like RET1 and RET0), 12 loop and branch ops, and 9
+function-header pseudo-ops, for a total of 94 ops.
+
+`luajit -bl fib.lua` dumps the bytecode:
+
+    -- BYTECODE -- fib.lua:2-2
+    0001    KSHORT   1   2
+    0002    ISGE     0   1
+    0003    JMP      1 => 0007
+    0004    KSHORT   1   1
+    0005    RET1     1   2
+    0006    JMP      1 => 0015
+    0007 => GGET     1   0      ; "fib"
+    0008    SUBVN    2   0   0  ; 1
+    0009    CALL     1   2   2
+    0010    GGET     2   0      ; "fib"
+    0011    SUBVN    3   0   1  ; 2
+    0012    CALL     2   2   2
+    0013    ADDVV    1   1   2
+    0014    RET1     1   2
+    0015 => RET0     0   1
+
+    -- BYTECODE -- fib.lua:0-4
+    0001    FNEW     0   0      ; fib.lua:2
+    0002    GSET     0   1      ; "fib"
+    0003    GGET     0   2      ; "print"
+    0004    GGET     1   1      ; "fib"
+    0005    GGET     2   3      ; "tonumber"
+    0006    GGET     3   4      ; "arg"
+    0007    TGETB    3   3   1
+    0008    CALL     2   0   2
+    0009    CALLM    1   0   0
+    0010    CALLM    0   1   0
+    0011    RET0     0   1
+
+Many of these ops are specialized versions of basic operations; there
+are, for example, three SUB instructions, two of which are specialized
+to the case where one of the operands is a constant.  Some of the
+operations are duplicated to provide the JIT compiler a place to
+record its success or failure at JIT-compiling the loop body.
+
+There is no specialized version of the ">=" operation for comparing
+against a constant, so the "< 2" test in `fib` is compiled to KSHORT
+(load immediate) followed by ISGE; similarly, there is no specialized
+version of the `return` operation, so `return 1` is compiled to KSHORT
+followed by RET1.
+
+As on the SPARC or in Smalltalk-80, each function evidently has its
+own set of registers; the main-program code at the bottom of the
+listing above begins by getting some variables fro the global
+namespace in registers 0, 1, 2, and 3, and then after calling
+`tonumber` (in register 2) and `fib` (in register 1) it expects to
+still find `print` in register 0, even though within `fib` the
+argument `n` is evidently in register 0.  Thus no bytecode need be
+emitted to save and restore context upon function call or return.
+
+The three-operand nature of LuaJIT's bytecode saves some operations,
+and thus some opcode dispatches, compared to the two-operand XIS code
+above, which has 19 instructions in the `fib` subroutine rather than
+15.  Where XIS has
+
+      a_rr(mov, 0, 1),           /* fib: r1 := r0 */
+      a_k16(lit16, 2, 2),        /* r2 := 2 */
+      a_rr(sub, 2, 1),           /* r1 -= r2 */
+      a_jl(1, 13),               /* if r1 < 0, go forward 13 insns */
+
+LuaJIT has
+
+    0001    KSHORT   1   2
+    0002    ISGE     0   1
+    0003    JMP      1 => 0007
+
+although perhaps this has as much to do with LuaJIT discarding the
+subtraction result rather than storing it in a destination register.
+A recursive call `fib(n-2)` in LuaJIT is three instructions, and would
+be two if not for the possibility of something having rebound the name
+`fib`:
+
+        0010    GGET     2   0      ; "fib"
+        0011    SUBVN    3   0   1  ; 2
+        0012    CALL     2   2   2
+
+while XIS requires six, due to explicit saving and restoring of
+argument registers:
+
+      a_rs(push, 0),             /* save return value from recursive call */
+      a_k16(lit16, 3, 2),        /* r3 := 2 */
+      a_rr(mov, 1, 0),           /* r0 := r1 */
+      a_rr(sub, 3, 0),           /* r0 -= r3 */
+      a_call(-14),               /* call fib */
+      a_rd(pop, 1),              /* pop saved return value into r1 */
+
+I don't know if there's a way to get such implicit save/restore into a
+Veskeno-sized spec; maybe make some of the "registers" index off a
+stack pointer in memory that increments or decrements by some constant
+after a call, like a lobotomized SPARC?  Where would you store the
+return address --- would it eat a general-purpose register?
+
+> If I remember correctly, the SPARC has 64 general-purpose registers:
+  8 for global variables, and 48 in a "register window", of which 8
+  are shared with the caller, 8 are local, and 8 are shared with
+  callees --- so the window shifts by 16 on every call and return.
+  The idea is that a simple, slow implementation can store all of
+  these windows in RAM; a slightly less simple one can use 48
+  registers and save 16 to RAM on every call and restore them on every
+  return; and a more sophisticated implementation can maintain a
+  circular buffer that only "spills" to RAM when it gets full.  Thus
+  the "S" for "Scalable" in "SPARC".
+
+Part of CPython's slowness is because CPython's bytecode is
+stack-based rather than register-based, commonly requiring about twice
+as many opcode dispatches as Lua.  The above function is 18 CPython
+bytecode ops, rather than LuaJIT's 15; its leaf path is 7 ops rather
+than 5, and its non-leaf path is 16 ops rather than 11, so for this
+microbenchmark the dispatch penalty of stack-machine code is smaller
+than that typical factor of 2.
+
+      3           0 LOAD_FAST                0 (n)
+                  3 LOAD_CONST               1 (2)
+                  6 COMPARE_OP               0 (<)
+                  9 POP_JUMP_IF_FALSE       16
+                 12 LOAD_CONST               2 (1)
+                 15 RETURN_VALUE
+            >>   16 LOAD_GLOBAL              0 (fib)
+                 19 LOAD_FAST                0 (n)
+                 22 LOAD_CONST               2 (1)
+                 25 BINARY_SUBTRACT
+                 26 CALL_FUNCTION            1 (1 positional, 0 keyword pair)
+                 29 LOAD_GLOBAL              0 (fib)
+                 32 LOAD_FAST                0 (n)
+                 35 LOAD_CONST               1 (2)
+                 38 BINARY_SUBTRACT
+                 39 CALL_FUNCTION            1 (1 positional, 0 keyword pair)
+                 42 BINARY_ADD
+                 43 RETURN_VALUE
+
+As one specific example, this three-op sequence corresponds to a single
+LuaJIT op:
+
+                 19 LOAD_FAST                0 (n)
+                 22 LOAD_CONST               2 (1)
+                 25 BINARY_SUBTRACT
+
+    0008    SUBVN    2   0   0  ; 1
+
+Both LuaJIT and CPython separate the comparison and the jump into two
+separate instructions; in LuaJIT the comparison is effectively a
+conditional-skip instruction as on HP calculators.  Conditional skip
+is very easy to implement in software for a fixed instruction length,
+but very easy to implement *incorrectly* otherwise.
+
+To complete the comparisons, the i386 code emitted by GCC in the tests
+above was as follows:
+
+     804844d:       56                      push   %esi
+     804844e:       53                      push   %ebx
+     804844f:       83 ec 14                sub    $0x14,%esp    ; useless waste
+     8048452:       8b 5c 24 20             mov    0x20(%esp),%ebx ; n
+     8048456:       b8 01 00 00 00          mov    $0x1,%eax       ; return 1
+     804845b:       83 fb 01                cmp    $0x1,%ebx       ; n <= 1?
+     804845e:       7e 1a                   jle    804847a <fib+0x2d>
+     8048460:       8d 43 ff                lea    -0x1(%ebx),%eax ; n-1
+     8048463:       89 04 24                mov    %eax,(%esp)     ; pass arg
+     8048466:       e8 e2 ff ff ff          call   804844d <fib>
+     804846b:       89 c6                   mov    %eax,%esi       ; save result
+     804846d:       83 eb 02                sub    $0x2,%ebx       ; n-2
+     8048470:       89 1c 24                mov    %ebx,(%esp)     ; pass arg
+     8048473:       e8 d5 ff ff ff          call   804844d <fib>
+     8048478:       01 f0                   add    %esi,%eax       ; sum results
+     804847a:       83 c4 14                add    $0x14,%esp
+     804847d:       5b                      pop    %ebx
+     804847e:       5e                      pop    %esi
+     804847f:       c3                      ret
+
+This is 11 operations in the leaf-call base case and 19 operations in
+the non-leaf recursive case.  To avoid redundant saves and restores
+around the recursive calls, it keeps its local variables (`n` and the
+return value from the first recursive call) in callee-saved registers
+%esi and %ebx; this reduces the code size but has no real effect on
+performance.  (If it had used caller-saved registers, as I did in the
+XIS code, the initial root call to `fib` would have avoided the cost
+to save and restore them, but that is not significant.)
+
+It suffers from the shitty i386 C iBCS calling convention where
+everything goes on the stack.  Revising it to
+
+    __attribute__((fastcall)) int fib(int n)
+    {
+        return n < 2 ? 1 : fib(n-1) + fib(n-2);
+    }
+
+yields about 17% shorter runtimes with `gcc -O -fomit-frame-pointer
+fib.c -o fib`, of 334-336 ms with `./fib 35`, and the following
+improved code, with only 17 instructions (12% less):
+
+     804844d:       56                      push   %esi
+     804844e:       53                      push   %ebx
+     804844f:       83 ec 04                sub    $0x4,%esp    ; still useless
+     8048452:       89 cb                   mov    %ecx,%ebx       ; n
+     8048454:       b8 01 00 00 00          mov    $0x1,%eax       ; return 1
+     8048459:       83 f9 01                cmp    $0x1,%ecx       ; n < 1?
+     804845c:       7e 14                   jle    8048472 <fib+0x25>
+     804845e:       8d 49 ff                lea    -0x1(%ecx),%ecx ; n-1, arg
+     8048461:       e8 e7 ff ff ff          call   804844d <fib>
+     8048466:       89 c6                   mov    %eax,%esi       ; save result
+     8048468:       8d 4b fe                lea    -0x2(%ebx),%ecx ; n-2, arg
+     804846b:       e8 dd ff ff ff          call   804844d <fib>
+     8048470:       01 f0                   add    %esi,%eax       ; sum results
+     8048472:       83 c4 04                add    $0x4,%esp
+     8048475:       5b                      pop    %ebx
+     8048476:       5e                      pop    %esi
+     8048477:       c3                      ret
+
+(Adding `static inline` induces GCC to inline it into itself five
+levels deep, resulting in 242 instructions that include 32 recursive
+calls, and more than doubling the execution speed, to 157 ms runtime
+for `./fib 35`.)
+
+This is getting pretty deep into optimization hacks; the justification
+is just that it illuminates some of the tradeoffs between different
+instruction-set choices.
+
+[As explained in the LuaJIT Wiki]: http://wiki.luajit.org/Bytecode-2.0
+
+### SWEET-16 ###
+
+As I wrote in "bytecode interpreters for tiny computers" in 2008:
+
+> Steve Wozniak's SWEET16 16-bit virtual machine, included as part of
+  Integer BASIC, supposedly doubled the code density of the 6502. The
+  virtual machine itself was 300 bytes of 6502 assembly, implementing
+  these instructions; here "#" means "[0-F]".
+
+>     0x1# SET: load immediate               0x2# LD: copy register to accumulator
+>     0x3# ST: copy accumulator to register  0x4# LD: load byte indirect w/ increment
+>     0x5# ST: store byte indirect w/incr    0x6# LDD: load two bytes ind w/incr
+>     0x7# STD: store two bytes ind w/incr   0x8# POP: load byte indirect w/predecr
+>     0x9# STP: store byte ind w/predecr     0xA# ADD: add register to accum
+>     0xB# SUB: subtract register from acc   0xC# POPD: load 2 bytes ind w/predecr
+>     0xD# CPR: compare register w/acc       0xE# INR: increment register
+>     0xF# DCR: decrement register           0x00 RTN to 6502 mode
+>     0x01 BR unconditional branch           0x02 BNC branch if no carry
+>     0x03 BC branch if carry                0x04 BP branch if positive
+>     0x05 BM branch if minus                0x06 BZ branch if zero
+>     0x07 BNZ branch if nonzero             0x08 BM1 branch if -1
+>     0x09 BNM1 branch if not -1             0x0A BK break (software interrupt)
+>     0x0B RS return from sub (R12 is SP)    0x0C BS branch to sub (R12 is SP)
+
+> 0x01-0x09 and 0x0C have a second byte which is a signed 8-bit
+  displacement. If you want a 16-bit jump, you can push it on the
+  stack and RS.
+
+> That's it, 28 instructions, 300 bytes of machine code to implement
+  them. And I thought the 6502 was already reasonable on code density,
+  so this was apparently quite a win.
+
+It's notable to me that his only ALU operations here are ADD, SUB,
+CPR, INR, and DCR; there are no bitwise operations, not even a
+shift-right.  I'm guessing that SET was followed by a 16-bit immediate
+to load into R#, though that isn't mentioned in my notes.
+
+This is about the right level of complexity for Veskeno, although I'd
+go 32-bit and trade some of the condition codes and branching options
+for some bitwise operations.
+
+Darius Bacon suggested that one of the reasons XIS was so slow was
+that it didn't have a distinguished accumulator, so every binary
+operation had to index an array three times: once to read each input
+and once to write the output.  (It also had to extract the relevant
+fields from the instruction word.)  As with stack machines, a
+single-accumulator machine like the SWEET-16 reduces the number of
+operands that need to be decoded and indexed, at the expense of
+requiring a larger number of opcodes to be decoded for a given task.
+
+### Chip-8 ###
 
 Thanks
 ------

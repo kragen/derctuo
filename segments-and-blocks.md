@@ -187,17 +187,56 @@ In the case of accessing a multi-word chunk of data from a block, the
 first three operations can be amortized over many accesses to the same
 block.
 
+Matrices
+--------
+
+The once and future king of computer applications is numerical
+matrices, with applications such as matrix-vector multiply xGEMV,
+matrix-matrix multiply xGEMM, and eigenvalue computation
+xSYTRD/xGEBRD/xSTERF/xSTEDC accounting for a good deal of the usage of
+many computers --- historically due to physics models, now due to
+artificial neural networks.
+
+The obvious way to organize a matrix for access locality in a
+blocks-and-nodes system is to divide it into rectangular or square
+blocks; if it's 32-bit single-precision, an 8×8 block fits into a
+256-byte storage block, and in 64-bit double-precision, two 4×4 blocks
+do.  In SGEMV matrix-vector multiply, multiplying an 8×8 matrix block
+by an 8-element vector segment yields an 8-element partial-sum vector
+segment in 64 multiply-accumulates; in SGEMM matrix-matrix multiply,
+multiplying two 8×8 matrix blocks yields an 8×8 partial-sum matrix
+block in 512 multiply-accumulates.
+
+These seem likely to be sufficiently large amounts of computation that
+the cost of faulting in a block will not be overwhelming, particularly
+if any I/O latency can be hidden with multitasking.
+
+The *other* king of computer applications is slinging around pixels to
+put on the screen, and a similar 8×8 block of 32-bit BGRA pixels seems
+like a good fundamental unit to use there.
+
 Related systems
 ---------------
-
-The Burroughs B5000 is probably where this kind of structure derives
-from originally, but I still need to read THE DESCRIPTOR to learn
-about it.
 
 As mentioned above, Jochen Liedtke wrote some systems somewhat similar
 to this design before writing L4, providing memory protection and
 process isolation on Z80-based systems with what I understand to be a
 trusted compiler.
+
+### The Burroughs B5000 ###
+
+The Burroughs B5000 is probably where this kind of structure derives
+from originally, but I still need to read THE DESCRIPTOR to learn
+about it.
+
+The B5000 tagged every 48-bit memory word with a code/data bit, thus
+providing "W^X" functionality at a memory-word level rather than a
+page level; its descendants added two more tag bits, providing dynamic
+typing at the hardware level, so that for example only a single ADD
+instruction was needed, dynamically dispatching to single- or
+double-precision addition; its "descriptors" indicated whether an
+array contained words or bytes (and, if bytes, bytes of which of the
+three supported sizes.)
 
 ### The relation to KeyKOS ###
 
@@ -287,7 +326,14 @@ just one uniform kind of node for instance variables, local variables,
 etc., but with storage for pointer-free bytes slapped onto the side.
 
 Kaehler & Krasner's 1982 LOOM paper describes an approach that is very
-similar in many ways, maintaining an in-RAM cache of up to
+similar in many ways, although unfortunately they had not yet finished
+the system at the time they published their paper, saying, "Our LOOM
+virtual memory system is in its infancy.  We are only beginning to
+make measurements on its performance."  Other authors of the LOOM
+system included Althoff, Weyer, Deutsch, Ingalls, and Merry, with
+input from Bobrow and Tesler.
+
+LOOM maintains an in-RAM cache of up to
 2<sup>15</sup> "resident" objects linked together with 16-bit short
 Oops, out of a possible total of 2<sup>31</sup> objects on disk
 (occupying a maximum of 2<sup>33</sup> bytes, since it was 1982),
@@ -299,12 +345,23 @@ RAM, some short-Oop fields are just 0 ("lambda") instead of pointing
 at leaf objects, requiring LOOM to refetch the on-disk object to find
 the long Oop they're supposed to refer to.
 
+LOOM de-lambda-izes the entire receiver, fleshing out lambdas into
+full leaves, before invoking a method.  Thus it avoids null checks on
+every field access.  This is reminiscent of the
+microcontroller-focused mechanism described above which brings blocks
+or nodes into memory when their keys are brought into a
+virtual-machine register.
+
 Their short-Oop mechanism is table-based, unlike HotSpot's compressed-Oop
 mechanism, which represents a 64-bit object pointer as a 36-bit (?)
 offset from a global heap base address, shifted right by 4 (?) bits
-and thus stored in a 32-bit word.  This permits relocation of objects
+and thus stored in a 32-bit word.  Being table-based permits relocation of objects
 when their 4-word leaves are replaced by full-fledged resident objects
-after being brought in from disk.
+after being brought in from disk.  They do suggest using precisely
+HotSpot's compressed-Oop approach to support 2<sup>36</sup> bytes of
+on-disk objects, though, and their RAM is 16-bit-word-oriented, so
+they can support 131072 bytes of objects in RAM, like the original
+Macintosh 128K, not merely 65536.
 
 LOOM used reference counting for garbage collection, both on disk and
 in RAM.
@@ -390,6 +447,18 @@ multiple processes might be writing to the same page or node at the
 same time, but when the first of them commits its write, the others
 are aborted, either immediately or when they attempt to commit.
 (Presumably they can then be automatically retried.)
+
+Copy-on-write is a little bit tricky, in that, if the same process or
+transaction refers to the same block via two different access paths
+--- such as via block key register 3 and block slot 5 in some node ---
+you probably want it to get the same version of the block.  So it
+isn't sufficient to do the pure-functional-tree thing of "modifying" a
+pointer to the block by creating a new version of the node, and its
+parent node, and so on up to the root of the tree, because there is
+perhaps no tree.  Instead, every time you go to load a block register,
+you must do a table lookup to see if the current process/transaction
+has a modified copy of that block, and, if not, conditionally create
+one.  (And analogously for modifying nodes.)
 
 It's tempting to suggest that these mechanisms would make it easy to
 build highly concurrent shared mutable data structures, but history
