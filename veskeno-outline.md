@@ -52,12 +52,15 @@ is, and what counts as an occurrence of the word — I omitted
 occurrences of “fiery”, but counted words containing “fire”, such as
 “firepans” and “firebrands”.
 
-The objective of Veskeno: make software, specifically Derctuo, run reproducibly
--------------------------------------------------------------------------------
+The objective of Veskeno: make software, specifically Derctuo, run as reproducibly as other mathematics
+-------------------------------------------------------------------------------------------------------
 
-Since at least Church, Turing, and Gödel, we know that we can, in
+Since at least Church, Turing, and Gödel, we have a rigorous
+mathematical formalization of the notion of an *algorithm*, which is
+how we have managed to build digital computers that can be programmed
+to execute any algorithm in the first place.  So we know that we can, in
 theory, come to the same kind of consensus about the behavior of an
-*algorithm* — in theory any algorithm whatever can be executed on any
+algorithm — in theory any algorithm whatever can be executed on any
 computer in the universe, on the same input data, and compute exactly
 the same results.  And, again in theory, it does not matter whether
 the computation happens in 02020 CE or 02184 CE; the results will be
@@ -1049,9 +1052,64 @@ Related work
 
 ### Preservation through emulation, e.g., SIMH ###
 
-### Lorie’s UVM ###
+### van der Hoeven and Lorie’s UVM ###
 
 ### Chifir ###
+
+In [The Cuneiform Tablets of 2015], Long Tien Nguyen and Alan Kay
+described their design for a simple archival virtual machine called
+Chifir, for which they report having successfully preserved
+Smalltalk-72.
+
+They describe their requirements as follows:
+
+> 1. It can be described in a single Letter or A4-sized page using
+>    English and diagrams. A “one-pager” has a nice psychological
+
+>    quality of compactness and elegance to it; we were inspired by
+>    the half-page Lisp metacircular evaluator in the Lisp 1.5 manual
+>    [27].
+> 2. It can be implemented in a single afternoon by a reasonably
+>    competent programmer.
+
+Implicitly, they also require that it be sufficiently powerful to run
+the system they want to preserve.
+
+[My implementation of Chifir] took me an hour of programming and 111
+lines of C, but because Nguyen and Kay have not published their
+Smalltalk-72 virtual machine image or any other test data for Chifir,
+my implementation may very well have bugs; it might take another hour
+or more to find and fix all of its bugs.
+
+Chifir is a word-oriented 32-bit three-operand memory-to-memory
+machine with very fluffy instruction encoding.  Its 15 instructions
+are roughly JMP, JZ, save-return-address, MOV, LD, ST, +, -, *, /, %,
+<, NAND, refresh-screen, and read-keyboard; the half-duplex nature of
+the read-keyboard instruction makes it impossible to emulate
+full-duplex systems like video-games on Chifir.  But Nguyen and Kay
+did not intend for Chifir to be universal in the same way that Veskeno
+is; they say:
+
+> We think that trying to design a “universal” virtual machine to
+> serve as the simple virtual machine is a bad idea, because trying to
+> ensure compatibility with the entire design space of computer
+> architectures will make the resulting “universal virtual machine”
+> very complicated. In our opinion, this is the mistake of van der
+> Hoeven et al.’s Universal Virtual Computer for software preservation
+> [15]. They tried to make the most general virtual machine they could
+> think of, one that could easily emulate all known real computer
+> architectures easily. The resulting design [25] has a segmented
+> memory model, bit-addressable memory, and an unlimited number of
+> registers of unlimited bit length. This Universal Virtual Computer
+> requires several dozen pages to be completely specified and
+> explained, and requires far more than an afternoon (probably several
+> weeks) to be completely implemented.
+
+[The Cuneiform Tablets of 2015]: http://www.vpri.org/pdf/tr2015004_cuneiform.pdf "VPRI TR-2015-004"
+[My implementation of Chifir]: https://gitlab.com/kragen/bubbleos/blob/master/yeso/chifir.c
+[27]: http://web.cse.ohio-state.edu/~rountev.1/6341/pdf/Manual.pdf "Lisp 1.5 Programmer’s Manual, McCarthy Abrahams Edwards & Hart, 1962, appendix B, pp. 70–71 (78–79 of 116)"
+
+### Lisp ###
 
 ### The JVM ###
 
