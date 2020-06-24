@@ -1065,7 +1065,6 @@ They describe their requirements as follows:
 
 > 1. It can be described in a single Letter or A4-sized page using
 >    English and diagrams. A “one-pager” has a nice psychological
-
 >    quality of compactness and elegance to it; we were inspired by
 >    the half-page Lisp metacircular evaluator in the Lisp 1.5 manual
 >    [27].
