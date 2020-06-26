@@ -1110,6 +1110,117 @@ is; they say:
 
 ### Lisp ###
 
+Lisp has a simple core --- not quite as simple as SK-combinators or
+the λ-calculus, but still pretty simple.  [The basic forms][27] are
+COND, LABELS (now normally called `letrec`), LAMBDA, and QUOTE, which
+are "special forms", and the regular functions CAR, CDR, CONS, ATOM,
+EQUAL, and NULL; these suffice to write a metacircular interpreter for
+Lisp or, for example, a normal-order λ-calculus reducer.
+
+Because both CONS and function application implicitly allocate memory,
+as does LAMBDA in modern interpretations (where it produces a
+closure), it's difficult for Lisp programs to be failure-free --- when
+run on a finite machine they can run out of memory and crash.  But, at
+least initially, eliminating unpredictable failures is beyond the
+scope of Veskeno.
+
+A binary format like various Lisps' FASL formats could both permit
+rapid startup and eliminate text-related parsing bugs.
+
+However, the history of Lisp is littered with subtle bugs.  McCarthy's
+1959 paper published a Lisp metacircular interpreter that
+inadvertently defined Lisp with dynamic scope --- a bug that remained
+ossified in Lisp for nearly a quarter century, with workarounds like
+FUNARGS --- and contained a few other subtle bugs.  Writing the
+following one-pager in Python took an hour for a programmer who has
+implemented Lisps more than once before, running into several minor
+bugs on the way; bugs may still remain.
+
+    def Eval(sexp, env):
+        return (env[sexp] if type(sexp) is str else
+                specials[sexp[0]](sexp[1:], env) if type(sexp[0]) is str
+                                                and sexp[0] in specials else
+                Eval(sexp[0], env)([Eval(arg, env) for arg in sexp[1:]]))
+
+    def evcon(branches, env):
+        for q, a in branches:
+            if Eval(q, env): return Eval(a, env)
+
+    def evletrec(args, env):
+        assignments, body = args[0], args[1]
+        env = env.copy()
+        for name, a, b in assignments: env[name] = closure(a, b, env)
+        return Eval(body, env)
+
+    def closure(args, body, env):
+        return lambda vals: Eval(body, augment(env, list(zip(args, vals))))
+
+    def augment(env, nvpairs):
+        env = env.copy()
+        for n, v in nvpairs: env[n] = v
+        return env
+
+    specials = {
+        'cond': evcon,
+        'letrec': evletrec,
+        'lambda': lambda args, env: closure(args[0], args[1], env),
+        'quote': lambda args, env: args[0],
+    }
+
+    base_env = {
+        'car': lambda args: args[0][0],
+        'cdr': lambda args: args[0][1:],
+        'cons': lambda args: [args[0]] + args[1],
+        'atom': lambda args: type(args[0]) is str,
+        'null': lambda args: not args[0],
+        'equal': lambda args: args[0] == args[1],
+        't': True,
+    }
+
+    # produces ['b']
+    example_prog = ['letrec', [['assoc', ['k', 'kvs'],
+                                ['cond', [['equal', 'k', ['car', ['car', 'kvs']]],
+                                          ['cdr', ['car', 'kvs']]],
+                                         [['null', ['cdr', 'kvs']],
+                                          ['quote', []]],
+                                         ['t', ['assoc', 'k', ['cdr', 'kvs']]]]]],
+                              ['assoc', ['quote', 'y'], ['quote',
+                                                         [['x', 'a'],
+                                                          ['y', 'b'],
+                                                          ['z', 'c']]]]]
+
+    # produces [['X', 'a'], [['X', 'small'], ['X', 'dog']], ['X', 'sat']]
+    example2 = ['letrec',
+                 [['subst', ['f', 'd'],
+                   ['cond', [['atom', 'd'], ['f', 'd']],
+                            [['null', 'd'], ['quote', []]],
+                            ['t', ['cons', ['subst', 'f', ['car', 'd']],
+                                           ['subst', 'f', ['cdr', 'd']]]]]],
+                  ['x', [], ['quote', 'X']]],
+                ['subst', ['lambda', ['de'], ['cons', ['x'], ['cons', 'de',
+                                                              ['quote', []]]]],
+                 ['quote', ['a', ['small', 'dog'], 'sat']]]]
+
+    if __name__ == '__main__':
+        import cgitb
+        cgitb.enable(format='text')
+        print(Eval(example2, base_env))
+
+Running Lisp efficiently requires some kind of garbage collection; the
+above implementation inherits from Python not only GC but also its
+lists, recursive function calls, equality comparison, closures, I/O,
+error reporting, and truthiness, and it takes advantage of Python's
+dictionaries.  Its behavior on argument-count mismatch is inherited
+from Python's `zip`.  It constructs circular data structures, which
+old versions of Python would be unable to garbage-collect.  Probably
+an implementation in a lower-level language like C would be
+considerably more efficient, but would also require implementing from
+scratch these Python bequests.  In my experience this tends to take as
+long or longer than implementing the semantic core above expressed in
+Python.
+
+### Abadi and Cardelli's ς-calculus of objects ###
+
 ### The JVM ###
 
 ### ActivePapers ###
@@ -1119,6 +1230,8 @@ is; they say:
 ### The Cult of the Bound Variable ###
 
 32-bit unsigned
+
+Darius suggests it's worth looking at the Sandmark contestants' bugs.
 
 ### Corewar Redcode ###
 
