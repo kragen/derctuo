@@ -370,10 +370,14 @@ Running on microcontrollers
 ---------------------------
 
 This block-and-node system solves a lot of the problems that make
-bunches of microcontrollers a pain to program with the kind of
-general-purpose software we had on 1970s home computers.
+bunches of microcontrollers a pain to program with even the kind of
+general-purpose software we had on 1970s home computers, despite
+nominally having tens or hundreds of times as much computational
+power.
 
-Using the loading of block key registers to drive an unprotected
+### Virtual memory with 256-byte blocks as pages ###
+
+Using the loading of block key registers to drive a non-hardware-supported
 virtual-memory system should permit, for example, implementing a
 reasonably featureful and performant virtual-memory system on an AVR
 with an SPI Flash chip, perhaps with a somewhat smaller block size,
@@ -382,46 +386,25 @@ second, a reasonable SPI speed, 256 bytes should take 409.6
 microseconds to load or store, plus whatever overheads exist (I think
 about 25% on SPI itself?  Plus erase time for Flash?)
 
+Nodes should probably have 32 node keys and 32 block keys.  Block keys
+of 32 bits in stable storage could address up to a terabyte, which is
+not too limiting; 128 bytes of such block keys would be 32 block keys,
+and it's probably reasonable to use a similar number of node keys.  In
+RAM, such a node might shrink to 64 bytes; it probably isn't necessary
+to keep the 32-bit identifiers of nonresident nodes and blocks,
+because the extra latency to read 4 bytes from an arbitrary location
+in Flash is small, unlike spinning rust.  (This of course suggests
+that the whole program of using virtual memory for such a system may
+be bad...)
+
+### No barrel shifters ###
+
 Hardware without fast bit-shifting abilities, such as an AVR, might
 benefit in another way from 256-byte blocks: they could eliminate the
 need for a shift operation to compute the block-slot index from a flat
 address into an 8192-byte tree.
 
-The AVR itself supports SPI with I think an 8 MHz clock, but slower
-signals are less demanding on PCB layout.  Also, some common SPI
-memories don't support such high speeds; according to file
-`jellybeans-2016`, the US$2.78 two-megabit STMicroelectronics
-M95M02-DRMN6TP EEPROM is only 5 MHz.  Others do; the US$1.09
-256-kilobit Microchip 23K256-I/SN SRAM claims 20MHz according to file
-`low-power-micros`, and the US$0.36 4-mebibit Winbond W25X40CLSNIG
-claims 104MHz.  Memories cheaper than that tend to be only 400kHz I²C.
-I don't know how fast SD cards' SPI interfaces are, but they're also
-required.
-
-If the SPI interface or whatever supports DMA, it might be feasible to
-run a second process for a couple thousand cycles while the first one
-was blocked on loading a block from external storage.
-
-There are a few different ways a microcontroller like the AVR could
-handle dynamically loading code.  First, it could just not do it at
-all, just using all this segments and nodes stuff to make it
-reasonably easy to run a little code with a lot of data.  Second, it
-could dynamically load bytecode blocks into RAM and run them in an
-interpreter --- the AVR is slow enough that this would be somewhat
-limiting, and it's certainly power-hungry, but this would allow
-relatively quick task switching.  Third, it could dynamically load
-machine-code blocks (whether somewhat dynamically created from
-bytecode or compiled ahead of time) and burn them into a "transient
-program area" in its Flash so it could run them, although this will
-limit its lifespan.  Fourth, if it's a microcontroller that can run
-from RAM, which the AVR can't, it could just load blocks of machine
-code into RAM and run that.
-
-Nowadays, as described in file `stm32`, it probably doesn't make sense
-to use an AVR; you should use at least a Cortex-M processor like the
-STM32; a 48MHz STM32F031x4 with 16 kibibytes of RAM costs US$1.30, and
-I think some STM32s are even cheaper than that.  As bonuses, you get
-much lower power consumption and the ability to run code in RAM.
+### Multiprocessing and concurrency ###
 
 A potentially interesting approach to the problem of personal
 computing on microcontrollers would be to share access to "disk"
@@ -448,21 +431,26 @@ same time, but when the first of them commits its write, the others
 are aborted, either immediately or when they attempt to commit.
 (Presumably they can then be automatically retried.)
 
-Copy-on-write is a little bit tricky, in that, if the same process or
-transaction refers to the same block via two different access paths
---- such as via block key register 3 and block slot 5 in some node ---
-you probably want it to get the same version of the block.  So it
-isn't sufficient to do the pure-functional-tree thing of "modifying" a
-pointer to the block by creating a new version of the node, and its
-parent node, and so on up to the root of the tree, because there is
-perhaps no tree.  Instead, every time you go to load a block register,
-you must do a table lookup to see if the current process/transaction
-has a modified copy of that block, and, if not, conditionally create
-one.  (And analogously for modifying nodes.)
-
 It's tempting to suggest that these mechanisms would make it easy to
 build highly concurrent shared mutable data structures, but history
 has not been kind to such optimistic statements.
+
+### Memory buses and hardware ###
+
+The AVR itself supports SPI with I think an 8 MHz clock, but slower
+signals are less demanding on PCB layout.  Also, some common SPI
+memories don't support such high speeds; according to file
+`jellybeans-2016`, the US$2.78 two-megabit STMicroelectronics
+M95M02-DRMN6TP EEPROM is only 5 MHz.  Others do; the US$1.09
+256-kilobit Microchip 23K256-I/SN SRAM claims 20MHz according to file
+`low-power-micros`, and the US$0.36 4-mebibit Winbond W25X40CLSNIG
+claims 104MHz.  Memories cheaper than that tend to be only 400kHz I²C.
+I don't know how fast SD cards' SPI interfaces are, but they're also
+required.
+
+If the SPI interface or whatever supports DMA, it might be feasible to
+run a second process for a couple thousand cycles while the first one
+was blocked on loading a block from external storage.
 
 I'm not sure what the connectivity between multiple processors and the
 "disk" should look like; I²C tends to be only 400kbps, which would
@@ -475,6 +463,47 @@ Probably you'd end up either connecting the processors into a ring,
 each with locally attached SPI memory, or dedicating one or two
 "kernel" processors to I/O arbitration, with a direct link to the
 memory and another direct link to each application processor.
+
+### Dynamically loading code blocks on a microcontroller ###
+
+There are a few different ways a microcontroller like the AVR could
+handle dynamically loading code.  First, it could just not do it at
+all, just using all this segments and nodes stuff to make it
+reasonably easy to run a little code with a lot of data.  Second, it
+could dynamically load bytecode blocks into RAM and run them in an
+interpreter --- the AVR is slow enough that this would be somewhat
+limiting, and it's certainly power-hungry, but this would allow
+relatively quick task switching.  Third, it could dynamically load
+machine-code blocks (whether somewhat dynamically created from
+bytecode or compiled ahead of time) and burn them into a "transient
+program area" in its Flash so it could run them, although this will
+limit its lifespan.  Fourth, if it's a microcontroller that can run
+from RAM, which the AVR can't, it could just load blocks of machine
+code into RAM and run that.
+
+### STM32 ###
+
+Nowadays, as described in file `stm32`, it probably doesn't make sense
+to use an AVR; you should use at least a Cortex-M processor like the
+STM32; a 48MHz STM32F031x4 with 16 kibibytes of RAM costs US$1.30, and
+I think some STM32s are even cheaper than that.  As bonuses, you get
+much lower power consumption and the ability to run code in RAM.
+
+### Copy-on-write ###
+
+Copy-on-write is a little bit tricky, in that, if the same process or
+transaction refers to the same block via two different access paths
+--- such as via block key register 3 and block slot 5 in some node ---
+you probably want it to get the same version of the block.  So it
+isn't sufficient to do the pure-functional-tree thing of "modifying" a
+pointer to the block by creating a new version of the node, and its
+parent node, and so on up to the root of the tree, because there is
+perhaps no tree.  Instead, every time you go to load a block register,
+you must do a table lookup to see if the current process/transaction
+has a modified copy of that block, and, if not, conditionally create
+one.  (And analogously for modifying nodes.)
+
+### The J1A ###
 
 A potentially more interesting kind of microcontroller to use for this
 is the J1A Forth-like processor.  It might be reasonable to extend it
