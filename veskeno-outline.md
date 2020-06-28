@@ -1142,10 +1142,26 @@ However, the history of Lisp is littered with subtle bugs.  McCarthy's
 1959 paper published a Lisp metacircular interpreter that
 inadvertently defined Lisp with dynamic scope --- a bug that remained
 ossified in Lisp for nearly a quarter century, with workarounds like
-FUNARGS --- and contained a few other subtle bugs.  Writing the
-following one-pager in Python took an hour for a programmer who has
-implemented Lisps more than once before, running into several minor
-bugs on the way; bugs may still remain.
+FUNARGS --- and contained a few other subtle bugs; an erratum is
+prepended to AIM-008 saying:
+
+> The definition of eval given on page 15 has two errors, one of which
+> is typographical and the other conceptual.  The typographical error
+> is in the definition of evcon where "l→" and "T→" should be
+> interchanged.
+> 
+> The second error is in evlen.  The program as it stands will not
+> work if a quoted expression contains a symbol which also acts as a
+> variable bound by the lambda.  This can be corrected by using
+> instead of subst in evlen a function subsq defined by ...
+
+Note that at this point McCarthy had been working on Lisp for a few
+years and had a more or less working implementation due to Slug
+Russell, and yet his QUOTE did not work properly inside a LAMBDA.
+
+Writing the following one-pager in Python took an hour for a
+programmer who has implemented Lisps more than once before, running
+into several minor bugs on the way; bugs may still remain.
 
     def Eval(sexp, env):
         return (env[sexp] if type(sexp) is str else
