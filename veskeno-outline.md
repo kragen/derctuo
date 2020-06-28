@@ -44,6 +44,17 @@ rational being in any possible universe would get the same results.
 Unless they failed to understand or made a mistake.  (Did I make a
 mistake above?)
 
+As David Hume says:
+
+> Algebra and arithmetic [are] the only sciences in which we can carry
+  on a chain of reasoning to any degree of intricacy, and yet preserve
+  a perfect exactness and certainty. We are possessed of a precise
+  standard, by which we can judge of the equality and proportion of
+  numbers; and according as they correspond or not to that standard,
+  we determine their relations, without any possibility of error. When
+  two numbers are so combined, as that the one has always a unit
+  answering to every unit of the other, we pronounce them equal.
+
 There are a variety of things for which we can make such objective
 assertions: which side won a chess game, given all the moves, for
 example, or that the word “fire” occurs 559 times in the King James
