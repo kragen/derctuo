@@ -1,6 +1,13 @@
 The humans like to memorialize dates by holding annual celebrations.
 What kinds of dates would a hacker culture memorialize?
 
+I'm putting together a date table here in a sort of cuckoo-hash
+fashion: most dates commemorate individual hackers, and for most of
+the hackers the relevant known dates are their birthdate and their
+death date.  When there is a collision, I can usually move the person
+in question to a different relevant date: their death date if they're
+listed at their birthdate, or vice versa.
+
 * January 1, 1992: Grace Hopper died (born December 9, 1906)
 * January 8, 1642: Galileo Galilei died after 8.5 years of house
   arrest (born February 15, 1564, sentenced by the Inquisition June
@@ -8,6 +15,7 @@ What kinds of dates would a hacker culture memorialize?
 * January 11, 2013: Aaron Hillel Swartz committed suicide to escape
   government persecution (born November 8, 1986)
 * January 14, 1901: Tarski born (died October 26, 1983)
+* January 15, 2001: the founding of Wikipedia
 * February 7, 1990: Alan Perlis died (born April 1, 1922)
 * Feburary 8, 1920: Bob Bemer born (died June 22, 2004)
 * February 11, 1897: Emil Post born (died April 21, 1954)
@@ -24,10 +32,14 @@ What kinds of dates would a hacker culture memorialize?
   Athens](https://en.wikipedia.org/wiki/Siege_of_Athens_and_Piraeus_(87%E2%80%9386_BC)),
   having burned Plato's Academy.  (However, this needs to be corrected
   for calendar alignment.)
+* March 4, 1959: John McCarthy (born September 4, 1927; died October
+  24, 2011) published Artificial Intelligence Project Memo 8,
+  "Recursive functions of symbolic expressions and their computation
+  by machine", describing the LISP language he and Steve "Slug"
+  Russell (born 1937, still alive) had developed on the 704.
 * March 5, 1574: William Oughtred born (died June 30, 1660)
 * March 7, 1917: Betty Holberton born (died December 8, 2001)
 * March 11, 1890: Vannevar Bush born (died June 28, 1974)
-* March 18, 1964: Norbert Wiener died (born November 26, 1894)
 * March 20, 1956: Kurt Gödel (born April 28, 1906, died January 14,
   1978) wrote to John von Neumann, posing essentially the P vs. NP
   problem
@@ -56,6 +68,14 @@ What kinds of dates would a hacker culture memorialize?
 * May 20, 1921: Hao Wang (王浩) born (died May 13, 1995)
 * May 31, 1832: Évariste Galois killed in a duel (born October 25, 1811)
 * June 7, 1954: Alan Turing committed suicide (born June 23, 1912)
+* June 9, 1905: Einstein's paper on the photoelectric effect, for
+  which he received the Nobel Prize, is published after having been
+  received on March 18.  Einstein was born on March 14, 1879, and died
+  on April 18, 1955.  In his *[annus
+  mirabilis](https://en.wikipedia.org/wiki/Annus_Mirabilis_papers)*
+  1905, he published relativity and some other stuff, including his
+  thesis (April 30).  *Annalen der Physik* received the relativity
+  paper on June 30 and published it September 26.
 * June 16, 1915: John Tukey born (died July 26, 2000)
 * June 22, 1910: Konrad Zuse born (died December 18, 1995)
 * June 27, 1831: Sophie Germain (Monsieur Antoine-Auguste Leblanc) died
@@ -78,14 +98,19 @@ What kinds of dates would a hacker culture memorialize?
 * August 12, 2013: Warren Teitelman died (born 1941)
 * September 5, 1977: launch of Voyager 1, omitting "Here Comes the
   Sun" for copyright reasons
+* September 9, 1941: Dennis Ritchie born (died October 12, 2011)
 * September 17, 1826: Riemann born
-* September 26, 1905: Einstein published the theory of relativity.
-  Einstein was born on March 14, 1879, and died on April 18, 1955.  In
-  his *annus mirabilis* 1905, he published relativity and some other
-  stuff, including his thesis (April 30).  *Annalen der Physik*
-  received the relativity paper on June 30 and published it September
-  26.
+* September 26, 1983: Stanislav Yefgravovich Petrov (born September 7,
+  1939; died May 19, 2017) refused to nuke the US when a radar system
+  malfunctioned, thus saving human civilization
 * September 27, 1983: The inauguration of the GNU Project
+* September 30, 1993: WSMR-SIMTEL20, one of the greatest libraries of
+  software in the world, [was shut down at 1600 hours Mountain
+  Daylight
+  Time](https://groups.google.com/forum/#!original/alt.folklore.computers/OF5LQn2aZUU/zRu4O11K1okJa "28ftr2$pmc@usenet.INS.CWRU.Edu by Richard F. Drushel")
+  and its 165,000 files destroyed, following a copyright lawsuit from
+  the Louis E. Wheeler Co., as reported in Network World, January 16,
+  1995 ("Army gets caught in software piracy firestorm").
 * October 18, 1931: Thomas Edison died (born February 11, 1847)
 * October 29, 1998: the sale of the Archimedes Palimpsest
 * the fourth month of the inundation season: when Ahmose wrote the
@@ -96,13 +121,29 @@ What kinds of dates would a hacker culture memorialize?
   J. S. Bach born, or July 28, 1750, Bach died (Episcopal feast day))
 * November 8, 1848: Gottlob Frege born (died July 26, 1925; published
   the Begriffsschrift in 1879) although he was an anti-Semite
+* November 26, 1894: Norbert Wiener born (died March 18, 1964)
+* December 1, 1975: the publication of the first version of Scheme as
+  the paper "Scheme: an interpreter for Extended Lambda Calculus",
+  1975, [AIM-349](https://dspace.mit.edu/handle/1721.1/5794)
 * December 7, 1873: Cantor sends Dedekind his proof of the
   uncountability of the reals
+* December 8, 1864: George Boole died (born November 2, 1815)
 * December 9, 1968: Doug Engelbart's Mother of All Demos (born
   January 30, 1925; died July 2, 2013)
+* December 10, 1815: Augusta Ada Byron (later Lovelace) born (died
+  November 27, 1852).  In September 1843 her translation of Luigi
+  Menabrea's 1842 French notes on Babbage (born 1791)'s Analytical
+  Engine were published in *Scientific Memoirs*, including [the first
+  computer
+  program](https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg)
+  in Note G of its "notes by the translator"; [translated into C by
+  Sinclair Target in
+  2018](https://twobithistory.org/2018/08/18/ada-lovelace-note-g.html)
 * December 28, 1903: John von Neumann born (died February 8, 1957)
 
-* Lu Ban?
+Things I don't know dates of:
+
+* Lu Ban (魯班) (dates unknown)
 * Zhang Heng (張衡) (dates unknown)
 * Su Song (蘇頌) (dates unknown)
 * Guo Shoujing (郭守敬) (dates unknown)
@@ -114,18 +155,19 @@ What kinds of dates would a hacker culture memorialize?
 * Zu Chongzhi (祖沖之) (dates unknown)
 * Heron of Alexandria (dates unknown)
 * Eudoxus of Cnidus (dates unknown) (when was his eclipse?)
+* Dakṣiputra Pāṇini (dates unknown)
+* Akṣapāda Gautama (dates unknown)
 * Ahmad, Muhammad and Hasan bin Musa ibn Shakir, the Banu Musa who
   wrote the كتاب الحيل Kitab al-Hiyal (dates unknown) in the House of
   Wisdom
-* the first solar power plant entered production in Egypt
-* the publication of the first Scheme paper?
-* the Russian who didn't launch the nukes
+* the first solar power plant entered production in Egypt (Frank
+  Shuman's "Solar Engine One" in Maadi, 1912-1913)
 * Chomsky hierarchy?
   <https://doi.org/10.1016%2FS0019-9958%2859%2990362-6> 1959 "On
   certain formal properties of grammars" (though Chomsky himself is
   still alive)
-* Aristotle
-* Something about Knuth?
+* Aristotle (dates unknown)
+* Something about Knuth?  The publication date of TAOCP volume 1?
 * Stephen A. Cook's SAT paper establishing NP-completeness?
   <http://www.cs.toronto.edu/~sacook/homepage/1971.pdf>
   <https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.406.395>
@@ -133,16 +175,10 @@ What kinds of dates would a hacker culture memorialize?
   to Qin Shi Huang?
 * something to memorialize the Library of Alexandria?
 * Johann Bernoulli?
-* the SIMTEL20 shutdown
 * something to celebrate Euclid
-* the birth or death of Dennis Ritchie
-* the founding of Wikipedia
-* something about Babbage; maybe Lovelace's publication of the first
-  program?
 * al-Khwarizmi's book
   <https://en.wikipedia.org/wiki/The_Compendious_Book_on_Calculation_by_Completion_and_Balancing>?
 * something to celebrate Aryabhata and the Aryabhatiya?
-* McCarthy's or Russell's Lisp
 * publication of the break of MD5
 * Brahmagupta
 * Newton's death or publication of Principia (July 5, 1687?) or birth (Dec 25)
@@ -156,7 +192,7 @@ What kinds of dates would a hacker culture memorialize?
 * Apollo's landing on the moon
 * Kantorovich's birth or his publication of "Математические методы
   организации и планирования производства"
-* the burning of the Maya papyri
+* the burning of the Maya codices
 * the birth of Emmy Noether
 * the publication of Alice in Wonderland
 * Champollion's decipherment of the hieroglyphs
@@ -183,6 +219,11 @@ What kinds of dates would a hacker culture memorialize?
 * 4.4BSD-Lite released
 * Jean Bartik?  May have made ENIAC a stored-program computer.
 * Kalashnikov?
+* April 1962: Spacewar!
+* James Watt?
+* the Cultural Revolution
+* McCarthyism
+* Alonzo Church?
 
 Of secondary importance:
 
