@@ -8,7 +8,16 @@ death date.  When there is a collision, I can usually move the person
 in question to a different relevant date: their death date if they're
 listed at their birthdate, or vice versa.
 
-0. January 1, 1992: Grace Hopper died (born December 9, 1906)
+So, for example, to insert Laplace, Hao Wang moved from May 20 to May
+13, allowing Jean Sammet to move from March 23 to May 20, freeing up
+March 23 for Laplace.  Laplace's death date, March 5, was occupied by
+William Oughtred, who died June 30, which is already quite full with
+two difficult-to-move events: the feast of Ramon Llull and the release
+of OpenGL.
+
+1. January 1, 1992: Grace Hopper died (born December 9, 1906)
+0. January 4, 1643 (O.S. December 25, 1642): Newton born; died March
+   31, 1727 (O.S. March 20, 1726), published Principia July 5, 1687?
 0. January 8, 1642: Galileo Galilei died after 8.5 years of house
    arrest (born February 15, 1564, sentenced by the Inquisition June
    22, 1633(?))
@@ -16,6 +25,10 @@ listed at their birthdate, or vice versa.
    government persecution (born November 8, 1986)
 0. January 14, 1901: Tarski born (died October 26, 1983)
 0. January 15, 2001: the founding of Wikipedia
+0. January 19, 1912: Leonid Vitaliyevich Kantorovich (Леони́д
+   Вита́льевич Канторо́вич) born (died April 7, 1986). Published
+   "Математические методы организации и планирования производства" in
+   1939.
 0. February 7, 1990: Alan Perlis died (born April 1, 1922)
 0. Feburary 8, 1920: Bob Bemer born (died June 22, 2004)
 0. February 11, 1897: Emil Post born (died April 21, 1954)
@@ -26,6 +39,7 @@ listed at their birthdate, or vice versa.
    were distant suns, burned at the stake for, among other things,
    teaching reincarnation and possessing the writings of Erasmus.
 0. February 23, 1855: Gauss died (born April 30, 1777)
+0. February 24, 1709: Jacques de Vaucanson born (died November 2, 1782)
 0. March 1, 1990: the Secret Service raided Steve Jackson Games for
    publishing GURPS Cyberpunk
 0. March 1, 86 BCE: [Sulla sacked
@@ -40,20 +54,36 @@ listed at their birthdate, or vice versa.
 0. March 5, 1574: William Oughtred born (died June 30, 1660)
 0. March 7, 1917: Betty Holberton born (died December 8, 2001)
 0. March 11, 1890: Vannevar Bush born (died June 28, 1974)
+0. March 18, 1905: Einstein sends his paper on the photoelectric
+   effect, for which he received the Nobel Prize, to *Annalen der
+   Physik*, which published it on June 9.  Einstein was born on March
+   14, 1879, and died on April 18, 1955.  In his *[annus
+   mirabilis](https://en.wikipedia.org/wiki/Annus_Mirabilis_papers)*
+   1905, he published relativity and some other stuff, including his
+   thesis (April 30).  *Annalen der Physik* received the relativity
+   paper on June 30 and published it September 26.
 0. March 20, 1956: Kurt Gödel (born April 28, 1906, died January 14,
    1978) wrote to John von Neumann, posing essentially the P vs. NP
    problem
 0. March 21, 1768: Fourier born (or, alternatively, December 21, 1807,
    he presented his paper "on the propagation of heat in solid bodies")
-0. March 23, 1928: Jean E. Sammet born (died May 20, 2017)
+0. March 23, 1749: Laplace born (died March 5, 1827); published
+   Bayesian probability theory in 1812
 0. March 25, 1914: Norman Borlaug born, who saved a billion lives with
    dwarf wheat (died September 12, 2009)
 0. March 31, 1596: Descartes' birth (died February 11, 1650)
 0. April 7, 1761: Thomas Bayes died (birthdate unknown)
+0. April 9, 1806: Isambard Kingdom Brunel born (died September 15, 1859)
+0. April 14, 1935: Emmy Noether died (born March 23, 1882)
 0. April 15, 1707: Euler born (died September 18, 1783)
 0. April 25, 1903: Kolmogorov born (died October 20, 1987)
+0. April 26, 1920: the death of Srinivasa Ramanujan (born December 22,
+   1887)
 0. April 29, 1911: founding of Tsinghua University (then 清華學堂, now
    清华大学)
+0. April 30, 1995: the NSFNet backbone shut down, ending the NSFNet
+   Acceptable Use Policy which prohibited most for-profit activity on
+   most of the internet.
 0. April 30, 1916: Claude Shannon born (died February 24, 2001)
    (Shannon Day was celebrated April 30, 2016)
 0. May 2, 1519: Leonardo da Vinci died (born April 14 or 15, 1452)
@@ -63,19 +93,15 @@ listed at their birthdate, or vice versa.
    on April 7, 1933 eliminated all Jewish and Communist public
    employees, including professors, with some exceptions;
 0. May 11, 1918: Richard Feynman born (died February 15, 1988)
+0. May 13, 1995: Hao Wang (王浩) died (born May 20, 1921)
 0. May 17, 1902: the discovery that the Antikythera Mechanism had gears
    (probably brought up July 1901)
-0. May 20, 1921: Hao Wang (王浩) born (died May 13, 1995)
+0. May 20, 2017: Jean E. Sammet died (born March 23, 1928)
 0. May 31, 1832: Évariste Galois killed in a duel (born October 25, 1811)
 0. June 7, 1954: Alan Turing committed suicide (born June 23, 1912)
-0. June 9, 1905: Einstein's paper on the photoelectric effect, for
-   which he received the Nobel Prize, is published after having been
-   received on March 18.  Einstein was born on March 14, 1879, and died
-   on April 18, 1955.  In his *[annus
-   mirabilis](https://en.wikipedia.org/wiki/Annus_Mirabilis_papers)*
-   1905, he published relativity and some other stuff, including his
-   thesis (April 30).  *Annalen der Physik* received the relativity
-   paper on June 30 and published it September 26.
+0. June 9, 597: St. Columba died (born December 7, 521).  Legend has
+   it he fought the battle of Cúl Dreimhne in 561 to defend his right
+   to copy a St. Finnian's psalter.
 0. June 16, 1915: John Tukey born (died July 26, 2000)
 0. June 22, 1910: Konrad Zuse born (died December 18, 1995)
 0. June 27, 1831: Sophie Germain (Monsieur Antoine-Auguste Leblanc) died
@@ -89,6 +115,8 @@ listed at their birthdate, or vice versa.
    1943)
 0. July 16, 1945: the Trinity event
 0. July 17, 1912: Poincaré died (born April 29, 1854)
+0. July 20, 1969: Apollo 11 lands humans on the moon for the first
+   time at 20:17 UTC
 0. July 25, 1926: Ray Solomonoff born (died December 7, 2009)
 0. August 6, 2002: Dijkstra died (born May 11, 1930)
 0. August 8, 1900: David Hilbert (born January 23, 1862; died February
@@ -96,6 +124,8 @@ listed at their birthdate, or vice versa.
    International Congress of Mathematicians in Paris.
 0. August 9, 1927: Marvin Minsky born (died January 24, 2016)
 0. August 12, 2013: Warren Teitelman died (born 1941)
+0. August 17, 2004: Xiaoyun Wang (王小云), Dengguo Feng, Xuejia Lai,
+   and Hongbo Yu of Shandong University published their break of MD5.
 0. September 5, 1977: launch of Voyager 1, omitting "Here Comes the
    Sun" for copyright reasons
 0. September 9, 1941: Dennis Ritchie born (died October 12, 2011)
@@ -139,11 +169,15 @@ listed at their birthdate, or vice versa.
    in Note G of its "notes by the translator"; [translated into C by
    Sinclair Target in
    2018](https://twobithistory.org/2018/08/18/ada-lovelace-note-g.html)
+0. December 23, 1790: Jean-François Champollion born (died March 4,
+   1832), deciphered the Egyptian demotic script in 1806 and, while
+   awaiting trial for treason, the hieroglyphs in 1822.
 0. December 28, 1903: John von Neumann born (died February 8, 1957)
 
 Things I don't know dates of:
 
-0. Lu Ban (魯班) (dates unknown)
+1. Lu Ban (魯班) (dates unknown)
+0. Shandong University 山东大学 founded (dates unknown)
 0. Zhang Heng (張衡) (dates unknown)
 0. Su Song (蘇頌) (dates unknown)
 0. Guo Shoujing (郭守敬) (dates unknown)
@@ -167,6 +201,7 @@ Things I don't know dates of:
    certain formal properties of grammars" (though Chomsky himself is
    still alive)
 0. Aristotle (dates unknown)
+0. Brahmagupta (dates unknown)
 0. Something about Knuth?  The publication date of TAOCP volume 1?
 0. Stephen A. Cook's SAT paper establishing NP-completeness?
    <http://www.cs.toronto.edu/~sacook/homepage/1971.pdf>
@@ -174,29 +209,16 @@ Things I don't know dates of:
 0. something to memorialize the Mohists and the other scholars who fell
    to Qin Shi Huang?
 0. something to memorialize the Library of Alexandria?
-0. Johann Bernoulli?
 0. something to celebrate Euclid
 0. al-Khwarizmi's book
    <https://en.wikipedia.org/wiki/The_Compendious_Book_on_Calculation_by_Completion_and_Balancing>?
 0. something to celebrate Aryabhata and the Aryabhatiya?
-0. publication of the break of MD5
-0. Brahmagupta
-0. Newton's death or publication of Principia (July 5, 1687?) or birth (Dec 25)
-0. Boole's birth
-0. publication of the break of Merkle's knapsack algorithm
+0. publication of the break of Merkle's knapsack algorithm (date unknown)
 0. something about the Nine Chapters on the Mathematical Art
-0. Laplace's birth, or the publication of his probability theory
-0. the release of the first version of Haskell
-0. St. Columba's war
-0. Ramanujan's death
-0. Apollo's landing on the moon
-0. Kantorovich's birth or his publication of "Математические методы
-  организации и планирования производства"
-0. the burning of the Maya codices
-0. the birth of Emmy Noether
+0. the release of the first version of Haskell (dates unknown)
+0. July 1562: the burning of the Maya codices by Bishop Diego de Landa
+   (date unknown)
 0. the publication of Alice in Wonderland
-0. Champollion's decipherment of the hieroglyphs
-0. the end of the NSFNet AUP
 0. the founding of Sun
 0. the going on sale of the Altair 8800
 0. founding of the University of Leipzig
@@ -232,6 +254,8 @@ Of secondary importance:
 * October 30, 1632: (O.S. October 20) Christopher Wren born (died
   March 8, 1723 (O.S. February 25))
 * Rudolf Carnap
+0. August 6, 1667 (O.S. July 27): Johann Bernoulli born (died January
+   1, 1748)
 
 Rejected:
 
