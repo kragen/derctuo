@@ -1,5 +1,5 @@
 Consider the problem of efficiently implementing some kind of virtual
-machine, like [Veskeno](veskeno-outline.md) or the JVM.  Often it's
+machine, like [Veskeno](veskeno-outline.md) or the JVM.  Often it’s
 desirable for the virtual machine to be able to provide bounds
 checking and garbage collection, thus preventing indexing, type, and
 memory-management errors from provoking entirely unpredictable
@@ -13,7 +13,7 @@ more orthogonal approach.
 
 Exploring this, I think I found a way to write a featureful and
 adequately fast multitasking system with memory protection on
-microcontrollers, perhaps similar to Liedtke's pre-L4 designs,
+microcontrollers, perhaps similar to Liedtke’s pre-L4 designs,
 L3 and Eumel; it ought to straightforwardly support paradigms like
 transactional shared memory, ACID transactions, and access to
 filesystem snapshots, and even helps to support clustering.
@@ -32,14 +32,14 @@ fields.)
 
 Similarly, every memory reference on the i386 in protected mode
 indexes into some 4096-byte page with the last 12 bits of the
-effective address.  This indexing, too, avoids any bounds checking ---
-although the more significant 20 bits of the memory address are looked
-up in the processor's TLB, and if they are not found, a tree traversal
+effective address.  This indexing, too, avoids any bounds
+checking — although the more significant 20 bits of the memory address are looked
+up in the processor’s TLB, and if they are not found, a tree traversal
 is performed, with the possibility of a protection fault if no page is
 mapped.
 
-So suppose our virtual machine provides access to pointer-free "string
-memory" in, say, 1024-byte blocks, and a virtual-machine instruction
+So suppose our virtual machine provides access to pointer-free “string
+memory” in, say, 1024-byte blocks, and a virtual-machine instruction
 to index into the current block with an 10-bit index.  A bytecode loop
 running in the virtual machine can freely generate such indices and
 read and write the current block without incurring any expense of
@@ -47,16 +47,16 @@ bounds-checking.  Of course, that the array or record being indexed by
 the virtual machine may be smaller than 1024 bytes, and wrapping
 around to the beginning may not be an acceptable handling of
 overflowing those bounds, so this may not provide bounds-checking from
-the point of view of the high-level language implemented --- but it
-prevents the bytecode from corrupting the virtual machine's data
+the point of view of the high-level language implemented — but it
+prevents the bytecode from corrupting the virtual machine’s data
 structures.
 
 Multiple block keys
 -------------------
 
 Suppose we want to access more than 1024 bytes in our program?  We can
-have multiple block pointers in "segment descriptor" or "block
-descriptor" or "block key" registers in the virtual machine.  4, 8, or
+have multiple block pointers in “segment descriptor” or “block
+descriptor” or “block key” registers in the virtual machine.  4, 8, or
 16 might be a reasonable number.  How do we specify which segment to
 use?  There are many possibilities.  The read-string-memory and
 write-string-memory instructions could contain a segment field
@@ -64,7 +64,7 @@ indicating which register to use; the virtual machine could provide an
 instruction that sets the current segment to one of the segment
 registers; different modes of accessing memory could use different
 current-segment registers (for example, instruction fetch, data read,
-and data write); you could use the 8086 "instruction prefix" mechanism
+and data write); you could use the 8086 “instruction prefix” mechanism
 where non-default segment registers are selected for a single
 instruction by a special instruction before it; or some combination.
 
@@ -86,15 +86,15 @@ Nodes
 
 But suppose we want to access more than 8192 bytes of data in our
 program?  We need some way to store the referents of block keys, but
-we cannot store them in blocks themselves --- the program could
+we cannot store them in blocks themselves — the program could
 overwrite them.  Instead let us store block keys in a different kind
 of structure, which following KeyKOS terminology we will call a
-"node".  A node contains, say, 64 block key slots.  The virtual
-machine contains a "current node register" analogous to the "current
-block register", and a set of 4--16 node registers analogous to the
-4--16 block or segment registers.  A "read block key" instruction
+“node”.  A node contains, say, 64 block key slots.  The virtual
+machine contains a “current node register” analogous to the “current
+block register”, and a set of 4–16 node registers analogous to the
+4–16 block or segment registers.  A “read block key” instruction
 takes a 6-bit index and loads the corresponding block key into the
-current segment register; the analogous "write block key" stores the
+current segment register; the analogous “write block key” stores the
 block key from the current segment register into the specified block
 key slot of the current node.
 
@@ -113,8 +113,8 @@ Node keys
 ---------
 
 In addition to the 64 block keys, a node *also* contains (say) 64
-*node* key slots, and there are analogous "read node key" and "write
-node key" instructions which permit traversing and mutating the graph
+*node* key slots, and there are analogous “read node key” and “write
+node key” instructions which permit traversing and mutating the graph
 of nodes.  Like the block-key instructions, these instructions require
 no validity checking; there is no way to copy a block key into a
 node-key slot or vice versa, and there is no way to copy either kind
@@ -129,33 +129,33 @@ conditionals or self-modifying or dynamically-generated code.
 There is nothing to prevent the node graph from being arbitrarily
 cyclic or to prevent nodes from becoming unreferenced, but a garbage
 collector can safely traverse this node graph.  Because the nodes are
-so large, 256-1024 bytes, this should be a relatively short process
---- a machine with 16 gibibytes of RAM and 64-bit pointers cannot
+so large, 256-1024 bytes, this should be a relatively short
+process — a machine with 16 gibibytes of RAM and 64-bit pointers cannot
 accommodate even 16'777'216 nodes, and if the nodes are being used to
-index a tree of blocks in RAM, there can't be even 262'144 nodes.  So
+index a tree of blocks in RAM, there can’t be even 262'144 nodes.  So
 a full garbage collection should normally be submillisecond.  The
 corollary, of course, is that these nodes are not going to be a
-reasonable way to implement small data structures like a Lisp "cons"
-or "pair", costing at least some 64 times as much as a reasonable
-cons.  Still, compared to CPython or Perl, that's still not that much.
+reasonable way to implement small data structures like a Lisp “cons”
+or “pair”, costing at least some 64 times as much as a reasonable
+cons.  Still, compared to CPython or Perl, that’s still not that much.
 
 The repertoire
 --------------
 
 So, the full inventory of operations is something like the following:
 
-* read-string-memory(bk, u10) -> u8 or u32 or something via the given
+* read-string-memory(bk, u10) → u8 or u32 or something via the given
   block key, which may be implicit for efficiency;
-* write-string-memory(bk, u10, u8 or u32 or something), analogously
-  --- these two operations might come in multiple widths;
-* allocate-block() -> bk, allocates a fresh block (with the
+* write-string-memory(bk, u10, u8 or u32 or something),
+  analogously — these two operations might come in multiple widths;
+* allocate-block() → bk, allocates a fresh block (with the
   destination location perhaps implicit);
-* allocate-node(bk) -> nk, allocates a fresh node all of whose block
+* allocate-node(bk) → nk, allocates a fresh node all of whose block
   keys initially refer to the block given by bk;
-* read-block-key(nk, u6) -> bk, reads a block key from the node given
+* read-block-key(nk, u6) → bk, reads a block key from the node given
   by nk in the slot given by u6;
 * write-block-key(nk, u6, bk), analogously;
-* read-node-key(nk, u6) -> nk, analogously to read a node key;
+* read-node-key(nk, u6) → nk, analogously to read a node key;
 * write-node-key(nk, u6, nk), analogously.
 
 Also, possibly one or more of the following:
@@ -166,7 +166,7 @@ Also, possibly one or more of the following:
   operations or for all operations;
 * far-call(u4, offset), transfer control to the code at the given
   offset in the block whose key is in the identified block key
-  register; this is not applicable if the virtual machine's code is
+  register; this is not applicable if the virtual machine’s code is
   not itself stored in blocks;
 * select-node-key(u4), start using the node key in the identified node
   key register;
@@ -194,12 +194,12 @@ The once and future king of computer applications is numerical
 matrices, with applications such as matrix-vector multiply xGEMV,
 matrix-matrix multiply xGEMM, and eigenvalue computation
 xSYTRD/xGEBRD/xSTERF/xSTEDC accounting for a good deal of the usage of
-many computers --- historically due to physics models, now due to
+many computers — historically due to physics models, now due to
 artificial neural networks.
 
 The obvious way to organize a matrix for access locality in a
 blocks-and-nodes system is to divide it into rectangular or square
-blocks; if it's 32-bit single-precision, an 8×8 block fits into a
+blocks; if it’s 32-bit single-precision, an 8×8 block fits into a
 256-byte storage block, and in 64-bit double-precision, two 4×4 blocks
 do.  In SGEMV matrix-vector multiply, multiplying an 8×8 matrix block
 by an 8-element vector segment yields an 8-element partial-sum vector
@@ -230,45 +230,45 @@ from originally, but I still need to read THE DESCRIPTOR to learn
 about it.
 
 The B5000 tagged every 48-bit memory word with a code/data bit, thus
-providing "W^X" functionality at a memory-word level rather than a
+providing “W^X” functionality at a memory-word level rather than a
 page level; its descendants added two more tag bits, providing dynamic
 typing at the hardware level, so that for example only a single ADD
 instruction was needed, dynamically dispatching to single- or
-double-precision addition; its "descriptors" indicated whether an
+double-precision addition; its “descriptors” indicated whether an
 array contained words or bytes (and, if bytes, bytes of which of the
 three supported sizes.)
 
 ### The relation to KeyKOS ###
 
 As I mentioned above, this is in some sense copied from KeyKOS,
-although there are some differences.  KeyKOS didn't statically
-segregate block keys ("page keys") from other kinds of keys, and it
-didn't have "block key registers" or "node key registers" or any key
+although there are some differences.  KeyKOS didn’t statically
+segregate block keys (“page keys”) from other kinds of keys, and it
+didn’t have “block key registers” or “node key registers” or any key
 registers other than the ones in the nodes.
 
 KeyKOS had various other abilities.
 
 It used the IBM 370 virtual-memory mechanism, and later the SPARC
-virtual-memory mechanism, to let the "virtual machine bytecode" be the
+virtual-memory mechanism, to let the “virtual machine bytecode” be the
 regular CPU instructions, mapping many-page segments with the MMU so
 that the four-instruction sequence above was just a regular memory
 access.
 
-Space and time were divided up hierarchically with "space banks" and
-"clocks" --- you needed access to a non-exhausted space bank to
+Space and time were divided up hierarchically with “space banks” and
+“clocks” — you needed access to a non-exhausted space bank to
 allocate space and a non-exhausted clock in order to consume CPU time.
 The owner of a space bank could revoke all the storage allocated from
 it.
 
-It had kinds of keys other than page keys and node keys --- it had
+It had kinds of keys other than page keys and node keys — it had
 invocation keys and resumption keys supporting efficient remote
-procedure call between separate processes ("domains"), as well as keys
+procedure call between separate processes (“domains”), as well as keys
 granting access to other kinds of kernel objects such as space banks
 and clocks.
 
-There was a "weaken" operation that could convert a normal node key or
-page key into a "sense key" which only permitted read operations ---
-transitively, so that if a page key was fetched from a node via a
+There was a “weaken” operation that could convert a normal node key or
+page key into a “sense key” which only permitted read
+operations — transitively, so that if a page key was fetched from a node via a
 sense key, that page key would also be returned as a read-only sense
 key.
 
@@ -304,46 +304,46 @@ A Smalltalk method normally runs with access to some local variables,
 including its arguments; a vector of instance variables in its
 receiver; and a pool of constants associated with, I think, the
 method.  Different bytecodes are assigned to load and store from each
-of these "segments", except that the constant pool is not writable.
+of these “segments”, except that the constant pool is not writable.
 There are no indirections there; the offsets are all hardcoded into
 the instructions.  Arrays are instead treated as a separate class of
-object whose `#at:` and `#at:put:` methods are "primitives", handled
+object whose `#at:` and `#at:put:` methods are “primitives”, handled
 by native code linked into the virtual machine.
 
-Smalltalk does not have a notion of "pointer-free data"; its SmallIntegers,
-characters, booleans, and symbols ("selectors") are treated as
+Smalltalk does not have a notion of “pointer-free data”; its SmallIntegers,
+characters, booleans, and symbols (“selectors”) are treated as
 full-fledged objects and nominally accessed by sending them messages,
 although some of them normally are implemented by storing all their
 (immutable) data in a tagged pointer rather than boxed in memory like
 CPython.  Some selectors like `#ifTrue:ifFalse:` are special-cased by
 the virtual machine.
 
-(Hmm, actually maybe Smalltalk does have such a notion: "bits"
+(Hmm, actually maybe Smalltalk does have such a notion: “bits”
 fields.)
 
 So in a sense this is a simplification of the Smalltalk model, with
 just one uniform kind of node for instance variables, local variables,
 etc., but with storage for pointer-free bytes slapped onto the side.
 
-Kaehler & Krasner's 1982 LOOM paper describes an approach that is very
+Kaehler & Krasner’s 1982 LOOM paper describes an approach that is very
 similar in many ways, although unfortunately they had not yet finished
-the system at the time they published their paper, saying, "Our LOOM
+the system at the time they published their paper, saying, “Our LOOM
 virtual memory system is in its infancy.  We are only beginning to
-make measurements on its performance."  Other authors of the LOOM
+make measurements on its performance.”  Other authors of the LOOM
 system included Althoff, Weyer, Deutsch, Ingalls, and Merry, with
 input from Bobrow and Tesler.
 
 LOOM maintains an in-RAM cache of up to
-2<sup>15</sup> "resident" objects linked together with 16-bit short
+2<sup>15</sup> “resident” objects linked together with 16-bit short
 Oops, out of a possible total of 2<sup>31</sup> objects on disk
 (occupying a maximum of 2<sup>33</sup> bytes, since it was 1982),
-linked together with 32-bit long Oops.  Nonresident objects'
-ambassadors in RAM are called "leaves".  They mention that the average
+linked together with 32-bit long Oops.  Nonresident objects’
+ambassadors in RAM are called “leaves”.  They mention that the average
 object in their system consumes 13 words in memory (26 bytes), plus
 perhaps a couple more words in the Resident Object Table.  To save
-RAM, some short-Oop fields are just 0 ("lambda") instead of pointing
+RAM, some short-Oop fields are just 0 (“lambda”) instead of pointing
 at leaf objects, requiring LOOM to refetch the on-disk object to find
-the long Oop they're supposed to refer to.
+the long Oop they’re supposed to refer to.
 
 LOOM de-lambda-izes the entire receiver, fleshing out lambdas into
 full leaves, before invoking a method.  Thus it avoids null checks on
@@ -352,13 +352,13 @@ microcontroller-focused mechanism described above which brings blocks
 or nodes into memory when their keys are brought into a
 virtual-machine register.
 
-Their short-Oop mechanism is table-based, unlike HotSpot's compressed-Oop
+Their short-Oop mechanism is table-based, unlike HotSpot’s compressed-Oop
 mechanism, which represents a 64-bit object pointer as a 36-bit (?)
 offset from a global heap base address, shifted right by 4 (?) bits
 and thus stored in a 32-bit word.  Being table-based permits relocation of objects
 when their 4-word leaves are replaced by full-fledged resident objects
 after being brought in from disk.  They do suggest using precisely
-HotSpot's compressed-Oop approach to support 2<sup>36</sup> bytes of
+HotSpot’s compressed-Oop approach to support 2<sup>36</sup> bytes of
 on-disk objects, though, and their RAM is 16-bit-word-oriented, so
 they can support 131072 bytes of objects in RAM, like the original
 Macintosh 128K, not merely 65536.
@@ -389,8 +389,8 @@ about 25% on SPI itself?  Plus erase time for Flash?)
 Nodes should probably have 32 node keys and 32 block keys.  Block keys
 of 32 bits in stable storage could address up to a terabyte, which is
 not too limiting; 128 bytes of such block keys would be 32 block keys,
-and it's probably reasonable to use a similar number of node keys.  In
-RAM, such a node might shrink to 64 bytes; it probably isn't necessary
+and it’s probably reasonable to use a similar number of node keys.  In
+RAM, such a node might shrink to 64 bytes; it probably isn’t necessary
 to keep the 32-bit identifiers of nonresident nodes and blocks,
 because the extra latency to read 4 bytes from an arbitrary location
 in Flash is small, unlike spinning rust.  (This of course suggests
@@ -407,9 +407,9 @@ address into an 8192-byte tree.
 ### Multiprocessing and concurrency ###
 
 A potentially interesting approach to the problem of personal
-computing on microcontrollers would be to share access to "disk"
+computing on microcontrollers would be to share access to “disk”
 blocks using a MESI or similar cache-coherency protocol, with these
-"blocks" of 256--1024 bytes playing the role of cache lines.  Then
+“blocks” of 256–1024 bytes playing the role of cache lines.  Then
 runnable processes can be migrated to whatever processor is idle, like
 on SMP.  (You could presumably do the same thing on a Linux-like
 system with a SAN, running MESI at page granularity; has anybody tried
@@ -418,10 +418,10 @@ this?  Maybe Amoeba?)
 Normally, in MESI, if a cache line is in Modified or Exclusive state,
 a request from another cache to read it immediately transitions it to
 Shared state, guaranteeing forward progress.  But there are possible
-alternatives; for example, you could "lock" a block or node for
+alternatives; for example, you could “lock” a block or node for
 writing, so that attempts by other processes (on the same processor or
 not) to access that block or node will have to wait until you unlock
-it.  Or, all blocks and nodes might be "copy-on-write" in the sense
+it.  Or, all blocks and nodes might be “copy-on-write” in the sense
 that each process writing to them has its own private copy, and all
 shared data might be immutable, with keys to new data transmitted
 explicitly via some kind of IPC mechanism, or some small safety valve
@@ -431,7 +431,7 @@ same time, but when the first of them commits its write, the others
 are aborted, either immediately or when they attempt to commit.
 (Presumably they can then be automatically retried.)
 
-It's tempting to suggest that these mechanisms would make it easy to
+It’s tempting to suggest that these mechanisms would make it easy to
 build highly concurrent shared mutable data structures, but history
 has not been kind to such optimistic statements.
 
@@ -439,29 +439,29 @@ has not been kind to such optimistic statements.
 
 The AVR itself supports SPI with I think an 8 MHz clock, but slower
 signals are less demanding on PCB layout.  Also, some common SPI
-memories don't support such high speeds; according to file
+memories don’t support such high speeds; according to file
 `jellybeans-2016`, the US$2.78 two-megabit STMicroelectronics
 M95M02-DRMN6TP EEPROM is only 5 MHz.  Others do; the US$1.09
 256-kilobit Microchip 23K256-I/SN SRAM claims 20MHz according to file
 `low-power-micros`, and the US$0.36 4-mebibit Winbond W25X40CLSNIG
 claims 104MHz.  Memories cheaper than that tend to be only 400kHz I²C.
-I don't know how fast SD cards' SPI interfaces are, but they're also
+I don’t know how fast SD cards’ SPI interfaces are, but they’re also
 required.
 
 If the SPI interface or whatever supports DMA, it might be feasible to
 run a second process for a couple thousand cycles while the first one
 was blocked on loading a block from external storage.
 
-I'm not sure what the connectivity between multiple processors and the
-"disk" should look like; I²C tends to be only 400kbps, which would
+I’m not sure what the connectivity between multiple processors and the
+“disk” should look like; I²C tends to be only 400kbps, which would
 push block access times up to a spinning-rust-like millisecond level,
-and SPI is inherently single-master, so you couldn't connect multiple
+and SPI is inherently single-master, so you couldn’t connect multiple
 microcontrollers directly to a single memory chip.  The CAN bus might
-work, but of course memory chips don't support it directly.
+work, but of course memory chips don’t support it directly.
 
-Probably you'd end up either connecting the processors into a ring,
+Probably you’d end up either connecting the processors into a ring,
 each with locally attached SPI memory, or dedicating one or two
-"kernel" processors to I/O arbitration, with a direct link to the
+“kernel” processors to I/O arbitration, with a direct link to the
 memory and another direct link to each application processor.
 
 ### Dynamically loading code blocks on a microcontroller ###
@@ -471,19 +471,19 @@ handle dynamically loading code.  First, it could just not do it at
 all, just using all this segments and nodes stuff to make it
 reasonably easy to run a little code with a lot of data.  Second, it
 could dynamically load bytecode blocks into RAM and run them in an
-interpreter --- the AVR is slow enough that this would be somewhat
-limiting, and it's certainly power-hungry, but this would allow
+interpreter — the AVR is slow enough that this would be somewhat
+limiting, and it’s certainly power-hungry, but this would allow
 relatively quick task switching.  Third, it could dynamically load
 machine-code blocks (whether somewhat dynamically created from
-bytecode or compiled ahead of time) and burn them into a "transient
-program area" in its Flash so it could run them, although this will
-limit its lifespan.  Fourth, if it's a microcontroller that can run
-from RAM, which the AVR can't, it could just load blocks of machine
+bytecode or compiled ahead of time) and burn them into a “transient
+program area” in its Flash so it could run them, although this will
+limit its lifespan.  Fourth, if it’s a microcontroller that can run
+from RAM, which the AVR can’t, it could just load blocks of machine
 code into RAM and run that.
 
 ### STM32 ###
 
-Nowadays, as described in file `stm32`, it probably doesn't make sense
+Nowadays, as described in file `stm32`, it probably doesn’t make sense
 to use an AVR; you should use at least a Cortex-M processor like the
 STM32; a 48MHz STM32F031x4 with 16 kibibytes of RAM costs US$1.30, and
 I think some STM32s are even cheaper than that.  As bonuses, you get
@@ -492,10 +492,10 @@ much lower power consumption and the ability to run code in RAM.
 ### Copy-on-write ###
 
 Copy-on-write is a little bit tricky, in that, if the same process or
-transaction refers to the same block via two different access paths
---- such as via block key register 3 and block slot 5 in some node ---
-you probably want it to get the same version of the block.  So it
-isn't sufficient to do the pure-functional-tree thing of "modifying" a
+transaction refers to the same block via two different access
+paths — such as via block key register 3 and block slot 5 in some
+node — you probably want it to get the same version of the block.  So it
+isn’t sufficient to do the pure-functional-tree thing of “modifying” a
 pointer to the block by creating a new version of the node, and its
 parent node, and so on up to the root of the tree, because there is
 perhaps no tree.  Instead, every time you go to load a block register,
@@ -507,7 +507,7 @@ one.  (And analogously for modifying nodes.)
 
 A potentially more interesting kind of microcontroller to use for this
 is the J1A Forth-like processor.  It might be reasonable to extend it
-to do many of the block and node operations "in hardware", run several
+to do many of the block and node operations “in hardware”, run several
 processors concurrently inside a single FPGA, and perhaps reconfigure
 other parts of the FPGA dynamically to assist with other computations.
 
@@ -525,15 +525,15 @@ other transaction in the mean time.  If so, we *roll back* the
 transaction, discarding all of the buffered written data, and
 transparently restart it from the beginning; if not, it successfully
 commits, and its versions of that modified data become the active
-versions.  It's a very simple idea.
+versions.  It’s a very simple idea.
 
 As one example, you might have a piece of code that scans for an
-occurrence of the word "fuck" in a file, and sends an alert email if
+occurrence of the word “fuck” in a file, and sends an alert email if
 it appears, and another piece of code that modifies the contents of
 the file.  If the scanning code happens to be reading through the file
-when the word "full" is overwritten with the word "sick", it might
-incorrectly conclude that the word "fuck" occurred, and send a
-spurious email, possibly getting someone fired from a job they'd be
+when the word “full” is overwritten with the word “sick”, it might
+incorrectly conclude that the word “fuck” occurred, and send a
+spurious email, possibly getting someone fired from a job they’d be
 better off without.  But if both pieces of code must run within
 transactions, which must commit if the XXX
 

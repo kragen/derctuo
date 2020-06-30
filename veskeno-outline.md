@@ -204,7 +204,7 @@ performance headroom.
 A typical 1980s video-game might run on a 6502 like the 1.79MHz one in
 a Nintendo; [a multiply routine for the 6502] takes 130 CPU clock
 cycles to multiply 8 bits by 8 bits and get a 16-bit result, while a
-version using a table of squares takes 79–83 cycles.  At the 6502's
+version using a table of squares takes 79–83 cycles.  At the 6502’s
 max of 3 MHz this might give us 38000 8-bit multiplies per second, or
 only about 22000 on the Nintendo, working out to about 5000 16-bit
 multiplies per second; typically, though, 6502-based video-games
@@ -215,13 +215,13 @@ some 256 times faster, obviating the need for sprite hardware.
 
 [a multiply routine for the 6502]: https://www.lysator.liu.se/~nisse/misc/6502-mul.html
 
-On the other hand, for faithfully reproducing the "feel" of human
+On the other hand, for faithfully reproducing the “feel” of human
 interactions with existing computer systems, simulating the *analog*
 behavior of computer hardware often demands significant computational
-work.  XXX at masswerk.at has reproduced "Spacewar!", perhaps the
+work.  XXX at masswerk.at has reproduced “Spacewar!”, perhaps the
 first video-game done on a computer; he reports that the most
 difficult and time-consuming part was accurately reproducing the color
-change and exponential decay behavior of the PDP-1's display.
+change and exponential decay behavior of the PDP-1’s display.
 Accurately simulating analog video artifacts like chroma subsampling,
 NTSC artifact colors, ghosting, blur, ringing, noise, and
 pincushioning, as the Apple2 XScreenSaver module does, can use an
@@ -327,7 +327,7 @@ reproducible on other implementation of Veskeno.
 A binary, rather than textual, file format
 ------------------------------------------
 
-It's reasonable to consider, for example, core Lisp as the canonical
+It’s reasonable to consider, for example, core Lisp as the canonical
 representation for algorithms, by which is meant the usual definitions
 of S-expressions, CAR, CDR, CONS, QUOTE, NULL, ATOM, EQUAL, LAMBDA,
 some kind of conditional such as COND or IF, and some kind of
@@ -341,7 +341,7 @@ and the printer.
 However, when we turn to thinking of testing and failures, many subtle
 considerations appear.  LAMBDA and LABELS involve the introduction of
 symbols; what is the maximum acceptable length of these symbols?  How
-many characters of them are significant --- all of them?  Are
+many characters of them are significant — all of them?  Are
 characters counted as bytes (in UTF-8?), as Unicode code points, or as
 UTF-16 code units?  Which characters are allowed?  Is comparison
 case-insensitive, or, if case-sensitive, is it done in, for example,
@@ -349,25 +349,25 @@ Normalization Form D?  Is there a maximum nesting depth to lists, and
 what is it?  How about a maximum length?  Is the symbol NIL, or some
 other symbol, EQUAL to an empty list, or treated as falsehood in
 conditionals?  Is the ASCII tab character treated as whitespace?  How
-about vertical tab (^K)?  How does EQUAL handle lists --- does it
+about vertical tab (^K)?  How does EQUAL handle lists — does it
 treat them as always inequivalent, almost like EQ, or does it compare
 their contents, and if so does it have a recursion limit?  Must the
 input file end with a linefeed character?  What will the parser do if
 an extra right parenthesis is added to the end of the file?  How about
 an extra left parenthesis?  If an unused argument is specified as a
-nonterminating computation, will the computation succeed or not ---
-that is, is evaluation lazy or eager?  Does the answer depend on
+nonterminating computation, will the computation succeed or not — that
+is, is evaluation lazy or eager?  Does the answer depend on
 circumstances?
 
-If mutable state is added --- as it was immediately to Lisp,
-historically speaking --- additional questions become relevant.  What
+If mutable state is added — as it was immediately to Lisp,
+historically speaking — additional questions become relevant.  What
 is the order of evaluation of arguments?
 
 These problems are amplified by the fact that the answers may be
 dependent on the invocation context in a poorly specified way.  As an
-example, CPython's default recursion limit is 1000 stack levels, which
+example, CPython’s default recursion limit is 1000 stack levels, which
 may give rise to a nesting limit of 333, 500, or 1000 for lists in a
-straightforwardly-written recursive-descent parser --- but if that
+straightforwardly-written recursive-descent parser — but if that
 parser is invoked from a context already nested ten stack levels deep,
 these limits instead become 330, 495, or 990.  CPython is unusual in
 that it handles stack overflow explicitly by raising an exception;
@@ -386,7 +386,7 @@ implements Veskeno and builds and tests a program as a Veskeno virtual
 machine image in her implementation.  Unbeknownst to Alice, her
 program depends on symbols with equal Normalization Form D being
 treated as EQUAL.  Bob, perhaps three centuries later, implements
-Veskeno and attempts to run Alice's virtual machine image.  It
+Veskeno and attempts to run Alice’s virtual machine image.  It
 produces different results than it did for Alice.  Bob concludes that
 Alice (RIP) was a superstitious fool whose reported results cannot be
 trusted, or perhaps a fraud.
@@ -402,11 +402,11 @@ with, for example, a textual assembly-language format, but others are
 generic problems of most or all textual formats.  And the advantages
 of textual formats seem to primarily redound to the benefit of the
 person writing a file in them, not to the implementor of a complete,
-correct interpreter of the file format.  As the priorities say, "it’s
+correct interpreter of the file format.  As the priorities say, “it’s
 worth trading off 100 hours of effort programming *for* Veskeno to
-save even a single hour of effort writing a Veskeno implementation."
+save even a single hour of effort writing a Veskeno implementation.”
 Consequently, a binary file format seems far more likely to be able to
-achieve Veskeno's aims.
+achieve Veskeno’s aims.
 
 An untyped 32-bit register machine with mod-2³² wraparound
 ----------------------------------------------------------
@@ -422,7 +422,7 @@ which behave mod 2³² as you would expect.
 
 One great drawback of 32-bit arithmetic is that its input space is of
 size 2<sup>64</sup>; as a result, exhaustive testing of an arithmetic
-operation would take half a million CPU years at Veskeno's 1-MIPS
+operation would take half a million CPU years at Veskeno’s 1-MIPS
 performance target.  Most programmers today cannot spend half a
 million CPU years on an afternoon project because they do not have
 hundreds of millions of CPUs available, nor even hundreds of CPUs; it
@@ -606,8 +606,8 @@ still have others.)
 Fixed- or variable-length instructions
 --------------------------------------
 
-Variable-length instructions are more space-efficient --- the usual
-reason for them, irrelevant here --- and make it easy to include
+Variable-length instructions are more space-efficient — the usual
+reason for them, irrelevant here — and make it easy to include
 immediate constants of the full width of a register, thus avoiding the
 lit16/low16 hack in XIS, the RISCy spike above.
 
@@ -716,26 +716,26 @@ This eventually produces the output:
 This amounts to a compact summary of the overall behavior of the
 `add16` function; if a different function produced the same hash, we
 could be reasonably confident that its behavior on 16-bit unsigned
-numbers was the same as add16's.  And by using Merkle trees we could
+numbers was the same as add16’s.  And by using Merkle trees we could
 detect deviations without finishing the whole test, and, more
 important, localize them in particular parts of the input.  (A
 cross-cutting Hamming-code-like hashing strategy would permit pinpoint
 localization: with 33 hashes for different subsets of these
-2<sup>32</sup> test cases --- one for odd-numbered test cases, one for
+2<sup>32</sup> test cases — one for odd-numbered test cases, one for
 test cases whose ordinal number is odd when divided by 2 rounding
-downward, and so on --- we can easily determine which case is failing
+downward, and so on — we can easily determine which case is failing
 if only one is.)
 
 But this test takes 13 hours and 49 minutes of CPU time to produce
 this output on this netbook, thus testing only some 86000 addition
 operations per second.  CPython3 on this netbook is pretty close to
-Veskeno's target performance of a million multiply-accumulates per
+Veskeno’s target performance of a million multiply-accumulates per
 second, although they are 32-bit rather than 16-bit.
 
-It's conceivable that this test could be optimized by up to about an
-order of magnitude, but not by two orders of magnitude; and it's more
+It’s conceivable that this test could be optimized by up to about an
+order of magnitude, but not by two orders of magnitude; and it’s more
 likely that a similar test in Veskeno would be *much slower*, because
-SHA-256 isn't a basic operation like addition.  The corresponding
+SHA-256 isn’t a basic operation like addition.  The corresponding
 exhaustive test for a two-operand 32-bit math operation would require
 ten orders of magnitude more computation; as mentioned before,
 2<sup>64</sup> microseconds is some 585 millennia.
@@ -781,7 +781,7 @@ Not counted here is the serial-computation slowdown, which [is
 estimated](vector-vm.md) at 32×.  Above it is estimated that a Samsung
 Galaxy A10, for example, can do about 70 billion multiply-accumulate
 operations per second, but single-threaded unvectorized code on it
-won't get more than about 1.6 billion, 44 times slower; out-of-order
+won’t get more than about 1.6 billion, 44 times slower; out-of-order
 processors with more execution units close the gap a little.  It would
 not be surprising for a virtual machine that exploits such data
 parallelism to exceed the speed of optimized single-threaded
@@ -791,7 +791,7 @@ Possible coarse-grained parallelism
 -----------------------------------
 
 There is nothing in principle that prevents Veskeno from providing a
-"spawn" facility to run a "child" Veskeno computation, given a program
+“spawn” facility to run a “child” Veskeno computation, given a program
 and input data, and such a facility would be very useful for writing
 an automatic Veskeno test suite.  If several such concurrent
 computations can be run, this might make it possible to gain back a
@@ -801,7 +801,7 @@ potentially risky, though; it would need to be subject to a number of
 restrictions:
 
 1. Although it could report *predictable* failures in the child to the
-   parent --- out-of-bounds memory accesses, for example --- it could
+   parent — out-of-bounds memory accesses, for example — it could
    not be allowed to report unpredictable failures such as running out
    of memory.  Unpredictable failures could be handled by
    automatically retrying or by propagating the failure to the parent,
@@ -811,10 +811,10 @@ restrictions:
    ability to inquire whether a child computation was still running,
    or had already completed, would probably violate determinism.  Any
    attempt to access the results of the child computation before the
-   child's completion must transparently block until the child is
+   child’s completion must transparently block until the child is
    complete.
-3. The interface must be simple enough to implement --- correctly! ---
-   as part of the same afternoon as the rest of Veskeno.
+3. The interface must be simple enough to implement — correctly! — as
+   part of the same afternoon as the rest of Veskeno.
 
 More elaborate kinds of interaction could in principle be specified;
 for example, the parent computation could be provided with facilities
@@ -877,7 +877,7 @@ cryptographically random key bits: for example, by measuring the
 latency of electromechanical disk requests, which are influenced by
 turbulence inside the disk drive, they can produce a reliably
 different set of numbers on every execution; another approach is by
-measuring the timing of the user's keystrokes.  The objective is that,
+measuring the timing of the user’s keystrokes.  The objective is that,
 if you ask PGP to generate keypairs on two occasions and type the same
 input at it to the best of your human ability, you will still generate
 two different *and unpredictable* private keys.  (Modern operating
@@ -921,10 +921,10 @@ sequence of input events that were delivered, although it might be a
 useful accelerant to save snapshots of some intermediate checkpoint
 states.
 
-User interaction isn't the only kind of I/O, though.  It's common for
+User interaction isn’t the only kind of I/O, though.  It’s common for
 programs to read from and write to a filesystem, for a variety of
-reasons.  Doing this synchronously isn't in itself a source of
-nondeterminism --- given a frozen filesystem snapshot that is part of
+reasons.  Doing this synchronously isn’t in itself a source of
+nondeterminism — given a frozen filesystem snapshot that is part of
 the initial state from which the Veskeno computation proceeds,
 presumably the program will always read the same data in response to
 the same seek() and read() calls, unless it alters it in between with
@@ -932,7 +932,7 @@ a write().  But it is potentially a source of implementation
 complexity and bug-proneness.
 
 Some filesystem access happens because programs are handling data that
-doesn't fit in their virtual memory.  This might be reading a
+doesn’t fit in their virtual memory.  This might be reading a
 100-kilobyte file on a 16-bit machine or writing a 5-gigabyte file on
 a 32-bit machine.  For Derctuo, I can avoid this problem by making
 Veskeno not 16 bits, and not managing multi-gigabyte datasets.  If
@@ -959,7 +959,7 @@ program does not access this file, or enumerate the contents of the
 directory /usr/lib/python3.4/encodings, or look at how much space is
 left on the disk, its execution will not be affected by this file; but
 if I run CPython 3.4 and type `b'\xce'.decode('mac_greek')`, that file
-will be loaded and used to map that byte to U+0388.  It's a resource
+will be loaded and used to map that byte to U+0388.  It’s a resource
 available upon request, but otherwise unobtrusive.
 
 Usually you can add new files to a Unix filesystem or new environment
@@ -967,20 +967,20 @@ variables to a Unix environment without breaking any existing
 programs.  This contrasts to, for example, adding new positional
 arguments to a function call.  (Adding new fields to a C struct is a
 kind of middle ground: it breaks existing *compiled* programs, but not
-existing source code, because it's an incompatible change to the ABI
+existing source code, because it’s an incompatible change to the ABI
 but not the API.)  This kind of decoupling via name-value pairs is a
 pervasive pattern for permitting the independent evolution of
 different software components.
 
 To a great extent, such decoupling can be provided within a Veskeno
 image without any special support from the Veskeno virtual machine: a
-"filesystem", a tree of string-indexed blobs, can be built in memory
+“filesystem”, a tree of string-indexed blobs, can be built in memory
 and accessed via a filesystem-emulation library.  This collapses if
 multiple gigabytes of data are needed, but my intent with Derctuo is
 to keep the total size of all the data in the image to double-digit
 megabytes.
 
-It's common for physical computers to use "memory-mapped I/O": magical
+It’s common for physical computers to use “memory-mapped I/O”: magical
 memory addresses which cause things to happen in the physical world
 when they are written or even read.  This is costly to provide in
 virtual machines in general, because nearly every time memory is read
@@ -1008,14 +1008,14 @@ rather than simplifying.
 But a simple first-order approximation to computational cost is to
 count the number of CPU instructions executed by a single-threaded
 version of the algorithm.  Given a nailed-down instruction set like
-Veskeno's, this number should be as perfectly reproducible as
+Veskeno’s, this number should be as perfectly reproducible as
 everything else about a Veskeno computation, and it would probably
-only increase Veskeno's complexity by 2--5 lines of code, a simplicity
-loss of perhaps 1--5%.  This may be a worthwhile cost to pay.
+only increase Veskeno’s complexity by 2–5 lines of code, a simplicity
+loss of perhaps 1–5%.  This may be a worthwhile cost to pay.
 
 However, as with single-stepping, this is a facility that can be
 provided by a metacircular Veskeno interpreter: a Veskeno program that
-executes Veskeno programs.  Veskeno's simple instruction set suggests
+executes Veskeno programs.  Veskeno’s simple instruction set suggests
 that the binary-translation approach used by Valgrind would be an
 especially suitable approach.
 
@@ -1029,19 +1029,19 @@ problem by not providing programs with access to those bits, relying
 on a relatively elaborate static type system that reliably
 distinguishes memory pointers from other data such as characters and
 integers.  A less elaborate hybrid system is possible, in which
-pointers are loaded into special registers for pointers (or "segments"
-or "descriptors") and stored in special memory for pointers, like
-KeyKOS's "nodes"; but even such a scheme seems likely to be far more
-complex than Veskeno's complexity budget permits.  (Still, see
+pointers are loaded into special registers for pointers (or “segments”
+or “descriptors”) and stored in special memory for pointers, like
+KeyKOS’s “nodes”; but even such a scheme seems likely to be far more
+complex than Veskeno’s complexity budget permits.  (Still, see
 [Segments and Blocks](segments-and-blocks.md).)
 
-This means, in particular, that if there's a way to change the Veskeno
+This means, in particular, that if there’s a way to change the Veskeno
 memory map after startup, for example by mapping in the contents of a
 file (or part thereof) or the results of a child computation, it must
 happen at a deterministically chosen, well-specified address.  It need
-not be insensitive to the previous execution of the computation ---
-for example, it could happen at the end of the current data segment
---- but it cannot happen at an address not specified in the Veskeno
+not be insensitive to the previous execution of the computation — for
+example, it could happen at the end of the current data segment — but
+it cannot happen at an address not specified in the Veskeno
 specification.
 
 Self-modifying code
@@ -1121,33 +1121,33 @@ is; they say:
 
 ### Lisp ###
 
-Lisp has a simple core --- not quite as simple as SK-combinators or
+Lisp has a simple core — not quite as simple as SK-combinators or
 the λ-calculus, but still pretty simple.  [The basic forms][27] are
 COND, LABELS (now normally called `letrec`), LAMBDA, and QUOTE, which
-are "special forms", and the regular functions CAR, CDR, CONS, ATOM,
+are “special forms”, and the regular functions CAR, CDR, CONS, ATOM,
 EQUAL, and NULL; these suffice to write a metacircular interpreter for
 Lisp or, for example, a normal-order λ-calculus reducer.
 
 Because both CONS and function application implicitly allocate memory,
 as does LAMBDA in modern interpretations (where it produces a
-closure), it's difficult for Lisp programs to be failure-free --- when
+closure), it’s difficult for Lisp programs to be failure-free — when
 run on a finite machine they can run out of memory and crash.  But, at
 least initially, eliminating unpredictable failures is beyond the
 scope of Veskeno.
 
-A binary format like various Lisps' FASL formats could both permit
+A binary format like various Lisps’ FASL formats could both permit
 rapid startup and eliminate text-related parsing bugs.
 
-However, the history of Lisp is littered with subtle bugs.  McCarthy's
+However, the history of Lisp is littered with subtle bugs.  McCarthy’s
 1959 paper published a Lisp metacircular interpreter that
-inadvertently defined Lisp with dynamic scope --- a bug that remained
+inadvertently defined Lisp with dynamic scope — a bug that remained
 ossified in Lisp for nearly a quarter century, with workarounds like
-FUNARGS --- and contained a few other subtle bugs; an erratum is
+FUNARGS — and contained a few other subtle bugs; an erratum is
 prepended to AIM-008 saying:
 
 > The definition of eval given on page 15 has two errors, one of which
 > is typographical and the other conceptual.  The typographical error
-> is in the definition of evcon where "l→" and "T→" should be
+> is in the definition of evcon where “l→” and “T→” should be
 > interchanged.
 > 
 > The second error is in evlen.  The program as it stands will not
@@ -1236,9 +1236,9 @@ into several minor bugs on the way; bugs may still remain.
 Running Lisp efficiently requires some kind of garbage collection; the
 above implementation inherits from Python not only GC but also its
 lists, recursive function calls, equality comparison, closures, I/O,
-error reporting, and truthiness, and it takes advantage of Python's
+error reporting, and truthiness, and it takes advantage of Python’s
 dictionaries.  Its behavior on argument-count mismatch is inherited
-from Python's `zip`.  It constructs circular data structures, which
+from Python’s `zip`.  It constructs circular data structures, which
 old versions of Python would be unable to garbage-collect.  Probably
 an implementation in a lower-level language like C would be
 considerably more efficient, but would also require implementing from
@@ -1246,7 +1246,7 @@ scratch these Python bequests.  In my experience this tends to take as
 long or longer than implementing the semantic core above expressed in
 Python.
 
-### Abadi and Cardelli's ς-calculus of objects ###
+### Abadi and Cardelli’s ς-calculus of objects ###
 
 ### The JVM ###
 
@@ -1258,11 +1258,11 @@ Python.
 
 32-bit unsigned
 
-Darius suggests it's worth looking at the Sandmark contestants' bugs.
+Darius suggests it’s worth looking at the Sandmark contestants’ bugs.
 
 ### Corewar Redcode ###
 
-Corewar is a game in which a multithreaded processor "MARS" runs two
+Corewar is a game in which a multithreaded processor “MARS” runs two
 programs that try to kill each other, alternating instructions.  Like
 the Burroughs 5000, MARS tags memory words as instructions or data; a
 program that attempts to execute a data word dies.
@@ -1272,7 +1272,7 @@ specifying these programs; there is no binary program format.  The
 determinism of MARS is intentionally limited: programs are loaded at
 random starting addresses.  (Absent this measure, whichever program
 started running first could win by using its first instruction to
-store a data word in the other program's first-executed location.)
+store a data word in the other program’s first-executed location.)
 
 ### Wirth-the-RISC ###
 
@@ -1282,19 +1282,19 @@ easy to teach, without losing practicality.  He produced a series of
 progressively more complex designs in Verilog, unfortunately called
 RISC0, RISC1, RISC2, RISC3, RISC4, and RISC5, and ported the Oberon
 system to run on them.  Lacking a better name, I will just call them
-"Wirth-the-RISC".
+“Wirth-the-RISC”.
 
 Wirth-the-RISC is admirably simple, with four condition-code flags for
-conditional jumps; 16 conditions for jumps (including "always"), which
+conditional jumps; 16 conditions for jumps (including “always”), which
 can optionally be indirect and/or save a return address; 16
-register-to-register ALU instructions, some of which have two variants
---- signed versus unsigned MUL, for example, and ADD with or without
-carry; load and store instructions with offsets; and, for the RISC5
-processor's interrupts, an instruction to enable or disable
+register-to-register ALU instructions, some of which have two
+variants — signed versus unsigned MUL, for example, and ADD with or
+without carry; load and store instructions with offsets; and, for the RISC5
+processor’s interrupts, an instruction to enable or disable
 interrupts, and an instruction to return from them.  Four of the ALU
 instructions are floating-point, though my impression is that the
 processor does not rise to the level of being practical for
-floating-point work --- it has no double-precision and no square-root
+floating-point work — it has no double-precision and no square-root
 instruction.
 
 The fact that Wirth-the-RISC successfully runs the Oberon GUI is a
@@ -1304,9 +1304,9 @@ testament to the practicality of this design.
 
 ### Brainfuck ###
 
-Brainfuck is a virtual machine of Urban Müller's design; it was not
-the first of the "esoteric programming languages" (that would be
-INTERCAL) --- or even, I think, the second --- but it was in a sense
+Brainfuck is a virtual machine of Urban Müller’s design; it was not
+the first of the “esoteric programming languages” (that would be
+INTERCAL) — or even, I think, the second — but it was in a sense
 the one that established esoteric programming languages as a genre,
 inspiring the current profusion.  The Brainfuck virtual machine is,
 like INTERCAL, deliberately difficult to program in, but unlike
@@ -1389,8 +1389,8 @@ down to implement it from the spec, which I think took about an hour:
       return 0;
     }
 
-After testing some simple examples, I downloaded Linus Åkesson's
-implementation of Conway's Game of Life (pbuh, QEPD):
+After testing some simple examples, I downloaded Linus Åkesson’s
+implementation of Conway’s Game of Life (pbuh, QEPD):
 
                 Linus Akesson presents:
                        The Game Of Life implemented in Brainfuck
@@ -1450,7 +1450,7 @@ lines of C, I had implemented a virtual machine capable of running any
 Brainfuck program, and had transformed the ASCII-art textphile above
 into a running implementation of the Game of Life!  In principle, the
 C program above could compute any computable function, as long as it
-didn't require more than 30001 bytes of memory.
+didn’t require more than 30001 bytes of memory.
 
 Brainfuck itself, though, is a finger pointing at the moon; it is not
 the moon.  It has no subroutine-call mechanism, it cannot run code
@@ -1474,7 +1474,7 @@ between streams of input and output bytes and the input and output
 events of interest; this mapping, too, would need to be standardized
 for such an emulation to be portable among implementations.
 
-Here's a sample dialogue with the Life program, using this
+Here’s a sample dialogue with the Life program, using this
 implementation of Brainfuck:
 
      abcdefghij
@@ -1650,7 +1650,7 @@ These 8 generations of 10×10 Life required 98 CPU seconds on this
 netbook (with the Brainfuck implementation compiled with `cc -O5
 -fomit-frame-pointer -Wall -std=gnu99` using GCC 4.8.4), illustrating
 the efficiency problems of Brainfuck.  I took a couple of hours to
-write the following C version of Åkesson's awesome program, which,
+write the following C version of Åkesson’s awesome program, which,
 compiled the same way, was able to do 80000 generations in 1.424 CPU
 seconds, an efficiency difference of some 700k×, suggesting that the
 Brainfuck slowdown in this case is about 5 or 6 orders of magnitude.
@@ -1771,23 +1771,23 @@ Brainfuck slowdown in this case is about 5 or 6 orders of magnitude.
         }
     }
 
-### Urbit's Nock ###
+### Urbit’s Nock ###
 
-Urbit is Mencius Moldbug's effort to establish an internet with a
+Urbit is Mencius Moldbug’s effort to establish an internet with a
 feudal, authoritarian structure, which he believes to be the ideal
 structure for a society.  The basic foundation of Urbit is a
 deterministic, reproducible virtual machine called Nock, named after a
-political propagandist Moldbug admires despite Nock's private contempt
+political propagandist Moldbug admires despite Nock’s private contempt
 for Jewish people.  Nock implements a combinator-graph-reduction
 instruction set encoded as integers.  The rest of the Urbit
 distributed computation system is built atop Nock.
 
-Nock's basic instruction repertoire is too limited to be usably
+Nock’s basic instruction repertoire is too limited to be usably
 efficient for many of the tasks required for a distributed-computing
 system like Urbit; this is partly compensated using a mechanism called
-"jets".  The Nock implementation recognizes certain pieces of Nock
+“jets”.  The Nock implementation recognizes certain pieces of Nock
 code at runtime and, rather than evaluating them instruction by
-instruction, instead invokes a "jet" --- a subroutine written in C
+instruction, instead invokes a “jet” — a subroutine written in C
 that is hoped to produce an equivalent result.  Perhaps the most
 egregious example is an implementation of the Markdown document markup
 language, where a C implementation of Markdown is shamelessly
@@ -1797,11 +1797,11 @@ encountered.
 Jets offer an apparent escape from the tradeoff between simplicity of
 specification and usable levels of efficiency.  And, in theory, they
 provide an unambiguous behavior specification for the native code to
-adhere to.  However, they aren't a viable option for Veskeno, both
+adhere to.  However, they aren’t a viable option for Veskeno, both
 because they means that a practically usable implementation requires
 an enormous amount of code whose contents must be guessed at by the
 implementor, and because in practice that code will be buggy in all
-modern implementations, since we don't yet have sufficiently powerful
+modern implementations, since we don’t yet have sufficiently powerful
 formal methods for people to use them routinely, so if Veskeno used
 jets, no Veskeno results would be reproducible in practice.
 
@@ -1810,10 +1810,10 @@ Veskeno.
 
 ### Simplicity ###
 
-Simplicity is Russell O'Connor's verifiable smart-contract language,
+Simplicity is Russell O’Connor’s verifiable smart-contract language,
 designed for Ethereum.  It is a very interesting project, but like
-Nock, it relies on jets to reach usable efficiency.  It's capable of
-expressing only finitary computations --- those that could in
+Nock, it relies on jets to reach usable efficiency.  It’s capable of
+expressing only finitary computations — those that could in
 principle be expressed by a finite table of input-to-output mappings,
 although Simplicity is designed to be able to practically express
 finitary computations whose tables, though finite, would be too large
@@ -1828,9 +1828,9 @@ Veskeno than Nock.
 
 ### Smalltalk-78 ###
 
-### The LuaJIT "bytecode" format ###
+### The LuaJIT “bytecode” format ###
 
-Lua's register-based "bytecode" format --- really a wordcode --- is
+Lua’s register-based “bytecode” format — really a wordcode — is
 famous for its efficiency.  Considering this program in C:
 
     fib(n) { return n < 2 ? 1 : fib(n-1) + fib(n-2); }
@@ -1851,12 +1851,12 @@ takes 11.856-12.211 s, both with the same results.  Under LuaJIT
 
 So we can say that, on this crude microbenchmark, PUC Lua is 29-31
 times slower than C, while LuaJIT is 1.6-2.9 times slower than C.
-Reputedly LuaJIT 2's "bytecode" interpreter, which Mike Pall wrote in
-assembly, is faster than many high-level languages' compiled code;
+Reputedly LuaJIT 2’s “bytecode” interpreter, which Mike Pall wrote in
+assembly, is faster than many high-level languages’ compiled code;
 unfortunately there does not seem to be an option to disable the JIT
 compiler for easy microbenchmarking.
 
-It's somewhat to be expected that the extra type checks Lua must do
+It’s somewhat to be expected that the extra type checks Lua must do
 will slow down the process, especially in software, especially on an
 in-order processor like this Atom.  Perhaps that accounts for the
 speed difference between XIS, the RISCy spike above (1/20 native), and
@@ -1870,15 +1870,15 @@ takes 4.963-5.176 s to compute fib(32), 42-51 times slower than C:
     fib = lambda n: 1 if n < 2 else fib(n-1) + fib(n-2)
     print(fib(int(sys.argv[1])))
 
-LuaJIT uses its own slightly different "bytecode" format.  [As
+LuaJIT uses its own slightly different “bytecode” format.  [As
 explained in the LuaJIT Wiki], the LuaJIT bytecode, like the PUC Lua
 bytecode, has a fixed 32-bit-wide format with 8-bit fields. The opcode
 is the least significant 8 bits; the 2-operand instructions have a
 16-bit field as the second operand, which is usually an index into a
 constant table.  There are 16 comparison ops (which conditionally skip
 the following instruction, which is always a JMP), 4 unary ops, 17
-"binary" ops (one of which, string concatenation, is actually
-variadic), 6 constant ops, 7 "upvalue" and function ops, 11 ops for
+“binary” ops (one of which, string concatenation, is actually
+variadic), 6 constant ops, 7 “upvalue” and function ops, 11 ops for
 manipulating Lua tables (like the GSET, GGET, and TGETB operations
 above), 8 calling and iteration ops (like CALL and CALLM above), 4
 return ops (like RET1 and RET0), 12 loop and branch ops, and 9
@@ -1893,10 +1893,10 @@ function-header pseudo-ops, for a total of 94 ops.
     0004    KSHORT   1   1
     0005    RET1     1   2
     0006    JMP      1 => 0015
-    0007 => GGET     1   0      ; "fib"
+    0007 => GGET     1   0      ; “fib”
     0008    SUBVN    2   0   0  ; 1
     0009    CALL     1   2   2
-    0010    GGET     2   0      ; "fib"
+    0010    GGET     2   0      ; “fib”
     0011    SUBVN    3   0   1  ; 2
     0012    CALL     2   2   2
     0013    ADDVV    1   1   2
@@ -1905,11 +1905,11 @@ function-header pseudo-ops, for a total of 94 ops.
 
     -- BYTECODE -- fib.lua:0-4
     0001    FNEW     0   0      ; fib.lua:2
-    0002    GSET     0   1      ; "fib"
-    0003    GGET     0   2      ; "print"
-    0004    GGET     1   1      ; "fib"
-    0005    GGET     2   3      ; "tonumber"
-    0006    GGET     3   4      ; "arg"
+    0002    GSET     0   1      ; “fib”
+    0003    GGET     0   2      ; “print”
+    0004    GGET     1   1      ; “fib”
+    0005    GGET     2   3      ; “tonumber”
+    0006    GGET     3   4      ; “arg”
     0007    TGETB    3   3   1
     0008    CALL     2   0   2
     0009    CALLM    1   0   0
@@ -1922,8 +1922,8 @@ to the case where one of the operands is a constant.  Some of the
 operations are duplicated to provide the JIT compiler a place to
 record its success or failure at JIT-compiling the loop body.
 
-There is no specialized version of the ">=" operation for comparing
-against a constant, so the "< 2" test in `fib` is compiled to KSHORT
+There is no specialized version of the “>=” operation for comparing
+against a constant, so the “< 2” test in `fib` is compiled to KSHORT
 (load immediate) followed by ISGE; similarly, there is no specialized
 version of the `return` operation, so `return 1` is compiled to KSHORT
 followed by RET1.
@@ -1937,7 +1937,7 @@ still find `print` in register 0, even though within `fib` the
 argument `n` is evidently in register 0.  Thus no bytecode need be
 emitted to save and restore context upon function call or return.
 
-The three-operand nature of LuaJIT's bytecode saves some operations,
+The three-operand nature of LuaJIT’s bytecode saves some operations,
 and thus some opcode dispatches, compared to the two-operand XIS code
 above, which has 19 instructions in the `fib` subroutine rather than
 15.  Where XIS has
@@ -1959,7 +1959,7 @@ A recursive call `fib(n-2)` in LuaJIT is three instructions, and would
 be two if not for the possibility of something having rebound the name
 `fib`:
 
-        0010    GGET     2   0      ; "fib"
+        0010    GGET     2   0      ; “fib”
         0011    SUBVN    3   0   1  ; 2
         0012    CALL     2   2   2
 
@@ -1973,27 +1973,27 @@ argument registers:
       a_call(-14),               /* call fib */
       a_rd(pop, 1),              /* pop saved return value into r1 */
 
-I don't know if there's a way to get such implicit save/restore into a
-Veskeno-sized spec; maybe make some of the "registers" index off a
+I don’t know if there’s a way to get such implicit save/restore into a
+Veskeno-sized spec; maybe make some of the “registers” index off a
 stack pointer in memory that increments or decrements by some constant
 after a call, like a lobotomized SPARC?  Where would you store the
-return address --- would it eat a general-purpose register?
+return address — would it eat a general-purpose register?
 
 > If I remember correctly, the SPARC has 64 general-purpose registers:
-  8 for global variables, and 48 in a "register window", of which 8
+  8 for global variables, and 48 in a “register window”, of which 8
   are shared with the caller, 8 are local, and 8 are shared with
-  callees --- so the window shifts by 16 on every call and return.
+  callees — so the window shifts by 16 on every call and return.
   The idea is that a simple, slow implementation can store all of
   these windows in RAM; a slightly less simple one can use 48
   registers and save 16 to RAM on every call and restore them on every
   return; and a more sophisticated implementation can maintain a
-  circular buffer that only "spills" to RAM when it gets full.  Thus
-  the "S" for "Scalable" in "SPARC".
+  circular buffer that only “spills” to RAM when it gets full.  Thus
+  the “S” for “Scalable” in “SPARC”.
 
-Part of CPython's slowness is because CPython's bytecode is
+Part of CPython’s slowness is because CPython’s bytecode is
 stack-based rather than register-based, commonly requiring about twice
 as many opcode dispatches as Lua.  The above function is 18 CPython
-bytecode ops, rather than LuaJIT's 15; its leaf path is 7 ops rather
+bytecode ops, rather than LuaJIT’s 15; its leaf path is 7 ops rather
 than 5, and its non-leaf path is 16 ops rather than 11, so for this
 microbenchmark the dispatch penalty of stack-machine code is smaller
 than that typical factor of 2.
@@ -2107,12 +2107,12 @@ instruction-set choices.
 
 ### SWEET-16 ###
 
-As I wrote in "bytecode interpreters for tiny computers" in 2008:
+As I wrote in “bytecode interpreters for tiny computers” in 2008:
 
-> Steve Wozniak's SWEET16 16-bit virtual machine, included as part of
+> Steve Wozniak’s SWEET16 16-bit virtual machine, included as part of
   Integer BASIC, supposedly doubled the code density of the 6502. The
   virtual machine itself was 300 bytes of 6502 assembly, implementing
-  these instructions; here "#" means "[0-F]".
+  these instructions; here “#” means “[0-F]”.
 
 >     0x1# SET: load immediate               0x2# LD: copy register to accumulator
 >     0x3# ST: copy accumulator to register  0x4# LD: load byte indirect w/ increment
@@ -2133,21 +2133,21 @@ As I wrote in "bytecode interpreters for tiny computers" in 2008:
   displacement. If you want a 16-bit jump, you can push it on the
   stack and RS.
 
-> That's it, 28 instructions, 300 bytes of machine code to implement
+> That’s it, 28 instructions, 300 bytes of machine code to implement
   them. And I thought the 6502 was already reasonable on code density,
   so this was apparently quite a win.
 
-It's notable to me that his only ALU operations here are ADD, SUB,
+It’s notable to me that his only ALU operations here are ADD, SUB,
 CPR, INR, and DCR; there are no bitwise operations, not even a
-shift-right.  I'm guessing that SET was followed by a 16-bit immediate
-to load into R#, though that isn't mentioned in my notes.
+shift-right.  I’m guessing that SET was followed by a 16-bit immediate
+to load into R#, though that isn’t mentioned in my notes.
 
-This is about the right level of complexity for Veskeno, although I'd
+This is about the right level of complexity for Veskeno, although I’d
 go 32-bit and trade some of the condition codes and branching options
 for some bitwise operations.
 
 Darius Bacon suggested that one of the reasons XIS was so slow was
-that it didn't have a distinguished accumulator, so every binary
+that it didn’t have a distinguished accumulator, so every binary
 operation had to index an array three times: once to read each input
 and once to write the output.  (It also had to extract the relevant
 fields from the instruction word.)  As with stack machines, a
