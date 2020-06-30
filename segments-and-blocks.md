@@ -511,8 +511,8 @@ to do many of the block and node operations “in hardware”, run several
 processors concurrently inside a single FPGA, and perhaps reconfigure
 other parts of the FPGA dynamically to assist with other computations.
 
-Incremental and differentiable computation
-------------------------------------------
+Incremental, differentiable, and concurrent computation
+-------------------------------------------------------
 
 Above I mentioned transactional memory for concurrency control as one
 possible application of this kind of virtual machine.  The idea is
