@@ -510,3 +510,35 @@ is the J1A Forth-like processor.  It might be reasonable to extend it
 to do many of the block and node operations "in hardware", run several
 processors concurrently inside a single FPGA, and perhaps reconfigure
 other parts of the FPGA dynamically to assist with other computations.
+
+Incremental and differentiable computation
+------------------------------------------
+
+Above I mentioned transactional memory for concurrency control as one
+possible application of this kind of virtual machine.  The idea is
+that, to access the memory, you run some code inside a *transaction*,
+giving it some inputs when you start it, and buffer all its memory
+writes in a copy-on-write fashion; if the transaction runs to
+completion successfully, it tries to *commit*, at which point we check
+to see whether any block or node it read had been modified by some
+other transaction in the mean time.  If so, we *roll back* the
+transaction, discarding all of the buffered written data, and
+transparently restart it from the beginning; if not, it successfully
+commits, and its versions of that modified data become the active
+versions.  It's a very simple idea.
+
+As one example, you might have a piece of code that scans for an
+occurrence of the word "fuck" in a file, and sends an alert email if
+it appears, and another piece of code that modifies the contents of
+the file.  If the scanning code happens to be reading through the file
+when the word "full" is overwritten with the word "sick", it might
+incorrectly conclude that the word "fuck" occurred, and send a
+spurious email, possibly getting someone fired from a job they'd be
+better off without.  But if both pieces of code must run within
+transactions, which must commit if the XXX
+
+XXX sequence tearing
+
+XXX incremental GUI
+
+XXX CMT blocking

@@ -101,7 +101,7 @@ of OpenGL.
 0. June 7, 1954: Alan Turing committed suicide (born June 23, 1912)
 0. June 9, 597: St. Columba died (born December 7, 521).  Legend has
    it he fought the battle of Cúl Dreimhne in 561 to defend his right
-   to copy a St. Finnian's psalter.
+   to copy St. Finnian's psalter.
 0. June 16, 1915: John Tukey born (died July 26, 2000)
 0. June 22, 1910: Konrad Zuse born (died December 18, 1995)
 0. June 27, 1831: Sophie Germain (Monsieur Antoine-Auguste Leblanc) died
@@ -145,6 +145,7 @@ of OpenGL.
 0. October 29, 1998: the sale of the Archimedes Palimpsest
 0. the fourth month of the inundation season: when Ahmose wrote the
    Rhind Papyrus
+0. October 31: octal Newtonmas --- oct 31 = dec 25
 0. November 2, 1988: the helminthiasis of the internet with the Morris
    worm
 0. November 6, 1717: J. S. Bach imprisoned (or March 31, 1685:
