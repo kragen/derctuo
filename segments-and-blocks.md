@@ -521,11 +521,13 @@ giving it some inputs when you start it, and buffer all its memory
 writes in a copy-on-write fashion; if the transaction runs to
 completion successfully, it tries to *commit*, at which point we check
 to see whether any block or node it read had been modified by some
-other transaction in the mean time.  If so, we *roll back* the
+other transaction in the mean time.  If so, we *abort* the
 transaction, discarding all of the buffered written data, and
 transparently restart it from the beginning; if not, it successfully
 commits, and its versions of that modified data become the active
-versions.  It’s a very simple idea.
+versions.  It’s a very simple idea, and it is commonly used to permit
+high levels of parallelism with very straightforward, non-bug-prone,
+semantics.
 
 As one example, you might have a piece of code that scans for an
 occurrence of the word “fuck” in a file, and sends an alert email if
@@ -533,12 +535,367 @@ it appears, and another piece of code that modifies the contents of
 the file.  If the scanning code happens to be reading through the file
 when the word “full” is overwritten with the word “sick”, it might
 incorrectly conclude that the word “fuck” occurred, and send a
-spurious email, possibly getting someone fired from a job they’d be
-better off without.  But if both pieces of code must run within
-transactions, which must commit if the XXX
+spurious email, possibly getting someone fired.  But if both pieces of
+code must run within transactions, which must commit for any
+externally-observable thing to happen, then any modification to the
+blocks read by the scanner will abort the scanner’s
+transaction — unless it doesn’t commit until after the scanner
+commits, in which case the scanner will see a consistent
+post-modification version of the file.
 
-XXX sequence tearing
+Thus this simple optimistic-synchronization rule makes the
+transactions perfectly serializable — the results are exactly the same
+as if all the transaction code had run in a single thread, in the
+order in which the transactions committed — and it guarantees forward
+progress.  There are various kinds of optimizations that can be made
+to improve such a system’s performance.
 
-XXX incremental GUI
+### Long transactions ###
 
-XXX CMT blocking
+Consider, though, the situation of this scanner running on a large
+disk partition on which files are frequently being created and
+destroyed.  Although the system never blocks, the scanner will never
+finish!  By the time it comes to the end of the disk, certainly some
+other program will have modified some blocks it had already scanned,
+thus invalidating its results, and so it will be automatically
+restarted.
+
+There are many ways to handle this “long transaction” problem; among
+them, pessimistic synchronization, nested transaction memoization,
+relaxed consistency, clever reordering, and spheres of influence.
+
+#### Pessimistic synchronization ####
+
+Pessimistic synchronization was historically the most common way to
+solve the problem.  Instead of allowing all transactions to proceed,
+the scanner acquires “read locks” on every block or node it reads; if
+any other transaction attempts to write to such a block or node, it is
+paused until the scanner’s transaction completes and then acquires a
+write lock; and if the scanner tries to acquire a read lock on a block
+that some other transaction already has a write lock on, the scanner
+blocks until the other transaction commits or aborts.  The great
+benefits of pessimistic synchronization are that no work is ever
+wasted (so worst-case execution times can be computed) and no block
+ever need be copied.  Its drawbacks include that it’s easy to
+deadlock; it’s difficult to get good scalability, since things block
+all the time; and, in real-time systems, it suffers from “priority
+inversion” where a low-priority task can hold a lock blocking a
+high-priority task, and a medium-priority task can then starve the
+low-priority and the high-priority task.
+
+#### Nested transaction memoization ####
+
+Nested transaction memoization is probably not something I just made
+up, but it works as follows.  The scanner scans as follows, in a
+made-up programming language with block arguments:
+
+    scan(word, file, start, end) = {
+        return child_transaction {
+            assert(word.len < blocksize)
+            if (end - start < blocksize) {
+                return contains(word, file, start, end)
+            }
+
+            mid = start + (end - start) // 2
+            return (scan(word, file, start, mid + len(word) - 1) or
+                    scan(word, file, mid, end))
+        }
+    }
+
+`scan` starts by spawning a nested child transaction which can commit
+or abort before its parent does — by default, its abort will just
+retry it without affecting its parent, but once it commits, the blocks
+and nodes it read and wrote are added to the read and write sets of
+its parent, so any *later* changes to the blocks it read will then
+abort the parent; but there are some significant fillips we will see
+below.
+
+If the area to scan is smaller than `blocksize`, then the scan is done
+directly, using a naïve string search or Boyer-Moore or whatever.  We
+presume that this can be done quickly enough that, much of the time,
+we will finish before something else overwrites any of the data in
+that range, so our chance of being aborted is small.
+
+Otherwise, `scan` proceeds by making two recursive calls to itself,
+which of course spawn their own nested transactions.  If, during a
+commit, some read block is found to have been overwritten by a
+concurrent transaction, that transaction is then retried; but its
+earlier siblings remain committed.
+
+So far, this seems to have ameliorated our problem only slightly: if
+something writes to the third quarter of the file while the fourth
+quarter is being scanned, then the transaction scanning the second
+half of the file will be aborted and retried.  So our tiny chances of
+success, assuming a uniform distribution of write traffic, would seem
+to have improved only by a factor of 4, or less.
+
+This is where *memoization* comes in and saves the day!  Suppose that,
+instead of only remembering a flat list of blocks and nodes read and
+written by each *active* transaction in the stack, we also remember
+those read and written by *committed* transactions that are children
+or descendants of some active transaction, as well as the code and
+environment state needed to re-execute those transactions.  Now, when
+we retry scanning the second half of the file, we can *revalidate*
+these read sets, and if they are still valid, we can “wink in” the
+write set without actually running any of the transaction code.
+
+To be concrete, suppose the file consists of eight blocks (0, 1, 2, 3,
+4, 5, 6, and 7), and we are retrying scanning the last four blocks
+because block 5 has changed.  (I will disregard overlaps here.)  The
+transaction to scan blocks 4, 5, 6, and 7 is invalid, so it begins
+re-executing, and the first thing it does is to spawn a child
+transaction to scan blocks 4 and 5.  This child transaction is
+invalid, since block 5 has changed, so it spawns a child transaction
+to scan block 4.  So far, memoization has changed nothing.
+
+But then a miracle occurs!  Block 4 hasn’t changed, so it doesn’t need
+to be scanned; the `False` return value and (empty) write set of the
+block-4 transaction are instantly retrieved from the memo table.  We
+proceed to spawn a child transaction to scan block 5, which has
+changed, so we rescan it byte by byte.  It also returns `False`, and
+so the blocks-4-and-5 transaction returns `False`, and its parent
+transaction spawns a new transaction to scan blocks 6 and 7.  But that
+transaction is also found in the memo table!  So no code need execute;
+its (empty) write set is committed to its parent, and its `False`
+return value is returned.
+
+So now our scan is complete, having scanned only the single block that
+actually changed and done additional O(log N) transaction revalidation
+work, through the beautiful gift of memoized nested transactions!
+
+Like I said, I probably didn’t just make this up.  I just can’t
+remember where I’ve seen it.  Maybe Umut Acar’s “self-adjusting
+computation”.
+
+Transactions that return immutable data — inevitably, newly
+created — poses no problem for this approach, and neither does
+mutating existing data.  But allocating and returning new blocks and
+nodes does pose a difficulty for memoization, because memoization
+introduces aliasing!  Without memoization, running the same
+transaction twice with the same inputs (including the state of the
+store) will allocate and return two separate sets of objects, but a
+naïvely implemented memo system would return two aliases to the same
+mutable objects.  I think this can be solved by marking the blocks and
+nodes as copy-on-write, by having the memo system actually copy them
+before returning them, or by making them read-only.
+
+#### Relaxed consistency ####
+
+A common solution to the long-transaction problem is to use more
+relaxed isolation levels, at the risk of incorrect results.  No more
+details will be given of this shameful practice.
+
+#### Clever reordering, or MVCC ####
+
+A different approach to the problem is to hope that the scanner’s
+results can be retroactively inserted into the transaction history
+instead of being appended to it.  This works surprisingly often; in
+the example code above, for instance, the scanner doesn’t write any
+blocks — its only effect is to return a Boolean value — so it can
+trivially be run on any previous snapshot, and it is guaranteed that
+none of the transactions that committed in the interim would have had
+different results had the scanner transaction committed long ago.
+
+This approach requires examining the write-set of the long transaction
+when it goes to commit to ensure that it’s not overwriting any blocks
+or nodes that any transaction committed after its snapshot had read.
+If so, such a cyclic dependency violates serializability and thus
+cannot be tolerated; the long transaction must be retried anyway.
+
+This poses the question of exactly where in history to (conceptually)
+insert the long transaction.  But unless we are making up a
+transaction log, there’s no need to actually *compute* the
+serializable order to respect transaction isolation; it’s sufficient
+that one exists.  So it’s sufficient to ensure that committing the
+transaction would not create a cycle in the bipartite graph of
+transactions and block/node versions.
+
+#### Spheres of Influence ####
+
+Retrying the long transaction, however, isn’t the only possible
+solution!  You could, instead, commit the long transaction and roll
+back and retry the already-committed *later* transactions, as long as
+no effects from them have escaped your rollback grasp.  This is the
+idea of the “spheres of influence” idea from the ancient transaction
+processing literature, which I found in Gray & Reuter, and it’s fairly
+similar to how the US banking system works: all numbers are
+provisional, subject to revision, until a few months have passed.
+
+### Incremental recomputation ###
+
+Above, the use of memoized nested transactions was suggested to permit
+long transactions to complete successfully despite concurrent writes.
+But it should be apparent that this is a form of incremental
+computation: by memoizing results from previous partial computations,
+incremental changes can be accommodated efficiently, even when they’re
+happening too fast for a batch-mode computation to run to completion
+successfully.
+
+If the memo table is retained rather than being discarded as soon as
+the root transaction commits, it can be used to incrementalize future
+computations of similar transactions as well.  In a database system,
+for example, this approach could largely transparently provide the
+performance functionality of standard indices, materialized views, and
+precomputed OLAP rollups, though perhaps not query optimization, since
+its very transparency complicates its use by a query optimizer.
+
+What policy should be used to manage memo-table entries?  Retaining
+too little will waste CPU cycles and perhaps miss real-time deadlines;
+retaining too much will waste RAM and perhaps also slow the system
+down.  A unified memo-table-management system might be able to use
+robust heuristics to come to a reasonable global optimization
+solution, taking into account the observed computational cost of each
+transaction; but, lacking that, you probably need some way to manually
+specify the policy.
+
+This memo table will suffer “false misses” under some circumstances
+that a smarter incremental computation mechanism might be able to take
+advantage of: computations that would be equivalent but end up reading
+the same data from different locations, for example, and in ABA cases
+where a location changes twice, ending with the same value it started
+with (a counter being incremented and then decremented, for instance).
+
+### Parallel computation with nested transactions ###
+
+In the example code above, the child transaction results were used
+immediately; the parent transaction blocked until the child
+transaction was finished executing.  But in many cases, including the
+above, it would be semantically acceptable to spawn multiple
+potentially concurrent child transactions, returning only a future for
+the transaction’s output from the initial spawn call, which is *later*
+blocked on — perhaps after spawning additional child transactions.
+
+### Differentiable computation with transactions ###
+
+To compute a Jacobian of a computation with a small number of outputs
+and many inputs — the gradient, in the case that the number of outputs
+is one — reverse-mode automatic differentiation is much more
+efficient.  But reverse-mode automatic differentiation requires
+propagating the gradient backward through the dataflow.  For a short
+or highly regular computation, it’s reasonable to materialize the
+whole dataflow graph in RAM at once, but not for long, iterative, and
+irregular computations, since the dataflow graph can contain trillions
+of nodes — in the limit, a node for every machine instruction executed
+on thousands of machines over a period of hours to months.
+
+So the usual way to do this — if I understand correctly, which I may
+not — is to run the computation forward from the beginning to the end,
+saving its entire state on a “tape” of periodic checkpoints.  If you
+have enough space, you can take the checkpoints close enough together
+that the full dataflow graph between any two adjacent checkpoints fits
+in RAM; then you can iterate backward through the checkpoints,
+building that dataflow graph in memory so as to propagate the Jacobian
+backward to the previous checkpoint.  For the gradient case, this is
+theoretically about as fast as the original computation.
+
+If that’s too much space — perhaps a terabyte for 10 minutes of
+computation — you can thin out the tape to a logarithmically-small
+number of checkpoints, in exchange for a logarithmically-small (or
+log-squared?) slowdown.  Perhaps instead of 1024 checkpoints, one per
+second, you might have 11 checkpoints: one from 1 second ago, one from
+2 seconds ago, one from 4 seconds ago, and so on up to 1024 seconds
+ago.  When the time comes to propagate the Jacobian from the
+checkpoint from 4 seconds from the end to the checkpoint from 8
+seconds to the end, you first replay from the 8-seconds-from-the-end
+checkpoint to recreate the 6-seconds-from-the-end and
+5-seconds-from-the-end checkpoints.
+
+It should be apparent that, with manual control over the memo table,
+the memoized-nested-transaction mechanism described earlier can
+provide an efficient, space-sharing way to periodically checkpoint a
+computation — once we roll back everything that happened later, the
+*end* of each memoized transaction is a point to which we can quickly
+“fast-forward” from its beginning.  Actually constructing the
+in-memory dataflow graphs and back-propagating the Jacobians, however,
+cannot be done by the mechanisms described earlier; they require more
+profound interfacing. XXX
+
+### Streams and reactive UI updates ###
+
+Some of the transactions described above write their output to the
+block and node store.  Others, though, are merely queries that return
+a value without mutating anything, at least not anything externally
+visible.  By recording which blocks and nodes are read by a query
+transaction, as the transaction system does, we can automatically
+determine when query results have become out of date; the memoization
+mechanism described above provides a reasonably efficient way to
+support polling, for example for screen updates, but if writing to a
+block or node can trigger an asynchronous invalidation notification
+(which can be responded to by repeating the query if desired), that
+may have lower latency, have higher throughput, or use less energy
+under some circumstances.
+
+Nothing in the system design limits these approaches to read-only
+queries; they can apply equally well to “queries” that mutate the
+block and node store in a persistent way (as opposed to using nodes
+and blocks they allocate ephemerally as temporary storage, or allocate
+and then return).  Indeed, if those queries write to no nodes and
+blocks that they also read and did not allocate, they can be
+mechanically guaranteed to be idempotent.  (But see above about
+memoization introducing aliasing.)
+
+Progress bars on such transactions probably cannot be provided through
+transactional mechanisms, since they have dataflow from uncommitted
+transactions.  So, as with differentiable programming,
+metatransactional mechanisms are needed.
+
+### Modular blocking and composable memory transactions ###
+
+The [_Composable Memory Transactions_ paper][CMT], which I need to
+reread, explains how to use an optimistic transactional memory with
+nested transactions, like the above, to support blocking patterns of
+communication by adding two more functions, `retry` and `orElse`.
+
+[CMT]: https://www.microsoft.com/en-us/research/wp-content/uploads/2005/01/2005-ppopp-composable.pdf "Harris, Marlow, Peyton Jones, and Herlihy, 2005"
+
+`retry` conceptually simply aborts the current transaction, causing it
+to be automatically retried.  But if the system responds by beginning
+to run the same transaction code again with the same inputs and the
+same state of the store, it would simply deterministically reach
+`retry` a second time, and so on, busy-waiting.  So a more reasonable
+system, like the one they actually implemented, waits to retry the
+transaction until the store has changed — specifically, until some
+transactional variable that it had read before invoking `retry` has
+changed.
+
+The `orElse` operator provides a way to recover from such failures, by
+composing two alternative child transactions into a larger child
+transaction.  If the child transaction that is its left argument fails
+because of invoking `retry` (though not because of a conflicting write
+by a concurrent transaction), then control flows to the alternative
+transaction that is its right argument.  If that transaction also
+fails, then the transaction resulting from `orElse` fails.
+
+Thus `retry` provides a way to convert a polling interface, such as
+reading a transaction variable to see if something is ready, into a
+blocking interface, while `orElse` provides a way to either combine
+two sources of blocking into an alternative source that only blocks
+while both sources are blocking, like Unix `select(2)`, or to convert
+a blocking interface into a polling interface (by providing a second
+alternative that does not block).
+
+Precisely the same interface would work on top of nodes and blocks.
+
+The requirements of transactional systems limit the applicability of
+familiar interprocess communication.
+
+For example, you could try to implement a byte pipe between two
+transactions by a memory block whose first two words contain beginning
+and end pointers into a ring buffer that is the rest of the block.  A
+transaction could attempt to add bytes to the ring buffer and return
+the number successfully written, blocking with `retry` if there is not
+room, or to remove bytes from it and return them, blocking with
+`retry` if there are no bytes to remove.  If a pipe-reader and a
+pipe-writer try to mutate the block at the same time, one will succeed
+and the other will fail at first, then retry and succeed.  So, at
+first, this sounds like a standard Unix pipe.
+
+But, if the pipe-reader’s parent transaction is aborted, the
+pipe-reader’s modifications to the pipe block will be rolled back.  As
+long as the two share a parent transaction, then all the pipe-writer’s
+modifications will, too; and, until they do share a parent transaction
+(that is, until any levels of transactions separating them from their
+lowest common ancestor transaction have committed), their
+communications won’t be visible to one another — the writer can’t
+unblock the reader or provide it bytes, and the reader can't unblock
+the writer.
