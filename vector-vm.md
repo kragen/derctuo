@@ -4,6 +4,9 @@ from the implementation and by minimizing environmental dependencies.
 Can we reconcile this with efficiency by implementing a vector virtual
 machine?
 
+This note describes an approach to [Veskeno's
+design](veskeno-outline.md) that I am not currently pursuing.
+
 The background of the problem
 -----------------------------
 

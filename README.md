@@ -23,6 +23,23 @@ hacked together a PDF version in the last few days of 02019.
 So what’s my vision for Derctuo?  How would I like it to be similar or
 different?
 
+[Hamming said](https://www.cs.virginia.edu/~robins/YouAndYourResearch.html):
+
+> And I suggest that by altering the problem, by looking at the thing
+> differently, you can make a great deal of difference in your final
+> productivity because you can either do it in such a fashion that
+> people can indeed build on what you've done, or you can do it in
+> such a fashion that the next person has to essentially duplicate
+> again what you've done. It isn't just a matter of the job, it's the
+> way you write the report, the way you write the paper, the whole
+> attitude.
+
+There are a number of ways in which Dercuano is more like “do it in
+such a fashion that the next person has to essentially duplicate again
+what you’ve done”.  The context of Hamming’s remark is generalizing
+mathematical methods, and that is one way Dercuano is limited in
+scope, but 
+
 †Clearly the sequels to Dercuano should be called Derctuo, Derczrio,
 Dercforro, and so on.
 
