@@ -139,5 +139,43 @@ the standard example of this is the equation V = IR for a resistor,
 from which you can calculate the current if you know the voltage, the
 voltage if you know the current; if you know neither *a priori*, you
 may still be able to incorporate it into a system of equations that
-eventually allow you to determine both.
+eventually allow you to determine both, the simplest example being two
+resistors in series with a battery.
 
+This is pretty essential not only in circuit analysis but in a variety
+of different domains: mechanical force and displacement are similarly
+interdependent in a steady-state spring, as is flow rate and pressure
+drop in a hydraulic system, for example.
+
+Etc.
+----
+
+Modelica supports compile-time units checking, but I'm not yet clear
+that its units support extends to full vector-space dimensional
+analysis.
+
+Could you get faster simulation results with interval arithmetic,
+affine arithmetic, or especially reduced affine arithmetic?
+
+I wish there was a way to describe an object like a hollow copper
+cylinder of such-and-such dimensions and have all of its properties
+potentially available --- but only if you ask for them.  For example:
+electrical resistance, flow resistance, cost, mass, stiffness, tensile
+strength, effective RF resistance with skin effect, volume,
+temperature, thermal insulation, and so on.  I don't think there's a
+way to do this kind of thing in Modelica itself, but you could do it
+in a higher-level language that compiles to Modelica.
+
+The other thing is that Modelica suffers a bit from the
+assembly-language disease where you have to invent a name for every
+intermediate value, worsened by the COBOL problem of DATA
+DIVISION. PROCEDURE DIVISION.  A model or other class is divided into
+a section of variable declarations (which can instantiate other
+classes used as components --- a circuit model, for example, might
+instantiate resistors and op-amps) and a section of equations, which
+can include connections between components.  (There are some other
+miscellaneous sections that are sometimes present as well.)  So, for
+example, in a circuit model you must give a name to every circuit
+component, even if it's something like "R37".  The standard rebuttal
+to this complaint is that you should be using the graphical model
+editor anyway, which I do not find convincing.
