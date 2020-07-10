@@ -143,7 +143,17 @@ your digital audio workstation to your home server so that if it
 breaks or gets stolen you suffer minimal interruption to your work.
 Or you could interactively edit a 3-D scene on your laptop in Blender,
 then migrate your Blender session to your rendering cluster to run
-faster overnight.
+faster overnight.  Or your could periodically checkpoint a
+long-running compute job on a cluster, on individual machines or
+cluster-wide, saving the snapshots to a different machine in order to
+recover from partial failures.
+
+An interesting special case is where the device you're running on
+doesn't have enough space for a whole snapshot, so it needs to
+occasionally demand-page in bits of the image while it's running.
+This could make it feasible to run memory-hungry applications like
+Slack on machines with relatively little RAM, although swapping over
+the network like that can be slow.
 
 Concrete implementation approaches
 ----------------------------------
