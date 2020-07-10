@@ -5,9 +5,9 @@ Objectives
 ----------
 
 I want to have a cloud development server.  A problem with this in the
-past has been upgrades: if I don't upgrade the machine's software, it
+past has been upgrades: if I don’t upgrade the machine’s software, it
 gets out of date and progressively more painful to do things on.  But
-when I do upgrade it, I'm at risk of the machine not booting any more,
+when I do upgrade it, I’m at risk of the machine not booting any more,
 perhaps requiring a crash cart to visit it, or even plugging the disks
 into another machine (that still boots) to recover their data.
 
@@ -16,14 +16,14 @@ upgrade, so you can roll it back if things go badly.  Other
 virtualization and paravirtualization systems have similar
 capabilities.  The simplest solution is just to use QEMU running under
 a popular system with good support; Ubuntu 20.04 is supported until
-2025, for example.  Then the "hypervisor" system can remain relatively
-untouched by whatever development activities I'm doing, while the
+2025, for example.  Then the “hypervisor” system can remain relatively
+untouched by whatever development activities I’m doing, while the
 guests can evolve at will.
 
 It would also be nice to be able to use a sandbox with some chance of
 containing potential attacks.
 
-Also, there are some experiments I've been wanting to try for a while
+Also, there are some experiments I’ve been wanting to try for a while
 [involving incremental snapshots of virtual
 machines](migrating-app-snapshots.md), and this might be a nice
 stepping stone.
@@ -47,7 +47,7 @@ instead.
 
 `kvm` is the command installed by the `qemu-kvm` package which is just
 equivalent to `qemu-system-x86_64 -enable-kvm`.  (Older versions of
-`qemu-kvm` were actually a separate branch of QEMU I think, but it's
+`qemu-kvm` were actually a separate branch of QEMU I think, but it’s
 still more convenient to invoke it this way.)
 
 At first I made the mistake of making the disk too small; Ubuntu 20.04
@@ -113,14 +113,15 @@ Escaping QED
 ------------
 
 I should not have used QED --- I misunderstood the documentation, and
-it's a deprecated format; attempting to fix:
+it’s a deprecated format; attempting to fix:
 
     qemu-img convert ubuntu-base.qed -O qcow2 ubuntu-base.qcow2
 
 This took 4-6 minutes and shrank the file to 8.8 GB.  Now of course I
 need to test the resulting environment and recreate the dev branch.
 
-This is actually significantly slower, but not enough to matter for my
+Making a backed QCOW2 image is actually significantly slower than doing it with QED,
+but not enough to matter for my
 purposes:
 
     $ time qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev0.qcow2
