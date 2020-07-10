@@ -66,6 +66,15 @@ occurrences of “fiery”, but counted words containing “fire”, such as
 The objective of Veskeno: make software, specifically Derctuo, run as reproducibly as other mathematics
 -------------------------------------------------------------------------------------------------------
 
+> [C]omputer science is about formalizing imperative knowledge. The
+> essence of programming is about imperative knowledge. It’s about how
+> to do things. … But it’s no different than what we say in the SICP
+> lectures: Mathematics is about how you think about what’s true,
+> following from various axioms. Computing is how you think about how
+> to do things.
+>
+> — [Hal Abelson, 2011](http://www.gigamonkeys.com/code-quarterly/2011/hal-abelson/)
+
 Since at least Church, Turing, and Gödel, we have a rigorous
 mathematical formalization of the notion of an *algorithm*, which is
 how we have managed to build digital computers that can be programmed
