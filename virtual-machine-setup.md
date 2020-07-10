@@ -1,6 +1,33 @@
 I set up a virtual machine today using QEMU with KVM under Ubuntu
 20.04.
 
+Objectives
+----------
+
+I want to have a cloud development server.  A problem with this in the
+past has been upgrades: if I don't upgrade the machine's software, it
+gets out of date and progressively more painful to do things on.  But
+when I do upgrade it, I'm at risk of the machine not booting any more,
+perhaps requiring a crash cart to visit it, or even plugging the disks
+into another machine (that still boots) to recover their data.
+
+Amazon AWS allows you to snapshot an EC2 volume before trying an
+upgrade, so you can roll it back if things go badly.  Other
+virtualization and paravirtualization systems have similar
+capabilities.  The simplest solution is just to use QEMU running under
+a popular system with good support; Ubuntu 20.04 is supported until
+2025, for example.  Then the "hypervisor" system can remain relatively
+untouched by whatever development activities I'm doing, while the
+guests can evolve at will.
+
+It would also be nice to be able to use a sandbox with some chance of
+containing potential attacks.
+
+Also, there are some experiments I've been wanting to try for a while
+[involving incremental snapshots of virtual
+machines](migrating-app-snapshots.md), and this might be a nice
+stepping stone.
+
 Initial setup procedure
 -----------------------
 
@@ -11,25 +38,24 @@ default in Ubuntu 20.04’s kernel and present in the CPU, which
 `/proc/cpuinfo` says is an “Intel(R) Xeon(R) CPU E5649 @ 2.53GHz”.
 
 I was having a hard time setting up Debian inside QEMU, so I snarfed
-the Ubuntu install ISO instead.
+the Ubuntu install ISO (SHA256
+e5b72e9cfe20988991c9cd87bde43c0b691e3b67b01f76d23f8150615883ce11)
+instead.
 
     qemu-img create -f qed ubuntu-base.qed 32G
     kvm -hda ubuntu-base.qed -cdrom Downloads/ubuntu-20.04-desktop-amd64.iso -m 2G
 
-This is using the ISO image with SHA256
-e5b72e9cfe20988991c9cd87bde43c0b691e3b67b01f76d23f8150615883ce11.
-
-XXX I should not have used QED; it's a deprecated format
-
-`kvm` is the command installed by the `qemu-kvm` package which, as far
-as I can tell, is equivalent to `qemu-system-x86_64 -enable-kvm`.
+`kvm` is the command installed by the `qemu-kvm` package which is just
+equivalent to `qemu-system-x86_64 -enable-kvm`.  (Older versions of
+`qemu-kvm` were actually a separate branch of QEMU I think, but it's
+still more convenient to invoke it this way.)
 
 At first I made the mistake of making the disk too small; Ubuntu 20.04
 claims to need at least 8.6 GB to install, and in fact used 11 GB.
 (The QED format, added in recent QEMU versions, is allocate-on-write,
 so even though the virtual disk is 32 GB, the `ubuntu-base.qed` file
 it’s stored in is only 11 GB, since it’s mostly unused.) Also,
-whatever QEMU’s default memory size is [128MiB], it’s too small, and Ubuntu’s
+QEMU’s default memory size turns out to be 128MiB, which is too small, and Ubuntu’s
 installer “reported” this fact by displaying a blank text-mode screen
 with a blinking cursor and never doing anything else; `-m 2G` or
 something is needed.
@@ -83,6 +109,32 @@ some 320 kB (plus whatever is used thereafter, typically tens of
 megabytes to gigabytes) and 10–11 milliseconds.  That way I won’t have
 to install Ubuntu again.
 
+Escaping QED
+------------
+
+I should not have used QED --- I misunderstood the documentation, and
+it's a deprecated format; attempting to fix:
+
+    qemu-img convert ubuntu-base.qed -O qcow2 ubuntu-base.qcow2
+
+This took 4-6 minutes and shrank the file to 8.8 GB.  Now of course I
+need to test the resulting environment and recreate the dev branch.
+
+This is actually significantly slower, but not enough to matter for my
+purposes:
+
+    $ time qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev0.qcow2
+    Formatting 'ubuntu-dev0.qcow2', fmt=qcow2 size=34359738368 backing_file=ubuntu-base.qcow2 cluster_size=65536 lazy_refcounts=off refcount_bits=16
+
+    real    0m0.244s
+
+The resulting derived file is only 197kB.
+
+Interestingly, both QCOW2 and QED can use a file in a different format
+or even accessed over HTTP as the backing file, so I could put that
+base image (or the QED one) up on a web site and remotely lazily clone
+it!
+
 Results
 -------
 
@@ -118,7 +170,9 @@ What’s the most reasonable way to enable ssh into these virtual
 machines?  I’d need to disable password authentication and do some
 kind of port forwarding; I forget how QEMU does its networking.  (I
 think by default it uses Slirp but can alternatively use TUN/TAP or
-L2TPv3?)
+L2TPv3?)  There used to be a `-redir tcp:2222::22` option that looks
+like it will work, which I think is now spelled `-net
+user,hostfwd=tcp::2222-:22`.
 
 How about Mosh?
 
@@ -127,7 +181,8 @@ have them totally open inside the firewall.  (Apparently I can say
 `-vnc :2,password` and then set the password “using the
 “`set_password`” command in the
 `[pcsys_monitor](https://www.qemu.org/docs/master/qemu-doc.html#pcsys_005fmonitor)`.”
- — but I’m not sure how to get to the monitor; typing ^Ah does nothing — and
+ — but I’m not sure how to get to the monitor (maybe -monitor stdio or -mon stdio?);
+typing ^Ah does nothing — and
 also apparently
 `-vnc localhost:2` will only allow connections from localhost.)
 
@@ -159,11 +214,6 @@ How insecure is KVM?
 
 How about accessing files on the guest’s filesystem?  There are
 `-fsdev` and `-virtfs` flags to QEMU, but I’m not sure what they do.
-
-Is QED really better than QCOW2?  I thought QED introduced the -b base
-image thing, but [apparently QCOW2 also supports
-it](https://askubuntu.com/questions/884534/how-to-run-ubuntu-desktop-on-qemu).
-Also apparently QCOW2 can use a non-QCOW2 image as the base.
 
 Is there an advantage to [kvm -M
 pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?

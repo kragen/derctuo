@@ -163,7 +163,10 @@ Concrete implementation approaches
 QEMU's CLI has "stop", "cont", "savevm" and "loadvm" commands that
 might be a sufficient hook to implement such a system, reducing the
 problem to a problem of synchronizing qcow2 images (or, possibly,
-snapshots thereof).
+snapshots thereof).  QEMU also has a live migration feature (I don't
+know how this works) and the ability to create a "copy-on-read" image
+with a remote "backing file", which is awfully similar to the features
+described above.
 
 I wrote about [a user-level virtual-memory system that would
 facilitate this kind of copy-on-write thing](segments-and-blocks.md).
