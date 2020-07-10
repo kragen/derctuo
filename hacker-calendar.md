@@ -141,6 +141,7 @@ of OpenGL.
    and its 165,000 files destroyed, following a copyright lawsuit from
    the Louis E. Wheeler Co., as reported in Network World, January 16,
    1995 ("Army gets caught in software piracy firestorm").
+0. October 4, 1957: launch of Sputnik 1
 0. October 18, 1931: Thomas Edison died (born February 11, 1847)
 0. October 29, 1998: the sale of the Archimedes Palimpsest
 0. the fourth month of the inundation season: when Ahmose wrote the
@@ -170,6 +171,9 @@ of OpenGL.
    in Note G of its "notes by the translator"; [translated into C by
    Sinclair Target in
    2018](https://twobithistory.org/2018/08/18/ada-lovelace-note-g.html)
+0. December 17, 1706: Gabrielle Émilie Le Tonnelier de Breteuil,
+   Marquise du Châtelet, who discovered energy, was born (died
+   September 10, 1749)
 0. December 23, 1790: Jean-François Champollion born (died March 4,
    1832), deciphered the Egyptian demotic script in 1806 and, while
    awaiting trial for treason, the hieroglyphs in 1822.
@@ -232,7 +236,6 @@ Things I don't know dates of:
 0. something about Prometheus
 0. the rescue of the library of Timbuktu
 0. Mozart?
-0. launch of Sputnik
 0. Haskell released
 0. THERAC-25
 0. Ariane 5
@@ -248,6 +251,10 @@ Things I don't know dates of:
 0. McCarthyism
 0. Alonzo Church?
 0. Ctesibius?
+0. Genesis Block mined?
+0. Morse's first telegraph message sent?
+0. Santos Dumont's first flight?
+0. Fred Fish?
 
 Of secondary importance:
 

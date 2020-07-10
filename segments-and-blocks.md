@@ -899,3 +899,54 @@ lowest common ancestor transaction have committed), their
 communications won’t be visible to one another — the writer can’t
 unblock the reader or provide it bytes, and the reader can't unblock
 the writer.
+
+Snapshot debugging
+------------------
+
+> Debuggers don't.
+
+What debuggers do is provide programmers visibility into a program's
+internal state in order to can formulate and test hypotheses until
+they diagnose a bug.  Traditionally debuggers do this by providing
+three fundamental services: memory and register inspection --- letting
+programmers go inside the program "spatially"; breakpoints and
+single-stepping --- letting them "go inside" the program temporally;
+and mutation --- letting them change the program's state while it's
+stopped.  Essentially by scripting these, more sophisticated
+facilities are commonly built, like "stepping over" a subroutine call,
+disassembly, source-code display, displaying the call stack and local
+variables, injecting code into the program, and so on.
+
+(Single-stepping can be implemented by scripting breakpoints, simply
+by repeatedly placing and removing breakpoints, and this is a common
+way to support single-stepping on platforms with no native
+single-stepping support.  Implementing breakpoints by scripting
+single-stepping is also possible but generally impractically
+inefficient.)
+
+However, with imperative programming languages, these three basic
+facilities are frustratingly inadequate, because very commonly by the
+time the programmer sees that some memory location has a wrong value
+in it, the code that placed that value there is long gone.  With
+sufficient patience and meticulosity, repeated re-executions of a
+program can eventually find how the location was changed by using
+inspection and breakpoints, but this is an extreme measure, and often
+it must be repeated more than once.  So there are a couple more basic
+facilities commonly provided by modern debuggers: watchpoints and
+reverse execution.
+
+Breakpoints stop the execution of the program when it executes a
+particular instruction; watchpoints, by contrast, stop its execution
+when it modifies a particular memory location.  This can be provided
+inefficiently by scripting single-stepping and inspection --- after
+each single step of the program, the debugger's script inspects the
+memory location to see if its value has changed --- but on many
+platforms there are more efficient ways to solve that problem, either
+using virtual-memory hardware or using special CPU registers devoted
+to implementing watchpoints.
+
+Watchpoints allow a single re-execution to find how a given memory
+location was changed, but reverse execution improves on this.  OCaml's
+debugger was the first debugger I know of to provide reverse
+debugging, which it did by exploiting Unix's fork(2) to make
+copy-on-write snapshots of the program state; XXX
