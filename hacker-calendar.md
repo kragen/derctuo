@@ -1,16 +1,16 @@
 The humans like to memorialize dates by holding annual celebrations.
 What kinds of dates would a hacker culture memorialize?
 
-I'm putting together a date table here in a sort of cuckoo-hash
+I’m putting together a date table here in a sort of cuckoo-hash
 fashion: most dates commemorate individual hackers, and for most of
 the hackers the relevant known dates are their birthdate and their
 death date.  When there is a collision, I can usually move the person
-in question to a different relevant date: their death date if they're
+in question to a different relevant date: their death date if they’re
 listed at their birthdate, or vice versa.
 
 So, for example, to insert Laplace, Hao Wang moved from May 20 to May
 13, allowing Jean Sammet to move from March 23 to May 20, freeing up
-March 23 for Laplace.  Laplace's death date, March 5, was occupied by
+March 23 for Laplace.  Laplace’s death date, March 5, was occupied by
 William Oughtred, who died June 30, which is already quite full with
 two difficult-to-move events: the feast of Ramon Llull and the release
 of OpenGL.
@@ -27,7 +27,7 @@ of OpenGL.
 0. January 15, 2001: the founding of Wikipedia
 0. January 19, 1912: Leonid Vitaliyevich Kantorovich (Леони́д
    Вита́льевич Канторо́вич) born (died April 7, 1986). Published
-   "Математические методы организации и планирования производства" in
+   “Математические методы организации и планирования производства” in
    1939.
 0. February 7, 1990: Alan Perlis died (born April 1, 1922)
 0. Feburary 8, 1920: Bob Bemer born (died June 22, 2004)
@@ -44,12 +44,12 @@ of OpenGL.
    publishing GURPS Cyberpunk
 0. March 1, 86 BCE: [Sulla sacked
    Athens](https://en.wikipedia.org/wiki/Siege_of_Athens_and_Piraeus_(87%E2%80%9386_BC)),
-   having burned Plato's Academy.  (However, this needs to be corrected
+   having burned Plato’s Academy.  (However, this needs to be corrected
    for calendar alignment.)
 0. March 4, 1959: John McCarthy (born September 4, 1927; died October
    24, 2011) published Artificial Intelligence Project Memo 8,
-   "Recursive functions of symbolic expressions and their computation
-   by machine", describing the LISP language he and Steve "Slug"
+   “Recursive functions of symbolic expressions and their computation
+   by machine”, describing the LISP language he and Steve “Slug”
    Russell (born 1937, still alive) had developed on the 704.
 0. March 5, 1574: William Oughtred born (died June 30, 1660)
 0. March 7, 1917: Betty Holberton born (died December 8, 2001)
@@ -66,12 +66,12 @@ of OpenGL.
    1978) wrote to John von Neumann, posing essentially the P vs. NP
    problem
 0. March 21, 1768: Fourier born (or, alternatively, December 21, 1807,
-   he presented his paper "on the propagation of heat in solid bodies")
+   he presented his paper “on the propagation of heat in solid bodies”)
 0. March 23, 1749: Laplace born (died March 5, 1827); published
    Bayesian probability theory in 1812
 0. March 25, 1914: Norman Borlaug born, who saved a billion lives with
    dwarf wheat (died September 12, 2009)
-0. March 31, 1596: Descartes' birth (died February 11, 1650)
+0. March 31, 1596: Descartes’ birth (died February 11, 1650)
 0. April 7, 1761: Thomas Bayes died (birthdate unknown)
 0. April 9, 1806: Isambard Kingdom Brunel born (died September 15, 1859)
 0. April 14, 1935: Emmy Noether died (born March 23, 1882)
@@ -89,7 +89,7 @@ of OpenGL.
 0. May 2, 1519: Leonardo da Vinci died (born April 14 or 15, 1452)
 0. May 7, 1711 (O.S. April 26): David Hume born. (Died August 25, 1776)
 0. May 10, 1933: nationwide book burning by Nazis, following the German
-   "Law for the Restoration of the Professional Civil Service", which
+   “Law for the Restoration of the Professional Civil Service”, which
    on April 7, 1933 eliminated all Jewish and Communist public
    employees, including professors, with some exceptions;
 0. May 11, 1918: Richard Feynman born (died February 15, 1988)
@@ -101,7 +101,7 @@ of OpenGL.
 0. June 7, 1954: Alan Turing committed suicide (born June 23, 1912)
 0. June 9, 597: St. Columba died (born December 7, 521).  Legend has
    it he fought the battle of Cúl Dreimhne in 561 to defend his right
-   to copy St. Finnian's psalter.
+   to copy St. Finnian’s psalter.
 0. June 16, 1915: John Tukey born (died July 26, 2000)
 0. June 22, 1910: Konrad Zuse born (died December 18, 1995)
 0. June 27, 1831: Sophie Germain (Monsieur Antoine-Auguste Leblanc) died
@@ -109,7 +109,7 @@ of OpenGL.
 0. June 30, 1992: OpenGL released
 0. June 30, feast day of Ramon Llull, whose works were prohibited by
    the Spanish Inquisition (traditional death date June 29)
-0. July 1, 1646: Leibniz's birth in Leipzig (O.S. June 21) (died
+0. July 1, 1646: Leibniz’s birth in Leipzig (O.S. June 21) (died
    November 14, 1716)
 0. July 10, 1856: Nikola Tesla (Никола Тесла) born (died January 7,
    1943)
@@ -126,8 +126,8 @@ of OpenGL.
 0. August 12, 2013: Warren Teitelman died (born 1941)
 0. August 17, 2004: Xiaoyun Wang (王小云), Dengguo Feng, Xuejia Lai,
    and Hongbo Yu of Shandong University published their break of MD5.
-0. September 5, 1977: launch of Voyager 1, omitting "Here Comes the
-   Sun" for copyright reasons
+0. September 5, 1977: launch of Voyager 1, omitting “Here Comes the
+   Sun” for copyright reasons
 0. September 9, 1941: Dennis Ritchie born (died October 12, 2011)
 0. September 17, 1826: Riemann born
 0. September 26, 1983: Stanislav Yefgravovich Petrov (born September 7,
@@ -137,10 +137,10 @@ of OpenGL.
 0. September 30, 1993: WSMR-SIMTEL20, one of the greatest libraries of
    software in the world, [was shut down at 1600 hours Mountain
    Daylight
-   Time](https://groups.google.com/forum/#!original/alt.folklore.computers/OF5LQn2aZUU/zRu4O11K1okJa "28ftr2$pmc@usenet.INS.CWRU.Edu by Richard F. Drushel")
+   Time](https://groups.google.com/forum/#!original/alt.folklore.computers/OF5LQn2aZUU/zRu4O11K1okJa “28ftr2$pmc@usenet.INS.CWRU.Edu by Richard F. Drushel”)
    and its 165,000 files destroyed, following a copyright lawsuit from
    the Louis E. Wheeler Co., as reported in Network World, January 16,
-   1995 ("Army gets caught in software piracy firestorm").
+   1995 (“Army gets caught in software piracy firestorm”).
 0. October 4, 1957: launch of Sputnik 1
 0. October 18, 1931: Thomas Edison died (born February 11, 1847)
 0. October 29, 1998: the sale of the Archimedes Palimpsest
@@ -155,20 +155,20 @@ of OpenGL.
    the Begriffsschrift in 1879) although he was an anti-Semite
 0. November 26, 1894: Norbert Wiener born (died March 18, 1964)
 0. December 1, 1975: the publication of the first version of Scheme as
-   the paper "Scheme: an interpreter for Extended Lambda Calculus",
+   the paper “Scheme: an interpreter for Extended Lambda Calculus”,
    1975, [AIM-349](https://dspace.mit.edu/handle/1721.1/5794)
 0. December 7, 1873: Cantor sends Dedekind his proof of the
    uncountability of the reals
 0. December 8, 1864: George Boole died (born November 2, 1815)
-0. December 9, 1968: Doug Engelbart's Mother of All Demos (born
+0. December 9, 1968: Doug Engelbart’s Mother of All Demos (born
    January 30, 1925; died July 2, 2013)
 0. December 10, 1815: Augusta Ada Byron (later Lovelace) born (died
    November 27, 1852).  In September 1843 her translation of Luigi
-   Menabrea's 1842 French notes on Babbage (born 1791)'s Analytical
+   Menabrea’s 1842 French notes on Babbage (born 1791)’s Analytical
    Engine were published in *Scientific Memoirs*, including [the first
    computer
    program](https://commons.wikimedia.org/wiki/File:Diagram_for_the_computation_of_Bernoulli_numbers.jpg)
-   in Note G of its "notes by the translator"; [translated into C by
+   in Note G of its “notes by the translator”; [translated into C by
    Sinclair Target in
    2018](https://twobithistory.org/2018/08/18/ada-lovelace-note-g.html)
 0. December 17, 1706: Gabrielle Émilie Le Tonnelier de Breteuil,
@@ -179,7 +179,7 @@ of OpenGL.
    awaiting trial for treason, the hieroglyphs in 1822.
 0. December 28, 1903: John von Neumann born (died February 8, 1957)
 
-Things I don't know dates of:
+Things I don’t know dates of:
 
 1. Lu Ban (魯班) (dates unknown)
 0. Shandong University 山东大学 founded (dates unknown)
@@ -200,25 +200,25 @@ Things I don't know dates of:
    wrote the كتاب الحيل Kitab al-Hiyal (dates unknown) in the House of
    Wisdom
 0. the first solar power plant entered production in Egypt (Frank
-   Shuman's "Solar Engine One" in Maadi, 1912-1913)
+   Shuman’s “Solar Engine One” in Maadi, 1912-1913)
 0. Chomsky hierarchy?
-   <https://doi.org/10.1016%2FS0019-9958%2859%2990362-6> 1959 "On
-   certain formal properties of grammars" (though Chomsky himself is
+   <https://doi.org/10.1016%2FS0019-9958%2859%2990362-6> 1959 “On
+   certain formal properties of grammars” (though Chomsky himself is
    still alive)
 0. Aristotle (dates unknown)
 0. Brahmagupta (dates unknown)
 0. Something about Knuth?  The publication date of TAOCP volume 1?
-0. Stephen A. Cook's SAT paper establishing NP-completeness?
+0. Stephen A. Cook’s SAT paper establishing NP-completeness?
    <http://www.cs.toronto.edu/~sacook/homepage/1971.pdf>
    <https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.406.395>
 0. something to memorialize the Mohists and the other scholars who fell
    to Qin Shi Huang?
 0. something to memorialize the Library of Alexandria?
 0. something to celebrate Euclid
-0. al-Khwarizmi's book
+0. al-Khwarizmi’s book
    <https://en.wikipedia.org/wiki/The_Compendious_Book_on_Calculation_by_Completion_and_Balancing>?
 0. something to celebrate Aryabhata and the Aryabhatiya?
-0. publication of the break of Merkle's knapsack algorithm (date unknown)
+0. publication of the break of Merkle’s knapsack algorithm (date unknown)
 0. something about the Nine Chapters on the Mathematical Art
 0. the release of the first version of Haskell (dates unknown)
 0. July 1562: the burning of the Maya codices by Bishop Diego de Landa
@@ -240,7 +240,7 @@ Things I don't know dates of:
 0. THERAC-25
 0. Ariane 5
 0. Chernobyl
-0. Lavoisier's execution
+0. Lavoisier’s execution
 0. Linux announced
 0. 4.4BSD-Lite released
 0. Jean Bartik?  May have made ENIAC a stored-program computer.
@@ -252,8 +252,8 @@ Things I don't know dates of:
 0. Alonzo Church?
 0. Ctesibius?
 0. Genesis Block mined?
-0. Morse's first telegraph message sent?
-0. Santos Dumont's first flight?
+0. Morse’s first telegraph message sent?
+0. Santos Dumont’s first flight?
 0. Fred Fish?
 
 Of secondary importance:
@@ -267,11 +267,11 @@ Of secondary importance:
 
 Rejected:
 
-* Kathleen Booth? no, she's still alive
-* Michael Rabin (no, he's still alive)
+* Kathleen Booth? no, she’s still alive
+* Michael Rabin (no, he’s still alive)
 * September 10, 1839: Charles Sanders Peirce born (died April 19,
-  1914) (but he supported racism-based slavery, and wasn't as
+  1914) (but he supported racism-based slavery, and wasn’t as
   important as other significant hackers in the history of logic)
-* Ed Fredkin (no, he's still alive)
-* Ivan Sutherland (no, he's still alive)
+* Ed Fredkin (no, he’s still alive)
+* Ivan Sutherland (no, he’s still alive)
 
