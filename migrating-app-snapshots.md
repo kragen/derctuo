@@ -29,15 +29,17 @@ However, you might be able to reduce this time in a number of ways:
    the image by a secure hash, which will automatically deduplicate
    them.  After the base Ubuntu install, for example, I installed a
    bunch of development tools and some software projects in a derived
-   image, which used only 28 megabytes in the derived disk image,
-   which would take only 11 seconds to transmit.  (Probably some
+   image, which used only 2 gigabytes in the derived disk image,
+   which would take only 13 minutes to transmit.  (Probably some
    things changed in RAM, too, but I don't have a good way to measure
    them.)
 
 3. You can **compress** the transferred data, using an algorithm like
    gzip (LZ77) or LZSS.  For example, the 11-gigabyte Ubuntu install
    mentioned above gzips to only 4.2 gigabytes, reducing the initial
-   setup time to about 40 minutes.
+   setup time to about 40 minutes (including RAM); the 2-gigabyte
+   derived image --- the deltas to set up a development environment
+   --- compresses to 1.03 gigabytes, about seven minutes.
 
 4. You can **run the app on the server** while the transfer is
    happening, transmitting screen images and input events over the

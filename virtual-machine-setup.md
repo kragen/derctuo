@@ -19,6 +19,8 @@ the Ubuntu install ISO instead.
 This is using the ISO image with SHA256
 e5b72e9cfe20988991c9cd87bde43c0b691e3b67b01f76d23f8150615883ce11.
 
+XXX I should not have used QED; it's a deprecated format
+
 `kvm` is the command installed by the `qemu-kvm` package which, as far
 as I can tell, is equivalent to `qemu-system-x86_64 -enable-kvm`.
 
