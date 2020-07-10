@@ -13,14 +13,14 @@ half.
 
 However, you might be able to reduce this time in a number of ways:
 
-1. You might be able to *demand-page* it to some extent, prioritizing
+1. You might be able to **demand-page** it to some extent, prioritizing
    the transfer of blocks of the memory or disk image that the
    application is blocking on to download first.  This way you might
    be able to use the virtual machine considerably earlier than an
    hour and a half.  (Of course, some kind of prefetch strategy could
    make demand-paging work a lot better.)
 
-2. You might be able to *cache* it.  If the image is organized as a
+2. You might be able to **cache** it.  If the image is organized as a
    (materialized) Merkle tree, then you can download only the blocks
    that aren't already present locally; moreover, the rsync algorithm
    (ideally with a zsync-like precomputed index) may offer further
@@ -34,12 +34,12 @@ However, you might be able to reduce this time in a number of ways:
    things changed in RAM, too, but I don't have a good way to measure
    them.)
 
-3. You can *compress* the transferred data, using an algorithm like
+3. You can **compress** the transferred data, using an algorithm like
    gzip (LZ77) or LZSS.  For example, the 11-gigabyte Ubuntu install
    mentioned above gzips to only 4.2 gigabytes, reducing the initial
    setup time to about 40 minutes.
 
-4. You can *run the app on the server* while the transfer is
+4. You can **run the app on the server** while the transfer is
    happening, transmitting screen images and input events over the
    network in parallel with the streaming of the memory image.  This
    of course means that the image is being partly invalidated while
@@ -49,11 +49,11 @@ However, you might be able to reduce this time in a number of ways:
    long enough period of time for the previously invalidated pages to
    be transferred, the pause will be reduced to zero.
 
-5. You can *get a faster internet connection*.  For example, if you
+5. You can **get a faster internet connection**.  For example, if you
    have a 400Mbps connection instead of 20Mbps, the same transfer
    would take 5 minutes instead of an hour and a half.
 
-6. You can *use less storage*.  For example, the Emacs process I'm
+6. You can **use less storage**.  For example, the Emacs process I'm
    typing this note in has a virtual memory size of 308 megabytes, of
    which 16 megabytes is resident; the 308 megabytes includes all of
    its shared libraries and Lisp code, though 250 megabytes of it is
@@ -64,7 +64,7 @@ However, you might be able to reduce this time in a number of ways:
    an hour and a half, or 30 seconds with gzip, and if only the 16
    megabytes were needed, it would take only six seconds.
 
-7. You can *flush caches*.  Most in-memory application state is not
+7. You can **flush caches**.  Most in-memory application state is not
    vital and can be regenerated from other, more compact state --- a
    decompressed image in BGRA can be regenerated from its JPEG, for
    example.  If the application can be notified to flush caches in
@@ -80,7 +80,7 @@ require every app to be written in terms of CRDTs or event sourcing,
 you need some kind of concurrency control, specifically mutual
 exclusion.
 
-The most reasonable solution is to acquire a *lease*, a time-limited
+The most reasonable solution is to acquire a **lease**, a time-limited
 lock, on the application state you're "checking out".  So when you
 start snarfing the dirty pages into your tablet, the tablet might
 acquire a three-hour lease it renews every hour.  As long as it holds
@@ -110,7 +110,7 @@ This approach permits internet-disconnected operation for a limited
 period of time as well, for which purpose you might want a longer
 lease, maybe a day or two up to a month or two.  This poses the
 problem of what happens if the device owning the checkout is lost,
-stolen, or broken; in such a case you will want to *steal* the lease,
+stolen, or broken; in such a case you will want to **steal** the lease,
 so any state on the device becomes orphaned and cannot be committed to
 the original application image, though it can perhaps be committed as
 a new image that branched from the original.
