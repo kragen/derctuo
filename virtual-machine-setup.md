@@ -1,5 +1,5 @@
-I set up a virtual machine today using QEMU with KVM under Ubuntu
-20.04.
+I set up a virtual machine today using the virtual-machine emulator
+QEMU with KVM under Ubuntu 20.04.
 
 Objectives
 ----------

@@ -157,6 +157,41 @@ This could make it feasible to run memory-hungry applications like
 Slack on machines with relatively little RAM, although swapping over
 the network like that can be slow.
 
+Another sort of special case is where the "home server" is just a
+local disk, and effectively you're just implementing checkpointing and
+software suspend.  This should give you quicker boots (if you can
+circumvent slow BIOS/UEFI/Linux anyway) and, if you run out of
+battery, you'll recover to the latest consistent checkpoint when you
+come back up.
+
+More generally, you can have topologies other than a simple
+client-server topology; you could write out checkpoints to a local
+disk, which is streaming them to another server elsewhere, or you
+could have a distributed net of servers for block storage, leases, and
+commits, with some kind of quorum system for things that require
+consensus.  Multiple clients on the same LAN can promiscuously share
+new blocks that might be useful for migration.  And so on.
+
+Security issues
+---------------
+
+Cloning a machine containing secrets, including entropy pool data, can
+lead to the inadvertent disclosure of secrets with many cryptosystems;
+for example, it can lead to nonce reuse, or the computation of
+multiple RSA keys containing common factors.  It would be advisable to
+consider any such random numbers to be nonrandom after a checkpoint.
+Moreover, host-based security measures like retry limits and sleeps
+between wrong-password retries are entirely circumvented if the
+attacker can snapshot and replicate the host, but of course in that
+case the attacker owns the hardware and the game is over anyway.
+
+The migrated state is subject to corruption from whatever host it's
+been migrated to, so in effect the running application is trusting
+every host that has ever committed to it in the past; any of them can
+have inserted arbitrary malicious code into the imge.  In theory a
+defender might be able to detect this, but in practice probably would
+not.
+
 Concrete implementation approaches
 ----------------------------------
 
@@ -168,6 +203,9 @@ know how this works) and the ability to create a "copy-on-read" image
 with a remote "backing file", which is awfully similar to the features
 described above.
 
+QEMU now has a machine type called "microvm" intended for booting
+single-application virtual machines.
+
 I wrote about [a user-level virtual-memory system that would
 facilitate this kind of copy-on-write thing](segments-and-blocks.md).
 
@@ -176,3 +214,10 @@ that the client apps could be web browsers and in that WebAssembly
 runtimes are likely to support the kinds of isolation and snapshotting
 that would be useful for this kind of thing, as well as often being
 more manageable than entire Linux installations.
+
+Docker of course is commonly used for running single (server)
+applications in an isolated environment, and it extensively uses
+copy-on-write to keep its disk space usage somewhat manageable.  A
+typical Docker image using Alpine Linux might be 700 MB.  (I thought
+it was a lot smaller, but the ones I have here are that big.)  It
+would be interesting to try replicating Docker instances around.
