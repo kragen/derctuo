@@ -27,7 +27,7 @@ claims to need at least 8.6 GB to install, and in fact used 11 GB.
 (The QED format, added in recent QEMU versions, is allocate-on-write,
 so even though the virtual disk is 32 GB, the `ubuntu-base.qed` file
 it’s stored in is only 11 GB, since it’s mostly unused.) Also,
-whatever QEMU’s default memory size is, it’s too small, and Ubuntu’s
+whatever QEMU’s default memory size is [128MiB], it’s too small, and Ubuntu’s
 installer “reported” this fact by displaying a blank text-mode screen
 with a blinking cursor and never doing anything else; `-m 2G` or
 something is needed.
@@ -123,23 +123,32 @@ How about Mosh?
 Can I get QEMU to authenticate VNC connections?  It makes me uneasy to
 have them totally open inside the firewall.  (Apparently I can say
 `-vnc :2,password` and then set the password “using the
-“`set_password`” command in the `pcsys_monitor`.” and also apparently
+“`set_password`” command in the
+`[pcsys_monitor](https://www.qemu.org/docs/master/qemu-doc.html#pcsys_005fmonitor)`.”
+ — but I’m not sure how to get to the monitor; typing ^Ah does nothing — and
+also apparently
 `-vnc localhost:2` will only allow connections from localhost.)
 
 When connected to QEMU over VNC, can I access QEMU’s console to do
 things like tell it to shut down?
 
 Can QEMU snapshot the machine RAM state like VirtualBox does, so I can
-start new virtual machines without booting them?  `-loadvm` maybe?
+start new virtual machines without booting them?
+[`-loadvm` maybe?](https://www.qemu.org/docs/master/qemu-doc.html#vm_005fsnapshots)
 Bonus if there’s some way to do this in a copy-on-write way so that I
 can journal aggregated machine state changes out over a network for
 point-in-time recovery.  Even cooler would be if I could unfreeze from
 such a snapshot when an ssh connection came in.
 
-Can I get Ubuntu or Debian to boot in QEMU with KVM with `-nographic`?
+Can I get Ubuntu or Debian [to boot in QEMU with KVM with
+`-nographic`](https://askubuntu.com/questions/924913/how-to-get-to-the-grub-menu-at-boot-time-using-serial-console/1110209#1110209)?
 
-What’s the easiest way to do copy-paste in and out of QEMU?  Am I
-better off using spice or curses?
+What’s the easiest way to do copy-paste in and out of QEMU, when not
+using ssh?  Am I better off using
+[spice](https://wiki.archlinux.org/index.php/QEMU#SPICE) ([see
+also](https://www.linux-kvm.org/page/SPICE)) or curses?  [Apparently
+Spice makes it
+easier](https://askubuntu.com/questions/858649/how-can-i-copypaste-from-the-host-to-a-kvm-guest).
 
 Is my window manager really what’s at fault in the keyboard focus
 problem?
@@ -149,3 +158,11 @@ How insecure is KVM?
 How about accessing files on the guest’s filesystem?  There are
 `-fsdev` and `-virtfs` flags to QEMU, but I’m not sure what they do.
 
+Is QED really better than QCOW2?  I thought QED introduced the -b base
+image thing, but [apparently QCOW2 also supports
+it](https://askubuntu.com/questions/884534/how-to-run-ubuntu-desktop-on-qemu).
+Also apparently QCOW2 can use a non-QCOW2 image as the base.
+
+Is there an advantage to [kvm -M
+pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?
+The default is pc-i440fx-focal.
