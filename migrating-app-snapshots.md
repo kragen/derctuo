@@ -86,7 +86,7 @@ start snarfing the dirty pages into your tablet, the tablet might
 acquire a three-hour lease it renews every hour.  As long as it holds
 that lease, any attempt to check out the application state on another
 machine will fail, telling you to close it on your tablet first.  When
-you close the application on the tablet, it releases its lease, so it
+you close the application on the tablet, it releases its lease, so the lease
 terminates earlier than the three-hour deadline, which simply serves
 as a timeout to permit automatic recovery in case of device failure.
 
@@ -111,7 +111,7 @@ period of time as well, for which purpose you might want a longer
 lease, maybe a day or two up to a month or two.  This poses the
 problem of what happens if the device owning the checkout is lost,
 stolen, or broken; in such a case you will want to **steal** the lease,
-so any state on the device becomes orphaned and cannot be committed to
+so any state on the lost device becomes **orphaned** and cannot be committed to
 the original application image, though it can perhaps be committed as
 a new image that branched from the original.
 
