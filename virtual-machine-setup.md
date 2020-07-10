@@ -37,11 +37,15 @@ think may be a matter of using the obsolete and buggy window manager
 `wm2`; I worked around this by running QEMU with `-vnc :2`.  QEMU by
 default has no authentication on its VNC interface; rather than fixing
 this (there’s maybe an option to fix that?) I just packet-filtered VNC
+on the machine hosting QEMU
 and, for good measure, X-Windows too:
 
     iptables -A INPUT -s 127.0.0.0/24 -p tcp --dport 5900:6100 -j ACCEPT
     iptables -A INPUT -s 192.168.0.0/24 -p tcp --dport 5900:6100 -j ACCEPT
     iptables -A INPUT -p tcp --dport 5900:6100 -j REJECT
+
+(A little additional work was needed to get this to take effect at
+every boot.)
 
 To connect remotely to the server from outside its local network, I’m
 tunneling over `ssh`, which works pretty well:
@@ -86,11 +90,24 @@ while on the host machine it takes 619–641 ms.  However, the host
 machine has 12 CPUs with hyperthreading, thus 24 “CPUs”, while the
 QEMU-emulated machine has only a single virtual CPU.
 
+It turns out QEMU has an `-smp` flag that’s just off by default.
+Running `./dev0 -smp 12` and building
+[Yeso](https://gitlab.com/kragen/bubbleos/tree/master/yeso) with
+`make` takes 9.6–10.0 seconds.  `make -j 12`, to run up to 12
+compilation processes in parallel when possible, takes 2.0–2.2
+seconds; that’s almost a 5× speedup.  On the host machine, the
+corresponding numbers are 7.4–8.4 seconds and 1.41–1.45 seconds,
+suggesting that QEMU’s overhead for system things like file I/O and
+process management is more like 30%.  And on the host machine `make -j
+30` is even faster, at 1.35–1.40 seconds, but unsurprisingly provides
+no additional speedup on the 12-CPU virtual machine.
+
 Over my high-latency internet connection to the server, graphical user
 interfaces are a bit slow, perhaps in part because of bandwidth
 limits.  However, browsers typically load pages a lot faster; they’re
 just slower to scroll.  It might be worthwhile trying XPra or Spice to
-see if I can get faster screen updates.
+see if I can get faster screen updates, or just using ssh and/or Mosh
+when possible.
 
 Unknowns to probe/things to try
 -------------------------------
@@ -119,20 +136,16 @@ can journal aggregated machine state changes out over a network for
 point-in-time recovery.  Even cooler would be if I could unfreeze from
 such a snapshot when an ssh connection came in.
 
-Is there a way to get QEMU or some other free-software virtualization
-system (VirtualBox?) to support SMP?  Other than, of course, running a
-cluster of virtual machines.  QEMU has a `-smp [cpus=]n` flag but I’m
-not clear on whether that will make it run faster; it should be an
-easy enough test, though.
-
 Can I get Ubuntu or Debian to boot in QEMU with KVM with `-nographic`?
 
 What’s the easiest way to do copy-paste in and out of QEMU?  Am I
 better off using spice or curses?
 
-Is my window manager really at fault in the keyboard focus problem?
+Is my window manager really what’s at fault in the keyboard focus
+problem?
 
 How insecure is KVM?
 
 How about accessing files on the guest’s filesystem?  There are
 `-fsdev` and `-virtfs` flags to QEMU, but I’m not sure what they do.
+
