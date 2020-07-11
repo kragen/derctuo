@@ -106,7 +106,10 @@ QCOW, QCOW2, and QED virtual disk formats:
     qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev1.qcow2
     chmod 444 ubuntu-base.qcow2
 
-And I wrote a script to launch virtual machines with these disk
+Now ubuntu-base.qcow2 is what Proxmox calls a “template”: you can’t
+start it but you can create and start clones of it.
+
+And I wrote a script to launch virtual machines with these cloned disk
 images:
 
     $ cat dev0
@@ -147,6 +150,54 @@ Interestingly, both QCOW2 and QED can use a file in a different format
 or even accessed over HTTP as the backing file, so I could put that
 base image (or the QED one) up on a web site and remotely lazily clone
 it!
+
+Recovering disk space used by deleted VM snapshots
+--------------------------------------------------
+
+After I used `savevm` a couple of times, `qemu-img` reported, at one
+point:
+
+    $ qemu-img info ubuntu-dev0.qcow2 
+    image: ubuntu-dev0.qcow2
+    file format: qcow2
+    virtual size: 32 GiB (34359738368 bytes)
+    disk size: 5.67 GiB
+    cluster_size: 65536
+    backing file: ubuntu-base.qcow2
+    Snapshot list:
+    ID        TAG                 VM SIZE                DATE       VM CLOCK
+    1         tetris1             1.5 GiB 2020-07-10 16:40:17   00:01:43.207
+    2         ready               1.5 GiB 2020-07-10 16:59:52   00:11:43.959
+    Format specific information:
+        compat: 1.1
+        lazy refcounts: false
+        refcount bits: 16
+        corrupt: false
+
+So it seems like the VM-state snapshots show up as disk-state
+snapshots.  I have deleted them:
+
+    qemu-img snapshot ubuntu-dev0.qcow2 -d tetris1
+    qemu-img snapshot ubuntu-dev0.qcow2 -d ready
+
+But this does not reduce the size of the QCOW2 file all the way back
+down; `du -h` and `qemu-img info` show that it's still occupying 3.9
+GB of real space, and its file size in `ls -lh` is still 5.7 GB (so
+it’s somewhat sparse).
+
+I thought maybe
+`qemu-img convert` might solve the problem, but it seems that
+`qemu-img convert` produces an image without a backing file — so it’s
+ten gigs.  It turns out that the way to avoid this is using `qemu-img
+rebase`, as explained in the qemu-img man page:
+
+    qemu-img create -b ubuntu-dev0.qcow2 -f qcow2 ubuntu-dev0-copy.qcow2 # 92 ms
+    qemu-img rebase -b ubuntu-base.qcow2 ubuntu-dev0-copy.qcow2  # 76773 ms
+
+This produces a 2.4-gigabyte copy which `qemu-img compare` reports is
+identical to `ubuntu-dev0.qcow2`.  (I'm not sure but I think I have
+about 2.4 GB of devtools stuff installed in this image, above and
+beyond what’s in the base image.)
 
 Results
 -------
@@ -196,42 +247,13 @@ to a particular point in the Tetris game I was playing.  Doing this
 bloats the .qcow2 file from 1 GB to 2.6 GB, presumably with a RAM
 image, and takes about 15 seconds, during which time the VM is paused,
 which is pretty disruptive.  Reloading from this image is, I think,
-faster than saving, but it still takes 15 seconds to repaint my screen
+faster than saving (or booting), but it still takes 15 seconds to repaint my screen
 over this slow internet connection.
 
 A lazy clone of a disk image (QCOW2 at least) doesn’t share the
-snapshots of its backing file.
-
-`qemu-img` reports at one point:
-
-    $ qemu-img info ubuntu-dev0.qcow2 
-    image: ubuntu-dev0.qcow2
-    file format: qcow2
-    virtual size: 32 GiB (34359738368 bytes)
-    disk size: 5.67 GiB
-    cluster_size: 65536
-    backing file: ubuntu-base.qcow2
-    Snapshot list:
-    ID        TAG                 VM SIZE                DATE       VM CLOCK
-    1         tetris1             1.5 GiB 2020-07-10 16:40:17   00:01:43.207
-    2         ready               1.5 GiB 2020-07-10 16:59:52   00:11:43.959
-    Format specific information:
-        compat: 1.1
-        lazy refcounts: false
-        refcount bits: 16
-        corrupt: false
-
-So it seems like the VM-state snapshots show up as disk-state
-snapshots.  I have deleted them:
-
-    qemu-img snapshot ubuntu-dev0.qcow2 -d tetris1
-    qemu-img snapshot ubuntu-dev0.qcow2 -d ready
-
-But this does not reduce the size of the QCOW2 file.  I thought maybe
-`qemu-img convert` might solve the problem, but it seems that
-`qemu-img convert` produces an image without a backing file — so it’s
-ten gigs.  I don’t know if maybe there’s a `convert` option to avoid
-this.
+snapshots of its backing file.  Presumably I could clone an
+already-booted virtual machine (with the booted state in a VM
+snapshot) by `cp foo.qcow2 bar.qcow2`.
 
 Unknowns to probe/things to try
 -------------------------------
@@ -275,4 +297,14 @@ Is there an advantage to [kvm -M
 pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?
 The default is pc-i440fx-focal.
 
-What do Bonnie++ and lmbench think?
+What do Bonnie++ and lmbench think?  Does using the virtio block
+controller instead of emulated IDE help?  [The Proxmox dox
+say](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#_emulated_devices_and_paravirtualized_devices):
+
+> It is highly recommended to use the virtio devices whenever you can,
+> as they provide a big performance improvement. Using the virtio
+> generic disk controller versus an emulated IDE controller will
+> double the sequential write throughput, as measured with
+> bonnie++(8). Using the virtio network interface can deliver up to
+> three times the throughput of an emulated Intel E1000 network card,
+> as measured with iperf(1). [1]
