@@ -151,6 +151,9 @@ it!
 Results
 -------
 
+So far everything seems reasonably okay except that screen redraws are
+painfully slow.
+
 In single-CPU user-level compute performance, QEMU with KVM seems to
 only cost on the order of 5%, if anything: `./fib 40` inside QEMU takes 632–663 ms,
 while on the host machine it takes 619–641 ms.  However, the host
@@ -218,6 +221,14 @@ snapshots of its backing file.
         refcount bits: 16
         corrupt: false
 
+So it seems like the VM-state snapshots show up as disk-state
+snapshots.  I have deleted them:
+
+    qemu-img snapshot ubuntu-dev0.qcow2 -d tetris1
+    qemu-img snapshot ubuntu-dev0.qcow2 -d ready
+
+But this does not reduce the size of the QCOW2 file.
+
 Unknowns to probe/things to try
 -------------------------------
 
@@ -261,3 +272,6 @@ pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?
 The default is pc-i440fx-focal.
 
 What do Bonnie++ and lmbench think?
+
+How do I eliminate those VM snapshots?  Can I do it without starting
+QEMU?
