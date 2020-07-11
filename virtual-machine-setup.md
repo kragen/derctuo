@@ -293,7 +293,9 @@ is reportedly using peaks of up to about 16 megabits per second.  My
 initial impression of XPra: *this is fucking awesome*.
 
 It might be more reasonable to run XPra within the guest instead of on
-the host (that way copy and paste would work, for example),
+the host (that way copy and paste would work, for example,
+and I wouldn’t be limited to the screen space of the virtual
+machine’s emulated graphics card),
 but this was an easier way to get started, and it allows me
 to handle the guest bootup process as well.
 
@@ -350,3 +352,9 @@ say](https://pve.proxmox.com/wiki/Qemu/KVM_Virtual_Machines#_emulated_devices_an
 > bonnie++(8). Using the virtio network interface can deliver up to
 > three times the throughput of an emulated Intel E1000 network card,
 > as measured with iperf(1). [1]
+
+Can I do KVM Inception, running QEMU with KVM inside of QEMU with KVM?
+I think the answer is yes, Android Studio says the answer is yes, for
+testing Android apps inside the virtual machine it would be extremely
+convenient for the answer to be yes, but kvm-ok in the virtual machine
+says no.
