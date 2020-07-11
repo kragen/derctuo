@@ -199,6 +199,25 @@ over this slow internet connection.
 A lazy clone of a disk image (QCOW2 at least) doesn’t share the
 snapshots of its backing file.
 
+`qemu-img` reports at one point:
+
+    $ qemu-img info ubuntu-dev0.qcow2 
+    image: ubuntu-dev0.qcow2
+    file format: qcow2
+    virtual size: 32 GiB (34359738368 bytes)
+    disk size: 5.67 GiB
+    cluster_size: 65536
+    backing file: ubuntu-base.qcow2
+    Snapshot list:
+    ID        TAG                 VM SIZE                DATE       VM CLOCK
+    1         tetris1             1.5 GiB 2020-07-10 16:40:17   00:01:43.207
+    2         ready               1.5 GiB 2020-07-10 16:59:52   00:11:43.959
+    Format specific information:
+        compat: 1.1
+        lazy refcounts: false
+        refcount bits: 16
+        corrupt: false
+
 Unknowns to probe/things to try
 -------------------------------
 
