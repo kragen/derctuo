@@ -16,12 +16,14 @@ upgrade, so you can roll it back if things go badly.  Other
 virtualization and paravirtualization systems have similar
 capabilities.  The simplest solution is just to use QEMU running under
 a popular system with good support; Ubuntu 20.04 is supported until
-2025, for example.  Then the “hypervisor” system can remain relatively
+2025, for example.  Then the “hypervisor” operating system
+installed on the physical hardware can remain relatively
 untouched by whatever development activities I’m doing, while the
 guests can evolve at will.
 
 It would also be nice to be able to use a sandbox with some chance of
-containing potential attacks.
+containing potential attacks to a single more or less disposable
+virtual machine.
 
 Also, there are some experiments I’ve been wanting to try for a while
 [involving incremental snapshots of virtual
@@ -40,10 +42,11 @@ default in Ubuntu 20.04’s kernel and present in the CPU, which
 I was having a hard time setting up Debian inside QEMU, so I snarfed
 the Ubuntu install ISO (SHA256
 e5b72e9cfe20988991c9cd87bde43c0b691e3b67b01f76d23f8150615883ce11)
-instead.
+instead.  This is a reconstruction of what would have had the right
+effect (I mistakenly used QED instead; see “Escaping QED” below):
 
-    qemu-img create -f qed ubuntu-base.qed 32G
-    kvm -hda ubuntu-base.qed -cdrom Downloads/ubuntu-20.04-desktop-amd64.iso -m 2G
+    qemu-img create -f qcow2 ubuntu-base.qcow2 32G
+    kvm -hda ubuntu-base.qcow2 -cdrom Downloads/ubuntu-20.04-desktop-amd64.iso -m 2G
 
 `kvm` is the command installed by the `qemu-kvm` package which is just
 equivalent to `qemu-system-x86_64 -enable-kvm`.  (Older versions of
@@ -51,10 +54,10 @@ equivalent to `qemu-system-x86_64 -enable-kvm`.  (Older versions of
 still more convenient to invoke it this way.)
 
 At first I made the mistake of making the disk too small; Ubuntu 20.04
-claims to need at least 8.6 GB to install, and in fact used 11 GB.
-(The QED format, added in recent QEMU versions, is allocate-on-write,
-so even though the virtual disk is 32 GB, the `ubuntu-base.qed` file
-it’s stored in is only 11 GB, since it’s mostly unused.) Also,
+claims to need at least 8.6 GB to install, and in fact used 8.8 GB.
+(The QCOW2 format is allocate-on-write,
+so even though the virtual disk is 32 GB, the `ubuntu-base.qcow2` file
+it’s stored in is only 8.8 GB, since it’s mostly unused.) Also,
 QEMU’s default memory size turns out to be 128MiB, which is too small, and Ubuntu’s
 installer “reported” this fact by displaying a blank text-mode screen
 with a blinking cursor and never doing anything else; `-m 2G` or
@@ -64,7 +67,7 @@ At first I was having trouble with keyboard focus in QEMU, which I
 think may be a matter of using the obsolete and buggy window manager
 `wm2`; I worked around this by running QEMU with `-vnc :2`.  QEMU by
 default has no authentication on its VNC interface; rather than fixing
-this (there’s maybe an option to fix that?) I just packet-filtered VNC
+this (see below about the options to fix that) I just packet-filtered VNC
 on the machine hosting QEMU
 and, for good measure, X-Windows too:
 
@@ -74,6 +77,11 @@ and, for good measure, X-Windows too:
 
 (A little additional work was needed to get this to take effect at
 every boot.)
+
+This is a little dodgy given that network traffic from the virtual
+machine itself appears to come from localhost, since it’s using the
+`user` networking type (Slirp), so different virtual machines have
+free rein to connect to VNC and X servers.
 
 To connect remotely to the server from outside its local network, I’m
 tunneling over `ssh`, which works pretty well:
@@ -88,48 +96,52 @@ server come from localhost.
 Once I had Ubuntu installed, I could run the virtual machine without
 the CD-ROM:
 
-    kvm -hda ubuntu-base.qed -m 2G
+    kvm -hda ubuntu-base.qcow2 -m 2G
 
 But rather than running directly from there, I used it as a base for
-cloning further copy-on-write disk images, which is a feature of QED:
+cloning further copy-on-write disk images, which is a feature of the
+QCOW, QCOW2, and QED virtual disk formats:
 
-    qemu-img create -b ubuntu-base.qed -f qed ubuntu-dev0.qed
-    qemu-img create -b ubuntu-base.qed -f qed ubuntu-dev1.qed
-    chmod 444 ubuntu-base.qed
+    qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev0.qcow2
+    qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev1.qcow2
+    chmod 444 ubuntu-base.qcow2
 
 And I wrote a script to launch virtual machines with these disk
 images:
 
     $ cat dev0
     #!/bin/sh
-    kvm -hda ubuntu-dev0.qed -m 2G "$@"
+    kvm -hda ubuntu-dev0.qcow2 -smp 12 -m 2G "$@"
 
 This approach allows me to clone new virgin virtual disks at a cost of
 some 320 kB (plus whatever is used thereafter, typically tens of
-megabytes to gigabytes) and 10–11 milliseconds.  That way I won’t have
+megabytes to gigabytes) and 250 milliseconds.  That way I won’t have
 to install Ubuntu again.
 
 Escaping QED
 ------------
 
-I should not have used QED --- I misunderstood the documentation, and
-it’s a deprecated format; attempting to fix:
+Initially I used the deprecated disk image format QED (`-f qed`)
+because I misunderstood the QEMU documentation to be saying that it
+had some extra features; to fix it, I did this:
 
     qemu-img convert ubuntu-base.qed -O qcow2 ubuntu-base.qcow2
 
-This took 4-6 minutes and shrank the file to 8.8 GB.  Now of course I
-need to test the resulting environment and recreate the dev branch.
+This took 4-6 minutes and shrank the file to 8.8 GB.  Then I 
+needed to recreate the dev child image and reinstall the things
+that I had installed in it previously.
 
 Making a backed QCOW2 image is actually significantly slower than doing it with QED,
 but not enough to matter for my
-purposes:
+purposes; doing this with QED took 10–11 milliseconds:
 
     $ time qemu-img create -b ubuntu-base.qcow2 -f qcow2 ubuntu-dev0.qcow2
     Formatting 'ubuntu-dev0.qcow2', fmt=qcow2 size=34359738368 backing_file=ubuntu-base.qcow2 cluster_size=65536 lazy_refcounts=off refcount_bits=16
 
     real    0m0.244s
 
-The resulting derived file is only 197kB.
+The resulting derived file is only 197kB; after spending ten minutes
+installing stuff in it, it’s 1 GB.
 
 Interestingly, both QCOW2 and QED can use a file in a different format
 or even accessed over HTTP as the backing file, so I could put that
@@ -140,17 +152,18 @@ Results
 -------
 
 In single-CPU user-level compute performance, QEMU with KVM seems to
-only cost on the order of 5%: `./fib 40` inside QEMU takes 660–663 ms,
+only cost on the order of 5%, if anything: `./fib 40` inside QEMU takes 632–663 ms,
 while on the host machine it takes 619–641 ms.  However, the host
 machine has 12 CPUs with hyperthreading, thus 24 “CPUs”, while the
-QEMU-emulated machine has only a single virtual CPU.
+QEMU-emulated machine initially had only a single virtual CPU.
 
 It turns out QEMU has an `-smp` flag that’s just off by default.
-Running `./dev0 -smp 12` and building
+Running `./dev0 -smp 12` (or later adding `-smp 12` in the `dev0`
+script) and building
 [Yeso](https://gitlab.com/kragen/bubbleos/tree/master/yeso) with
-`make` takes 9.6–10.0 seconds.  `make -j 12`, to run up to 12
-compilation processes in parallel when possible, takes 2.0–2.2
-seconds; that’s almost a 5× speedup.  On the host machine, the
+`make` takes 9.3–10.2 seconds.  `make -j 12`, to run up to 12
+compilation processes in parallel when possible, takes 1.8–2.2
+seconds; that’s more than a 5× speedup.  On the host machine, the
 corresponding numbers are 7.4–8.4 seconds and 1.41–1.45 seconds,
 suggesting that QEMU’s overhead for system things like file I/O and
 process management is more like 30%.  And on the host machine `make -j
@@ -159,43 +172,51 @@ no additional speedup on the 12-CPU virtual machine.
 
 Over my high-latency internet connection to the server, graphical user
 interfaces are a bit slow, perhaps in part because of bandwidth
-limits.  However, browsers typically load pages a lot faster; they’re
+limits; repainting a full 1024×768 virtual screen takes 5–15 seconds.
+However, browsers typically load pages a lot faster; they’re
 just slower to scroll.  It might be worthwhile trying XPra or Spice to
 see if I can get faster screen updates, or just using ssh and/or Mosh
 when possible.
+
+Running with `-vnc :1` I can get a console in my terminal window with
+`-monitor stdio`.  This is apparently how to use the `set_password`
+command to require a password on the VNC server (required with `-vnc
+:1,password` supposedly).  (SASL is also an authentication option.)
+Also apparently `-vnc localhost:1` would also only allow connections
+from localhost, though without any real authentication.
+
+By using [`savevm
+tetris1`](https://www.qemu.org/docs/master/qemu-doc.html#vm_005fsnapshots)
+at the monitor prompt `(qemu) ` I can save a virtual machine image
+that I can later revive with `kvm ... -loadvm tetris1`, thus returning
+to a particular point in the Tetris game I was playing.  Doing this
+bloats the .qcow2 file from 1 GB to 2.6 GB, presumably with a RAM
+image, and takes about 15 seconds, during which time the VM is paused,
+which is pretty disruptive.  Reloading from this image is, I think,
+faster than saving, but it still takes 15 seconds to repaint my screen
+over this slow internet connection.
+
+A lazy clone of a disk image (QCOW2 at least) doesn’t share the
+snapshots of its backing file.
 
 Unknowns to probe/things to try
 -------------------------------
 
 What’s the most reasonable way to enable ssh into these virtual
 machines?  I’d need to disable password authentication and do some
-kind of port forwarding; I forget how QEMU does its networking.  (I
-think by default it uses Slirp but can alternatively use TUN/TAP or
-L2TPv3?)  There used to be a `-redir tcp:2222::22` option that looks
+kind of port forwarding.
+By default QEMU does its networking with Slirp,
+but it can alternatively use TUN/TAP or
+L2TPv3.  There used to be a `-redir tcp:2222::22` option that looks
 like it will work, which I think is now spelled `-net
 user,hostfwd=tcp::2222-:22`.
 
 How about Mosh?
 
-Can I get QEMU to authenticate VNC connections?  It makes me uneasy to
-have them totally open inside the firewall.  (Apparently I can say
-`-vnc :2,password` and then set the password “using the
-“`set_password`” command in the
-`[pcsys_monitor](https://www.qemu.org/docs/master/qemu-doc.html#pcsys_005fmonitor)`.”
- — but I’m not sure how to get to the monitor (maybe -monitor stdio or -mon stdio?);
-typing ^Ah does nothing — and
-also apparently
-`-vnc localhost:2` will only allow connections from localhost.)
-
-When connected to QEMU over VNC, can I access QEMU’s console to do
-things like tell it to shut down?
-
-Can QEMU snapshot the machine RAM state like VirtualBox does, so I can
-start new virtual machines without booting them?
-[`-loadvm` maybe?](https://www.qemu.org/docs/master/qemu-doc.html#vm_005fsnapshots)
-Bonus if there’s some way to do this in a copy-on-write way so that I
+Is there some way to save VM state snapshots
+in a copy-on-write way so that I
 can journal aggregated machine state changes out over a network for
-point-in-time recovery.  Even cooler would be if I could unfreeze from
+point-in-time recovery?  Even cooler would be if I could unfreeze from
 such a snapshot when an ssh connection came in.
 
 Can I get Ubuntu or Debian [to boot in QEMU with KVM with
@@ -219,3 +240,5 @@ How about accessing files on the guest’s filesystem?  There are
 Is there an advantage to [kvm -M
 pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?
 The default is pc-i440fx-focal.
+
+What do Bonnie++ and lmbench think?

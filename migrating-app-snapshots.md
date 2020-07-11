@@ -199,9 +199,10 @@ QEMU's CLI has "stop", "cont", "savevm" and "loadvm" commands that
 might be a sufficient hook to implement such a system, reducing the
 problem to a problem of synchronizing qcow2 images (or, possibly,
 snapshots thereof).  QEMU also has a live migration feature (I don't
-know how this works) and the ability to create a "copy-on-read" image
-with a remote "backing file", which is awfully similar to the features
-described above.
+know how this works) and the ability to create a “copy-on-read” image
+with a remote “backing file”, which is awfully similar to the features
+described above; however, VM snapshotted states from the backing file
+are not available in the derived image.
 
 QEMU now has a machine type called "microvm" intended for booting
 single-application virtual machines.
@@ -218,6 +219,6 @@ more manageable than entire Linux installations.
 Docker of course is commonly used for running single (server)
 applications in an isolated environment, and it extensively uses
 copy-on-write to keep its disk space usage somewhat manageable.  A
-typical Docker image using Alpine Linux might be 700 MB.  (I thought
+typical Docker image using Alpine Linux might be 700 MB, five minutes.  (I thought
 it was a lot smaller, but the ones I have here are that big.)  It
 would be interesting to try replicating Docker instances around.
