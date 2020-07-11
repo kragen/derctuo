@@ -293,7 +293,8 @@ is reportedly using peaks of up to about 16 megabits per second.  My
 initial impression of XPra: *this is fucking awesome*.
 
 It might be more reasonable to run XPra within the guest instead of on
-the host, but this was an easier way to get started, and it allows me
+the host (that way copy and paste would work, for example),
+but this was an easier way to get started, and it allows me
 to handle the guest bootup process as well.
 
 Unknowns to probe/things to try
