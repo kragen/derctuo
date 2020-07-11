@@ -1,4 +1,4 @@
-I set up a virtual machine today using the virtual-machine emulator
+I set up a virtual machine this week using the virtual-machine emulator
 QEMU with KVM under Ubuntu 20.04.
 
 Objectives
@@ -254,6 +254,47 @@ A lazy clone of a disk image (QCOW2 at least) doesn’t share the
 snapshots of its backing file.  Presumably I could clone an
 already-booted virtual machine (with the booted state in a VM
 snapshot) by `cp foo.qcow2 bar.qcow2`.
+
+XPra
+----
+
+I decided to try XPra to see if I could get a more usable remote
+display for graphical things than VNC, which was too slow.  On my
+outdated Linux Mint laptop, I installed XPra 0.15.8 (from 2015):
+
+    sudo apt install xpra python-rencode python3-rencode python-gtkglext1
+
+The last three of which were because Xpra complained about missing
+Python libraries; I think probably python3-rencode was unnecessary,
+since XPra on this laptop is running in Python 2.  On the Ubuntu 20.04
+server, I installed XPra 3.0.6:
+
+    sudo apt install xpra
+
+Then I was able to launch a remote xterm displaying on my local
+display via
+
+    xpra start ssh:serverhost --start=xterm --remote-xpra=xpra
+
+and later reattach to the session containing the xterm with
+
+    xpra attach ssh:serverhost --remote-xpra=xpra
+
+Within the xterm I could then run
+
+    ./dev0
+
+in order to launch the QEMU KVM virtual machine as described
+previously.
+
+There’s still highly noticeable lag, but it seems dramatically more
+usable than VNC.  And VNC had more trouble with my keymapping.  XPra
+is reportedly using peaks of up to about 16 megabits per second.  My
+initial impression of XPra: *this is fucking awesome*.
+
+It might be more reasonable to run XPra within the guest instead of on
+the host, but this was an easier way to get started, and it allows me
+to handle the guest bootup process as well.
 
 Unknowns to probe/things to try
 -------------------------------
