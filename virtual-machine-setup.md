@@ -227,7 +227,11 @@ snapshots.  I have deleted them:
     qemu-img snapshot ubuntu-dev0.qcow2 -d tetris1
     qemu-img snapshot ubuntu-dev0.qcow2 -d ready
 
-But this does not reduce the size of the QCOW2 file.
+But this does not reduce the size of the QCOW2 file.  I thought maybe
+`qemu-img convert` might solve the problem, but it seems that
+`qemu-img convert` produces an image without a backing file — so it’s
+ten gigs.  I don’t know if maybe there’s a `convert` option to avoid
+this.
 
 Unknowns to probe/things to try
 -------------------------------
@@ -272,6 +276,3 @@ pc-q35-focal](https://discourse.ubuntu.com/t/virtualization-qemu/11523)?
 The default is pc-i440fx-focal.
 
 What do Bonnie++ and lmbench think?
-
-How do I eliminate those VM snapshots?  Can I do it without starting
-QEMU?
