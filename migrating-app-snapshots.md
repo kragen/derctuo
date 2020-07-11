@@ -192,6 +192,18 @@ have inserted arbitrary malicious code into the imge.  In theory a
 defender might be able to detect this, but in practice probably would
 not.
 
+In the form described above, the application state is also entirely
+vulnerable to the server; a malicious server can steal information and
+make arbitrary modifications to it.  If you were willing to give up
+the possibility of executing applications on the server, you could
+reduce this vulnerability to some extent by signing and encrypting the
+application state on the clients, perhaps even limiting the server’s
+powers to mere denials of service; you’d have to be careful about
+replay attacks, and it might not be possible to stop them entirely,
+and of course the amount and pattern of encrypted data blocks read and
+written might provide a malicious server with access to information we
+would prefer to conceal from it.
+
 Concrete implementation approaches
 ----------------------------------
 
