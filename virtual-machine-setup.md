@@ -114,7 +114,7 @@ images:
     kvm -hda ubuntu-dev0.qcow2 -smp 12 -m 2G "$@"
 
 This approach allows me to clone new virgin virtual disks at a cost of
-some 320 kB (plus whatever is used thereafter, typically tens of
+some 200 kB (plus whatever is used thereafter, typically tens of
 megabytes to gigabytes) and 250 milliseconds.  That way I won’t have
 to install Ubuntu again.
 
