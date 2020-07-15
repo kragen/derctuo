@@ -262,12 +262,19 @@ I decided to try XPra to see if I could get a more usable remote
 display for graphical things than VNC, which was too slow.  On my
 outdated Linux Mint laptop, I installed XPra 0.15.8 (from 2015):
 
-    sudo apt install xpra python-rencode python3-rencode python-gtkglext1
+    sudo apt install xpra python-rencode python-gtkglext1
 
-The last three of which were because Xpra complained about missing
-Python libraries; I think probably python3-rencode was unnecessary,
-since XPra on this laptop is running in Python 2.  On the Ubuntu 20.04
-server, I installed XPra 3.0.6:
+I installed the last two packages listed because, without them, though
+XPra worked, it complained as follows about missing Python libraries:
+
+    2020-07-14 21:28:33,437 rencode import error: No module named rencode
+    2020-07-14 21:28:33,987 Warning: 'rencode' packet encoder not found
+    2020-07-14 21:28:33,988  the other packet encoders are much slower
+    2020-07-14 21:28:33,988 xpra gtk2 client version 0.15.8 (r11211)
+    2020-07-14 21:28:34,044 OpenGL support could not be enabled:
+    2020-07-14 21:28:34,044  cannot import name gdkgl
+
+On the Ubuntu 20.04 server, I installed XPra 3.0.6:
 
     sudo apt install xpra
 
@@ -287,6 +294,15 @@ Within the xterm I could then run
 in order to launch the QEMU KVM virtual machine as described
 previously.
 
+Without the `--remote-xpra=xpra` option, I was getting failures with
+this error:
+
+    bash: /home/user/.xpra/run-xpra: No such file or directory
+    2020-07-14 21:31:30,499 failed to receive anything, not an xpra server?
+    2020-07-14 21:31:30,500   could also be the wrong username, password or port
+    2020-07-14 21:31:30,500   or maybe this server does not support 'unknown' compression or 'bencode' packet encoding?
+    2020-07-14 21:31:30,500 Connection lost
+
 There’s still highly noticeable lag, but it seems dramatically more
 usable than VNC.  And VNC had more trouble with my keymapping.  XPra
 is reportedly using peaks of up to about 16 megabits per second.  My
@@ -298,6 +314,17 @@ and I wouldn’t be limited to the screen space of the virtual
 machine’s emulated graphics card),
 but this was an easier way to get started, and it allows me
 to handle the guest bootup process as well.
+
+With this combination of XPra versions, I do get this error message,
+but everything graphical except setting cursors seems to work:
+
+    2020-07-14 21:27:06,962 error creating cursor: object of type 'int' has no len() (using default)
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/dist-packages/xpra/client/gtk_base/gtk_client_base.py", line 329, in set_windows_cursor
+        cursor = self.make_cursor(cursor_data)
+      File "/usr/lib/python2.7/dist-packages/xpra/client/gtk_base/gtk_client_base.py", line 359, in make_cursor
+        if len(pixels)<w*h*4:
+    TypeError: object of type 'int' has no len()
 
 Unknowns to probe/things to try
 -------------------------------
