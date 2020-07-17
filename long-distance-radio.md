@@ -16,10 +16,12 @@ one bit per second.
 [1]: https://en.wikipedia.org/wiki/QRP_operation
 
 So I think that it's possible to build infrastructure that permits
-global data communication at megabits per second when the ionosphere
-is favorable, without emitting a noticeable amount of radio
+global data communication at hundreds of kilobits per second when the
+ionosphere is favorable, without emitting a noticeable amount of radio
 interference, and without requiring more power than is easily
-available by energy harvesting.
+available by energy harvesting.  A global network of phased arrays can
+speak ultrawideband MF and HF to each other, but ultrawideband at
+higher frequencies internally and to nearby mobile radios.
 
 Power levels
 ------------
@@ -49,8 +51,12 @@ think, up to 1 watt.)
 [GMRS]: https://en.wikipedia.org/wiki/GMRS
 
 Handheld ferrite loopstick antennas are capable of transmitting and
-receiving MF signals like those used for AM radio, but their
-efficiency is fairly low.
+receiving MF signals like those used for AM radio, but their antenna
+efficiency is fairly low.  A better approach is to use higher
+frequencies to connect handheld devices to large, fixed infrastructure
+like a long-distance phased array, which then handles the long-range
+communication.  Still, these short-range links might be able to reach
+many kilometers.
 
 GPS
 ---
@@ -117,7 +123,7 @@ audible.  Presumably this waveform still retains the time-domain
 precision deriving from its >1MHz bandwidth.
 
 A more effective way to reduce interference might be simply spreading
-over a wider bandwidth by using shorter pulses.
+the signal over a wider bandwidth by using shorter pulses.
 
 Phased-array transceivers
 -------------------------
@@ -188,6 +194,10 @@ modest -23 dB, although of course that's not the attenuation from the
 transmitter; it's the attenuation from the open spaces in the tens of
 meters between the transmitters to the place a quarter of the way
 around the world.
+
+It might be necessary to confine the beam to a narrower horizontal
+angle than 6 degrees to compensate for the unavoidable vertical
+spread.
 
 Energy harvesting
 -----------------
