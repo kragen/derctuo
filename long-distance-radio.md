@@ -10,16 +10,17 @@ Due to skywave propagation, hams using MF and HF radio routinely
 watt][1] (there's a "thousand-miles-per-watt" award);
 under exceptional conditions, transmissions of 1000 km on 1 mW
 of transmitted power have been reported.  Typical transmission modes
-include (very slow) CW and the WSJT modes, many of which are around
+include (very slow "QRSS") CW and the WSJT modes, many of which are around
 one bit per second.
 
 [1]: https://en.wikipedia.org/wiki/QRP_operation
 
-So I think that it's possible to build infrastructure that permits
+So now I see how to build infrastructure that permits
 global data communication at hundreds of kilobits per second when the
 ionosphere is favorable, without emitting a noticeable amount of radio
 interference, and without requiring more power than is easily
-available by energy harvesting.  A global network of phased arrays can
+available by energy harvesting.  A global network of low-power
+kilometer-scale phased arrays can
 speak ultrawideband MF and HF to each other, but ultrawideband at
 higher frequencies internally and to nearby mobile radios.
 
@@ -30,14 +31,16 @@ A Wi-Fi card might emit 200 milliwatts, although
 the little FM radio transmitters you might plug into your MP3 player,
 legal since 2006 in the EU and longer in the US and Canada, are only
 about a microwatt, 10 nW in the US, 50 nW in the UK, 25 microwatts in
-Japan.  [The US allows 100 mW unlicensed AM radio transmitters][3], so
-I think 10 milliwatts per transmitter site ought to be reasonable,
+Japan.  [The US allows 100 mW unlicensed narrowband AM radio transmitters][3], so
+I think 10 milliwatts per transmitter site ought to be reasonable.
 
 [3]: https://en.wikipedia.org/wiki/DBm
 
+In a memory-holed YouTube video,
 Naomi Wu recently reviewed the Ulefone Armor 3WT FRS cellphone, which
-includes a 2W FRS walkie-talkie, on a memory-holed YouTube video.  She
-reports that in Shenzhen she can get several blocks of range.  FRS and
+includes a 2W FRS walkie-talkie.  She
+reports that in Shenzhen she can get several blocks of range, which is to say,
+several hundred meters.  FRS and
 GMRS radios commonly transmit at such powers; [GMRS] is permitted up
 to 50 watts, though WP says 1-5 watts is more common in practice, and
 FRS in the US was limited to 500 mW until 2017; FRS commonly gets a
@@ -52,11 +55,21 @@ think, up to 1 watt.)
 
 Handheld ferrite loopstick antennas are capable of transmitting and
 receiving MF signals like those used for AM radio, but their antenna
-efficiency is fairly low.  A better approach is to use higher
+efficiency is fairly low.  A better approach
+for mobile stations is probably to use higher
 frequencies to connect handheld devices to large, fixed infrastructure
 like a long-distance phased array, which then handles the long-range
 communication.  Still, these short-range links might be able to reach
-many kilometers.
+many kilometers.  (LoRa at 915 MHz can reach 10 km in rural areas,
+though fewer km in cities; one-watt GSM cellphones can talk to a base
+station 35 km away, and a "timing advance limit" has been hacked into
+some GSM equipment to extend that range further.)
+
+A handheld device is inevitably a point source of interference, with
+the unavoidable inverse-square interference pattern that implies.  A
+kilometer-scale phased array is, by contrast, a diffuse source, so it
+can emit at a much higher power before it starts to become a nuisance
+to neighbors.
 
 GPS
 ---
@@ -79,9 +92,11 @@ conventionally used.  A commercial AM radio station, for example,
 might transmit at 10 to 100 kW over a bandwidth of 20 kHz, on the
 order of 1 W/Hz.  A 10mW impulse radio whose pulses are evenly spread
 across the whole medium-wave AM broadcast band from 526.5 kHz to
-1606.5 kHz would average 9 nW/Hz, five or six orders of magnitude
+1606.5 kHz would average 9 nW/Hz, eight orders of magnitude
 quieter, easily below the noise floor, although it might become
-(faintly) audible if it were 30 dB higher in a particular direction.
+(faintly) audible if it were 30 dB higher in a particular compass
+direction because of (see below) phased-array directional
+transmission.
 
 This 1080 kHz bandwidth gives a temporal precision of about a
 microsecond, suggesting a few hundred kilobits per second of possible
@@ -100,7 +115,7 @@ their bandwidth may be 10 kHz.
 it's in the 87-105 MHz range, where there's no significant ionosphere
 propagation.)
 
-### Chirping ###
+### Chirping and wider bands ###
 
 Chirping the transmitted pulses, like LoRa or chirped radar, would
 avoid the need for high peak-to-average power ratios that might
@@ -123,7 +138,13 @@ audible.  Presumably this waveform still retains the time-domain
 precision deriving from its >1MHz bandwidth.
 
 A more effective way to reduce interference might be simply spreading
-the signal over a wider bandwidth by using shorter pulses.
+the signal over a wider bandwidth by using shorter pulses.  If the
+pulses were 30 ns instead of 1000 ns, for example, going up to 33 MHz
+instead of 1.5 MHz, you'd have 15 dB
+less power in any given station's 20 kHz band, 0.3 nW/Hz, about 95 dB
+quieter than AM broadcasters --- 63 dB because of transmitting at
+63 dB lower power, plus 32 dB because it's spread across 17000 times
+as much bandwidth.
 
 Phased-array transceivers
 -------------------------
@@ -286,4 +307,39 @@ Encoding
 Of course you want to use error-correction coding so that no one pulse
 is strong enough to be received clearly at the destination; you want
 the pulses to be tens of dB below the noise floor so that substantial
-coding gain is needed to detect them even near the source.
+coding gain is needed to detect them, even near the source.  The best
+way to ensure non-interference is non-detectability.
+
+Estimating potential results at 1-100 megabaud
+----------------------------------------------
+
+It's already commonplace for QRP hams to reach 1 bit per second
+transmitting 1000 km on 1 watt.  Conservatively, phased-array
+transmission should buy you 20 dB, while phased-array reception should
+buy you another 20 dB.  Supposing that those hams are not in the
+bandwidth-limited regime of the Shannon limit, using ultrawideband may
+not buy you any extra bandwidth, just keep you from slamming into a
+narrowband bandwidth ceiling.  1000 transmitters at 10 mW each works
+out to 10 watts rather than 1 watt, giving you another 10 dB, for a
+total of 50 dB, or 100 kilobaud, per phased-array-to-phased-array
+link.  If you can talk to ten phased arrays at once, that should give
+you a megabaud.  But if the phased arrays miraculously work out to buy
+you 30 dB instead of 20, you'd have 100 megabaud.
+
+Alternative communication media
+-------------------------------
+
+Earth-moon-earth or "moonbounce" communication is already commonplace
+among hams and sometimes is high enough bandwidth to hold voice
+conversations over.  Doing the equivalent using passive MEO satellites
+would require more precise and dynamic tracking, to the point that
+it's probably only practical at microwave frequencies, but would
+suffer the d<sup>4</sup> loss of the moonbounce path over a much
+shorter distance, and still would cover most of a terrestrial
+hemisphere.  LEO satellites have an even shorter path loss and larger
+cross-section, but only cover a thousand km or so.  Meteor-trail
+communication is an existing well-known technique for high-bandwidth
+opportunistic communication at a similar range.  And the ocean's SOFAR
+channel, though it has only a few kHz of bandwidth, has better
+attenuation characteristics, more consistency, and lower noise than
+the ionosphere route.
