@@ -74,7 +74,9 @@ but modern carbide tools can cut steel pretty well dry.
 I've previously written about geometric-optics sparkle feedback, where
 a sparkle pattern from sparkle glued to a rigid body indicates
 simultaneously its position and attitude to a camera at a known
-location with a point-source light at a known location.
+location with a point-source light at a known location.  Combined with
+a reference mask that obscures some of the sparkles, this should be
+capable of giving relatively precise feedback, 
 
 sparkle feedback
 
