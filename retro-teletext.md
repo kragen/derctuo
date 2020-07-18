@@ -157,6 +157,17 @@ to whoever else was in your group, though, would have been doable in
 the analog domain.  Per-character color would, I think, have been a
 poor tradeoff, but maybe per-line color would have been adequate.
 
+A light pen would have needed only about microsecond resolution to
+identify a given letter on the display, but it isn't entirely clear
+how it would go about transmitting this information over a regular
+phone line.  If there was a way to feed it the front and back porches
+from the NTSC signal, there might be some hope, but otherwise it seems
+like whatever internal timing reference it had would drift hopelessly.
+(This was before the quartz watch revolution.)  Encoding its position
+in a pair of audible tones would not be unreasonable.  Nowadays, of
+course, the whole prospect is hopeless with LCD panels.  A
+tone-generating mouse, however, would be entirely usable.
+
 You could probably build something like this today with an ATMega328
 (about 20 times the speed of a Nova but with only 8 KiB of RAM) and
 the Arduino TVout library for a group of five displays.  You could use
