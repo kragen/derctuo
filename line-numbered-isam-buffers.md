@@ -81,6 +81,15 @@ Why ISAM rather than just a doubly-linked-list piece table?  You could
 include memory pointers to the pieces in the marker objects instead of
 ISAM keys.  Inserting and deleting into a doubly-linked list is easy;
 you have to update all the markers concerned, but that is true with
-ISAM as well.  So what is the advantage of ISAM here?
+ISAM as well.  And ISAM adds a logarithmic slowdown to the
+jump-to-a-marker operation, which would instead be constant-time with
+pointers to pieces.  So is there any advantage of ISAM here?
 
-FP-persistence maybe?
+FP-persistence maybe?  Ropes are "persistent" in the FP sense: a
+reference to a rope refers to a given state of that rope, so an undo
+history can be implemented simply as a list of pointers to ropes that
+share structure.  You can implement ISAM in an FP-persistent way, and
+if the references from the buffer blocks to the markers are indirected
+through an FP-persistent dictionary data structure (whether some
+variant of ISAM or just a hash table) then the whole buffer structure
+can be FP-persistent.
