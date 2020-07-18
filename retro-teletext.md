@@ -60,7 +60,10 @@ This reduces our screen-painting memory requirements to:
 - 32 40x12 buffers for the 7-bit characters on each screen, for a
   total of 107520 bits of RAM;
 - some registers for which TV was viewing which of the 32 "channels"
-  and where the cursors are and so forth.
+  and where the cursors are and so forth.  A hardware base-address
+  register for the screen buffer might be useful for quick scrolling
+  and quick page-flipping, at least if the page you want to flip to is
+  already in video RAM.
 
 The ROMs and RAMs need to be read very quickly while painting the
 screen.  An NTSC frame is 33.37 milliseconds, so each scan line is 64
@@ -68,6 +71,10 @@ microseconds, so each of the 200 pixels across the screen is 318 ns.
 However, we can transfer five pixels at a time from the ROM, so we
 have 1.59 microseconds to do it, and we can pipeline that with the
 following read from the RAM.
+
+40x12 is close to the 40x24 the failed 1979 Prestel system delivered
+in England, nearly a decade later, but with color, using a set-top
+box.
 
 This works out to 210 bits of ROM and 840 bits of RAM for each of the
 128 concurrent users, or 840 bits of ROM and 3360 bits of RAM for each
@@ -147,4 +154,14 @@ Suppose you wanted to make it actually cool?  Square-wave music like
 the IBM PC wouldn't have been hard to add, but recording and playing
 back PCM was probably not in the cards.  Broadcasting your phone voice
 to whoever else was in your group, though, would have been doable in
-the analog domain.  Color would, I think, have been a poor tradeoff.
+the analog domain.  Per-character color would, I think, have been a
+poor tradeoff, but maybe per-line color would have been adequate.
+
+You could probably build something like this today with an ATMega328
+(about 20 times the speed of a Nova but with only 8 KiB of RAM) and
+the Arduino TVout library for a group of five displays.  You could use
+an analog demultiplexer chip and some 10MHz op-amps as buffers to put
+each line onto the right output video signal, and probably bitbang the
+PS/2 protocol on five keyboards, although it might be hard to meet the
+PS/2 deadlines when you're stuck in a timer interrupt handler for most
+of the 64 microseconds.
