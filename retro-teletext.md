@@ -28,6 +28,9 @@ But what could it have been?  Is there a plausible way that a 1972
 computer system could have provided computation on demand to 128
 TV-screen terminals?
 
+Sharing character generators among TVs
+--------------------------------------
+
 First, let's reduce the problem a little bit by allowing party-line
 collaboration.  You'd have 128 terminals, but only 32 separate screen
 images, so when the system was fully used, most people would be
@@ -165,14 +168,132 @@ from the NTSC signal, there might be some hope, but otherwise it seems
 like whatever internal timing reference it had would drift hopelessly.
 (This was before the quartz watch revolution.)  Encoding its position
 in a pair of audible tones would not be unreasonable.  Nowadays, of
-course, the whole prospect is hopeless with LCD panels.  A
-tone-generating mouse, however, would be entirely usable.
+course, the whole prospect of a light pen is hopeless with LCD panels.
+A tone-generating mouse, however, would be entirely usable, both then
+and now.
+
+### Modern AVRs ###
 
 You could probably build something like this today with an ATMega328
 (about 20 times the speed of a Nova but with only 8 KiB of RAM) and
 the Arduino TVout library for a group of five displays.  You could use
-an analog demultiplexer chip and some 10MHz op-amps as buffers to put
+an analog demultiplexer chip and some 10MHz op-amps (these exist now,
+though maybe not in 1972) as buffers to put
 each line onto the right output video signal, and probably bitbang the
 PS/2 protocol on five keyboards, although it might be hard to meet the
 PS/2 deadlines when you're stuck in a timer interrupt handler for most
 of the 64 microseconds.
+
+Slower scanning
+---------------
+
+Suppose you could use a long-persistence phosphor like the ones
+conventionally used on analog oscilloscopes, and commonly used on
+computer terminals at the time (which is why the screens were green.)
+(This would also make light pens impossible.)  Then you wouldn't have
+to repaint the screen thirty times a second; you could repaint it,
+say, every two seconds, even without exotic and finicky direct-view
+bistable storage tubes (DVBSTs) like the Tek 4014 used.
+
+If you try to apply this in a simple way, by sharing the character
+generator circuitry and ROM between more screens, it doesn't really
+help, because the main cost of the system described above is really
+the RAM.  But we can use it instead to reduce the amount of RAM needed
+and increase the system's flexibility, because we don't need special
+video RAM to feed the character generator at reliably high speeds; we
+can generate scan lines, vector paths, or at least text lines on the
+fly from application data.  If the computer system runs at 200,000
+instructions per second and can devote half of this to generating
+video signals, and we need to repaint every two seconds, then we only
+have about 6,300 instructions available per screen repaint (if we are
+generating 32 channels).
+
+At such a low speed, perhaps the best we could do would be to use a
+character generator that reads from a specified position in main
+memory.  If we shoot for 12 lines of 80 5x8 characters, like a VT50,
+per two-second screen, but continue with the 64 microsecond line scan
+time, then our single character generator can drive 325 slow screens,
+which greatly exceeds the memory capacity of the computer to do
+anything useful with.
+
+Suppose instead we shoot for 1-second updates of 32 24-line screens.
+That's 6144 total scan lines, one every 0.163 ms; once every 8 scan
+lines (1.3 ms, 260 instructions) we need to update the character
+generator's line-start pointer.  That's still probably too much load
+on such a slow computer as the original Nova, but it's within the
+bounds of plausibility.  It would be straightforwardly achievable on
+the 300-ns-cycle 1970 SuperNova if using SRAM instead of core.
+
+Memory access contention might be another issue: if the character
+generator doesn't have its own internal buffer for one line of bytes,
+it has to read a character from main memory every 5 pixels, generating
+8x as much memory traffic.  If it only reads 80 bytes every 1.3 ms, at
+300 ns per 16-bit word (which I said you probably need anyway) it
+would need to use memory for 12 microseconds out of the 1300 to read
+them, and even with 1200 ns core it would only need 48 microseconds.
+Without the internal buffer these numbers go up to 96 microseconds and
+384 microseconds respectively, the second one amounting to about a
+third of the total memory bandwidth and thus having a significant,
+highly undesirable impact on the CPU's speed.  Moreover, it would also
+need strong guarantees of timeliness — it wouldn't be able to tolerate
+any extra memory latency, so it would need to have priority over the
+CPU.  The 80 bytes of memory would cost about US$39 if they cost the
+same as the core memory add-on for the Nova described earlier, but
+probably in practice you'd have to use semiconductor memory, which
+would cost a few times more.  This would clearly be a good tradeoff
+for 7% of the whole computer's performance.
+
+It's probably worthwhile actually to stick the whole array of
+line-start pointers in main memory instead of trying to update a
+character generator register from an interrupt handler thousands of
+times a second.  There are 768 of them, which would amount to 1536
+bytes if they were in an array, some 1% of all of RAM, which is
+reasonable.  (If all of the monitors had unique text on all of their
+lines, we could dispense with the pointers, but that would be 61
+kilobytes, 47% of RAM.  So it's probably necessary to have some degree
+of sharing in order to free up space for application data; the array
+of pointers is the easiest way to do this.  This could be as simple as
+some blank lines.)
+
+The modern inversion
+--------------------
+
+So much for 1972.  Now it's 2020, 48 years later, and TS-80P soldering
+irons routinely have STM32F microcontrollers in them: 48–72 MHz, a
+32-bit parallel ALU, RISC with nearly one instruction per clock,
+32-128 KiB of Flash, maybe 20 KiB of RAM, hardware multiply, hardware
+floating point in some cases, 1500 pJ per instruction; maybe US$2 in
+quantity 1.  That's about the same amount of Flash as the Nova's
+typical RAM, plus a somewhat smaller additional amount of RAM.  What
+can we do with that?
+
+Well, there's no need to use character generators, that's for sure.
+You can bitbang NTSC no problem: a 64-microsecond scan line is
+2000–5000 32-bit instructions instead of, like, 13 16-bit
+instructions.  You can bitbang *color* NTSC, which is beyond the
+capacity of an AVR.  You can bitbang multiple NTSC composite signals
+in parallel.
+
+If we crudely estimate that US$180 per user in 1972 is equivalent to
+about US$3600 today — reasonable based on gold and petroleum prices,
+though the CPI would suggest more like US$1800 — then we can afford
+some 1000–2000 microcontrollers per user, tens of megabytes of SRAM,
+tens of billions of operations per second.  You could reasonably
+dedicate a microcontroller per scan line on an NTSC or even megapixel
+screen, if that would be a helpful thing to do, which it probably
+isn't.
+
+Probably a more useful approach is, instead of only interfacing to
+humans through the physical objects that are easiest to interface
+through, such as televisions, to attempt to interface though objects
+that are more difficult, compensating for the difficulty to some
+extent through software.  This involves using control systems with the
+available actuators to structure the objects so they are usable as
+further transducers.  Digital fabrication, including both shaping
+processes (subtractive, additive, deformation) and assembly processes
+(welding, soldering, screwing), enables the creation of objects with
+enormously more transducers than the simple vacuum tube that is a 1972
+television.
+
+Computation and control have become cheap; we need to leverage that
+into cheap actuation and cheap sensing.
