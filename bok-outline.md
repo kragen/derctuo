@@ -1,14 +1,14 @@
 A possible ambition for Derctuo is to include all the background
 information needed to understand it, if I can find freely-licensed
-sources.  So, for example, file `pandemic-collapse.md` talks about
+sources.  So, for example, [Pandemic Collapse](pandemic-collapse.md) talks about
 geography (the US, Tenochtitlán, Cambodia), historical events (the
 Vietnam War, the 1918 flu, the Bronze Age Collapse), economic concepts
 (unemployment, insurance, banks), and other institutions (the US DoD,
-the Mormon church, major corporations).  File `solar-furnace-cpc.md`
+the Mormon church, major corporations).  [Solar furnace CPC](solar-furnace-cpc.md)
 talks about physical properties of common materials, the
 Stefan–Boltzmann law, manufacturing processes of ceramics,
 thermodynamics, units of measurement, basic optics, and the structure
-of the solar system.  File `ccn-streams.md` talks about networked
+of the solar system.  [CCN Streams](ccn-streams.md) talks about networked
 systems architecture, hashing, SHA-256, TCP/IP, disks, telephone
 networks, and all kinds of programming stuff.
 
@@ -24,7 +24,7 @@ cnx.org (before it shuts down), OpenStreetMap, Project Gutenberg, the
 Internet Archive etexts collections, and for recent things, PLoS and
 arXiv.org.  [Boundless] used to have some open-content textbooks but
 they seem to have mostly been lost, though fragments like [their
-definition of limits][8] mostly survive.  [OERCommons] has a search
+definition of limits][8] survive in part.  [OERCommons] has a search
 engine over thousands of freely licensed educational resources, of
 which nearly a thousand few are [textbooks][5], such as [Jim
 Hefferon’s linear algebra book][4] (CC-BY-SA, 7.5MB, 507pp.).  They
@@ -40,8 +40,8 @@ and another dozen or so similar initiatives.
 Geographic and historical knowledge in particular is sort of endless.
 Tenochtitlán is Mexico City today, with 8.8 million people, 0.11% of
 the world’s population; Mexico City’s Wikipedia page is 213kB, 33000
-words; the destruction of Tenochtitlán (what is referenced in file
-`pandemic-collapse.md`) is mentioned briefly after 9% of the page.  If
+words; the destruction of Tenochtitlán (what is referenced in
+Pandemic Collapse) is mentioned briefly after 9% of the page.  If
 you divided the world into, say, 2048 regions of equal population (4
 million or so), and included 4096 words or so on each of these
 regions, you’d probably cover most of the geographic facts of
@@ -99,6 +99,9 @@ without any pictures.  The thought above of having about 4096 words
 for every 4 million people would be more than adequate for Cambodia,
 though, since in the 16384 words on Cambodia, we could surely find
 space to mention the Khmer Rouge.
+
+Reading Level 3 might take a year at a reasonable level of reading
+speed, a bit over 1000 hours if you read it like a novel.
 
 The OERCommons textbooks mentioned earlier include 17 history
 textbooks, but most are too specific to include either of the events I
