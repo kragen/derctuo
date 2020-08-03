@@ -14,8 +14,9 @@ neighborhood of 100:1.
 The Wikipedia article on epicyclic gearing points out that, if you use
 gears instead of pulleys, you can use two rings instead of two suns,
 both simplifying hooking up the assembly and reducing its size, though
-at the cost of requiring the planets to change size between the sun
-planes.
+perhaps at the cost of requiring the planets to change size between
+the sun planes.  ("During World War II, a special variation of
+epicyclic gearing was developed for portable radar gear...")
 
 It occurred to me that if you use only a single planet, it can perhaps
 be quite large compared to the ring gears, and you can cut a third
