@@ -46,7 +46,8 @@ surface of a piece of softer steel, held in a softer wooden handle,
 held in a still softer hand.
 
 For example, you could imagine a tungsten-carbide tooth (sometimes
-these are called "teeth", other times "tools", "bits", or "inserts")
+these are called "teeth", other times "tools", "bits", or "inserts";
+analogous artifacts in archaeological contexts are called "microliths")
 shaving a 100-micron-thick, one-millimeter-wide shaving ("chip") as it
 scrapes along a steel surface.  WC (the most unfortunate chemical
 formula ever) is several times stronger in compression, some 1500 MPa,
