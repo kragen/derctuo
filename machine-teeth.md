@@ -46,7 +46,8 @@ surface of a piece of softer steel, held in a softer wooden handle,
 held in a still softer hand.
 
 For example, you could imagine a tungsten-carbide tooth (sometimes
-these are called "teeth", other times "tools", "bits", or "inserts")
+these are called "teeth", other times "tools", "bits", or "inserts";
+analogous artifacts in archaeological contexts are called "microliths")
 shaving a 100-micron-thick, one-millimeter-wide shaving ("chip") as it
 scrapes along a steel surface.  WC (the most unfortunate chemical
 formula ever) is several times stronger in compression, some 1500 MPa,
@@ -90,6 +91,15 @@ It is possible to substitute an intermediate-hardness material for the
 base of the tooth.  Steel, a harder aluminum, or yttrium-stabilized
 zirconia would work.  (You could try zircon, but I suspect it would be
 too fragile.)
+
+As economic context, here in the kitchen I have a cheap zirconia
+kitchen knife that's about 100 mm × 25 mm × 1.5 mm, which is about
+2800 mm³ of zirconia, enough for some 14000 such teeth; such a knife
+costs some US$7, about 0.05¢ (US$0.0005) per tooth.  I also have a
+high-speed steel hacksaw blade, which is about 310 mm × 12.7 mm × 600
+μm (300 mm between the mounting-hole centers), about 2400 mm³, which
+was even cheaper (about US$1.50 per blade), and is also suitable for
+cutting unhardened steel.
 
 Alternative metal-cutting tooth materials
 -----------------------------------------
