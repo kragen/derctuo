@@ -52,3 +52,13 @@ ion beam could instead be used to locally vaporize the feedstock, as
 in e-beam etching and FIB milling.  This should permit nanometer
 resolution rather than the mere submicron resolution routinely
 attainable with mechanically positioned tooltips.
+
+Of course, the localized heating of the glass substrate may also have
+effects, desirable or otherwise.  If they are desirable, the optimum
+“feedstock” may be a film of conducting graphene or graphite rather
+than a metal.  And, [as Russ of Sarbar Multimedia points
+out](https://www.youtube.com/watch?v=MDctYVg9pfU), you can use a laser
+rather than an arc to heat the feedstock, and if the substrate is
+transparent, you can place the feedstock on the opposite side of the
+substrate so that the laser side of the feedstock is the one touching
+the substrate.
