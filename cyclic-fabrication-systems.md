@@ -308,3 +308,63 @@ removed from the mold ahead of time, but is instead burned out by the
 hot metal; this eliminates the need for a binder and the need to
 disassemble the flask, and styrofoam is easier to cut than the
 traditional wood or, especially, metal.
+
+### Die-sink EDM ###
+
+EDM ("electric discharge machining") is a slow manufacturing process,
+but capable of holding very tight tolerances and cutting very hard
+materials.  You bring an electrically conductive workpiece together
+with a tool ("die") in an insulating liquid, such as diesel fuel or
+deionized water, holding a voltage across them, until a spark occurs,
+vaporizing some of both the workpiece and the die.  The vapor
+immediately condenses in the liquid, and some time later you move them
+toward each other until a new spark occurs somewhere else.  This
+repeats, thus eroding both the workpiece and the die.  They never
+quite make contact, and they never heat up except in a very thin
+surface layer, so the deformations that limit the precision of
+mechanical cutting processes are absent.
+
+The die can be of the same material as the workpiece.  However, to
+minimize the necessity to manufacture new dies, it's desirable to use
+die materials that are eroded less than the workpiece because of
+having higher boiling points, higher enthalpy of fusion and/or
+vaporization, or higher thermal conductivity; graphite, copper, and
+tungsten-copper are ideal, but even things like aluminum last longer
+than steel (I think?), which in turn lasts longer than stainless
+steel, which in turn lasts longer than tungsten carbide and similar
+materials.
+
+If the die is of a shape that can be produced by helical extrusion,
+then it can be fed into the cut in the helical path along which it was
+extruded; in the limit of no rotation, this produces a hole of an
+arbitrary prismatic shape.  However, as a practically important
+special case, this also includes drilling of threaded holes ("EDM
+tapping"), which can be achieved with a die with the proper thread
+pitch.  The end of the die is consumed in the process, but, especially
+for through holes, this is unimportant.  Small pits in the threads of
+the die are unimportant, as they will be covered by the thread fed in
+after them.
+
+- small hole EDM
+- orbiting
+- spark erosion grinding electrode wheels
+- electrical discharge grinding
+
+Another approach is to move the die in two directions of motion at
+once, as if for lapping; EDM drilling can thus produce very accurately
+cylindrical holes, even in very hard materials.  (And this is a
+crucial supporting process for wire EDM, as explained later.)  And,
+although I do not know of this process being used in practice, the
+same process could produce three accurately flat surfaces by
+translating and rotating them relative to each other while using them
+to erode one another via EDM.  A die can also be moved to cut out a
+shape as if it were a very slow end mill.
+
+EDM is also done at times with dies that are wheels analogous to
+grinding wheels; as with grinding wheels, small irregularities in the
+wheel surface are inconsequential, so they can make surfaces that are
+more accurately cylindrical than they are themselves.  Presumably
+these EDM wheels must periodically be dressed like grinding wheels,
+but using EDM rather than grinding.
+
+The dies normally 
