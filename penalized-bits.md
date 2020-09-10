@@ -13,7 +13,9 @@ that you want to find the representation of an integer *n* in binary.
 You could start with 32 real numbers initially set to 0.5, then use
 gradient descent or something to optimize |2⁰*v*₀ + 2¹*v*₁ + 2²*v*₂ +
 ... + 2³¹*v*₃₁ - *n*|² + αΣ*ᵢvᵢ*²(1-*vᵢ*)², for example.  This
-function's only zero (for real *vᵢ*) should be the correct binary
+function's only zero (for real *vᵢ*
+and positive α)
+should be the correct binary
 representation of the number.  At all other points it takes on
 strictly positive values, and it's differentiable everywhere.
 Moreover, although I haven't looked, I think it's convex, so its only
