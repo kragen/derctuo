@@ -137,7 +137,7 @@ of OpenGL.
 0. September 30, 1993: WSMR-SIMTEL20, one of the greatest libraries of
    software in the world, [was shut down at 1600 hours Mountain
    Daylight
-   Time](https://groups.google.com/forum/#!original/alt.folklore.computers/OF5LQn2aZUU/zRu4O11K1okJa “28ftr2$pmc@usenet.INS.CWRU.Edu by Richard F. Drushel”)
+   Time](https://groups.google.com/forum/#!original/alt.folklore.computers/OF5LQn2aZUU/zRu4O11K1okJa "28ftr2$pmc@usenet.INS.CWRU.Edu by Richard F. Drushel")
    and its 165,000 files destroyed, following a copyright lawsuit from
    the Louis E. Wheeler Co., as reported in Network World, January 16,
    1995 (“Army gets caught in software piracy firestorm”).
@@ -146,6 +146,7 @@ of OpenGL.
 0. October 29, 1998: the sale of the Archimedes Palimpsest
 0. the fourth month of the inundation season: when Ahmose wrote the
    Rhind Papyrus
+0. October 30, 1961: Tsar Bomba test
 0. October 31: octal Newtonmas --- oct 31 = dec 25
 0. November 2, 1988: the helminthiasis of the internet with the Morris
    worm
