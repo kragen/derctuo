@@ -19,6 +19,9 @@ unmechanized.  In my view, this is largely the fruit of twelve
 millennia of building houses to remain habitable despite being
 entirely passive.
 
+Water
+-----
+
 This leads to some drawbacks.  Consider how smart plumbing might work.
 A small pressurized tank under your sink provides immediate
 availability of high-volume water at whatever pressure you choose; the
@@ -128,6 +131,30 @@ them as a seasonal thermal store.  These stores can be orders of
 magnitude larger than water tanks of the same cost, but their
 available heat flux is lower.
 
+Other phase-change materials that could be useful in this context
+include Glauber's salt — sodium sulfate decahydrate, which melts at
+32°, yielding 252 kJ/kg — and a eutectic of NaCl and Glauber's salt,
+which melts at 18°, yielding 286 kJ/kg.  Glauber's salt can provide a
+very compact high-temperature reservoir, while the eutectic with
+sodium chloride can provide a low-temperature reservoir which, though
+it provides less heat capacity than water, can be operated at a much
+more convenient temperature.  Glauber's salt costs some US$0.05/kg,
+some fifty times as much as water, so a 10-megajoule heat or cool
+reservoir — roughly a person-day with perfect insulation — adds some
+US$2 to the materials cost.
+
+For cooking or hot-water heating, it may be worthwhile to use a
+higher-temperature thermal store than Glauber's salt can provide — for
+example, a pebble bed of stones or ceramic beads over which air is
+passed, or the famous "solar salt", a eutectic that melts at 220°.
+
+Even simple conversion of battery energy into heat may have a role;
+the wattage of the active heat pump will inevitably be limited,
+perhaps to a kilowatt or so, but there is no need for such a limit on
+resistive heating.  I bought a 600-watt nichrome resistor for boiling
+water a few weeks ago for US$1, complete with shitty power cable and
+shitty plastic protective cage and ceramic form.
+
 So the climate control system, responding to human commands, has many
 available tradeoffs.  Among others, it can spend water to get cool;
 spend battery to get cool, heat, or both; spend battery to generate
@@ -144,4 +171,3 @@ control theory, Bayesian modeling of future climate, and Black–Scholes
 option theory, it should be possible to achieve Earthship-like comfort
 and security without the orders-of-magnitude overprovisioning that
 makes the Earthship design so expensive.
-
