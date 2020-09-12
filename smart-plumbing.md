@@ -139,14 +139,16 @@ very compact high-temperature reservoir, while the eutectic with
 sodium chloride can provide a low-temperature reservoir which, though
 it provides less heat capacity than water, can be operated at a much
 more convenient temperature.  Glauber's salt costs some US$0.05/kg,
-some fifty times as much as water, so a 10-megajoule heat or cool
+some fifty times as much as water, but a 10-megajoule heat or cool
 reservoir — roughly a person-day with perfect insulation — adds some
 US$2 to the materials cost.
 
 For cooking or hot-water heating, it may be worthwhile to use a
 higher-temperature thermal store than Glauber's salt can provide — for
 example, a pebble bed of stones or ceramic beads over which air is
-passed, or the famous "solar salt", a eutectic that melts at 220°.
+passed, or a phase-change reservoir of sulfur that melts at 115°
+yielding 54 kJ/kg, or of the famous "solar salt", a eutectic that
+melts at 220°.
 
 Even simple conversion of battery energy into heat may have a role;
 the wattage of the active heat pump will inevitably be limited,

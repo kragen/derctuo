@@ -16,17 +16,19 @@ burning out the wax from the mold.  Similarly, in lost-foam casting,
 the foam pattern is burned out of the mold by the hot metal being
 cast.
 
-So what kinds of materials would make good candidates for such
+So what kinds of "support materials" would make good candidates for such
 processes?
 
-Potential evaporants
---------------------
+Evaporants for burnout
+----------------------
 
 If you need to do your burnout at low temperatures, carbon dioxide
 sublimes at -79° and is very cheap and pretty inert.  A number of
 other common compounds are solid at accessible temperatures below room
 temperature and are then easily evaporated, such as ammonia (-78°,
-boiling at -33°), sulfur dioxide (-72°, boiling at -10°), and water
+boiling at -33°), sulfur dioxide (-72°, boiling at -10°),
+the highly toxic cyanogen (-28°, boiling at -21°),
+and water
 (0°).  However, I can't think of any such compounds that don't melt
 first at atmospheric pressure or are totally nonpolar like CO₂;
 nonpolar compounds mostly tend to have a pretty wide liquid range,
@@ -35,6 +37,43 @@ inflammable [CS₂](https://en.wikipedia.org/wiki/Carbon_disulfide), may
 be an option, melting at -112°, but it doesn't boil until 46°!  It's
 famous for dissolving insoluble things like cellulose, phosphorus,
 rubber, sulfur, and asphalt.
+
+But at higher temperatures there are a number of inorganic and
+mostly-inorganic compounds that are easy to vaporize or thermally
+decompose into gases, which can perhaps then escape (through pores in
+the mass you want to remove them from, if they're embedded within it,
+as in the case of investment casting).  Sometimes these gases are
+reactive, toxic, or both, especially at high temperatures; for
+example, table salt (NaCl) melts at 801°, boils at 1465°, and starts
+evaporating rapidly at much lower temperatures of 1100°–1200°, a
+property used in preparing fired-clay pottery — but the resulting
+sodium gas is highly reactive!  Catalyzed by steam, it reacts with the
+surface of both the pottery and the kiln (or saggar) to produce a
+sodium silicate glaze, the desired result.
+
+Even before the burnout, it's possible for solid support materials to
+react, especially if the material they're supporting is fully or
+partly liquid, as is the case with pottery clay bodies, for example,
+which are colloids plasticized with water.  For example, dinitrogen
+pentoxide is a crystalline solid which melts at 41° into a liquid
+which boils at 47°, so it might seem like a reasonable candidate; but
+it reacts violently with water to form nitric acid, which can oxidize
+a wide range of materials to nitrates, so it will not work in systems
+where water may be present.
+
+So with this burnout process, questions of support-material
+compatibility arise, especially at higher temperatures, as well as
+human and environmental safety if the process is being done near
+humans or within Spaceship Earth or another spaceship.
+
+### Candidate high-temperature evaporants ###
+
+[Formamide](https://en.wikipedia.org/wiki/Formamide) is organic but
+only one-fourth carbon; it melts at **2°** and at 180° decomposes to
+mostly carbon monoxide and water.  If overheated or catalyzed by acids
+it produces HCN.  Formamide is miscible with water and so nontoxic
+that it's used as a cryoprotectant for vitrification, but it is also
+teratogenic.
 
 [Hyponitrous acid](https://en.wikipedia.org/wiki/Hyponitrous_acid) is
 an inorganic solid, if a dangerously unstable one, which spontaneously
@@ -120,6 +159,15 @@ blast-furnace conditions.  (Mysteriously, though, he forgot to patent
 this, patenting only the use of lithium chloride for the same
 purpose.)
 
+[Ammonium oxalate](https://en.wikipedia.org/wiki/Ammonium_oxalate) is
+organic but only about 20% carbon; it melts [or possibly
+decomposes](http://www.sciencemadness.org/smwiki/index.php/Ammonium_oxalate)
+at **70°** and presumably decomposes at a higher temperature, below
+about 130°, I think.  It's so nontoxic that it's found in kidney
+stones and is used as an anticoagulant for blood transfusions.
+However, the decomposition products include, at first, oxamide, and
+later hydrogen cyanide.
+
 In [Project Pluto](http://www.merkle.com/pluto/pluto.html "The Flying
 Crowbar, Gregg Herken, *Air & Space*, April/May 1990") a similar
 purpose in assembling a hot reactor was answered with naphthalene
@@ -129,11 +177,30 @@ They also sublime pretty rapidly at room temperature, typically
 millimeters per month (or, in SI units, hundreds of picometers per
 second.)  But mothballs are still organic.
 
+[NH₄ClO<sub>3</sub>](https://en.wikipedia.org/wiki/Ammonium_chlorate)
+decomposes at **102°** to nitrogen, chlorine, and oxygen, but is
+dangerously unstable; Wikipedia says, "Even solutions are known to be
+unstable ... it should only be kept in solution when needed, and never
+be allowed to crystallize."  Ammonium chlorite and hypochlorite are
+even worse.
+
+[Ammonium acetate](https://en.wikipedia.org/wiki/Ammonium_acetate) is
+organic but only about one-third carbon; it melts at **113°**, boils
+at 117°, and [decomposes to liquid acetamide and water at
+165°](http://www.sciencemadness.org/smwiki/index.php/Ammonium_acetate).
+[Acetamide](http://www.sciencemadness.org/smwiki/index.php/Acetamide)
+is acutely nontoxic but possibly carcinogenic, and doesn't decompose
+until 221°. Ammonium acetate is deliquescent and sufficiently nontoxic
+to be used as a diuretic, a biodegradable de-icer, and a food additive
+for buffering pH.  Crystallizing it from a water solution is
+difficult.
+
 Just plain crystalline [sulfur](https://en.wikipedia.org/wiki/Sulfur)
 melts at **115°**.  In air it will burn enthusiastically shortly
 thereafter (its flashpoint is 160°, its [autoignition
 temperature](http://www.inchem.org/documents/icsc/icsc/eics1166.htm)
-232°), but absent oxygen, it boils at 448°.
+232°), but absent oxygen, it boils at 448°.  It evaporates with
+surprising speed even at and below its melting point, though.
 
 > A unique property among the materials mentioned here is sulfur's
 > metastable "solid" amorphous form, easily produced by quenching
@@ -167,9 +234,18 @@ temperature](http://www.inchem.org/documents/icsc/icsc/eics1166.htm)
 > You could recrystallize this amorphous form either by waiting long
 > enough (apparently many years) or by annealing it, reconstituting
 > the familiar brittle yellow α-sulfur.  Reportedly above 90° the
-> recrystallization becomes "rapid", and is associated with a volume
+> recrystallization becomes "rapid",
+> which seems to mean "hours" or "minutes" rather than "seconds",
+> and is associated with a volume
 > loss of some 8%.  This may be useful for, for example, using the
 > sulfur as modeling clay.
+
+[Ammonium formate](https://en.wikipedia.org/wiki/Ammonium_formate) is
+organic but only 20% carbon; it melts at **116°**, and decomposes into
+water and the nontoxic formamide at 180°, at which point the formamide
+decomposes into carbon monoxide and ammonia.  Ammonium formate is
+deliquescent and relatively nontoxic.  The above-mentioned
+considerations for formamide apply.
 
 [Hydroxylammonium
 sulfate](https://en.wikipedia.org/wiki/Hydroxylammonium_sulfate) is a
@@ -187,6 +263,12 @@ However, though its toxicity is relatively low, it's a strong enough
 oxidizing agent to oxidize copper and nickel, and it's very acidic.
 Worse, I imagine that when you do manage to decompose it, it
 decomposes into ammonia and Caro's acid.
+
+The fertilizer, flame retardant, and herbicide [ammonium
+sulfamate](https://en.wikipedia.org/wiki/Ammonium_sulfamate) melts at
+**131°** and decomposes at 160°, presumably to ammonia and sulfamic
+acid, an "intrinsically safe" household cleaning product which melts
+at 205° and then decomposes to nitrogen, water, and sulfur oxides.
 
 The inorganic solid [Hydroxylammonium
 chloride](https://en.wikipedia.org/wiki/Hydroxylammonium_chloride)
@@ -245,6 +327,8 @@ another inorganic solid that can be entirely decomposed by heat at
 It's pleasantly stable and nontoxic, being widely used as a
 fertilizer, a food additive, 30% of worldwide fine particulate
 pollution, and (refreshingly for this list) a flame retardant.
+It's almost alone among ammonium salts in emitting no significant
+ammonia at room temperature.
 [Ammonium bisulfate](https://en.wikipedia.org/wiki/Ammonium_bisulfate)
 is an intermediate product in the decomposition, melting at 147°, for
 better or worse.
@@ -263,27 +347,42 @@ this but I don't want it going on anywhere near me.  Phosphorus oxides
 are very complicated and hard to predict, and they tend to be
 hygroscopic.
 
-Ammonium formate, oxalate, acetate?  Ammonium chlorate, perchlorate?
-Dichloramine?  Probably not monochloramine.
+[Oxamide](https://en.wikipedia.org/wiki/Oxamide), used as a fertilizer
+and flame retardant, loses water at **350°** to form the highly toxic
+cyanogen.  It's organic but only about one-third carbon.  Different
+sources claim that it [melts at
+163°](https://www.chemicalbook.com/ChemicalProductProperty_EN_CB2495794.htm),
+[at 300°, or not at
+all](http://www.chemspider.com/Chemical-Structure.9709.html).
 
-Nitramide?  Ammonium dinitramide?
+Nitramide?  Probably too dangerous.  Ammonium dinitramide?  Probably
+too dangerous, and also how to make it is a secret.
+
+acetamide?  [Urea](https://en.wikipedia.org/wiki/Urea)?  Melts at
+134°, only 20% carbon.
+
+Sulfamic acid
 
 Iodine
 
-Sulfur
+Thiocyanates?  Thiocyanides?  Bifluoride?  Cyanate?  Fluoride?
+Hydrosulfide?  Iodate?  Iodide? 
 
-Thiosulfates?  Thiosulfonates?  Sulfonates?  Sulfamates?  Persulfates?
-Thiocyanates?  Thiocyanides?
-
-CO₂
+Thiourea?
 
 Potential fusible solids
 ------------------------
 
-If melting like naphthalene rather than vaporizing is
+If melting like naphthalene rather than vaporizing is acceptable, then
+under some circumstances there are a variety of solids that can be
+easily melted.
 
-Deliquescent solids
--------------------
+Highly water-soluble and deliquescent solids
+--------------------------------------------
+
+If water won't damage the thing you're trying to remove the support
+material from — not the case for clay bodies for pottery, of course,
+but plausibly the case under many other conditions — 
 
 Ammonium nitrate
 
@@ -291,9 +390,13 @@ Calcium chloride
 
 Magnesium chloride, zinc chloride, ferric chloride, carnallite,
 potassium carbonate, potassium phosphate, ferric ammonium citrate,
-potassium hydroxide, sodium hydroxide
+potassium hydroxide, sodium hydroxide...
 
 phosphorus pentoxide?
 
 Solids that can be removed by a reagent
 ---------------------------------------
+
+Pretty much any solid can be removed by the appropriate reagent, but
+not always quickly, and the trick is to pick something that won't
+damage the thing you're trying to remove it from.
