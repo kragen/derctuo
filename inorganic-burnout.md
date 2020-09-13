@@ -238,7 +238,12 @@ surprising speed even at and below its melting point, though.
 > which seems to mean "hours" or "minutes" rather than "seconds",
 > and is associated with a volume
 > loss of some 8%.  This may be useful for, for example, using the
-> sulfur as modeling clay.
+> sulfur as modeling clay, then recrystallizing it to its usual form.
+> However, four hours at 100° does not seem to be enough time to have
+> any noticeable effect, even when the dark "amorphous" sulfur is in
+> contact with what seems to be yellow monoclinic α-sulfur.  Even
+> remelting to the low-viscosity liquid form doesn't seem to revert it
+> fully from dark brown to bright yellow.
 
 [Ammonium formate](https://en.wikipedia.org/wiki/Ammonium_formate) is
 organic but only 20% carbon; it melts at **116°**, and decomposes into
