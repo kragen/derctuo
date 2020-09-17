@@ -135,7 +135,19 @@ Here are some possible solutions:
 
 1. Try to approximate 1/n as a sum of decaying exponentials.
 Unfortunately this has a sort of discontinuity or step function where
-each new exponential begins.
+each new exponential begins.  If your initial exponential decay goes
+from amplitude 2/3 at 3/2 down to amplitude (-)2/5 at 5/2, then at
+7/2, instead of 2/7, its amplitude will be 6/25, which is too low by a
+ratio of 21/25; we can add in a new exponentially-decaying pulse train
+there with an amplitude of 8/175, and then at 9/2, when we want (-)2/9
+as our amplitude, the original exponential will have decayed down to
+(-)18/125, leaving a gap of (-)88/1125.  This is actually *larger*
+than the previous gap of 8/175, so our second exponential decay can't
+fill the gap — it would need to be growing rather than shrinking!  So
+we would need to pick some decay rate for it and start a third
+exponential, and so on.  This doesn't seem like a promising avenue
+because it's going to be a long time before the errors are small
+enough that we can stop adding new exponentials on every cycle.
 
 2. Try to approximate 1/n as a sum of functions that eventually tail
 off into exponential decay but have a substantial subexponential
@@ -167,6 +179,17 @@ frequency of the impulse train.
 
 5. The Gabor basis function in particular has an existing efficient
 sparse approximation that I've written about previously in Dercuano.
+
+6. Presumably you need to use some sort of bidirectional filtering to
+get the left tail of the sinc impulse response as well as the
+right — though probably by computing the left filter and the right
+filter on the original signal, then adding them together, rather than
+composing them as in `filtfilt`.  But maybe a more complicated
+topology of this kind of thing can help out in adding a smooth decay
+to the left side of these globs of alternating impulses.  Like, if you
+do the two-stage pipeline thing both to the left and to the right, you
+could add them together with an offset in order to get rid of the
+steep slope of the initial "attack".
 
 I don't know enough yet to know whether this will yield a more
 efficient and/or precise solution than the standard time-domain IIR
