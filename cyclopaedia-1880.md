@@ -7,9 +7,16 @@ nevertheless doesn't prefetch or give any kind of "working" notice!)
 so I thought I would add a partial headword index to accelerate the
 process of finding things.
 
+Without this index, a binary search for a headword would require
+looking at 11 or 12 pages distributed over both volumes, about a
+minute and a half of rendering time.  With it, the worst case should
+be 6 pages, but the average more like 4; about 5% of pages are
+included directly in the index.
+
 - Acetic anhydride-Acetification, p. 22 (vol. 1 38/916)
 - Aigremore-Air, p. 44 (vol. 1 60/916)
 - Alkali-Alkalimetry, p. 84 (vol. 1 100/916)
+- Ammonium (cont.), p. 134 (vol. 1 150/916)
 - Antispasmodic-Aplanatic, p. 174 (vol. 1 190/916)
 - Argentine-Aromatic, p. 184 (vol. 1 200/916)
 - Asparagin-Asparagus, p. 209 (vol. 1 225/916)
@@ -27,9 +34,16 @@ process of finding things.
 - Cæsalpina-Caffeine, p. 381 (vol. 1 397/916)
 - Cakes, p. 384 (vol. 1 400/916)
 - Candles (cont.), p. 394 (vol. 1 410/916)
+- Caoutchoucin, p. 399 (vol. 1 415/916)
+- Capsicum-Caramel, p. 401 (vol. 1 417/916)
+- Carat-Carbolic acid, p. 402 (vol. 1 418/916)
+- Carbon, p. 403 (vol. 1 419/916)
 - Carbon (cont.), p. 404 (vol. 1 420/916)
+- Carbonic oxide-Carmine, p. 407 (vol. 1 423/916)
 - Carnauba root-Carrageen, p. 409 (vol. 1 425/916)
 - Catgut-cathartin, p. 414 (vol. 1 430/916)
+- Coffee, p. 484 (vol. 1 500/916)
+- Dead, disposal of, p. 534 (vol. 1 550/916)
 - Draught, p. 584 (vol. 1 600/916)
 - Duck-Dust, p. 596 (vol. 1 612/916)
 - Dyspnœa-Eau, p. 601 (vol. 1 617/916)
@@ -63,6 +77,9 @@ process of finding things.
 - Hesperidin-Hollands p. 844 (vol. 1 860/916)
 - Hyocholic acid-Hysterics, p. 859 (vol. 1 875/916)
 - Ink, p. 896 (vol. 1 912/916, last)
+- Lac dye-Lacquer, p. 938 (vol. 2 50/916)
+- Liqueur de la motte-Liquor, p. 988 (vol. 2 100/928)
+- Meat, p. 1038 (vol. 2 150/928)
 - Mortification-Moulds, p. 1088 (vol. 2 200/928)
 - Neuralgia (cont.), p. 1100 (vol. 2 212/928)
 - Nitric acid (cont.), p. 1106 (vol. 2 218/928)
@@ -81,6 +98,7 @@ process of finding things.
 - Picoline-Pies, p. 1293 (vol. 2 405/928)
 - Pills (cont.), pp. 1298-1308 (vol. 2 410-20/928)
 - Platinum, p. 1338 (vol. 2 450/928)
+- Prince's metal-Printing, p. 1388 (vol. 2 500/928)
 - Quinine, p. 1413 (vol. 2 525/928)
 - Reduction-Refrigeration, p. 1428 (vol. 2 540/928)
 - Rock-Rot, p. 1438 (vol. 2 550/928)
@@ -88,7 +106,11 @@ process of finding things.
 - Sack-Saffron, p. 1443 (vol. 2 555/928)
 - Salicylic acid, p. 1448 (vol. 2 560/928)
 - Silica (cont.), p. 1487 (vol. 2 599/928)
+- Spheroidal state, p. 1538 (vol. 2 650/928)
 - Sulphocyanogen-Sulphur, p. 1588 (vol. 2 700/928)
+- Telephone (cont.), p. 1638 (vol. 2 750/928)
+- Upas-Urea, p. 1688 (vol. 2 800/928)
+- Water (cont.), p.1738 (vol. 2 850/928
 - Wolfram-Wool, p. 1785 (vol. 2 897/928)
 - Wound-Xyloidin, p. 1788 (vol. 2 900/928)
 - Yttrium-Zinc, p. 1791 (vol. 2 903/928)
