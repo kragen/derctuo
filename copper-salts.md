@@ -124,4 +124,6 @@ vinegar-and-salt-painted copper in a sealed box with a dish of ammonia
 nearby.  [Another video experiment report by the impressive
 mopatin](https://youtu.be/oC-A2qsbV_U) claims success at *reducing*
 copper oxide, or perhaps dissolving it, with a mix of vinegar and
-salt.)
+salt.  Others report success at making copper acetate from copper
+metal, vinegar, and low-concentration H₂O₂, which last they claim is
+not necessary.)
