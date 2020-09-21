@@ -33,7 +33,7 @@ manual work, it might be expedient to work with some 4 kV and gaps of
 the RC time constant, although the arc ignites at somewhat imprecise
 times due in large part to the irregular availability of free
 so-called "seed electrons" at the cathode, provided by photoelectrons
-or background ionizing radiation.
+or background ionizing light and other particles.
 
 [0]: https://en.wikipedia.org/wiki/Paschen%27s_law
 
@@ -152,6 +152,12 @@ us with the operation XNOR; combined with negation and access to the
 reference oscillator, we can construct in some sense all boolean
 functions.
 
+This same sort of threshold device may be of particular interest as a
+display pixel, glowing or not according to whether its voltage reaches
+the threshold and thus provokes repeated discharges.  Low-pressure
+plasmas, xenon, and mercury vapor coupled with phosphors may be useful
+in boosting visible light output for a given power level.
+
 A fourth possibility is to *interrupt* a continuing arc, ballasted for
 example by a resistor or the self-inductance of the wires, with a
 voltage pulse that temporarily robs the spark gap of the tens of volts
@@ -193,7 +199,8 @@ Sources of deviation from designed behavior include:
   frequency; by using higher radices rather than binary, with the
   reference oscillator running at ⅓, ¼, or less of the primary
   oscillator frequency; by using electrodes of graphite, copper, or
-  tungsten-copper; or possibly by using a dielectric coolant liquid
+  tungsten-copper such as Elkonite;
+  or possibly by using a dielectric coolant liquid
   rather than gas, or by running cooling water through the electrodes.
 
 - Spark initiation delay: avalanche discharge is triggered by a seed
@@ -209,9 +216,10 @@ Sources of deviation from designed behavior include:
   used in modern ozone generators, to provide corona discharge in
   advance of the avalanche discharge; using larger electrodes, perhaps
   with anodes full of holes to permit light to illuminate the cathode;
-  and suffusing the whole machine with slightly ionized gas.  The use
-  of graphite might worsen this problem because of its higher (≈4.6
-  eV) work function.
+  and suffusing the whole machine with slightly ionized gas or
+  ultraviolet light.  The use of graphite might worsen this
+  problem because its higher (≈4.6 eV) work function reduces
+  field emission and the emission of photoelectrons.
 
 Another crucial question about such devices is to what degree they can
 be miniaturized and sped up.  Near-kilohertz discharge rates should be
@@ -279,7 +287,11 @@ dielectric like water.
 This in turn suggests an electrical energy cost on the order of 10
 picojoules per bit operation, comparable to modern CMOS, although of
 course that doesn't account for the energy cost of pumping all that
-dielectric through the gap.
+dielectric through the gap.  Also, such low energy costs per operation
+probably require much higher operational frequencies — for RC = τ =
+2.1 ms as above, you'd need a 30-teraohm resistor, which would
+normally be called an "insulator".  So 1 nJ is probably achievable but
+10 pJ may not be.
 
 Conductive-mesh spark-gap electrodes may be a more effective way to
 deliver light, dielectric, and coolant to the spark gap, permitting as
@@ -314,3 +326,65 @@ they might be capable of speed rivaling modern solid-state
 electronics, or at least 1980s solid-state electronics.  Spark gaps of
 under a micron should be effective at a megapascal or so of gas, or
 perhaps at atmospheric pressure with liquid dielectrics.
+
+*****
+
+Another amusing application of such relaxation oscillators might be as
+microphones: below the Paschen minimum, even a very small change in
+the electrode spacing should produce a very large change in the
+breakdown voltage of the spark gap and consequently both the frequency
+and the breakdown voltage of a free-running RC oscillator.  (I'm not
+sure if it also increases the jitter.)  Above the Paschen minimum, it
+should produce a smaller, nearly linear, but still fairly reliable
+change in these variables.
+
+The oscillation period also depends, of course, on the resistance and
+capacitance, and in many applications it may be more practical to
+modulate the capacitance rather than the spark-gap size.  3 mm of
+ordinary glass ought to provide about 30 kV of dielectric strength, or
+fifty times that if fused silica instead; the 2 cm² of a finger touch,
+coupled with the relative permittivity of around 5 for glasses, gives
+a capacitance of about 3 pF, which may be a detectable touch.  Lower
+voltages and thinner materials may be a more practical way to detect
+human touch, or simply mechanical deformation of air-dielectric
+capacitors through levers.
+
+*****
+
+DTIC document 633669 from 1991, "Hydrogen spark gap for high
+repetition rates", reports 10-μs recovery times to 17% for a 1.4 MPa
+2.5-mm "unblown" hydrogen spark gap and 100-μs to 42%, about an order
+of magnitude faster than air; this is attributed to hydrogen's high
+thermal diffusivity.  That is, by "undervolting" the gap to 17% of its
+normal breakdown voltage (some 120kV), they can trigger discharges at
+100-kHz rates, or 10 kHz at 42% of its normal breakdown voltage.
+Recovery to 90% takes about 1 ms for hydrogen and 10 ms for air,
+"dominated by the cooling time of the hot channel" rather than its
+deionization.  It also points out that narrower gaps permit closer gas
+contact to metal surfaces, thus cooling the gas more rapidly, as well
+as lower inductance and resistance, and that the gas requires some
+time to recover its density after being rarefied by thermal expansion.
+They were working with three-electrode trigatron-type devices and
+report that "the recovery time varied little from millijoules to
+kilojoules of transferred energy", though it would be unsurprising if
+the picojoules I contemplate above did result in significant
+variation.  (Hopefully the smaller energies would also result in
+longer electrode life than the hundreds of shots at which they
+reported substantial electrode wear.)
+
+Above I haven't considered inductance, but of course at high enough
+speeds at a given length scale, inductive impedance will dominate
+resistance.  Decreasing the length scale also helps with this.
+
+The related DTIC document A636361, "A laser-triggered mini-Marx for
+low-jitter, high-voltage applications", describes an interesting way
+of triggering spark gaps with ±700-ps 2σ jitter — by using ultraviolet
+light to ionize SF₆ in the spark gap (in this case by a
+frequency-quadrupled Q-switched Nd:YAG laser) it is possible to ignite
+a plasma in a precharged spark gap, which then activates a Marx
+generator with rise times in the range of 2 ns.  There are a variety
+of ways that such spark gaps can detect light, ranging from the
+reduced jitter from photoelectric seed electrons to this sort of
+ionization-induced ignition-voltage reduction, and of course a
+traditional Geiger counter is nothing more than a spark gap arranged
+to detect ionizing light and other particles.
