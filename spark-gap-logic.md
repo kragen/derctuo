@@ -3,7 +3,7 @@ traditional elements — two-electrode air spark gaps, capacitors,
 resistors, and a high-voltage, low-current DC power supply — are
 probably sufficient to implement universal sequential digital logic,
 although it is probably limited to a few kilohertz, although [air-gap
-flashbulbs] can produce microsecond-level discharges when cooled by a
+flashbulbs][2] can produce microsecond-level discharges when cooled by a
 quartz heatsink, so faster speeds might be achievable.
 
 [2]: https://en.wikipedia.org/wiki/Air-gap_flash
