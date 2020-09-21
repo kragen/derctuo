@@ -115,15 +115,25 @@ chloride — although perhaps a different base like sodium carbonate or
 bicarbonate, or calcium hydroxide, is required to prevent the copper
 from complexing with ammonia.  It would be super cool if acetic acid
 were strong enough to allow the reduction and etching of copper to
-proceed, but I suspect it may not be.
+proceed; Cooley's 1880 Cyclopædia reports that dibasic acetate of
+copper is "prepared on a large scale in France by exposing copper to
+the air in contact with fermenting wine-lees", so I suspect that
+vinegar may be sufficiently strong to etch the copper.  Where I am
+most uncertain is as to whether it is sufficiently strong to maintain
+cuprous chloride in solution.  The Cyclopædia claims that heating
+cupric chloride reduces it to cuprous chloride "at a high
+temperature", which Wikipedia suggests is 993°, well above its 498°
+melting point, and a bit too high for this kitchen; WP claims cuprous
+chloride is stable to 1490°, though melting at 423°.
 
-(Distillation of ammonia by absorption into pure water may be feasible
+Distillation of ammonia by absorption into pure water may be feasible
 over days at room temperature; some random YouTuber reported
 successful deposition of a great deal of verdigris by putting their
 vinegar-and-salt-painted copper in a sealed box with a dish of ammonia
 nearby.  [Another video experiment report by the impressive
 mopatin](https://youtu.be/oC-A2qsbV_U) claims success at *reducing*
-copper oxide, or perhaps dissolving it, with a mix of vinegar and
+copper oxide, or perhaps the sulfides,
+or perhaps dissolving them, with a mix of vinegar and
 salt.  Others report success at making copper acetate from copper
 metal, vinegar, and low-concentration H₂O₂, which last they claim is
-not necessary.)
+not necessary.

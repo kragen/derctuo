@@ -13,6 +13,8 @@ minute and a half of rendering time.  With it, the worst case should
 be 6 pages, but the average more like 4; about 5% of pages are
 included directly in the index.
 
+- Abbreviation (cont.), p. 4 (vol. 1 20/916)
+- Acclimate-Acetic, p. 14 (vol. 1 30/916)
 - Acetic anhydride-Acetification, p. 22 (vol. 1 38/916)
 - Aigremore-Air, p. 44 (vol. 1 60/916)
 - Alkali-Alkalimetry, p. 84 (vol. 1 100/916)
@@ -51,6 +53,7 @@ included directly in the index.
 - Carnauba root-Carrageen, p. 409 (vol. 1 425/916)
 - Catgut-cathartin, p. 414 (vol. 1 430/916)
 - Coffee, p. 484 (vol. 1 500/916)
+- Copper (cont.), p. 509 (vol. 1 525/916)
 - Dead, disposal of, p. 534 (vol. 1 550/916)
 - Draught, p. 584 (vol. 1 600/916)
 - Dutch drops-Dynamite, p. 599 (vol. 1 615/916)
