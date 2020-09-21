@@ -57,7 +57,8 @@ respectively, to prevent precipitation of cupric carbonate.
 
 This last sounds relatively easy, but it consumes reducing sugars,
 such as glucose, fructose, or lactose — but not sucrose!  Though you
-can hydrolyze sucrose with HCl.
+can hydrolyze sucrose with HCl — or, apparently, by boiling it with
+citric acid.
 
 I think you can also, crossing the streams, use a cupric solution to
 oxidize copper metal, reducing the cupric ions to cuprous ions, and
