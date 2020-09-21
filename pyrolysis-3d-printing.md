@@ -260,7 +260,7 @@ Here's a list of candidates.
 | cobalt           | nitrate       |          84 |                |
 |                  | sulfate       |        less |                |
 | copper(II)       | nitrate       |        83.5 |                |
-|                  | sulfate       |        less |                |
+|                  | sulfate       |        very |                |
 |                  | formate       |           7 |                |
 | ferrous ammonium | sulfate       |          27 |                |
 | iron(II)         | nitrate       |         134 |                |

@@ -24,6 +24,11 @@ high voltage, which, as I understand it, then discharges on a
 timescale primarily limited by the self-induction of the elements of
 the system, commonly nanoseconds to microseconds.
 
+(Ordinary electrostatic discharges, like from walking across the
+carpet and touching a doorknob, have rise times in the range of a
+nanosecond or so, so the rise time will not be the limiting factor in
+performance; the recovery time will.)
+
 Without the voltage gain, you can build such a relaxation oscillator
 with a single RC timing circuit with a spark gap in parallel with the
 capacitor.  [Paschen's curve][0] has a minimum at one atmosphere at
