@@ -2,7 +2,7 @@ Thinking about Marx generators last night, I realized that their
 traditional elements — two-electrode air spark gaps, capacitors,
 resistors, and a high-voltage, low-current DC power supply — are
 probably sufficient to implement universal sequential digital logic,
-although it is probably limited to a few kilohertz, although [air-gap
+It may be limited to a few kilohertz, but [air-gap
 flashbulbs][2] can produce microsecond-level discharges when cooled by a
 quartz heatsink, so faster speeds might be achievable.
 
@@ -13,7 +13,7 @@ a source of high-voltage pulses when efficiency is not important.  A
 series of capacitors in series, separated by similar-sized spark gaps,
 are charged through a resistive network connecting their anodes and
 another connecting their cathodes, which, as long as little current
-flows, maintains the anodes at similar voltages and also their
+flows, respectively maintains the anodes at similar voltages and maintains the
 cathodes at similar voltages, so the voltage across each spark gap is
 nearly the negative of that across each condenser; once this voltage
 rises to a high enough level, the air in the gap experiences avalanche
@@ -22,7 +22,7 @@ in series, immediately overwhelming the breakdown of the adjacent
 spark gaps.  This very rapidly produces a chain reaction and a very
 high voltage, which, as I understand it, then discharges on a
 timescale primarily limited by the self-induction of the elements of
-the system.
+the system, commonly nanoseconds to microseconds.
 
 Without the voltage gain, you can build such a relaxation oscillator
 with a single RC timing circuit with a spark gap in parallel with the
