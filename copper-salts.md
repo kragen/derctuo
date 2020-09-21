@@ -31,7 +31,9 @@ insoluble and hard malachite and azurite, depending on the amount of
 hydroxylation; the neutral gray cupric carbonate readily hydroxylates
 given half a chance, or decays to cupric oxide at low CO₂
 concentrations; there is no cuprous.  Blue-green **cupric phosphate**
-and phosphate hydroxide are the insoluble rare mineral libethenite;
+and phosphate hydroxide are the insoluble rare mineral libethenite,
+or more commonly pseudomalachite,
+depending on hydration and hydroxylation — or, with aluminum, turquoise;
 again there is no cuprous.
 
 So, excluding exotics, there seem to be no stable water-soluble
