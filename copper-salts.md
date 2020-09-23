@@ -14,7 +14,7 @@ acids, and “degrades to [cupric oxide] in moist air”, while black
 acids — or alkalis, with which it yields cuprate salts; and there is
 additionally a hypothetical trivalent copper oxide which would be a
 strong oxidizer.  White **cuprous sulfate** “decomposes rapidly in
-presence of moisture” to copper and the highly soluble **blue
+presence of moisture” to copper and the highly soluble skin-staining **blue
 vitriol**.  “Little evidence exists for” yellow **cuprous hydroxide**,
 which is “extremely easily oxidized” to insoluble **cupric
 hydroxide**.  **Cuprous nitrate** is almost unknown; blue-green
@@ -48,14 +48,25 @@ sodium iodide.)
 WP suggests synthesizing cuprous oxide by the following routes:
 directly oxidizing copper by heating it in air (but then how do you
 separate the two oxides?); reducing cupric solutions to cuprous with
-sulfur dioxide (presumably sodium thiosulfate or ammonium thiosulfate
-would also work); reacting cuprous chloride with bases to precipitate
+sulfur dioxide (maybe sodium thiosulfate
+might also work; the ammonia in ammonium thiosulfate would probably form a
+tetraammine-copper(II) complex, which which would be pretty but might interfere);
+reacting cuprous chloride with bases to precipitate
 the cuprous hydroxide; or reducing alkaline cupric solutions with
 reducing sugars in Fehling’s or Benedict’s tests, where the copper is
 complexed with potassium sodium tartrate or sodium citrate,
 respectively, to prevent precipitation of cupric carbonate.
+(Fehling's test is mentioned in Cooley's 1880 Cyclopædia, for example
+under "Urine", along with Trommer's test, under "Sugar", which mixes
+blue vitriol with sugar and "an excess of hydrate of potassium [KOH]",
+then heats it to precipitate what sounds like cuprous oxide.  [The
+advantage of Fehling's test][21] is reputedly that it was more
+selective toward sugars and easier to prepare.  Benedict's test wasn't
+introduced until 1907.)
 
-This last sounds relatively easy, but it consumes reducing sugars,
+[21]: https://theskepticalchemist.com/demonstration-benedicts-test-reducing-sugars/
+
+Benedict's test sounds relatively easy, but it consumes reducing sugars,
 such as glucose, fructose, or lactose — but not sucrose!  Though you
 can hydrolyze sucrose with HCl — or, apparently, by boiling it with
 citric acid.
