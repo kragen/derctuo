@@ -57,7 +57,9 @@ The “repository” I refer to here is not necessarily a Git repository;
 it need not include the full change history, and moreover it needs to
 be interpretable with a minimum of previous knowledge in order to
 maximize reproducibility.  So probably we’re talking about something
-like a tar file or uncompressed zip file.
+like a tar file or uncompressed zip file.  (But there are Git
+repositories at <https://gitlab.com/kragen/derctuo> and
+<http://canonical.org/~kragen/derctuo.git>.)
 
 This is easy enough to do without restrictions if I’m willing to
 include dependencies on arbitrarily complex assemblages of software,
