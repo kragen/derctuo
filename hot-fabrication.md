@@ -278,6 +278,8 @@ Of course other similar metals, such as titanium, tantalum, hafnium,
 niobium, vanadium, molybdenum and thorium, can be used instead of
 zirconium to 3-D print similar [ultra-high-temperature ceramics][72]
 in similar ways; titanium carbide and molybdenum boride, among many
-other examples, have been made by SHS.
+other examples, have been made by SHS.  As another example, there’s a
+1997 paper by Sundaram et al., that got titanium diboride by SHS of
+magnesium, amorphous boria, and rutile.
 
 [72]: https://en.wikipedia.org/wiki/Ultra-high-temperature_ceramics

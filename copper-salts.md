@@ -3,26 +3,26 @@ thinking it might be useful to be able to smelt copper into a mold
 with a thermite reaction.  But for that you need cuprite, cuprous
 oxide, which I do not know where to buy.
 
-I think you'd probably have to synthesize it.
+I think you’d probably have to synthesize it.
 
 Copper has many salts, but more cupric salts than cuprous salts, and
 its cupric salts are more often water-soluble.
 
 Red **cuprous oxide** (cuprite) is insoluble in water, though not in
-acids, and "degrades to [cupric oxide] in moist air", while black
+acids, and “degrades to [cupric oxide] in moist air”, while black
 **cupric oxide** (tenorite) is also insoluble, though, again, not in
 acids — or alkalis, with which it yields cuprate salts; and there is
 additionally a hypothetical trivalent copper oxide which would be a
-strong oxidizer.  White **cuprous sulfate** "decomposes rapidly in
-presence of moisture" to copper and the highly soluble **blue
-vitriol**.  "Little evidence exists for" yellow **cuprous hydroxide**,
-which is "extremely easily oxidized" to insoluble **cupric
+strong oxidizer.  White **cuprous sulfate** “decomposes rapidly in
+presence of moisture” to copper and the highly soluble **blue
+vitriol**.  “Little evidence exists for” yellow **cuprous hydroxide**,
+which is “extremely easily oxidized” to insoluble **cupric
 hydroxide**.  **Cuprous nitrate** is almost unknown; blue-green
 **cupric nitrate** is a common water-soluble bulk chemical, easily
 synthesized from copper and silver nitrate.  **Cuprous iodide** is
 precipitated from cupric ions and potassium iodide, releasing iodine;
 there is no cupric iodide, or at any rate only a very unstable one.
-Rare blue **cupric fluoride** is "highly soluble in water"; there is
+Rare blue **cupric fluoride** is “highly soluble in water”; there is
 no cuprous.  Dark green water-soluble **cupric acetate**, a component
 of verdigris and used to make Paris green, can reportedly be heated
 with copper to produce white **cuprous acetate**.  Basic **cupric
@@ -42,7 +42,7 @@ iodide, and bromide.
 
 (Incidentally, the above suggests that copper ions offer a way to
 separate iodide and, if cupric, elemental iodine from a mixture of
-chlorides and iodides, though I'm not sure it would work as well for
+chlorides and iodides, though I’m not sure it would work as well for
 sodium iodide.)
 
 WP suggests synthesizing cuprous oxide by the following routes:
@@ -51,7 +51,7 @@ separate the two oxides?); reducing cupric solutions to cuprous with
 sulfur dioxide (presumably sodium thiosulfate or ammonium thiosulfate
 would also work); reacting cuprous chloride with bases to precipitate
 the cuprous hydroxide; or reducing alkaline cupric solutions with
-reducing sugars in Fehling's or Benedict's tests, where the copper is
+reducing sugars in Fehling’s or Benedict’s tests, where the copper is
 complexed with potassium sodium tartrate or sodium citrate,
 respectively, to prevent precipitation of cupric carbonate.
 
@@ -79,7 +79,7 @@ little contamination from the iodide which is insignificant in this
 context.  Somewhat less pure blue vitriol is available for US$5–$7/kg
 as a fungicide and alguicide for swimming pools, though it, too, is of
 course cupric rather than cuprous.  At about 250 g/mol (pentahydrate)
-it's about 25% copper (63.546 g/mol) by weight.
+it’s about 25% copper (63.546 g/mol) by weight.
 
 The thermite reaction with cupric oxide is hazardously rapid, so
 cupric contamination is to be avoided here; washing the
@@ -94,7 +94,7 @@ verdigris) is manufactured in bulk as a nutritional supplement (though
 not for humans — a substitute for blue vitriol for livestock) and a
 fungicide.
 
-[The electrochemistry chapter of Simon Quellen Field's scitoys][2]
+[The electrochemistry chapter of Simon Quellen Field’s scitoys][2]
 suggests making cuprous and cupric oxide by heating copper in air to
 red heat for half an hour, then flaking the black cupric oxide off (by
 allowing it to cool) to reveal the cupric oxide underneath.  I suspect
@@ -105,7 +105,7 @@ using salt water as the other electrode.)
 
 [2]: https://web.archive.org/web/20150811222018/http://scitoys.com/scitoys/scitoys/echem/echem2.html
 
-There's also "red plague": red cuprous oxide forming on the surface of
+There’s also “red plague”: red cuprous oxide forming on the surface of
 copper over months in humid environments due to galvanic corrosion
 with silver plating.
 
@@ -118,14 +118,14 @@ chloride — although perhaps a different base like sodium carbonate or
 bicarbonate, or calcium hydroxide, is required to prevent the copper
 from complexing with ammonia.  It would be super cool if acetic acid
 were strong enough to allow the reduction and etching of copper to
-proceed; Cooley's 1880 Cyclopædia reports that dibasic acetate of
-copper is "prepared on a large scale in France by exposing copper to
-the air in contact with fermenting wine-lees", so I suspect that
+proceed; Cooley’s 1880 Cyclopædia reports that dibasic acetate of
+copper is “prepared on a large scale in France by exposing copper to
+the air in contact with fermenting wine-lees”, so I suspect that
 vinegar may be sufficiently strong to etch the copper.  Where I am
 most uncertain is as to whether it is sufficiently strong to maintain
 cuprous chloride in solution.  The Cyclopædia claims that heating
-cupric chloride reduces it to cuprous chloride "at a high
-temperature", which Wikipedia suggests is 993°, well above its 498°
+cupric chloride reduces it to cuprous chloride “at a high
+temperature”, which Wikipedia suggests is 993°, well above its 498°
 melting point, and a bit too high for this kitchen; WP claims cuprous
 chloride is stable to 1490°, though melting at 423°.
 
