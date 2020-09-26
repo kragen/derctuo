@@ -86,3 +86,52 @@ over a long enough timescale will reduce the available area for the
 reaction to take place; but in many circumstances the reaction can be
 run to completion on a shorter timescale than that, and the increasing
 temperature may be an effective countervailing force.
+
+Maintaining the magnesium fuel in large solid pieces until near time
+to use would be a useful safety measure.  These would be much harder
+to ignite accidentally.  Perhaps the simplest approach would be a
+round magnesium rod that twists in a device exactly like a manual
+pencil sharpener to shave off shavings of a calibrated thickness.
+
+Under some circumstances, it might be best to first preheat some
+magnesia by burning magnesium, with little or no gas release, and then
+use a second, later burst of gas to move the generated heat to where
+it's needed.  This decouples the time during which the combustion
+happens — which may be limited by, for example, considerations such as
+the one mentioned above of burning the magnesium to solid magnesia
+fast enough that it doesn't melt into a round mass with little surface
+area, or inversely by the inability to burn the magnesium as fast as
+would be desired because of limited surface area — from the time
+during which the heat is transferred to where it will be used, which
+might be shorter or longer than the combustion time.
+
+Recharging spent magnesium fuel should be considerably easier than the
+analogous process for aluminum, which is especially interesting for
+use as a motor vehicle fuel.  Something like three fourths of
+magnesium today is produced in China by the Pidgeon silicothermic
+process, boiling magnesium vapor at sub-atmospheric pressures out of
+mixed MgO and ferrosilicon powders at 1200°–1400°, and further
+stabilizing the silica byproduct with CaO.  However, the historically
+dominant process was electrolysis of molten MgCl₂ produced from HCl
+and MgO; the electrolysis releases the Cl₂, which can be
+exothermically recombined with H₂ with ultraviolet light.  Pure MgCl₂
+melts at 714°, but, e.g., Davy fluxed it with corrosive sublimate to
+discover magnesium at a tamer temperature; so a recharging apparatus
+of a reasonably small size and temperature might be feasible.
+
+[A new, more direct process][7] uses a solid zirconia electrolyte to
+directly electrolyze MgO at 1150°–1300°, in order to drop the cost of
+magnesium for *structural* applications in vehicles.  The cathode is a
+bath of molten MgO through which argon is bubbled, coming out
+containing Mg vapor.  The O₂ can travel through the zirconia to the
+cathode, made, for example, of molten copper, tin, or silver, or of a
+zirconia–nickel cermet coating on the zirconia.  Magnesia-stabilized
+zirconia is more stable in the molten salt bath, but lower
+conductivity; they found some kind of sooper seekrit ingredient to
+keep the molten MgO from corroding regular yttria-stabilized zirconia.
+Like the Pidgeon process, the magnesium produced is in vapor form, and
+so a distillation step inherently purifies the reaction product.
+(With appropriate "fluxes" or molten-salt solvents, this same SOM
+process has been used to smelt iron, silicon, tantalum, and titanium.)
+
+[7]: https://web.archive.org/web/20131113035743/http://www1.eere.energy.gov/vehiclesandfuels/pdfs/merit_review_2011/lightweight_materials/lm035_derezinski_2011_o.pdf "Solid Oxide Membrane (SOM) Electrolysis of Magnesium, Powell et al., 2011"

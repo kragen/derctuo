@@ -11,9 +11,7 @@ blocks might be smaller than traditional flasks; we might have
 micro-channel blocks that swing open at a parting line to expose the
 interiors of the channels for cleaning, pressed together by a clip.
 Captive gaskets between them would separate the cavities along the
-parting line; at ordinary temperatures these would be made of teflon,
-but higher-temperature blocks would use gaskets that are brittle at
-room temperature, softening as their Tg is exceeded.
+parting line.
 
 Some blocks could incorporate their own electrical heating elements,
 catalyst foams, valves, and so on.  For thermal insulation, they could
@@ -22,6 +20,17 @@ example of gold leaf or aluminum foil.
 
 Microfluidic devices are capable of executing many experiments at
 once, and are widely used for this in biology today.
+
+At ordinary temperatures gaskets would be made of teflon,
+but higher-temperature blocks would use gaskets that are brittle at
+room temperature, softening as their Tg is exceeded.  Alternatively,
+modern fabrication technology is capable of shaping mating faces to
+match with submicron precision, which by itself may reduce leakage
+sufficiently without gaskets.  If not, greasing the mating faces with
+liquid (whether water, table salt, sulfur, H₂SO₄, lithium with its
+delightfully low vapor pressure, other liquid metals such as lead-tin
+solder, or something else) may be an option, although they probably
+couldn't be separated cold.
 
 There is in most cases no need for the surface of vessels to have a
 significant affinity for liquids; superhydrophobic or omniphobic
@@ -74,7 +83,10 @@ lamp”.
 Yttria-stabilized zirconia is already seeing some use in labware, but
 usually in a non-transparent form — though transparent YSZ is widely
 used for jewelry.  It is outstandingly resistant to corrosion, fairly
-hard (though less so than alumina), and above all, tough.
+hard (though less so than alumina), and above all, tough.  When hot
+(900°–1300°, maybe lower) it conducts electricity in the form of
+oxygen ions, and thus can be used to electrolytically add or remove
+oxygen from a hot reagent.
 
 Other [transparent
 ceramics](https://en.wikipedia.org/wiki/Transparent_ceramics) include
@@ -101,3 +113,33 @@ Teflon can withstand both higher temperatures and more corrosive
 materials, and many plastics and even metals can have their surfaces
 fluorinated in order to make them more inert to their contents, as
 well as in most cases decreasing wettability, as mentioned earlier.
+
+Blocks can be instrumented with not only stir bars and heaters but
+pumps, thermometers, pH meters, dielectric spectrometers, regular
+spectrometers, imaging spectrometers, sonar (to measure specific
+acoustic impedance, speed of sound (from which density can be
+inferred), and distance to a liquid surface), immersion densitometers,
+ion exchange beds, flow meters, chromatography columns, distillation
+columns, NMR equipment, reflectometers, X-ray fluorescence and
+diffractometry equipment, and strain gauges for both pressure and
+weight.
+
+Pumps need not use a shaft through a sliding seal; like stir bars,
+their impeller can be driven by a magnetic field from without, a trick
+even easier to do with a flow meter.  Also, piezoelectric devices can
+set up oscillations in the fluid that drive a "fluidic diode" type of
+pump; in some cases pure fluidic pumping driven by a stream of a
+friendlier fluid can be used; and in some cases peristaltic pumping is
+applicable.  In the special case of conductive liquids,
+magnetohydrodynamic pumping can be used.
+
+By moving a supporting rigid support along an unchanging beam and
+measuring the changing torque at the support, the mass distribution of
+the beam can be easily calculated, most precisely toward the center of
+the beam.  In general there is a tradeoff between precise measurement
+of weight and sealed couplings that permit easy fluid passage through
+the apparatus, but (at least without a pressure difference between
+inside and outside) it can be eased somewhat with flexible couplings,
+in particular plane-like couplings, like flexible circuit boards with
+fluid channels bored through them.
+
