@@ -164,7 +164,8 @@ have *arbitrary* change.  Incrementalizing the procedure in this way
 is not helpful for gradient descent as such, since very few of the
 components of the gradient are ever precisely 0, but if we modify the
 optimization procedure to search along only one or a few dimensions of
-P at a time — perhaps the ones whose component in the gradient is
+P at a time
+("coordinate descent") — perhaps the ones whose component in the gradient is
 largest — then we may be able to get a big speedup out of this kind of
 incrementalization.  SKETCHPAD's constraint-satisfaction algorithm
 used a relaxation approach somewhat similar to this.
@@ -176,6 +177,13 @@ produced by self-adjusting computation can be used directly for
 reverse-mode automatic differentiation.  I suspect the usual
 periodic-checkpoint approach to reverse-mode automatic differentiation
 may be more difficult to apply to self-adjusting computation.)
+
+(When doing coordinate descent with some kind of memoization, it may
+be possible to speed the affair up by not memoizing the intermediate
+evaluations during each line search or hyperplane search. Also,
+updating the gradient incrementally would probably blow all the
+advantages of incrementalization, so maybe you want to do that search
+with the method of secants or something.)
 
 I think the self-validating arithmetic approaches mentioned above can
 also offer, in some cases, an alternative incrementalization approach.

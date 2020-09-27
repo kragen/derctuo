@@ -56,8 +56,11 @@ produces hydrogen.  The MAGIC engine secondarily burns the hydrogen
 produced in air to recover the enthalpy of formation of the water,
 which was drawn from the initial water–magnesium reaction.  [Water's
 standard enthalpy of formation][4] is -285.83 ±0.04 kJ/mol and its
-molar mass is 18.01528(33) g/mol.  Magnesia's are 601.6 ±0.3 kJ/mol
-and 40.304 g/mol; although I'm not very sure of my understanding of
+molar mass is 18.01528(33) g/mol.  Magnesia's are -601.6 ±0.3 kJ/mol
+and 40.304 g/mol (compared to, say,
+-1675.7 kJ/mol and 101.960 g/mol for [alumina][8],
+nearly the same energy density);
+although I'm not very sure of my understanding of
 the thermochemistry, I think this means that splitting the water sucks
 up about half of the heat you'd otherwise get out of the reaction,
 since both MgO and H₂O have a single oxygen, so a mole of H₂O produces
@@ -65,6 +68,7 @@ a mole of MgO; so you would need about twice the amount of magnesium
 to produce a given amount of energy.
 
 [4]: https://en.wikipedia.org/wiki/Properties_of_water
+[8]: https://en.wikipedia.org/wiki/Aluminium_oxide
 
 The [hydrogen][6] also soaks up 28.836 J/mol/K of heat, lowering the
 potential maximum temperature further, but I think by another factor
