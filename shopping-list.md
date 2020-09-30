@@ -68,3 +68,14 @@
 - clay
 - kaolin
 - resins?
+
+## Paint store
+
+- converter
+- hematite
+- glow-in-the-dark
+- resins!
+- waterglass?
+- lime?
+- carbon
+- masilla reparadora inoxidable?
