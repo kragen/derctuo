@@ -183,7 +183,7 @@ be possible to speed the affair up by not memoizing the intermediate
 evaluations during each line search or hyperplane search. Also,
 updating the gradient incrementally would probably blow all the
 advantages of incrementalization, so maybe you want to do that search
-with the method of secants or something.)
+with successive parabolic interpolation or something.)
 
 I think the self-validating arithmetic approaches mentioned above can
 also offer, in some cases, an alternative incrementalization approach.
@@ -225,6 +225,8 @@ sort of "safe" or "home" position likely to do minimal further damage,
 until a new plan can be formulated.  Less dangerous departures from
 expected results may permit the original plan to continue while new
 plans are hatching.
+
+XXX anytime
 
 Indirection in construction and design
 --------------------------------------
