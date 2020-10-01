@@ -35,3 +35,18 @@ had the metals, but the metals are a huge pain.
 
 Slaked lime is, of course, another possibility, but it probably needs
 to be freshly calcined, which is also not easy to do in this kitchen.
+
+A somewhat less mild base, with its own toxicity problems, is sulfide
+of soda.  It is made by carbothermic reduction of sal mirabilis and
+can also be made from sulfide of lime with enough washing soda, though
+[markgollum says the yield is
+poor](http://www.sciencemadness.org/talk/viewthread.php?tid=1245&page=2).
+I am not sure if sulfide of lime also acts as a base, but it can be
+produced by carbothermic reduction of alabaster or, along with washing
+soda, from chalk and sulfide of soda, as practiced by that great
+physician; or, historically, by heating oyster shells with sulfur to
+red heat, though less than 1084°, again according to markgollum.
+Slaked lime with sulfur is also reported to work at only around 100°.
+Sulphuretted hydrogen over muriate of lime has also been suggested,
+though carbonic acid gas liberates sulphuretted hydrogen from the
+sulfide of lime.
