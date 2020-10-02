@@ -2,6 +2,9 @@ I want to snarf some of sciencemadness before it goes down, such as:
 
 <http://www.sciencemadness.org/talk/viewthread.php?tid=1245&page=2>
 
+Initial look at URL patterns
+----------------------------
+
 That thread is in forum 2
 <http://www.sciencemadness.org/talk/forumdisplay.php?fid=2>, which has
 216 pages such as
@@ -17,6 +20,9 @@ and include images like
 There's the risk that a thread in that forum might link to a thread in
 another forum, and then another, etc., but I think that mostly won't
 happen.
+
+First stab at crawling
+----------------------
 
 So some regexps would be something like
 
@@ -56,14 +62,41 @@ whole URL, just the beginning (or maybe anywhere).  Also I hadn't
 allowed the &page= on the viewthread regexp at the time, so I guess
 it's pretty certain.
 
+A second attempted crawl
+------------------------
+
 All right, trying again; seems to be working better now:
 
     time wget -r -l inf -np --regex-type pcre -w 17 --retry-connrefused \
       --accept-regex 'http://www\.sciencemadness\.org/talk/(?:images/.*|files\.php\?pid=\d+&aid=\d+|viewthread\.php\?tid=\d+(?:&page=\d+)?|forumdisplay\.php\?fid=2(?:&page=\d+)?)$' \
       http://www.sciencemadness.org/talk/forumdisplay.php?fid=2
 
+(Apologies for the poorly formatted regexp.  Probably `(?x:...)`
+formatting across lines would have been a good idea...)
+
 Initially I tried it with `-w 1.7` until I was sure I'd fixed *that*
 problem.  Now, half a gig later, it seems to be doing okay, though
 some images have been uploaded twice.  Maybe `--page-requisites` would
 be a good idea but I don't know how it interacts with
-`--accept-regex`.
+`--accept-regex`.  Maybe also `-k --adjust-extension` would also be
+useful.
+
+After 20-some hours this seems to be doing okay with something like
+1200 thread pages in 700 threads and 3000 attachments successfully
+downloaded, totaling 1.1 GB:
+
+    while :; do
+        echo "$(ls talk/|grep -Po 'tid=\d+'|sort -u | wc -l)" \
+             "$(ls talk/|grep -Po 'tid=\d+(?:&page=\d+)?'|sort -u | wc -l)" \
+             "$(ls talk/|grep -Po 'aid=\d+'|sort -u | wc -l)"
+        sleep 10m
+    done
+
+There are a few cases where the same file is downloaded under two
+different attachment IDs, resulting in some bloat, but it seems to be
+a minority of the total.
+
+The pagination of the forum goes up to page 216, and I think it's 30
+threads per page, suggesting that the total number of threads is a bit
+under 6500, and so I'm something like 11% done.  (If so, I'm going to
+run out of space on this disk.)
