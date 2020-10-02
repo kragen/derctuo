@@ -100,3 +100,8 @@ The pagination of the forum goes up to page 216, and I think it's 30
 threads per page, suggesting that the total number of threads is a bit
 under 6500, and so I'm something like 11% done.  (If so, I'm going to
 run out of space on this disk.)
+
+Aha, in fact it says on the front page of the forum: 98022 posts in
+6460 threads ("topics").  Total stats: 36333 topics, 497573 posts,
+288119 members.  So the forum I'm snarfing is about 20% of the total
+number of posts, and I'm about 10% or 15% done with it.
