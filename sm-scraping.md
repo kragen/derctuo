@@ -105,3 +105,16 @@ Aha, in fact it says on the front page of the forum: 98022 posts in
 6460 threads ("topics").  Total stats: 36333 topics, 497573 posts,
 288119 members.  So the forum I'm snarfing is about 20% of the total
 number of posts, and I'm about 10% or 15% done with it.
+
+I was missing this file:
+
+    wget -x http://www.sciencemadness.org/talk/js/header.js
+
+And this directory:
+
+    wget -r -w 21 -np http://www.sciencemadness.org/scipics/
+
+...which turns out to have a lot of interesting stuff in it.
+
+After another day I'm up to 1412 threads, 2236 pages, and 6201
+attachments, 2.1 gigabytes; one quarter done with this forum.
