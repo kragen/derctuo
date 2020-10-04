@@ -95,7 +95,7 @@ Journals, topics, and identities
 An *identity* is an agent in a distributed system, such as a human or
 a running program.  A *topic* is a set of messages an identity might
 want to subscribe to.  Prate’s gossip protocol, described above, does
-not directly provide the ability to subscribe to or "follow" topics,
+not directly provide the ability to subscribe to or “follow” topics,
 which is surprising because it is claimed to provide pub-sub.  It only
 provides the ability to subscribe to journals, which is implemented by
 asking other peers to send you pages from them.
@@ -149,3 +149,35 @@ Whatever solution is adopted to this problem, allowing complete
 unknowns to establish initial contacts, is vulnerable to Sybil attacks
 and spam, and so it cannot be considered reliable.  But that does not
 mean that no solution exists.
+
+Alternative terminology
+-----------------------
+
+I’ve considered a number of alternative terms for “journal” and
+“page”.  Perhaps “journal” should be “feed”, “stream”, “channel”,
+“ledger”, “scroll”, “book”, “codex”, “file”, “hair”, “thread”, “tune”,
+“battery”, “log”, “dynasty”, or “chain”, while perhaps “page” (the
+unit of committing to a journal) should be “transaction”, “line”,
+“drop”, “entry”, “scrap”, “chapter”, “cell”, “verse”, “slice”,
+“parcel”, “morsel”, “packet”, “commit”, “king”, “block”, or “link”.
+So we might say we append commits to a log, or lines to a file, drops
+to a stream, or entries to a ledger, or kings to a dynasty, rather
+than pages to a journal.
+
+“Page” has the misleading connotations of mutability and a fixed
+size. “Log”, “journal”, and “ledger”, and to a lesser extent “feed”,
+have the right append-only connotation.
+
+“Appending lines to a file” or “to a log” sounds reassuringly low-tech
+and helpfully connotes variable-sized-ness, but misleadingly connotes
+a size closer to 64 bytes than, say, 2048, which I think is more
+likely in the sweet spot.  It also misleadingly connotes plain text,
+and it might lead to confusion when we’re trying to talk about the
+implementation: “What do you mean, the file is stored in several
+files?”
+
+[Secure Scuttlebutt](secure-scuttlebutt.md) uses “feed” and “message”,
+and following that convention might help comprehensibility for people
+who know SSB.  [Kafka](ccn-streams.md) uses “topic partition”
+(described as an “ordered ‘commit log[]’”, leading me to favor “log”
+and “commit”) and “event”.
