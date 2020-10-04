@@ -3,7 +3,8 @@ energy of 24.7 MJ/kg.  This is among the highest energy densities of
 any easily burnable fuel — iron, polystyrene, polyethylene, and
 lithium borohydride are similar, while the more difficult aluminum,
 carbon, and silicon are up in the 70–84 MJ/ℓ range.  (See, however,
-[the note on aluminum-air batteries](aluminum-air-batteries.md).)  It
+[the note on aluminum-air batteries](aluminum-air-batteries.md)
+and the note on [lithum as a fuel](lithium-fuel.md).)  It
 excels iron at specific energy, and polystyrene, polyethylene, and
 lithium borohydride excel it.  But burning polystyrene, polyethylene,
 and lithium borohydride produces a lot of gas, spreading out the heat
