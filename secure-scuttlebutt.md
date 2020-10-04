@@ -111,6 +111,7 @@ signifying permanence in Chinese.  (You might want to use the
 “URL-safe” variant of base64 in which `-` and `_` are used instead of
 `/` and `+`; in that way you could still interpret `/` as a path
 separator in the usual way.)  On the downside, “p9” is Chromium’s
+and Microsoft WSL's
 server implementation of the 9P protocol, so it might not be a good
 name for a protocol identifier.
 
