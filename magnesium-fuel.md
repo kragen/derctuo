@@ -9,9 +9,13 @@ lithium borohydride excel it.  But burning polystyrene, polyethylene,
 and lithium borohydride produces a lot of gas, spreading out the heat
 a great deal.  So, for compact, easily ignited fuel to produce a high
 temperature, magnesium is pretty much tops.  As a bonus, it’s pretty
-abundant and easily electrowon from seawater.
+abundant and easily obtained from seawater; see notes below on
+smelting.
 
 [0]: https://en.wikipedia.org/wiki/Energy_density#Tables_of_energy_content
+
+Energetics of magnesia
+----------------------
 
 [Magnesia][1] has a molar mass of 40.3 g/mol and a heat capacity
 around room temperature of 37.2 J/mol/K; dividing these two gives an
@@ -61,7 +65,7 @@ and 40.304 g/mol (compared to, say,
 -1675.7 kJ/mol and 101.960 g/mol for [alumina][8],
 nearly the same energy density);
 although I'm not very sure of my understanding of
-the thermochemistry, I think this means that splitting the water sucks
+the thermodynamics, I think this means that splitting the water sucks
 up about half of the heat you'd otherwise get out of the reaction,
 since both MgO and H₂O have a single oxygen, so a mole of H₂O produces
 a mole of MgO; so you would need about twice the amount of magnesium
@@ -81,6 +85,14 @@ that exceed magnesia's boiling point.
 temperature from magnesium and water.)
 
 [5]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5090637/
+
+Using oxygen rather than water you should get the full 601.6 kJ/mol,
+which divided by magnesium’s 24.3 g/mol works out to 24.8 MJ/kg, close
+to the 24.7 cited above.  This makes me think I *am* understanding the
+thermodynamics properly.
+
+Engine design
+-------------
 
 For controlling the reaction rate, the most appealing option would
 seem to be preheating the magnesium to somewhat below its melting
@@ -109,6 +121,9 @@ would be desired because of limited surface area — from the time
 during which the heat is transferred to where it will be used, which
 might be shorter or longer than the combustion time.
 
+Recharging, or smelting
+-----------------------
+
 Recharging spent magnesium fuel should be considerably easier than the
 analogous process for aluminum, which is especially interesting for
 use as a motor vehicle fuel.  Something like three fourths of
@@ -118,7 +133,8 @@ mixed MgO and ferrosilicon powders at 1200°–1400°, and further
 stabilizing the silica byproduct with CaO.  However, the historically
 dominant process was electrolysis of molten MgCl₂ produced from HCl
 and MgO; the electrolysis releases the Cl₂, which can be
-exothermically recombined with H₂ with ultraviolet light.  Pure MgCl₂
+exothermically recombined with H₂ with ultraviolet light,
+even in aqueous solution, which tames the process a bit.  Pure MgCl₂
 melts at 714°, but, e.g., Davy fluxed it with corrosive sublimate to
 discover magnesium at a tamer temperature; so a recharging apparatus
 of a reasonably small size and temperature might be feasible.
@@ -139,3 +155,24 @@ so a distillation step inherently purifies the reaction product.
 process has been used to smelt iron, silicon, tantalum, and titanium.)
 
 [7]: https://web.archive.org/web/20131113035743/http://www1.eere.energy.gov/vehiclesandfuels/pdfs/merit_review_2011/lightweight_materials/lm035_derezinski_2011_o.pdf "Solid Oxide Membrane (SOM) Electrolysis of Magnesium, Powell et al., 2011"
+
+Magnesium sulfide
+-----------------
+
+Sulfur is an alternative oxidant; MgS has a molar mass of 56.38 g/mol
+and an enthalpy of formation of -347 kJ/mol, which works out to 14.3
+MJ per kg of magnesium or 6.2 MJ per kg accounting for the oxidant as
+well.  This reaction is used commercially to remove unwanted sulfur
+from steel.  It doesn’t melt until 2226°, and its boiling point is not
+known, though probably a bit lower than magnesia’s.  Interestingly, it
+can react with oxygen to give epsom salt rather than the little-known
+sulfite.
+
+The sulfide’s heat capacity at room temperature is 45.6 J/mol/K, which
+works out to a specific heat of 0.809 J/g/K.  This extrapolates out to
+7600 K.  This is a lot cooler than the extrapolated temperature for
+magnesia but still pretty toasty.
+
+This might be useful in cases where limiting the reaction rate is not
+desired, but it probably isn’t safe in more than milligram quantities
+because of the rapidity of the reaction.
