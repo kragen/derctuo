@@ -361,7 +361,8 @@ Lithium acetate 40.8%; nitrate 70%; sulfate 34.8%; tartrate 27%.
 
 Nickel acetate "easily soluble", nitrate 94%; sulfate 44%; everything
 else pyrolyzable almost insoluble.  (Its highly soluble chloride is
-not relevant.)
+not relevant.)  Hexaamminenickel chloride is soluble in anhydrous
+ammonia and decomposes with heat, presumably to yield nickel.
 
 Ammonium paratungstate pyrolyzes to tungsten trioxide at 600°, which
 is the soft mineral tungstite; the paratungstate ion has a tendency to
