@@ -1,5 +1,5 @@
 So I just looked at [Secure Scuttlebutt](secure-scuttlebutt.md) and
-I'm trying to figure out what would be better.  Layering would be
+I’m trying to figure out what would be better.  Layering would be
 better.
 
 The secure gossip protocol
@@ -19,7 +19,7 @@ concatenation of the header and the body.
 
 When two *peers* are talking about a journal --- later we shall
 discuss how this may come to pass --- which is identified by a *hash*
-of the journal's public key, they can ask one question:
+of the journal’s public key, they can ask one question:
 
 - Please send me pages N and up from journal X, up to a maximum of M
   bytes.
@@ -27,8 +27,8 @@ of the journal's public key, they can ask one question:
 The polite response to this question takes of one of the following
 forms:
 
-- I can't or would prefer not to.
-- I know pages numbered up to N' from journal X, whose public key is
+- I can’t or would prefer not to.
+- I know pages numbered up to N’ from journal X, whose public key is
   Y.  Page N consists of 301 bytes: <....>.  Page N+1 consists of 1820
   bytes: <...>.  Page N+2 consists of 238332 bytes.
 
@@ -36,7 +36,7 @@ The positive response may include the contents of zero or more pages.
 It includes the full public key, since the public keys use Ed25519 and
 are therefore only 32 bytes, which is compact enough to always send.
 The pages may be sent immediately or not until later; indeed, they may
-not exist at the time they are requested.  Consequently N' may be less
+not exist at the time they are requested.  Consequently N’ may be less
 than the maximum page number sent.
 
 The final information sent for a positive response is, at times, the
@@ -74,9 +74,9 @@ Again, as in BitTorrent, you might choose which peers and journals to
 devote your resources to based on your past interactions with them
 and/or their identities.  For example, if a peer asks you for pages
 from journal X, you might ask them for pages from the same journal,
-especially if you couldn't satisfy their request.  And if they do
+especially if you couldn’t satisfy their request.  And if they do
 satisfy your requests, you might prioritize satisfying their requests
-in the future, perhaps even subscribing to journals you aren't really
+in the future, perhaps even subscribing to journals you aren’t really
 interested in, but that they have expressed interest in.  As another
 example, you might send requests for pages optimistically to peers who
 you have no real reason to think can satisfy them.
@@ -94,8 +94,8 @@ Journals, topics, and identities
 
 An *identity* is an agent in a distributed system, such as a human or
 a running program.  A *topic* is a set of messages an identity might
-want to subscribe to.  Prate's gossip protocol, described above, does
-not directly provide the ability to subscribe to or "follow" topics,
+want to subscribe to.  Prate’s gossip protocol, described above, does
+not directly provide the ability to subscribe to or “follow” topics,
 which is surprising because it is claimed to provide pub-sub.  It only
 provides the ability to subscribe to journals, which is implemented by
 asking other peers to send you pages from them.
@@ -134,7 +134,7 @@ Granovetter diagram, who can introduce her to still others,
 progressively widening her circle of acquaintances.  But how can the
 progress get started?
 
-For example, suppose there's a well-known journal (call it Factsheet
+For example, suppose there’s a well-known journal (call it Factsheet
 9) that periodically publishes new lists of journals that publish on
 particular topics.  If you want to subscribe to news about wildfires,
 you can subscribe to Factsheet 9, peruse its past pages for
@@ -149,3 +149,35 @@ Whatever solution is adopted to this problem, allowing complete
 unknowns to establish initial contacts, is vulnerable to Sybil attacks
 and spam, and so it cannot be considered reliable.  But that does not
 mean that no solution exists.
+
+Alternative terminology
+-----------------------
+
+I’ve considered a number of alternative terms for “journal” and
+“page”.  Perhaps “journal” should be “feed”, “stream”, “channel”,
+“ledger”, “scroll”, “book”, “codex”, “file”, “hair”, “thread”, “tune”,
+“battery”, “log”, “dynasty”, or “chain”, while perhaps “page” (the
+unit of committing to a journal) should be “transaction”, “line”,
+“drop”, “entry”, “scrap”, “chapter”, “cell”, “verse”, “slice”,
+“parcel”, “morsel”, “packet”, “commit”, “king”, “block”, or “link”.
+So we might say we append commits to a log, or lines to a file, drops
+to a stream, or entries to a ledger, or kings to a dynasty, rather
+than pages to a journal.
+
+“Page” has the misleading connotations of mutability and a fixed
+size. “Log”, “journal”, and “ledger”, and to a lesser extent “feed”,
+have the right append-only connotation.
+
+“Appending lines to a file” or “to a log” sounds reassuringly low-tech
+and helpfully connotes variable-sized-ness, but misleadingly connotes
+a size closer to 64 bytes than, say, 2048, which I think is more
+likely in the sweet spot.  It also misleadingly connotes plain text,
+and it might lead to confusion when we’re trying to talk about the
+implementation: “What do you mean, the file is stored in several
+files?”
+
+[Secure Scuttlebutt](secure-scuttlebutt.md) uses “feed” and “message”,
+and following that convention might help comprehensibility for people
+who know SSB.  [Kafka](ccn-streams.md) uses “topic partition”
+(described as an “ordered ‘commit log[]’”, leading me to favor “log”
+and “commit”) and “event”.
