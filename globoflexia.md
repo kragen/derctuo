@@ -149,6 +149,7 @@ fiber reinforcement are draped.
 For the adhesive, rather than wheat paste, you could use:
 
 - PVA glue;
+- hide glue;
 - silicone;
 - epoxy resin and similar resin systems, if they don't attack the
   balloons;
@@ -176,6 +177,8 @@ For the adhesive, rather than wheat paste, you could use:
 - paraffin or other waxes, if the balloons can handle their melting
   temperatures;
 - spray foam;
+- linseed oil;
+- castable refractory mix;
 - other adhesives;
 - some mix of the above.
 
@@ -198,10 +201,13 @@ For the fiber reinforcement, instead of paper, you could use:
   or in printed circuit boards, although if the binder is strongly
   basic you might need to use alkali-resistant fiberglass;
 - carbon fiber;
+- large flakes of mica;
 - ceramic fiber like those used in refractory blankets and flocking,
   if resistance to high temperatures is desired (typically these
   fibers are mixes of mullite, alumina, zirconia, and silica);
 - basalt fiber;
+- webbing like that used in car seatbelts, made from nylon or other
+  fibers;
 - steel window screens;
 - aluminum or fiberglass window screens, if the binder is not strongly
   basic;
@@ -263,7 +269,8 @@ whether inert fillers or reactive; for example:
   bamboo fibers, or straw;
 - broken glass, for example for decorative purposes;
 - abrasives, such as aluminum oxide or silicon carbide;
-- pesticides such as copper chloride or blue vitriol to prevent
+- pesticides such as copper chloride, blue vitriol,
+  salt, or clove oil to prevent
   biodegradation, for example by insects eating wheat paste and cotton
   fibers;
 - UV blockers such as titanium dioxide to prevent photodegradation;
@@ -348,16 +355,38 @@ fiber reinforcement after it is already in position, but in other
 cases, especially with porous adhesives, it will be most convenient to
 combine them ahead of time.
 
+During the process of adding layers of fiber reinforcement and
+(possibly filled) adhesive, it may be convenient to embed other
+elements in the object being constructed, in non-random positions.
+For example, you can embed sensors, heating elements, LEDs or other
+lights, antennas, pancake coils, and wires to feed all of these.  For
+some purposes it is best to cover these with a layer of adhesive
+and/or fiber, for example to prevent abrasion or electrical short
+circuits, while for other purposes exposed electrodes or other
+actuators may be useful.
+
 ### Specific combinations ###
 
 The above outlines a large design space of processes, a few of which
 are already in use:
 
 - The ordinary kinds of papier-mâché, which commonly use untwisted
-  balloon forms.
+  balloon forms, but sometimes wire armatures.
 - "Cloth mache" [sic] in which fine cotton cloth is used instead of
   paper, either as the last layer or as several layers, sometimes with
   PVA glue rather than wheat paste.
+- Duct tape, masking tape, strapping tape, scotch tape, and electrical
+  tape are all composites of adhesive with reinforcing fibers;
+  strapping tape fibers are often parallel glass fibers with a PET or
+  polypropylene backing, masking tape is paper, scotch tape is
+  cellophane, electrical tape is generally plasticized PVC, and duct
+  tape is often polyester scrim with an LDPE backing.  (Velma Stoudt's
+  original "duck tape" used cotton duck, as the name implies.)  Duct
+  tape also typically includes a powdered aluminum filler in the LDPE
+  for reflectivity.  All of them can use a wide variety of so-called
+  pressure-sensitive adhesives.  So, pre-combining the adhesive with
+  the reinforcing fiber makes for a very convenient and versatile way
+  to make and repair things.
 - Découpage, in which the "fiber reinforcement" is primarily
   decorative and the adhesive is transparent, and the form is usually
   made by carpentry rather than globoflexia.
@@ -404,7 +433,9 @@ are already in use:
   reinforcement.
 - Traditional gauze-and-plaster medical casts for healing broken bones
   were an inspiration, as mentioned above.  In this case the form is
-  grown in a womb rather than twisted from balloons.
+  grown in a womb rather than twisted from balloons.  This technique
+  turns out to go back to the Middle Kingdom of ancient Egypt, around
+  4000 years ago; archaeologists call it "cartonnage".
 - Shotcrete has been on many occasions sprayed onto inflated domes to
   make Barbapapa-style houses.  In this case the balloons are very
   large and not twisted.  Typically the concrete is portland cement,
@@ -481,11 +512,19 @@ The clay form of a hand is slipcast from a clay slip containing a
 mildly acidic flocculating additive, using a porous mold made of
 plaster of Paris.  The hollow slipcast clay form is demolded and
 tightly wrapped in four layers of loosely woven cotton or linen cloth,
-richly smeared with high-temperature acetic-cure silicone ("red RTV").
+richly smeared with high-temperature acetic-acid-catalyzed silicone ("red RTV").
 Once the silicone has cured, the clay interior is washed out with
 water and a mild base such as baking soda in order to deflocculate the
-clay.  The resulting piece, once the acetate has escaped, can
-withstand temperatures up to some 240°.
+clay.  The resulting piece, once the acetic acid has escaped, can
+withstand temperatures up to some 240°; substituting a cloth with
+higher-temperature capabilities should allow it to handle 280°
+continuously or brief exposures to 320°.
+
+It might be necessary to protect the cotton from hydrolysis by the
+acetic acid before curing is complete; this can be done either by
+replacing acetic-acid silicone with more expensive tin-catalyzed or
+platinum-catalyzed varieties, or (with lower certainty) by
+impregnating the cotton with a buffer of, for example, baking soda.
 
 This is a case where a balloon form shaped by globoflexia is probably
 better than clay, actually, because it's both easier to shape to the
@@ -501,3 +540,166 @@ light through, due to the gauze's light weave.  Alcohol is emitted as
 the shellac dries, but this is a fast process; once dry the material
 emits almost no VOCs.
 
+#### A coarse filter unplugged by heat ####
+
+If you stamp one or two layers of a loose steel mesh such as a window
+screen, impregnated with warm paraffin wax, with a die, then you have
+a waterproof and chemically inert plug which, at a predetermined
+temperature (one calibratable within 5°) will melt and allow liquid to
+flow through freely, while filtering out particles larger than the
+mesh.  This could be useful for some kinds of over-temperature safety
+valves, for example for resin casting, where, if the resin starts to
+overheat, the ideal thing to do might be to dump it quickly out of the
+mold into something that dilutes and cools it.  It is possible for
+this mesh to have a much larger area than the aperture it covers,
+which may be desirable for keeping it from getting clogged by
+particulates.
+
+Under some circumstances it might be better to use injection molding
+to inject the paraffin around the reinforcing mesh.  This would
+provide more consistent paraffin thickness but, I think, less
+consistent mesh protection thickness.
+
+#### Ultralight tools for corrosive environments ####
+
+By cutting the shape of a stirrer out of, for example, styrofoam, you
+can get a very lightweight tool.  But styrofoam is soluble in all
+kinds of solvents, and it's kind of weak.  By wrapping it with
+fiberglass cloth, as is done to construct some boats and aircraft, you
+can greatly strengthen it.  A coating of, for example, paraffin,
+low-density polyethylene, teflon, epoxy, or polyester casting resin,
+could both firmly adhere the fiberglass reinforcement to the foam and
+add substantial chemical resistance.
+
+#### Carved aircrete furniture ####
+
+You can pour portland cement foamed in the usual way, by mechanical
+aeration of a surfactant-water solution before mixing in the cement,
+into forms that are merely blocks.  The next day, once the cement has
+partly set, you can sculpt these blocks into desirable shapes using
+hand tools like hacksaws, wood rasps, wire saws, hammers, and so on.
+The resulting surface will be porous and friable, and therefore not
+directly suitable for furniture use, and also an ugly gray unless you
+used super fancy portland cement.  Several coats of lime mortar
+(slaked lime and quartz construction sand) can give it a hard shell,
+perhaps reinforced in key places with copper wires.  The next day, a
+coat of polyurethane finish for heavy-duty floors can seal the lime
+and provide a softer, warmer surface to sit on or rest your feet on.
+
+#### Fiber-reinforced pottery ####
+
+The usual kind of pottery is fragile.  The ceramic fibers used in
+foundry blankets are much less fragile, and some of them can be used
+up to 1600°.  You could perhaps take segments of refractory-fiber
+cloth like these foundry blankets, dip them in a clay slip, and drape
+them over forms (for example, blow-molded from thermoplastic) to make
+a shape of two or three millimeters of thickness.  Once the clay slip
+was plastic, but before it became leather-hard, you could add another
+millimeter of clay to the inside and outside.  After drying and
+biscuit-firing these pottery pieces in the usual way, the clay should
+be sintered into a solid body; you can get a good biscuit fire out of
+at least some ball clays in 6 hours at 1020°, at which temperature
+some ceramic fibers are still quite inert.  So they should remain
+embedded as fibrous reinforcement in the finished ceramic, making it
+dramatically less fragile.
+
+However, care must be taken to ensure that the chemistry of the clay
+is compatible with that of the blanket.  Pure zirconia fiber (or
+yttria-stabilized zirconia fiber) would probably be perfectly safe,
+but I think everybody includes at least alumina and usually silica in
+their ceramic foundry blanket fiber.  (Vendors of pure zirconia fiber
+say it can be used up to 2200°.)  I suspect that any low-firing clay
+would be able to flux and dissolve silica out of part-silica fiber,
+and maybe alumina too.  The end product might still be stronger than
+ordinary ceramics, though.
+
+Silicon carbide fibers are more widely available than zirconia fibers;
+four companies already sell them commercially, at least two since the
+1980s (under the names Nicalon, Tyranno, Sylramic, and Ultra SCS).  I
+think they are not attacked by clays at common pottery-firing
+temperatures, and they are already in use for reinforcing
+ceramics — but I think primarily ceramics otherwise made of sintered
+silicon carbide, not fired clay.
+
+If desired, a second glaze firing can glaze the pieces to give them
+waterproof surfaces and provide protection against abrasion and crack
+initiation.  However, this poses the risk that the more aggressive
+fluxing of the glaze might attack the fiber reinforcement; this is the
+reason for the extra protective layer of clay without fiber in it.  If
+this is a problem, a possible alternative to traditional glazing is
+waterglass allowed to dry on the ceramic and then crosslinked by, for
+example, exposure to calcium chloride.
+
+#### "Ceracement": refractory "ferrocement" ####
+
+The usual ferrocement recipe uses iron (and consequently a little iron
+oxide), portland cement, and quartz, none of which is very friendly to
+temperatures above 1000° or 1500°.  Calcium aluminate cement can
+replace the portland cement, and olivine, sapphire, or carborundum can
+replace the quartz, but what can replace the iron?
+
+Refractory metals like tantalum and niobium are well known, but very
+expensive.  Ceramic fibers like those mentioned above (zirconia,
+alumina, carborundum) might be adequate; the "ceracement" structure
+won't need flexurally-stiff reinforcement to hold it up, since it can
+hold itself up once the cement is set.
+
+At even higher temperatures calcium aluminate fails and needs to be
+replaced with higher-temperature castable refractory binders such as
+aluminum phosphate.
+
+#### Shatter-resistant grinding stones ####
+
+Modern synthetic grinding stones have a variety of compositions:
+sapphire, silicon carbide, cubic boron nitride, etc., bonded with
+rubber, thermoset resin, waterglass (mostly historically), Sorel
+cement, and so on.  But they tend to fail in a brittle fashion rather
+than a ductile fashion, which frequently kills people when they are
+spinning fast around people.
+
+Cutoff discs are like thin grinding wheels, but they are usually
+reinforced with a fiber, typically fiberglass, I think.
+
+Perhaps grinding wheels could be made with much heavier fiber
+reinforcement to encourage them to fail in a more ductile fashion.
+High-energy-capacity fibers like rubber, nylon, or music wire might
+work better for this than high-modulus fibers like fiberglass and
+basalt fiber.
+
+#### Water-activated concrete tape ####
+
+Coat a roll of cotton scrim fabric with a low-temperature nonpolar
+thermoplastic adhesive like EVA.  Heat the cloth and run it through a
+pile of premixed quick-setting dry lime cement and construction sand,
+which sticks to the EVA and coats the cloth.  Allow the cloth to cool
+before spooling it onto the takeup roll.  Seal the finished roll
+hermetically in a reclosable container.
+
+The resulting tape can be torn by hand like duck tape, although gloves
+are advised.  Once a form is wrapped with it to a few millimeters
+thick, and flexed into the desired shape, you can moisten the tape
+around the form to start the cement setting.  Water can soak through
+it easily, and it will amalgamate into a cotton-reinforced mortar
+mass.
+
+Perhaps such tape can be laid between bricks or stones to hold them
+together, rather than troweling in mortar.
+
+Other cements can be substituted, such as portland cement or calcium
+aluminate, which would give stronger results.  There may be
+faster-setting high-strength cement formulations that are not in
+traditional construction use and that would activate the tape even
+faster.  Using plaster of paris instead of the cements suggested would
+provide much faster results (and perhaps this is already in use) but
+much lower strength.
+
+One particularly interesting possibility is using dissolved
+sodium-silicate waterglass as cement, which is somewhat tacky
+immediately and will set up hard when dried; but a variety of things
+will cause it to set up immediately and become water-insoluble, such
+as carbon dioxide gas or, I think, calcium chloride or magnesium
+sulfate.  So you could perhaps spray solutions of those on the tape,
+once it is applied, from a spray bottle.
+
+Steel wire mesh would be a stronger alternative to cotton scrim, and
+might still be possible to tear by hand.
