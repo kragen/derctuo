@@ -149,7 +149,10 @@ fiber reinforcement are draped.
 For the adhesive, rather than wheat paste, you could use:
 
 - PVA glue;
-- epoxy resin, if it doesn't attack the balloons;
+- silicone;
+- epoxy resin and similar resin systems, if they don't attack the
+  balloons;
+- cyanoacrylate adhesive;
 - plaster of Paris (thank you, Javier Candeira!);
 - sodium silicate waterglass;
 - slaked lime, if it doesn't attack the balloons or fibers;
@@ -159,6 +162,7 @@ For the adhesive, rather than wheat paste, you could use:
   fibers, and refractoriness is desired;
 - Sorel cement, if it doesn't attack the balloons or fibers, and
   maximal strength is desired;
+- a so-called "geopolymer cement";
 - latex paint;
 - shellac;
 - polyurethanes;
@@ -166,15 +170,18 @@ For the adhesive, rather than wheat paste, you could use:
 - phenolic resin;
 - various kinds of solvent-based plastic cements such as PVC dissolved
   in acetone, if the solvent doesn't attack the balloons or fibers;
-- clay, whether simply allowed to dry or later fired;
+- constant-tack adhesives like those used in scotch tape;
+- wet clay, whether simply allowed to dry or later fired;
 - tar, though probably using a solvent rather than heat;
 - paraffin or other waxes, if the balloons can handle their melting
   temperatures;
+- spray foam;
 - other adhesives;
 - some mix of the above.
 
 For the fiber reinforcement, instead of paper, you could use:
 
+- nothing;
 - heavily perforated paper;
 - paper towels;
 - cotton cloth, whether light like cotton tulle or heavy like canvas,
@@ -196,10 +203,14 @@ For the fiber reinforcement, instead of paper, you could use:
   fibers are mixes of mullite, alumina, zirconia, and silica);
 - basalt fiber;
 - steel window screens;
-- aluminum window screens, if the binder is not strongly basic;
+- aluminum or fiberglass window screens, if the binder is not strongly
+  basic;
 - stainless steel cloth;
+- thicker and stronger metal reinforcement such as traditional rebar
+  tie-ups, hardware cloth, chicken wire, or expanded sheet metal;
 - copper wires;
 - gel-spun ultra-high-molecular-weight polyethylene fibers;
+- nonwoven bargain-basement felted polyester fabric ("friselina");
 - other fibers;
 - some mix of the above.
 
@@ -211,6 +222,13 @@ fiber keeps the adhesive cracks from opening wider and thus continuing
 to propagate.  Still, even weak fibers can hold the adhesive in
 position until it sets, and for some purposes the adhesive alone will
 be strong enough without any help from the "reinforcement".
+
+The fiber reinforcement may have other purposes as well, other than
+shaping or strengthening; for example, if the adhesive is transparent,
+decorative or informative images can be printed on the fiber
+reinforcement; conductive fiber reinforcement can provide Faraday-cage
+protection against EMI more cheaply and flexibly than sheet metal;
+gold leaf or aluminum foil can provide high reflectivity; and so on.
 
 It may be worthwhile to also include other additives in the adhesive,
 whether inert fillers or reactive; for example:
@@ -240,6 +258,7 @@ whether inert fillers or reactive; for example:
 - plasticizers like phthalate esters;
 - chopped fibers, for example of basalt fiber or any of the other
   types mentioned earlier, or other fibers such as hair clippings,
+  horsehair, paper fibers as in ordinary papier-mâché,
   sawdust or other wood fibers, grass clippings, used yerba mate,
   bamboo fibers, or straw;
 - broken glass, for example for decorative purposes;
@@ -248,6 +267,8 @@ whether inert fillers or reactive; for example:
   biodegradation, for example by insects eating wheat paste and cotton
   fibers;
 - UV blockers such as titanium dioxide to prevent photodegradation;
+- additives to increase effective heat capacity, such as
+  microencapsulated phase-change materials;
 - milled mica, stainless steel, aluminum powder, or other glitters for
   a sparkly metallic appearance;
 - catalysts;
@@ -264,12 +285,219 @@ support.  There are many other reasons you might want to use multiple
 layers, including making sandwich panels with a light, weak inner core
 and stronger faces, and allowing earlier layers time to dry.
 
+In cases where the first layer has no fiber reinforcement, it might be
+useful for that first layer to be sprayed onto the balloons rather
+than placed there by hand.  This would allow it to be applied more
+rapidly and easily, and it could perhaps be strong enough once
+hardened to support significantly more weight than the balloons
+themselves.  Spray foam seems particularly appealing for this
+application.
+
 If you combine this process with the foam-filling process you can get
 shapes built from tubes with strong, rigid, hard surfaces braced by a
 weaker foam within.
 
 Also, of course, most of these processes can be used on top of a form
-produced by some other method than globoflexia; for example, 3-D
-printing, bending a wire armature, using an existing object such as a
-vase, blowing glass, vacuum-forming plastic, blow-molding plastic,
-electrotyping, and so on.
+produced by some other method than globoflexia; for example:
+
+- 3-D printing;
+- bending a wire armature;
+- using an existing object such as a vase;
+- blowing glass;
+- vacuum-forming plastic;
+- blow-molding plastic;
+- electrotyping;
+- modeling with clay or other modeling compounds;
+- origami, whether with paper, sheets of PET or other plastic,
+  aluminum foil, or other materials;
+- commanding a motorized reusable "armature" to assume a certain
+  position until the papier-mâché draped over it hardens;
+- CNC machining;
+- cutting, folding, and assembling shapes out of cardboard or MDF,
+  though this requires special attention to the adhesive's water
+  content;
+- laser cutting;
+- piling up sand or other soil, whether with an additional binder or
+  not;
+- assembling Legos, Meccano, Ramagon, Heckballs, modular T-slot
+  aluminum framing, or other reusable "construction set" parts;
+- building latticework structures out of other kinds of members, for
+  example, metal trusses or Tensegrities like Kenneth Snelson's;
+- manual carving of carveable materials such as metals, wood, foamed
+  concrete, alabaster, graphite, lightweight refractory bricks, tuff,
+  sandstone (natural or artificial), or papercrete;
+- hot-wire cutting of fusible foams such as styrofoam or
+  polyisocyanurate;
+- inflatable shapes made in ways other than balloon twisting; for
+  example, connecting sheets of polyethylene into a large balloon
+  sculpture using a hot-wire heat-sealing machine;
+- assembly of a variety of objects, for example with hot glue;
+- forming sheet metal, for example by hammering, stamping,
+  single-point incremental forming, or bead rolling;
+- assembling panels or other shapes cut or otherwise shaped from
+  closed-cell polymer foam or other materials;
+- carpentry;
+- basket weaving, whether from traditional materials such as bamboo
+  and rattan or non-traditional materials such as Ethernet cable and
+  sheet-metal strips;
+- other techniques for producing three-dimensional shapes;
+- some combination of the above.
+
+In some cases it will be most convenient to apply the adhesive to the
+fiber reinforcement after it is already in position, but in other
+cases, especially with porous adhesives, it will be most convenient to
+combine them ahead of time.
+
+### Specific combinations ###
+
+The above outlines a large design space of processes, a few of which
+are already in use:
+
+- The ordinary kinds of papier-mâché, which commonly use untwisted
+  balloon forms.
+- "Cloth mache" [sic] in which fine cotton cloth is used instead of
+  paper, either as the last layer or as several layers, sometimes with
+  PVA glue rather than wheat paste.
+- Découpage, in which the "fiber reinforcement" is primarily
+  decorative and the adhesive is transparent, and the form is usually
+  made by carpentry rather than globoflexia.
+- Standard fiberglass composite construction uses one or more layers
+  of fiberglass cloth as fiber reinforcement, sometimes laid up on top
+  of forms made by hot-wire cutting of styrofoam, then smoothed down
+  with epoxy.  Often additional layers of epoxy without cloth are
+  added after the first in order to provide a smooth surface without
+  any fiberglass sticking out of it.
+- "Textile-reinforced concrete" is ordinary portland cement reinforced
+  with high-modulus cloth rather than rebar; typical fibers used for
+  the textile include carbon fiber, AR glass, and basalt fiber.  The
+  forms are typically made of wood or styrofoam rather than by
+  globoflexia.  Making TRC forms by globoflexia would likely require
+  plastering the balloons first with a lightweight support material
+  such as ordinary papier-mâché.
+- Concrete canvas inflatable tents use a form made of a large
+  inflatable polyethylene bag to support a pre-sewn canvas fiber
+  reinforcement pre-impregnated with an adhesive system made of
+  portland cement and quartz construction sand, which is wetted with
+  water before inflation.
+- The same kind of concrete canvas is commonly used as a geotextile,
+  in which case the form is just the earth's surface.
+- "Ferrocement" uses a form made by bending rebar and "fiber
+  reinforcement" made of lighter-weight metal cloth, such as hardware
+  cloth or chicken wire; once the first layer of fiber reinforcement
+  is in place on the form, an adhesive system of typically portland
+  cement, quartz construction sand, and water is troweled on, often
+  followed by more layers of fiber reinforcement.  Usually a layer of
+  adhesive is also added to the *inside* of the structure to cover up
+  the steel.  The first layer of adhesive often includes a
+  chopped-fiber additive more to control the rheology of the mix so it
+  doesn't fall through the holes in the fiber reinforcement than to
+  strengthen the final product.  This has been used for decades for
+  lightweight buildings and cheap boats.
+- Very similar to ferrocement, fine-art sculptors commonly build forms
+  as bent-wire armatures, cover them with chicken-wire fiber
+  reinforcement, and trowel on a plaster of paris adhesive, with or
+  without strengthening fillers of sand and, for example, horsehair or
+  sisal.
+- Traditional lath-and-plaster construction makes forms of lath rather
+  than balloons, mixes horsehair and sand into the plaster-of-paris
+  adhesive additives to improve strength, and uses no further fiber
+  reinforcement.
+- Traditional gauze-and-plaster medical casts for healing broken bones
+  were an inspiration, as mentioned above.  In this case the form is
+  grown in a womb rather than twisted from balloons.
+- Shotcrete has been on many occasions sprayed onto inflated domes to
+  make Barbapapa-style houses.  In this case the balloons are very
+  large and not twisted.  Typically the concrete is portland cement,
+  sand, water, and chopped fiber, which last helps reduce slumping.
+- Papercrete is a very-low-compressive-strength, low-weight portland
+  cement concrete where consisting of portland cement, water, and
+  cellulose fibers from paper.  Sometimes it is applied to forms but
+  more commonly it is used to build walls.
+- Paperclay is a composite of cellulose fibers from paper, clay, and
+  typically sand or grog.  It is usually shaped by hand rather than
+  being applied to forms.  It has superior green strength to more
+  common clay materials, reputedly improving freedom of modeling.
+  When fired, the paper burns out, leaving a lightweight porous
+  material.
+- I have seen one person explain their system for constructing
+  lightweight RV furniture from blocks of styrofoam cut with a hot
+  knife, assembled, and then bonded together by coating the inner and
+  outer surfaces of the furniture with window screens glued to the
+  foam with latex paint.  This forms sandwich panels whose compressive
+  and shear stiffness come from the foam and whose tensile and
+  flexural strength comes from the window screens.
+
+However, the systematization suggests many new promising combinations.
+For example:
+
+#### Lime-concrete furniture ####
+
+The initial form is produced by globoflexia and wrapped in three
+layers of gauze strips dipped in fresh plaster of Paris.  Fifteen
+minutes later, steel window screens are draped over the plaster frame,
+and a thick mix of slaked lime, water, quartz construction sand, and
+chopped fibers is troweled onto the screens.  Two more such layers of
+screen and lime plaster are immediately applied.  A few hours later,
+the outer surface is painted with sodium silicate to increase its
+resistance to abrasion; sufficient air can still enter through the
+porous plaster and lime cement to cure the piece over the next 24
+hours.  Filling the final piece with foamed portland concrete, made in
+the usual way, is optional.
+
+#### Cement water pipes ####
+
+A balloon for twisting is inflated but not twisted.  It is wrapped in
+five layers of paper towels dipped in wet portland cement, sand, and
+chopped basalt fiber, leaving the balloon's ends exposed.  The entire
+resulting concrete tube is wrapped in stretch plastic wrap to keep it
+from drying out.  After 48 hours, the balloon is popped, exposing the
+inner surface of the pipe, which is then painted with a solution of
+potassium silicate to waterproof it.
+
+#### Bargain-basement roofing ####
+
+A light roof metal truss is built by bending and arc-welding together
+rebar.  Jute burlap cloth is dipped into hot tar and laid on top of
+the truss, one square meter at a time, overlapping squares in a
+shingled pattern.  Three layers should be sufficient for a rainproof
+roof sufficiently flexible not to suffer damage from hail.  However,
+it is a fire menace, it will get very hot in the sun and may drip, and
+you cannot walk on it.  Coating the top and bottom surfaces with
+aluminum foil will ameliorate these defects slightly.
+
+#### Cheap, lightweight inert pipes ####
+
+A balloon for twisting is inflated but not twisted.  A4-sized paper is
+dipped in low-melting paraffin and wrapped around the balloon in three
+layers.  Once the paraffin is cool, the balloon is popped or untied
+and removed.  The non-knot end of the balloon can be left open,
+forming a closed tube, or closed.  To improve strength, a fourth and
+fifth layer of paper dipped in two-component resin rather than
+paraffin can be added on the outside.
+
+#### Flexible heat-resistant oven mitts ####
+
+The clay form of a hand is slipcast from a clay slip containing a
+mildly acidic flocculating additive, using a porous mold made of
+plaster of Paris.  The hollow slipcast clay form is demolded and
+tightly wrapped in four layers of loosely woven cotton or linen cloth,
+richly smeared with high-temperature acetic-cure silicone ("red RTV").
+Once the silicone has cured, the clay interior is washed out with
+water and a mild base such as baking soda in order to deflocculate the
+clay.  The resulting piece, once the acetate has escaped, can
+withstand temperatures up to some 240°.
+
+This is a case where a balloon form shaped by globoflexia is probably
+better than clay, actually, because it's both easier to shape to the
+appropriate smooth blobby shape and easier to remove.  But it's
+important to remove it completely, because the balloon latex will
+probably fail at a much lower temperature.
+
+#### Translucent all-natural low-VOC objects ####
+
+By wrapping your twisted balloons in gauze soaked in shellac, you can
+get a waterproof, light, flexible material that allows significant
+light through, due to the gauze's light weave.  Alcohol is emitted as
+the shellac dries, but this is a fast process; once dry the material
+emits almost no VOCs.
+
