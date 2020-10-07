@@ -71,3 +71,22 @@
                     explanation
 
 This seems like it might really work as a Wiki thingy.
+
+So much for the user interface.  What should the storage format look
+like?
+
+The traditionalist approach would be to define a plain ASCII (or
+Unicode) text grammar and write a parser for it.  This would have the
+advantage of making source control easier.  But it also involves
+writing a parser and a deparser, as well as the user interface, and
+then fixing bugs where they mismatch.
+
+Probably a better approach is to serialize data in some kind of very
+general format that is still likely to be source-controllable.  The
+Lisp object-graph memory model maps reasonably well to something like
+YAML.
+
+It's possible to use multiple files like R Markdown notebooks, where
+the source is stored in one file and the rendered result in another
+file next to it (perhaps not checked in to Git).  Rendering to HTML is
+also super important.
