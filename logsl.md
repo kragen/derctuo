@@ -108,6 +108,19 @@ object such as a dictionary, a list, or a class instance, not a
 primitive object such as a string, a number, or null, which is
 represented as "???".
 
+Hmm, that restriction could be avoided, especially with colons:
+
+    # John Doe
+    [Person]
+    firstname: John
+    lastname: Doe
+    wife: (Mary Roe)
+
+Dictionary keys that are compound objects could be referred to by title:
+
+    (John Doe) 5
+    (Mary Roe) 18
+
 Python calling interface
 ------------------------
 
