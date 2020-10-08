@@ -114,7 +114,12 @@ And this directory:
 
     wget -r -w 21 -np http://www.sciencemadness.org/scipics/
 
-...which turns out to have a lot of interesting stuff in it.
+...which turns out to have a lot of interesting stuff in it.  And
+actually the default `-l 5` wasn't enough, snarfing only 499 MB in
+2249 files.
 
 After another day I'm up to 1412 threads, 2236 pages, and 6201
 attachments, 2.1 gigabytes; one quarter done with this forum.
+
+After another day my netbook crashed, and wget can't recover, so I
+need to find a better way to spider the site.
