@@ -1,5 +1,6 @@
 (From a discussion with Nick Johnson, though any errors are my
-responsibility, not his.)
+responsibility, not his.  And probably a lot of this is not novel,
+being implicit in Okasaki at least.)
 
 Bitcoin and similar systems include a hash of the previous block in
 each new block, forming a chain of blocks.  But verifying that any
@@ -181,3 +182,53 @@ is 180 milliseconds.
 
 (Hmm, actually I realize I didn’t include the chainheight annotation
 in the sizes of the forks, but the difference is not very large.)
+
+Application to LSM-trees
+------------------------
+
+Much of the logic above isn’t concerned with precisely what operation
+we do to merge together two trees into a larger tree.  In the above,
+it was simply a matter of constructing a new fork with the two trees
+as children, a constant-time and constant-space operation.  But it’s
+all highly suggestive of Lucene’s merge-based approach, also used in
+LevelDB, nowadays called a “log-structured merge tree”.  In an LSM
+tree, when you merge two 16-item segments into a 32-item segment, you
+have to read through each of them sequentially in order to sort them
+into order by key, perhaps constructing some kind of skip file or
+index to enable rapid random access by key.
+
+The amount of work becomes smaller if we use N-way merges: instead of
+first merging 1+1 = 2, then 2+2 = 4, then 4+4 = 8, then 8+8 = 16, then
+16+16 = 32, which involves appending an item to a new segment 63
+times, we directly merge 1 + 2 + 4 + 8 + 16 = 32, thus only doing it
+32 times.  We can also exchange some more variability in query time
+for a lower index construction time, by delaying merges for a longer
+time, say until the new segment will be 4× or 8× larger than the
+largest old segment being merged, not just 2× as in the examples
+above.
+
+The larger point, though, is that LSM-trees fundamentally involve more
+work per item than just concatenating them into ropes.  But it’s only
+logarithmically more work, and we can spread it evenly over the time
+when items are added in an analogous way.  The temporal sequence won’t
+be exactly the same: generating the 32-item merged node, done
+atomically at block 36 in the above example, will take 16 times as
+much work as generating the 2-item merged nodes, which in the above
+example are created at blocks, 2, 6, 37, etc.
+
+So we will generate these larger merged nodes gradually, over the
+course of adding several leafnodes.  And I think the amount of work we
+do per leafnode will gradually increase, but only logarithmically.  I
+haven’t worked out the reality yet.  Each new leafnode might include
+some logarithmically large set of pointers to segments it's merging
+and cursor positions in them, and a chunk of merged data.
+
+What does this have to do with blockchains?  Well, you could plausibly
+collectively generate a queryable database index in this way as part
+of a blockchain, but efficiency is in some sense not the point of a
+blockchain — inefficiency is.  A blockchain is designed to make it
+infeasibly inefficient to violate the established consensus rules on
+who owns what.
+
+Outside of blockchains, I suspect that LevelDB does in fact work this
+way in order to avoid unbounded pauses when inserting and deleting.
