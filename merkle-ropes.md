@@ -1,4 +1,5 @@
-(From a discussion with Nick Johnson.)
+(From a discussion with Nick Johnson, though any errors are my
+responsibility, not his.)
 
 Bitcoin and similar systems include a hash of the previous block in
 each new block, forming a chain of blocks.  But verifying that any
@@ -16,7 +17,7 @@ Merkle blockchain ropes and logarithmic-time appending
 
 What we would ideally like is a Merkle *tree* of the previous blocks
 instead of a linear Merkle block *chain*.  Both can be thought of as
-Cedar's "ropes", which represent sequences as the leaf nodes of a
+Cedar’s “ropes”, which represent sequences as the leaf nodes of a
 binary tree; in OCaml:
 
     type rope = Leaf of string | Fork of rope * rope
@@ -35,7 +36,7 @@ where the binary tree is pessimally balanced.  What we want is to
 incrementally rebalance the tree as we append to the end of it.
 
 If you have 8 leaf nodes to form into a perfectly balanced binary
-tree, you need to construct 7 internal nodes ("forks").  The first
+tree, you need to construct 7 internal nodes (“forks”).  The first
 fork can be added when you add the second leaf, but the second fork
 cannot be added until you add the fourth leaf, at which point you can
 also add the third fork.  Then the fifth leaf does not enable adding
@@ -46,7 +47,7 @@ makes it possible to add the fifth fork (over leaves 7 and 8), the
 sixth fork (over forks 4 and 5), and the seventh fork (over forks 3
 and 6).
 
-You could think of these fork nodes as being an "index", like that in
+You could think of these fork nodes as being an “index”, like that in
 a relational database, of the block chain; but, instead of allowing
 you to answer queries quickly, they allow you to construct proofs
 quickly.
@@ -63,7 +64,7 @@ In essence each new fork consolidates the two previous smallest
 remaining binary trees into a larger binary tree; the trees can be
 held in a stack of fully compacted trees and a queue of possibly not
 fully compacted trees.  Before adding a new leaf, we compact two trees
-if possible, then add the leaf to the queue.  Here's what the `stack;
+if possible, then add the leaf to the queue.  Here’s what the `stack;
 queue` state looks like as we add the first 40 leafnodes, one at a
 time:
 
@@ -78,7 +79,7 @@ time:
     9: 4 4; 1    19: 16; 1 1 1   29: 16 8 4; 1   39: 32 4; 1 1 1  
     10: 8; 1 1   20: 16 2; 1 1   30: 16 8 4 2;   40: 32 4 2; 1 1  
 
-The new leaf can embed the fork within it, thus "signing" the fork at
+The new leaf can embed the fork within it, thus “signing” the fork at
 insignificant extra cost.  The pointers in the fork can be the hashes
 of the two blocks containing its child nodes, annotated with bits to
 indicate whether the pointers are leaf pointers or fork pointers.  You
@@ -93,7 +94,7 @@ Moreover, to permit efficient traversal of the trees, each fork also
 needs to include a pointer to the previous fork on the stack, if any.
 In the above example, the fork containing the first 16 leaves is
 created with the 19th leafnode, but is not merged into a 32-leaf fork
-until leafnode 36.  When you're looking at leafnode 35, how are you
+until leafnode 36.  When you’re looking at leafnode 35, how are you
 going to find the older 16-node fork?  You need a pointer back to leaf
 19.
 
@@ -109,22 +110,22 @@ distinctions between the state, stacks, queues, and balanced trees can
 be entirely implicit in the structure.  A state is a fork of a stack
 and a queue; a stack is empty or a fork of a stack and a balanced; a
 balanced is either a leafnode or a fork of two balanceds; a queue is
-empty or a fork of a queue and a leafnode.  So the "type" of each fork
-(state, stack, queue, or balanced) is encoded by its parent's type and
-which side it's on.
+empty or a fork of a queue and a leafnode.  So the “type” of each fork
+(state, stack, queue, or balanced) is encoded by its parent’s type and
+which side it’s on.
 
 Each new block encodes, in a sense, a new balanced and a new
 stack with it as the right child and a new queue with a new right
 child (which is the block itself).  The only funny business is that,
-as I've described the queue above, consuming items from the front of
+as I’ve described the queue above, consuming items from the front of
 the queue requires reconstructing all the forks inside the queue, and
 these forks are not recorded at all in the blockchain.
 
-The length of the queue is bounded by the height of the tree, so it's
+The length of the queue is bounded by the height of the tree, so it’s
 only logarithmic.  With an ephemeral data structure (rather than an
 FP-persistent structure like an orthodox rope) you could do the queue
 operations in constant time, making the whole node-append operation
-constant-time.  This isn't important for block-chain applications, but
+constant-time.  This isn’t important for block-chain applications, but
 it could be useful in other rope applications.
 
 However, although *appending* to the structure can be thus made
@@ -139,13 +140,13 @@ As for the probabilistic proof mentioned earlier, if you annotate each
 fork with the total amount of hashing (PoW) work in its leafnodes,
 then you can choose a random leaf node to which to validate the path
 down from the current state, for example in proportion to the amount
-of hashing it is claimed to represent.  If you've been fed a fake
+of hashing it is claimed to represent.  If you’ve been fed a fake
 blockchain that pretends to represent 10% more work than it really
-does, then you'll have a 10% chance of finding a discrepancy, say
-where a fork's work total isn't the sum of its children's work totals,
-or where the previous node in the tree isn't actually the predecessor
-it specifies.  This assumes the thief can't predict which random node
-you'll try to validate.
+does, then you’ll have a 10% chance of finding a discrepancy, say
+where a fork’s work total isn’t the sum of its children’s work totals,
+or where the previous node in the tree isn’t actually the predecessor
+it specifies.  This assumes the thief can’t predict which random node
+you’ll try to validate.
 
 By validating several randomly chosen leafnodes this way, each in
 logarithmic time, you can achieve an arbitrarily high confidence level
@@ -178,5 +179,5 @@ the binary tree requires traversing only 3 levels of the B-tree plus a
 leafnode, 400 μs, so your access time for the 459 leafnode validations
 is 180 milliseconds.
 
-(Hmm, actually I realize I didn't include the chainheight annotation
+(Hmm, actually I realize I didn’t include the chainheight annotation
 in the sizes of the forks, but the difference is not very large.)
