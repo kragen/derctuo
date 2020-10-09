@@ -56,18 +56,19 @@ Yabe has also worked on magnesium-air fuel cells.
 
 The oxygen-magnesium reaction produces no gaseous products unless the
 temperature is allowed to go very high (magnesia boils at 3600°,
-though magnesium melts at 650°), but the water-magnesium reaction
+though magnesium melts at 650° and boils at 1091°),
+but the water-magnesium reaction
 produces hydrogen.  The MAGIC engine secondarily burns the hydrogen
 produced in air to recover the enthalpy of formation of the water,
-which was drawn from the initial water–magnesium reaction.  [Water's
+which was drawn from the initial water–magnesium reaction.  [Water’s
 standard enthalpy of formation][4] is -285.83 ±0.04 kJ/mol and its
-molar mass is 18.01528(33) g/mol.  Magnesia's are -601.6 ±0.3 kJ/mol
+molar mass is 18.01528(33) g/mol.  Magnesia’s are -601.6 ±0.3 kJ/mol
 and 40.304 g/mol (compared to, say,
 -1675.7 kJ/mol and 101.960 g/mol for [alumina][8],
 nearly the same energy density);
-although I'm not very sure of my understanding of
+although I’m not very sure of my understanding of
 the thermodynamics, I think this means that splitting the water sucks
-up about half of the heat you'd otherwise get out of the reaction,
+up about half of the heat you’d otherwise get out of the reaction,
 since both MgO and H₂O have a single oxygen, so a mole of H₂O produces
 a mole of MgO; so you would need about twice the amount of magnesium
 to produce a given amount of energy.
@@ -77,8 +78,8 @@ to produce a given amount of energy.
 
 The [hydrogen][6] also soaks up 28.836 J/mol/K of heat, lowering the
 potential maximum temperature further, but I think by another factor
-of less than 2.  So we're still talking about maximum temperatures
-that exceed magnesia's boiling point.
+of less than 2.  So we’re still talking about maximum temperatures
+that exceed magnesia’s boiling point.
 
 [6]: https://en.wikipedia.org/wiki/Hydrogen
 
@@ -113,10 +114,10 @@ pencil sharpener to shave off shavings of a calibrated thickness.
 Under some circumstances, it might be best to first preheat some
 magnesia by burning magnesium, with little or no gas release, and then
 use a second, later burst of gas to move the generated heat to where
-it's needed.  This decouples the time during which the combustion
+it’s needed.  This decouples the time during which the combustion
 happens — which may be limited by, for example, considerations such as
 the one mentioned above of burning the magnesium to solid magnesia
-fast enough that it doesn't melt into a round mass with little surface
+fast enough that it doesn’t melt into a round mass with little surface
 area, or inversely by the inability to burn the magnesium as fast as
 would be desired because of limited surface area — from the time
 during which the heat is transferred to where it will be used, which
@@ -152,7 +153,7 @@ conductivity; they found some kind of sooper seekrit ingredient to
 keep the molten MgO from corroding regular yttria-stabilized zirconia.
 Like the Pidgeon process, the magnesium produced is in vapor form, and
 so a distillation step inherently purifies the reaction product.
-(With appropriate "fluxes" or molten-salt solvents, this same SOM
+(With appropriate “fluxes” or molten-salt solvents, this same SOM
 process has been used to smelt iron, silicon, tantalum, and titanium.)
 
 [7]: https://web.archive.org/web/20131113035743/http://www1.eere.energy.gov/vehiclesandfuels/pdfs/merit_review_2011/lightweight_materials/lm035_derezinski_2011_o.pdf "Solid Oxide Membrane (SOM) Electrolysis of Magnesium, Powell et al., 2011"
@@ -177,3 +178,73 @@ magnesia but still pretty toasty.
 This might be useful in cases where limiting the reaction rate is not
 desired, but it probably isn’t safe in more than milligram quantities
 because of the rapidity of the reaction.
+
+Magnesium-silica reactions
+--------------------------
+
+Although, as explained above, you can smelt magnesia with ferrosilicon
+at 1200°–1400° with lime, because the gaseous magnesium leaves the
+reaction and the lime stabilizes the silica product as larnite, under
+normal conditions the reaction tends in the opposite direction:
+magnesium will reduce silica to silicon.  As [the International
+Magnesium Association cautions][9]:
+
+> The refractories used in the furnace should be high in alumina or
+> magnesia because molten magnesium can react violently with even
+> small amounts of silica (often [sic] present in ceramic materials).
+
+[9]: https://cdn.ymaws.com/www.intlmag.org/resource/resmgr/safety/Safe-Handlling-of-Mg.pdf
+
+SiO₂ has an [enthalpy of
+formation](https://en.wikipedia.org/wiki/Silicon_dioxide) of
+-911 kJ/mol, while [MgO’s enthalpy of formation][10] is -601.6 kJ/mol.
+So at room temperature I think the reaction would be SiO₂ + 2Mg → 2MgO
++ Si + 293 kJ per mol of silica, noticeably exothermic, though of
+course a very low reaction rate.  Magnesia’s 40.304 g/mol and silica’s
+60.08 g/mol add up to 140.69 g for the left side of this reaction,
+which works out to about 2.08 MJ/kg with both reagents in the
+denominator.  Counting just the magnesium, 3.63 MJ/kg, so (I think)
+that’s the intrinsic energetic cost of the Pidgeon process’s
+endothermic aspect.  The intrinsic energetic cost of the silicon in
+the ferrosilicon feedstock is three times as much per kg of magnesium
+produced.
+
+[10]: https://en.wikipedia.org/wiki/Magnesium_oxide
+
+The easily-accessible temperature-dependent equilibrium reversal of
+this reaction interestingly makes magnesium somewhat interconvertible
+with silicon, even in the impure form of ferrosilicon, assuming you
+have ample supplies of their ubiquitous oxides.  [Metallurgical-grade
+silicon is mostly produced by carbothermal reduction][11], though
+aluminothermal reduction is also performed; this suggests a mostly
+solar thermal route to smelt magnesium.
+
+[11]: https://en.wikipedia.org/wiki/Silicon#Production
+
+One of the most interesting aspects of the solid oxide electrolyte
+process for magnesium production mentioned above is that the resulting
+white-hot magnesium vapor is capable of reducing not oxides only of
+silicon but indeed of nearly any metal, including exotics like
+titanium and tantalum (though not, apparently, zirconium and yttrium,
+at least not fast enough to prevent the electrolysis from proceeding).
+Magnesium’s [first ionization energy][12] is 737.7 kJ/mol, kind of a
+middle-of-the-road value for metals, so I don’t think the issue is
+that it’s extremely easy to oxidize magnesium.  And from an entropic
+point of view you would think temperatures well above magnesium’s
+boiling point would tend to favor the reduction of magnesium, as it
+does in the Pidgeon process — presumably at a high enough temperature
+titanium would instead reduce magnesia to magnesium vapor, just as
+silicon does.  I guess I need to go read about Gibbs free energy.
+
+At 1200° [titanium dioxide is solid (melting point 1843°)][13],
+[magnesia is solid (melting point 2852°)][10], and [titanium is solid
+(melting point 1668°)][14], but magnesium is a gas (boiling point
+1091°, as mentioned above).
+
+[12]: https://en.wikipedia.org/wiki/Ionization_energies_of_the_elements_(data_page)
+[13]: https://en.wikipedia.org/wiki/Titanium_dioxide
+[14]: https://en.wikipedia.org/wiki/Titanium
+
+A practical aspect of the silica-magnesium reaction is that you maybe
+shouldn’t throw silica sand on an unwanted magnesium fire.  You will
+be disappoint.
