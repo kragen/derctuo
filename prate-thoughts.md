@@ -181,3 +181,25 @@ and following that convention might help comprehensibility for people
 who know SSB.  [Kafka](ccn-streams.md) uses “topic partition”
 (described as an “ordered ‘commit log[]’”, leading me to favor “log”
 and “commit”) and “event”.
+
+Detached and batched signatures
+-------------------------------
+
+    22:43 < xentrac> I hadn't thought about separating the signatures from the commit bodies.  that could 
+                     certainly speed up verification of updates
+    22:44 < xentrac> like, if I have commits 1-8, and you send me commits 9-16, I can just verify the commit-16 
+                     signature instead of the signatures of all eight commits
+    22:45 < xentrac> OTOH I'd still have to get the other seven signatures in order to be able to send commits 
+                     9-10 to somebody else who doesn't have time/bandwidth for the other six yet
+    22:46 < xentrac> because I'd need to send them commit 10's signature.  and then what if it turns out to be 
+                     invalid?
+    Day changed to 07 Oct 2020
+    19:37 < Remosi> xentrac, instead of the signatures for all of them, you can just transmit the hashes
+    19:37 < Remosi> and then the final signature
+    19:37 < Remosi> the hash presumably being no more bits than the signature.
+    19:46 < xentrac> you're saying that I can send mr. low bandwidth the full commits 9 and 10, and then only the 
+                     hashes of commits 11-16, and then the signature for commit 16?
+    19:48 < xentrac> I guess that's possible if the commit hashes in the chain are calculated over the previous 
+                     commit hash and a hash of the current commit body
+    19:53 < Remosi> it does mean however you have to send hashes for 11-16 rather than just a signature for 10.
+    19:56 < xentrac> yeah, but maybe that's a reasonable tradeoff for not having to receive signatures for 11-16

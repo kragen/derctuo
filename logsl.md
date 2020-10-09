@@ -15,6 +15,11 @@ conflicts.
 2. I would like it to not be a security hole by default, even at the
 possible cost of being less convenient to use.
 
+(I seem to be undecided about whether this is a
+single-programming-language thing or a cross-programming-language
+thing.  Maybe it should be a single-programming-language thing.  And
+maybe that language shouldn't be Python.)
+
 Inspiring examples
 ------------------
 
