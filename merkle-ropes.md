@@ -134,6 +134,26 @@ constant-time, it still takes logarithmic time to *query* it, which is
 usually more common, so I think logarithmic time for appending will
 almost always be good enough.
 
+### Code for the table ###
+
+The data for the above table was produced by the following code; I
+then formatted it into columns:
+
+    s, q = [], []
+
+    for _ in range(40):
+        if len(s) > 1 and s[-1] == s[-2]:
+            s[-2:] = [s[-1] + s[-2]]
+            q.append(1)
+        else:
+            q.append(1)
+            if len(q) > 1:
+                n = q.pop(0)
+                n += q.pop(0)
+                s.append(n)
+        print('{}:'.format(sum(s) + sum(q)),
+              ' '.join(str(i) for i in s) + ';', ' '.join(str(i) for i in q))
+
 Probabilistic chainheight validation
 ------------------------------------
 
