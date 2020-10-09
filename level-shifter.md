@@ -136,3 +136,41 @@ Of course cloudevil points out that seven discrete components are
 probably not cheaper than a level shifter chip!  And I might want to
 consider under what conditions it might oscillate.  But mostly I just
 thought it was an interesting way to tackle the problem.
+
+DocScrutinizer05 proposed [the following alternative bidirectional
+level-shifter circuit][3], based on a design he saw from NXP, which
+uses 8 components instead of 7, but only a single transistor:
+
+    $ 1 0.000005 10.20027730826997 50 5 50
+    f 544 240 544 304 32 3 0.02
+    v 240 160 320 160 0 0 40 2.3 0 0 0.5
+    w 320 160 352 160 0
+    w 544 160 544 240 0
+    g 240 160 240 192 0
+    R 656 192 768 192 0 0 40 15 0 0 0.5
+    r 352 160 352 304 0 10000
+    w 352 304 528 304 0
+    s 304 304 336 304 0 1 true
+    s 592 304 624 304 0 1 true
+    w 656 192 592 192 0
+    w 336 304 352 304 0
+    w 304 304 256 304 0
+    g 256 304 256 384 0
+    w 560 304 592 304 0
+    r 592 304 592 192 0 10000
+    g 624 304 624 400 0
+    d 400 160 352 160 2 default
+    r 544 160 592 160 0 47000
+    w 592 160 592 192 0
+    d 544 160 496 160 2 default
+    d 432 160 400 160 2 default
+    d 496 160 432 160 2 default
+    o 14 128 0 4354 19.999206274746793 0.0001 0 2 14 3
+    o 7 128 0 4354 4.600396862626605 0.0001 1 2 7 3
+
+[3]: http://www.falstad.com/circuit/circuitjs.html?ctz=CQAgjCAMB0l3BWcMBMcUHYMGZIA4UA2ATmIxAUgosgCgAzCgFiZBSaoRZF1exR5RYKWgDc2HcISr8qYaVEWSU0bIqowEtAO480UmQgHyNO5qxPmJpgObWD9sMQF0ASiEIJC4ZyAyE8HxclOSQNIS0AJx4jB2xY3kUweDpdeIFEo0DEugBnHkg+Qp5sbxzwEAAXSIBXAFNafIRfRMJ2AtY5KtqG3U9vJwFm419UkrLi9I6oM0TElC9pujsFidZVnjxOsy8ZYuGl2miDzN9BpJTaOzai1huQDlMAEwe4ONjLASe6+gBDGoANpUjlZLAdLFQmBh4DszgpwaNaC8uBYFExiAMFF8fv8gUiHvwHI8HNi-oDgS90ZjIYTPiBvmS8QB7cAWFCBGlcHzQUjOSBtDBQpiEDDENQweAQKjGPi0FnkMDspTxVhMaDSSDYDF4Nq66RhWBwCAQATkbC0IA
+
+I need to think more about how this works; it’s explained in [NXP
+appnote 10441][4].
+
+[4]: https://www.nxp.com/docs/en/application-note/AN10441.pdf
