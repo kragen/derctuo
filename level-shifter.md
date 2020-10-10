@@ -135,4 +135,11 @@ a lower voltage.
 Of course cloudevil points out that seven discrete components are
 probably not cheaper than a level shifter chip!  And I might want to
 consider under what conditions it might oscillate.  But mostly I just
-thought it was an interesting way to tackle the problem.
+thought it was an interesting way to tackle the problem.  And,
+amusingly, it’s only one more component than two purely passive
+unidirectional level shifters made from three resistors each — but it
+contains two transistors, which are both more expensive and often
+slower than resistors.
+
+(It's kind of goofy to describe a resistor by itself as "slow" or
+"fast"; it's really the whole circuit.  But I did it anyway.)

@@ -509,16 +509,25 @@ paraffin can be added on the outside.
 #### Flexible heat-resistant oven mitts ####
 
 The clay form of a hand is slipcast from a clay slip containing a
-mildly acidic flocculating additive, using a porous mold made of
+mildly [acidic flocculating additive] such as vinegar,
+using a porous mold made of
 plaster of Paris.  The hollow slipcast clay form is demolded and
 tightly wrapped in four layers of loosely woven cotton or linen cloth,
 richly smeared with high-temperature acetic-acid-catalyzed silicone ("red RTV").
-Once the silicone has cured, the clay interior is washed out with
+Once the silicone has cured, the still-wet clay interior is washed out with
 water and a mild base such as baking soda in order to deflocculate the
 clay.  The resulting piece, once the acetic acid has escaped, can
 withstand temperatures up to some 240°; substituting a cloth with
 higher-temperature capabilities should allow it to handle 280°
 continuously or brief exposures to 320°.
+
+[acidic flocculating additive]: https://digitalfire.com/article/deflocculants%253A%2Ba%2Bdetailed%2Boverview
+
+(Other reversible flocculants might be epsom salts, which can be
+deactivated by barium carbonate, and muriate of lime, which can be
+deactivated by soda ash or barium carbonate.  I've also seen muriate
+of lime recommended as a *de*flocculant, presumably to throw down
+vitriol in the form of alabaster.)
 
 It might be necessary to protect the cotton from hydrolysis by the
 acetic acid before curing is complete; this can be done either by
