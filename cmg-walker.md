@@ -1,4 +1,4 @@
-A control moment gyroscope or CMG is a device used, typically in
+A control moment gyroscope, CMG, or гиродин is a device used, typically in
 pairs, to control the attitudes of large spacecraft, as an alternative
 to reaction wheels.  Someone has built a cute little cube-shaped robot
 that can get up and walk by rolling from one corner to another using
@@ -76,7 +76,8 @@ centered 37 mm from the center (74 mm major diameter).  This rim has a
 volume of 89 ml, 1.01 kg.  If we also scale down the rotor linear
 speed and leave its angular speed alone, it's only going 6.6 m/s,
 which is still 1700 rpm.  (I guess I should work out what the scaling
-laws for CMGs are.)  The kinetic energy has dropped even more: now
+laws for CMGs are; I think that small CMGs are worse than reaction
+wheels.)  The kinetic energy has dropped even more: now
 it's only 22 J.  I feel like this would still probably work but you
 might need to spin up the motors.
 
