@@ -393,3 +393,31 @@ reduced jitter from photoelectric seed electrons to this sort of
 ionization-induced ignition-voltage reduction, and of course a
 traditional Geiger counter is nothing more than a spark gap arranged
 to detect ionizing light and other particles.
+
+*****
+
+A low-voltage way to try out some of these ideas is to replace the
+spark gaps with transistors, or perhaps diodes, in reverse avalanche
+mode, as in [Look Mum No Computer's Super Simple
+Oscillator](https://www.lookmumnocomputer.com/simplest-oscillator),
+which uses two unspecified terminals of a 2N3904 in parallel with a
+10μF capacitor.  [Another, better-explained variant of the design uses
+a
+2N4401](https://www.learningaboutelectronics.com/Articles/Relaxation-oscillator-circuit-with-a-transistor.php)
+with the emitter toward Vcc and the collector toward ground, in series
+with an LED and in parallel with a 3300μF (!) capacitor.  (Thank you
+very much to Hideki and splud on ##electronics for linking me!)
+
+Folklore says red LEDs suffer reverse avalanche discharge around 5V
+and often survive it, so they might be an alternative to the
+transistor or spark gap.  Their lifetime might be limited in this
+application, or it might not.  Probably something like a 1N4001, or
+any ordinary rectifier or small-signal diode, would have an
+inconveniently high breakdown voltage, which increases the chance of
+damage to the diode, as well as power consumption and electric shock
+risk.
+
+In either case you're depending on properties of the components that
+are not specified by the manufacturers because they're irrelevant to
+their usual uses, so consistent results from component to component
+may be hard to obtain.

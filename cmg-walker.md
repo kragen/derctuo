@@ -1,6 +1,7 @@
 A control moment gyroscope, CMG, or гиродин is a device used, typically in
 pairs, to control the attitudes of large spacecraft, as an alternative
 to reaction wheels.  Someone has built a cute little cube-shaped robot
+called Cubli
 that can get up and walk by rolling from one corner to another using
 reaction wheels, so the robot has no externally protruding components
 or pivoting joints, other than the bearings for the reaction wheels
@@ -83,3 +84,9 @@ might need to spin up the motors.
 
 The total mass left over, if it scaled the same way, would be about
 50 g.
+
+A collection of such contrivances possessed of concave surfaces, or
+even surfaces that could be horizontal near floor level, could climb
+atop one another; with adequate friction, they could then function as
+if parts of a single body, with rolling contact between them rather
+than flexible joints or bearings.
