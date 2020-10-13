@@ -12,6 +12,11 @@ signal source to your sound card through a resistor and some limiter
 diodes are grossly insufficient: your sound card is 20kHz, three
 orders of magnitude crappier.
 
+Once you can bring the problem into the digital domain, everything
+else becomes easy, because you can do it as slowly as you like.  But
+how can you digitize a 20MHz signal if you don't have access to the
+market?  50Msps ADCs are quite scarce in the municipal waste stream.
+
 Analog oscilloscopes achieved these bandwidths by using a cathode-ray
 tube; the beam's Y deflection was what you observed on the screen.  So
 you might think that you could salvage an old TV and use its CRT, but
