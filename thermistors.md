@@ -40,8 +40,12 @@ curve, and the impurities in the particular copper wire we're using.
 An input impedance of 1 MΩ on whatever voltage measurement thing you
 have connected to the other two wires would give you a parasitic
 offset current on the order of 1 μA, causing a relative error of 10⁻⁶
-or so on the temperature measurement.  An op-amp with lower offset
-current would provide a more precise measurement.
+or so on the temperature measurement.  You can get op-amps with much
+lower offset current than that; they would provide a more precise
+measurement.  For example, TI's datasheet for the LM741 — not a
+spectacularly low-offset-current op-amp — says its offset current at
+25° is typically 20 nA, worst-case 200 nA, and the whole bias current
+is typically 80 nA, worst-case 500 nA.
 
 The current you measure on the current wires outside the device would
 differ from the current through the "thermistor" only due to parasitic
