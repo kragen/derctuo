@@ -58,3 +58,23 @@ bandwidth of the pistons' movements, thus eliminating the direct
 production of sound above, say, four times their movement frequency,
 which might be 2 Hz.  Then only turbulence and surface roughness are
 left as noise sources.
+
+Why four times?  If the pistons moved back and forth in unison a
+single time, or with a simple difference in phase, they could move in
+a perfect sinusoid, thus generating no sound from their sheer movement
+at frequencies higher than their movement frequency.  But the movement
+I described above is not simply sinusoidal, so it would involve some
+harmonics.  8 Hz is inaudible, but 20 Hz or more might be audible and
+highly annoying.  Of course air turbulence and surface roughness will
+generate higher-frequency noise no matter what the cylinders'
+movement.
+
+You might be able to find a lower-displacement purely-sinusoidal
+movement pattern with the right characteristics — most crucially that
+the cylinders be closer together when moving leftwards than when
+moving rightwards, and the same distance apart when the intake port
+closes and when the exhaust port opens.  If a single sinusoid can't do
+the job, you might be able to find something that only uses two or
+three harmonics rather than four, and thus enable higher operating
+frequencies while remaining purely infrasonic, maybe up to 5 Hz or 10
+Hz.  But I'm confident that with four harmonics you can do it.
