@@ -147,5 +147,26 @@ Adjustment of the cycle might be useful for a variety of reasons:
 
 A second cylinder configured as described above can be used to harvest
 further energy from the exhaust, in the manner of double-expansion or
-triple-expansion steam-engines; this will also reduce noise further.
+triple-expansion steam-engines; this will also reduce noise further,
+as the second cylinder serves as a sort of muffler for the first.
+(You could also use such an engine as a muffler for a conventional
+internal-combustion piston engine, surely not a novel idea, since
+triple-expansion steam-engines go back generations.)
 
+An engine with two or three cylinders cascaded in this way can be
+fitted with valves to redirect the flows of gases to answer demands
+that change from moment to moment: now a triple-expansion engine with
+a single combustion chamber, one cylinder feeding into the next, for
+greater efficiency, now a three-cylinder engine with all three
+cylinders burning fresh fuel for greater power.
+
+By virtue of moving the expanding gas chamber down the cylinder as it
+expands, the loss of heat to the cylinder walls is reduced — while
+this benefits an internal-combustion engine less than a steam-engine,
+it may pose difficulties in keeping the hotter parts of those walls
+lubricated.
+
+As the space between the pistons can be reduced indeed to zero,
+requiring no accommodation for the opening of valves, the spark-plug
+is redundant in these classes of engines; it can be designed to ignite
+purely by adiabatic heating as in Diesel's engine.
