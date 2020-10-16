@@ -142,8 +142,18 @@ stainless-steel wire commonly encountered.
 Tungsten wire is also similar, and comes much thinner in conveniently
 packaged quartz-halogen lightbulbs to protect it from oxygen, though
 perhaps not all of those envelopes will themselves withstand
-temperatures over 1000°.  (And these lightbulbs do double duty as
-heating elements.)  However, they don't normally have four wires.
+temperatures over 1000°.  (And these lightbulbs can do double duty as
+heating elements.)  However, they don't normally have four wires.  I
+have such a lightbulb here; at room temperature (20°?), this
+untrustworthy multimeter, which measures a short circuit as 10Ω,
+measures it as 147.3–148.3Ω, so maybe it's actually 138Ω or so.  In
+theory tungsten's α should be around .0045, according to the Wikipedia
+table above, so at 100° it ought to be about 188Ω and measure about
+198Ω.  I boiled it for 20 minutes on the stove, miraculously without
+breaking it, and it measured 185–186Ω.  But the multimeter had gone to
+measuring a short circuit as 3Ω, so maybe that's really about 183Ω.
+Not the most spectacular agreement with theory but it's within
+measurement error.
 
 Silicon carbide, commonly used for heating elements and abrasives, is
 also a semiconductor, and can withstand even higher temperatures
@@ -159,3 +169,41 @@ either measure the average temperature to which the element is heated
 (though not the peak, which is what you usually really want) by
 measuring the voltage and current while it's on, or the temperature of
 its surroundings by turning it off and letting it equilibrate.
+
+RTDs
+----
+
+This turns out to be what's standardly called a "resistance
+temperature detector" or "[resistance thermometer]", which is commonly
+used for high-precision temperature measurements, usually with a
+precision more like 60 millikelvin than 1 millikelvin.  Copper is
+indeed a material commonly used for them, though usually not above
+150° because of oxidation; other common materials are nickel, despite
+its poorer coefficient, and platinum; the most common configuration is
+Pt100: platinum with 100Ω at 0°.  This higher resistance reduces the
+influence of lead-wire resistance.
+
+I don't think copper is going to be able to reduce silica or magnesia,
+but if that turns out to be wrong, as a last resort you could pack it
+in copper oxide.
+
+Wikipedia explains that above 660° your sensing filament tends to get
+contaminated with metal from the can it's in, so people usually use
+thermistors at higher temperatures despite their poorer precision and
+repeatability, typically having errors on the order of 2°.  Because
+RTDs typically have microscopically thin wires flapping around, like
+lightbulbs, they tend to be less durable than thermocouples.  The
+alternative to flapping around is to use a "wire-wound RTD" where the
+wire is wrapped around an insulating winding core, but the winding
+core generally has a different thermal coefficient of expansion from
+the metal, which causes strain in the metal, which introduces at least
+nonlinearity and maybe nonrepeatability.
+
+The problem with picking up metal from the can seems like it could be
+reduced by using a can made of fused quartz or sapphire or something,
+or using carborundum and periodically burning off any metal that has
+deposited.
+
+Many thanks to Greg Sittler for the very informative discussion!
+
+[resistance thermometer]: https://en.wikipedia.org/wiki/Resistance_thermometer

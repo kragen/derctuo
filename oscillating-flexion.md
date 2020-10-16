@@ -166,12 +166,24 @@ multiplied by the speed of sound in the substance.
 Consider how the example above compared to electrical power
 transmission through an electrical cable of comparable size.  If you
 enclosed three 40 AWG solid copper wires, each 80 microns in diameter,
-in 20 microns of Kynar insulation, you would have a similar-sized
+in 20 microns of [Kynar] insulation, you would have a similar-sized
 cable. You could run three-phase AC power over it at whatever
 frequency was convenient; your phase-to-phase voltage would be limited
 by the breakdown voltage of 40 μm of Kynar, while your RMS current
 would be limited by the resistance per meter and heat dissipation per
-meter of the cable at Kynar's maximum service temperature.  You can
+meter of the cable at Kynar's maximum service temperature
+of 149°.  You can
 decrease the radius of the conductor and increase the thickness of the
 Kynar by an equal amount, thus increasing the voltage linearly but
 also increasing resistance as the square of the remaining wire.
+
+[Kynar]: https://www.ipolymer.com/pdf/PVDF.pdf
+
+The dielectric strength is supposedly "1700 V/mil" for a short period
+of time; if we figure that's 1000 V/milli-inch in practice, that's
+about 40 volts per micron, so 1600 volts peak, 1100 VAC RMS
+phase-to-phase.  [40-gauge wire is rated for 90 milliamps over short
+runs][wire].  I think this ends up at a few hundred watts, too, so
+it's the same ballpark.
+
+[wire]: https://www.powerstream.com/Wire_Size.htm
