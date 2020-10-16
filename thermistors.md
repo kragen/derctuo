@@ -140,11 +140,11 @@ stranded picture-hanging wire from an art store has the thinnest
 stainless-steel wire commonly encountered.
 
 Tungsten wire is also similar, and comes much thinner in conveniently
-packaged quartz-halogen lightbulbs to protect it from oxygen, though
+packaged US$1 quartz-halogen lightbulbs to protect it from oxygen, though
 perhaps not all of those envelopes will themselves withstand
 temperatures over 1000°.  (And these lightbulbs can do double duty as
 heating elements.)  However, they don't normally have four wires.  I
-have such a lightbulb here; at room temperature (20°?), this
+have such a 28W 220V lightbulb here; at room temperature (20°?), this
 untrustworthy multimeter, which measures a short circuit as 10Ω,
 measures it as 147.3–148.3Ω, so maybe it's actually 138Ω or so.  In
 theory tungsten's α should be around .0045, according to the Wikipedia
@@ -153,7 +153,10 @@ table above, so at 100° it ought to be about 188Ω and measure about
 breaking it, and it measured 185–186Ω.  But the multimeter had gone to
 measuring a short circuit as 3Ω, so maybe that's really about 183Ω.
 Not the most spectacular agreement with theory but it's within
-measurement error.
+measurement error.  Next day short-circuit reading is 0.3Ω and bulb
+reading is 141Ω.  (To work at 28W at 220V it would need to increase to
+1700Ω; if it's at 1100° then its average α over that interval would
+need to triple, which is totally plausible.)
 
 Silicon carbide, commonly used for heating elements and abrasives, is
 also a semiconductor, and can withstand even higher temperatures
