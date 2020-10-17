@@ -17,16 +17,16 @@
 
 ## Hardware store
 
-- lime (not at shitty one)
+- lime (not at shitty one) (not at good one)
 - caustic soda
-- converter
-- boric acid or borax (not at shitty one)
-- infusorial earth
-- plaster
-- magnesium
-- silicone
+- converter (check)
+- boric acid or borax (not at shitty one) (not at good one)
+- infusorial earth (not at good one)
+- plaster (check)
+- magnesium (not at good one)
+- silicone (check)
 
-## Garden store
+## Garden store (not Catrilo 4713, that's a pet store)
 
 - Glauber's secret salt
 - green vitriol
