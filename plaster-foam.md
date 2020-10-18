@@ -78,4 +78,7 @@ to vermiculite but denser.
 Ttk Ciar suggests mixing a low-boiling-point material into the mix,
 such as isopropanol, so that it will form bubbles when heating.  Maybe
 a baking powder would work well.  I'm baking a loaf of plaster with
-baking powder right now.
+baking powder right now; the top of the foam seems a bit spongy, so
+perhaps in an hour or so it will be a hardened foam.  Still, the
+expansion seems to be less than a factor of 2, and it doesn't seem to
+be improving much.  I have now turned off the oven.
