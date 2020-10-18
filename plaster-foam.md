@@ -37,7 +37,15 @@ the plaster itself.
 sodium silicate is good to
 1150°](https://en.wikipedia.org/wiki/Vermiculite#Commercial_uses).
 [It says perlite is only good to
-850°](https://en.wikipedia.org/wiki/Perlite).  Abandoned US patent
+850°](https://en.wikipedia.org/wiki/Perlite).  Hydrated sodium
+silicate itself will foam up like vermiculite or perlite when you heat
+it, but the remaining solid material is still sodium silicate, and
+retains the very low softening point of alkali silicates.  Perhaps
+this is less of a problem in the vermiculite composite, where perhaps
+the sodium can diffuse away into the vermiculite rather than leaving
+points of contact very vulnerable to melting.
+
+Abandoned US patent
 application
 [US20160339606A1](https://patents.google.com/patent/US20160339606A1/en)
 describes trying to reinforce plaster of Paris with graphite and

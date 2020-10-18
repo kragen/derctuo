@@ -156,7 +156,8 @@ Not the most spectacular agreement with theory but it's within
 measurement error.  Next day short-circuit reading is 0.3Ω and bulb
 reading is 141Ω.  (To work at 28W at 220V it would need to increase to
 1700Ω; if it's at 1100° then its average α over that interval would
-need to triple, which is totally plausible.)
+need to triple, which is totally plausible.  Some 70W-rated halogens I
+bought measure 51Ω so it's even more plausible.)
 
 Silicon carbide, commonly used for heating elements and abrasives, is
 also a semiconductor, and can withstand even higher temperatures

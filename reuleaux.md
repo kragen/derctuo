@@ -80,7 +80,7 @@ and Lanz's work.  This is startling since, of course, we have a fairly
 complete theory of elastic deformation as well as well-developed
 practical numerical methods of computation.  But in Reuleaux's time,
 the analogous theory of rigid motion was similarly well-developed; you
-can design a planar four-bar linkage to tween between a couple of
+can design a planar four-bar linkage to tween between three
 predetermined positions with compass and straightedge, and the whole
 lovely theory of quaternions commonly used for rigid motion in modern
 games engines predated this book by decades.  As Reuleaux laments:
@@ -109,6 +109,9 @@ how recent the introduction of the wheel was, due to the still
 primitive state of the archaeological science; he claims "carriages"
 are known from the oldest times, while in fact they seem to postdate
 even such recent artifacts as the Great Pyramid.
+
+His account here of Watt's parallel motion is sticking with me.  I
+keep thinking about it.
 
 General Outlines
 ----------------
@@ -140,7 +143,7 @@ His definition of a machine is thought-provoking, as much for the
 aspects it omits (material handling, information, control, energy,
 force, thermodynamics, friction, efficiency, metrology, electricity,
 programmability, strength, tolerances, troubleshooting, wear,
-reliability, cost) as for what it includes:
+reliability, cost, clamping) as for what it includes:
 
 > *A machine is a combination of resistant bodies so arranged that by
 > their means the mechanical forces of nature can be compelled to do
@@ -297,6 +300,114 @@ it's moving in requires only its distances from two points, not three,
 permitting a reflection ambiguity — perhaps chiral orientation is not
 considered proper to a plane.
 
-Not yet sure I understand the bit about movement of a plane figure
-relative to a point in its plane.  Have to come back to that some
-other time, I think.
+Interestingly, it seems that when he considers motion of a line
+relative to another line, he *does* consider sliding motion along the
+line to be motion.
+
+### Temporary Centre; the Central Polygon ###
+
+It's surprising that he considers "the Phoronomics of point-systems"
+to be "exhausted" by propositions in two dimensions only!
+
+This idea of a "temporary center" of rotation, for any arbitrary
+rotation, is very interesting.  It reminds me of the
+compass-and-straightedge four-bar-linkage construction technique.
+
+"Open polygons" occur frequently in computer graphics but they are
+usually called something else.
+
+I don't understand this "reciprocal polygon" yet.  Why exactly must it
+exist, and be reciprocal?
+
+### § 7. Centroids; Cylindric Rolling ###
+
+Oh, this makes the reciprocal polygon thing a bit clearer, though it's
+still not clear why it must exist.  Boy, this sure is a different
+meaning of "centroid" than the one I'm familiar with, though not
+*completely* unconnected — the centroid of a uniform shape is its
+center of gravity, which is the center on which it turns when it has
+only angular momentum.
+
+All this terminology of "common, curtate, and prolate trochoids" is
+new to me, and I think I'll have to look it up.
+
+When he says, "*All relative motions of con-plane figures may be
+considered to be rolling motions*", he seems to be omitting the
+possibility of pure translational motion, which is the limit of
+rolling about an infinitely distant center.
+
+It's nice that he is getting into three-dimensional objects moving
+now, but I can't help but wonder if there are possibilities of
+three-dimensional motion other than the possibilities arising from
+extending two-dimensional motions prismatically, although Reuleaux
+claims there aren't.  For example, motions where the instantaneous
+axis of rotation twists from one moment to the next.  And what is the
+instantaneous axis of rotation of a common screw?
+
+It is now apparent that the reciprocal polygons of which Reuleaux was
+speaking may have quite different shapes.
+
+### § 8. The Determination of Centroids ###
+
+The construction he gives for finding the second point *M*₁ in Figure
+19 (p. 66) escapes me at the moment.  I will have to come back to
+this.
+
+**Oh**.  Because *M*₁ is notionally part of the same rigid body as *P*
+*and Q*, its distances to them are not changed by rolling; at the
+*given point in the movement has been brough into coincidence with
+**O*₁, so those distances are the distances from the moved positions
+**P*₁ and Q*₁.
+
+Figure 20 in the Google scan (p. 67, 88/651) is partly illegible; it
+is identical to Figure 10.  In the Archive's scan it is perfectly
+legible.  Incidentally, I think this page shows that the scans were
+taken from two separate physical copies, as the Archive's scan is
+stamped, "Reese Library of the University of California".
+
+Aha, and here he confronts the question of pure translational motion,
+using the device of "infinitely distant points", which seems pretty
+kosher, although not all this geometry so far is projectively
+invariant.  (Or is it?)
+
+Figure 22 is blowing my tiny fucking mind.
+
+### § 9. Reduction of Centroids ###
+
+I am totally not understanding this.  I thought the motion uniquely
+determined the two centroid curves?  But now we can invent more
+centroids for the same motion?
+
+Here he confronts the question of parallel motion in all of its
+complexity.
+
+Hmm, there's a clue about these "secondary centroids" in the part
+where he talks about gear teeth (though he never says "gear", always
+"spur-wheel").
+
+### § 10. Rotation about a Point ###
+
+Now Reuleaux seems to be taking up the question that had worried me
+earlier, that of motions in space that are not merely the extrusion of
+motions in a plane.
+
+### § 11. Conic Rolling ###
+
+Whoa, trippy, dude.
+
+### § 12. Most general Form of the Relative Motion of Rigid Bodies ###
+
+Okay, great, now we're getting into screwing motions?
+
+Oh wow.
+
+### § 13. Twisting and Rolling of Ruled Surfaces ###
+
+Holy shit.
+
+Hmm, he has a hypoid drive here, although he doesn't call it that.
+
+Pairs of Elements
+-----------------
+
+### § 14. Different Forms of Pairs of Elements ###
