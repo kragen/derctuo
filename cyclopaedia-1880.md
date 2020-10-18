@@ -160,6 +160,7 @@ included directly in the index.
 - Sack-Saffron, p. 1443 (vol. 2 555/928)
 - Salicylic acid, p. 1448 (vol. 2 560/928)
 - Silica (cont.), p. 1487 (vol. 2 599/928)
+- Sodium (cont.), p. 1513 (vol. 2 625/928)
 - Spheroidal state, p. 1538 (vol. 2 650/928)
 - Stereochromy-Stewing, p. 1563 (vol. 2 675/928)
 - Sturgeon-Succinic acid, p. 1575 (vol. 2 687/928)
