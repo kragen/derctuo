@@ -1,17 +1,28 @@
 Plaster of Paris is easily formed at room temperature, nontoxic, and
 somewhat refractory, withstanding temperatures up to
-[1200°](https://en.wikipedia.org/wiki/Plaster_mold_casting); it melts
-(or perhaps releases vitriol) at 1460°.  But it doesn't insulate
+[1200°](https://en.wikipedia.org/wiki/Plaster_mold_casting); it
+decomposes by releasing vitriol at 1460°.  But it doesn't insulate
 against heat extremely well, and it weakens somewhat when heated
-enough to start dehydrating again, though then [it reputedly
-strengthens above
-800°](http://www.sciencemadness.org/talk/viewthread.php?tid=79078);
-[it has a bad reputation for use in forging
+enough to start dehydrating again, becoming easily crumbled with
+the fingers.  [It reputedly
+strengthens again above
+800°](http://www.sciencemadness.org/talk/viewthread.php?tid=79078),
+but if that's true, it must be a process
+that takes more than the few minutes I tried.
+[It has a bad reputation for use in forging
 iron](https://www.iforgeiron.com/topic/54424-is-plaster-of-paris-mixed-with-sand-a-good-liner-for-a-forge/),
 because while it will survive up to 1200°, it slowly degrades at
 iron-forging temperatures.  [NIST wrote about the various stages of
 alabaster calcination in the
 1940s](https://nvlpubs.nist.gov/nistpubs/jres/27/jresv27n2p191_A1b.pdf).
+
+Once re-calcined, the plaster remains solid (except that portion
+heated to white heat, which evolves a vitriolic air), but is
+enormously more fragile than before; rubbing it between fingers
+produces a fine floury powder.  It also contracts slightly, producing
+cracks when heating is uneven.  These are more serious problems for
+larger objects, which more easily collapse under their own weight,
+than for smaller ones.
 
 Fired clay and portland-cement concrete can be foamed — aerated with
 bubbles — to improve their insulation capabilities, make them more
@@ -58,11 +69,13 @@ casting temperatures.)
 
 The standard way to foam fired clay is to mix it with sawdust, coffee
 grounds, used yerba mate, or a similar granular material that will
-burn off in the kiln.  This might work with alabaster plaster too.
+burn off in the kiln.  This might work with alabaster plaster too.  I
+have a lump of plaster mixed with yerba hardening right now.
 
 Fired-porous-clay kitty litter is another possible aggregate, similar
 to vermiculite but denser.
 
 Ttk Ciar suggests mixing a low-boiling-point material into the mix,
 such as isopropanol, so that it will form bubbles when heating.  Maybe
-a baking powder would work well.
+a baking powder would work well.  I'm baking a loaf of plaster with
+baking powder right now.
