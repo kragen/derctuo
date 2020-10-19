@@ -77,8 +77,12 @@ to vermiculite but denser.
 
 Ttk Ciar suggests mixing a low-boiling-point material into the mix,
 such as isopropanol, so that it will form bubbles when heating.  Maybe
-a baking powder would work well.  I'm baking a loaf of plaster with
-baking powder right now; the top of the foam seems a bit spongy, so
-perhaps in an hour or so it will be a hardened foam.  Still, the
-expansion seems to be less than a factor of 2, and it doesn't seem to
-be improving much.  I have now turned off the oven.
+a baking powder would work well, [as suggested by "Ken" in 2013, who
+also suggested trying dishwashing
+detergent](http://www.observationsblog.com/sciencetechnologyexperiments/plaster-of-paris-mixing-guide).
+I baked such a loaf of plaster with baking powder; the top of the foam
+seemed a bit spongy during baking, but the expansion seems to be less
+than a factor of 2.  I turned off the oven after about 20 or 30
+minutes of baking; a couple of hours later it seems to be setting
+reasonably well, resembling a lava rock, so I demolded it and put it
+in a plastic bag to finish setting overnight.

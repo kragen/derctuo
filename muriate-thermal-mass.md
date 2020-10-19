@@ -164,6 +164,15 @@ US$1000/m², over a styrofoam box painted black on the inside.  (See
 [Solar Netting](solar-netting.md) for how to prevent cheap glass from
 being broken by hailstones, using chicken wire.)
 
+(The heat transfer rate of a bubbler is limited by the size of the
+bubbles, but a saturated solution of muriate of lime gets quite
+frothy, from which I conclude that either the muriate itself reduces
+the surface tension substantially, or my sample is contaminated with a
+surfactant.  Either way, if a heat and/or vapor exchange is effected
+through direct contact, as in a droplet-column or bubbler exchanger,
+cyclonic separators or something might be necessary to filter the
+desiccant out of the air.)
+
 Moreover, as mentioned above, this thermal collector and desiccant can
 serve not only to provide house heating, but also house cooling and,
 when necessary, dehumidification.  This means it's competing against

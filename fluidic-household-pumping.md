@@ -35,9 +35,89 @@ it's easily available, and the cost is low.
 
 At temperatures between 0° and 100° we can direct the flow of air with
 nearly any everyday solid material, including polyethylene bags, waxed
-paper, styrofoam, plaster, wood, oiled muslin, PET bottles, cardboard,
+or lacquered paper, styrofoam, plaster, wood, oiled muslin, PET
+bottles, mica, EVA glue, cardboard,
 clay, glass, and aluminum foil; outside this temperature range it can
 become more demanding.  Within this temperature range the most
-diaphanous of materials can contain it without injury, needing only
+diaphanous of materials can contain airflow without injury, needing only
 enough support from wires or the like to prevent its collapse.
+Inflatable tubes, with stagnant air in a tube alongside the moving-air
+tube, may provide the lightest-weight support of all.
+
+The idea inevitably suggests itself to raise a flexible chimney with a
+hot-air balloon to produce suction from sun-heated air.  A solid
+bootstrapping heating chamber provides initial warm air to initially
+inflate the ultralightweight balloon, made perhaps of mylar; once it
+achieves inflation, it can serve as its own air-heating chamber,
+particularly if the exterior is visibly transparent and painted or
+mixed with an infrared-blocking paint and/or a low-infrared-emissivity
+coating, while an inner mylar partition is black, re-emitting the
+visible light absorbed as thermal infrared into the interior of the
+balloon.  Alternatively, the balloon can be fed from the chimney
+itself, which if fastened to the top of the balloon can inject any
+available hotter air into the balloon, displacing less-hot air out of
+an open balloon bottom.
+
+The chimney itself can have a construction similar to that of the
+balloon, and perhaps either or both would benefit from a light springy
+spiral or two to prevent their collapsing or rippling, resulting in
+airflow obstruction.
+
+Of course, a more conventional rigid chimney can also be used, with a
+greenhouse at its base and perhaps transparent panels within it to
+permit further heating of the air during its ascent.  If it can be
+laid upon the slope of a hill or mountain, it would require minimal
+material.
+
+Unlike chimneys intended for flue gases, such chimneys need only
+handle air in the range of 50°–200°, depending on the design, and can
+thus use non-heat-resistant materials, perhaps even PET.
+
+Even on cloudy days, greenhouses and greenhouse-effect chimneys can
+achieve significant temperature rises and thus significant pressures.
+
+Such a comparatively high-pressure, low-volume flow can be called upon
+to fluidically pump larger volumes of air at lower pressures, as in
+the Dyson bladeless fan.  I'm not quite sure how to use this negative
+gauge pressure to pump air *into* spaces at a zero or positive gauge
+pressure, particularly without sending the hot air into those areas;
+some ideas follow.
+
+By accelerating air down a wide tube toward a suction aperture, the
+air can be given momentum, and the air that misses the suction
+aperture can then be diverted through other tubes wherein it loses
+some, but not all, of its speed; this air, now at a positive gauge
+pressure (?), can then be used to direct other air at still lower
+speeds.
+
+Another approach, which may sort of be the same thing, is to use the
+low pressure to suck a flow down a long tube, which near the end has
+an aperture in its wall to another similar long tube, transferring
+some of its momentum to the fluid in the other tube, and mixing
+somewhat.
+
+Bistable fluidic valves of the well-known design using the Coandǎ
+effect can be used to change the direction of flows for an arbitrarily
+long period of time with just a puff of air.
+
+If you're just using the vacuum to drive a closed-circuit
+thermodynamic system, the problem vanishes; you can maintain the whole
+system at a negative gauge pressure and bring in nozzles of
+zero-gauge-pressure air as "compressed air" to blow the flow wherever
+it's desired.
+
+One difficulty arises if your thermodynamic system is evolving some
+gases you don't want in your chimney, perhaps because they are toxic
+or corrosive.  In some cases you can bubble them through limewater or
+something, but in other cases no such convenient outlet is available.
+In such a case some kind of pumping system like the ones I mentioned
+above seems essential, whether purely fluidic or merely pneumatic.
+
+Pumping via pneumatic, rather than fluidic, methods at low pressure
+simplifies the problem enormously; a flexible balloon of any kind
+(polyethylene, cloth, origami) within a larger space serves as a
+gas-tight piston, while a flap of flexible material over an aperture
+serves as a check-valve.  A balloon that inflates to obstruct an air
+passage provides a simple form of pneumatic switching that easily
+permits the construction of oscillators and the like.
 
