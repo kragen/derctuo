@@ -447,7 +447,8 @@ lime, which can then be gently heated to get limestone.
 
 ### Fluorides ###
 
-As pointed out by Bernd Jendrissek, a fluoride replacement reaction is
+Bernd Jendrissek very graciously pointed out that
+a fluoride replacement reaction is
 commonly used to harden teeth and make them more acid-resistant by
 converting hydroxyapatite to fluoroapatite.  The fluoride of calcium,
 fluorspar, is both harder and less water-soluble than either its
