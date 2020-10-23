@@ -1,3 +1,50 @@
+Plaster of Paris and lime mortar are widespread, cheap, rigid
+materials that can be easily shaped, especially before they harden.
+But they don't harden that much.  What if we could harden them
+further, once they were shaped, or otherwise strengthen them?
+
+In all of what follows, it’s worth keeping in mind that the material
+produced can be formed either as a solid or, sometimes more easily, as
+a foam.  Solid foams can permit faster permeation of liquid reagents,
+permitting the reaction throughout the whole material of a reagent
+that would otherwise only be able to reach the surface, and can also
+have superior mechanical properties in some applications.
+
+
+Coating
+-------
+
+The simplest way to alter such objects' material properties is to coat
+them with a liquid or gel which then adheres to them.  For example,
+portland-cement mortar, calcium-aluminate mortar, magnesium-phosphate
+mortar, shellac, wax, sodium silicate, paint, or glued paper.  Often a
+shell of a hard, dense, or tensilely-reinforced material around a
+lightweight, rigid core provides better tradeoffs of strength and
+weight, and sometimes even better absolute resilience to impacts, than
+either material could alone.
+
+The material in my note on [globoflexia](globoflexia.md) goes into
+considerably more detail about this family of construction, as well as
+the note in Dercuano about sandwich panels.
+
+
+Infiltration
+------------
+
+Plaster is fairly porous, lime a bit less so unless you find some way
+to foam it.  You can make plaster even more porous by the expedient of
+making it with more water.  These porous substances can have their
+pores infiltrated with other substances, such as polymerizing resins;
+vacuum or high pressure may be a useful way to make this infiltration
+more complete.
+
+Other useful infiltration materials might include thermoplastics,
+paraffin wax, molten sulfur, and reagents for replacement reactions.
+
+
+Replacement reactions
+---------------------
+
 As I mentioned in Dercuano, there are many anions that [precipitate as
 water-insoluble solids][0] ([chart][29]) when confronted with
 polyvalent cations such as calcium, magnesium, iron, copper, zinc,
@@ -23,15 +70,8 @@ It might be reasonable to use other semi-soluble or semi-solid sources
 of polyvalent cations as well, such as gelatinous aluminum hydroxide,
 or iron metal in the case of phosphate conversion coating.
 
-In all of what follows, it’s worth keeping in mind that the material
-produced can be formed either as a solid or, sometimes more easily, as
-a foam.  Solid foams can permit faster permeation of liquid reagents,
-permitting the reaction throughout the whole material of a reagent
-that would otherwise only be able to reach the surface, and can also
-have superior mechanical properties in some applications.
 
-Phosphates
-----------
+### Phosphates ###
 
 There are lots of [phosphates][6], many water-insoluble, hard, and
 refractory, even without getting into pyrophosphates, metaphosphates,
@@ -54,14 +94,27 @@ source), I’m not sure it *strengthens* the material in the process.
 
 [1]: https://hal.archives-ouvertes.fr/hal-01634396/document "Stabilization of minerals by reaction with phosphoric acid"
 
+One thing that does *not* work is ordinary hardware-store aqueous
+phosphoric acid at room temperature and pressure; after a couple of
+days no change was observable, and the plaster crumbled just as easily
+as before.  This is in retrospect completely obvious: commercial
+phosphoric acid is prepared by precisely this reaction, in reverse.
+I've now gradually added enough baking soda to mostly convert the
+phosphoric acid into some kind of gel; we'll see if the phosphate of
+soda presumably now dominating the scene is any more effective at
+phosphating the calcium.
+
 Gelatinous aluminum hydroxide is another appealing target for this
 kind of phosphate replacement reaction, since it is so easily molded;
 perhaps it would yield extremely insoluble and refractory aluminum
 phosphate (whether berlinite or in some other form, most likely an
 amorphous one), along with either caustic soda or easily-boiled-off
-aqueous ammonia.
+aqueous ammonia.  Maybe some such reaction would be useful for
+preventing neutral-electrolyte [aluminum-air
+batteries](aluminum-air-batteries.md) from getting clogged up with
+slime.
 
-### Magnesium phosphates ###
+#### Magnesium phosphates ####
 
 Although as a mineral its Mohs hardness is 6, magnesia or periclase is
 a cheap “crushable ceramic” commonly used for electrical insulation of
@@ -140,7 +193,7 @@ then soaking it in diammonium phosphate to post-harden it.
 
 See also below about zinc phosphate dental cement.
 
-### Phosphates of zinc, manganese, and iron ###
+#### Phosphates of zinc, manganese, and iron ####
 
 [Phosphate conversion coating][5] coats steel with water-insoluble
 phosphates of these three metals by taking advantage of their
@@ -205,7 +258,7 @@ Other possible cation-donating solids include the hydroxides (more or
 less equivalent to the oxides, if we’re talking about aqueous
 reactions) and the chloride of zinc.
 
-### Phosphate of boron ###
+#### Phosphate of boron ####
 
 [Boron phosphate][15] is a somewhat refractory material, subliming
 above 1400°, and water-insoluble in its crystalline form.  However,
@@ -214,7 +267,7 @@ room temperature.
 
 [15]: http://acta-arhiv.chem-soc.si/46/46-2-161.pdf
 
-### Phosphates of zirconium ###
+#### Phosphates of zirconium ####
 
 There is a very interesting [monozirconium diphosphate][16] but I
 suspect that zirconia will not yield it easily.  You could surely
@@ -224,12 +277,12 @@ with phosphoric acid; there might be easier routes.
 
 [16]: https://en.wikipedia.org/wiki/Zirconium_phosphate
 
-### Etc. ###
+#### Etc. ####
 
 Copper?  Titanium?
 
-Carbonates
-----------
+
+### Carbonates ###
 
 Perhaps you can convert plaster of Paris to the harder lime, once
 shaped, by one of the following approaches:
@@ -268,8 +321,8 @@ Lots of *other* polyvalent cation donor materials can productively
 form insoluble carbonates, though.  Barium, copper, iron, lead,
 manganese, nickel, and zinc, for example.
 
-Alginates
----------
+
+### Alginates ###
 
 I haven’t seen a whole lot about alginates except for the usual
 dental-mold and spherification stuff, using soluble sodium alginate
@@ -278,8 +331,8 @@ polyvalent cations would work to coagulate the stuff.  In particular,
 though, washing lime or plaster of Paris with a solution of sodium
 alginate ought to give you a waterproof surface, similar to tadelakt.
 
-Silicates
----------
+
+### Silicates ###
 
 Presumably washing the surface of lime or plaster of Paris with
 soluble silicates such as those of sodium or potassium would
@@ -320,8 +373,8 @@ The carbonate of magnesium (magnesite, Mohs 3.5–4.5) is some four
 times as soluble as the oxide, and the fluoride (sellaite, Mohs 5–6) a
 little less soluble than the oxide.
 
-Borates
--------
+
+### Borates ###
 
 Boric acid can form insoluble, hard, and sometimes refractory borates
 of many polyvalent cations, as well as the water-soluble borax; worth
@@ -349,8 +402,7 @@ boron nitride.  [Ammonium borate][24] seems like the ticket:
 [24]: https://www.borax.com/products/ammonium-pentaborate
 [25]: https://en.wikipedia.org/wiki/Boron_trioxide
 
-Sulfides
---------
+### Sulfides ###
 
 Generally the sulfides have the problem that they slowly decompose to
 produce sulphuretted hydrogen and sulfuric acid, given access to moist
@@ -359,8 +411,7 @@ sulfide][27].
 
 [27]: https://en.wikipedia.org/wiki/Calcium_sulfide
 
-Fluorosilicates
----------------
+### Fluorosilicates ###
 
 Toxic [ammonium fluorosilicate][17] is reasonably water-soluble, as
 are the fluorosilicates of copper, ferrous iron, lead, lithium,
@@ -369,8 +420,8 @@ calcium are much less so.
 
 [17]: https://en.wikipedia.org/wiki/Ammonium_fluorosilicate
 
-Oxalates
---------
+
+### Oxalates ###
 
 Oxalates of soda, potassa, and ammonium are fairly water-soluble,
 while oxalates of magnesium, silver, scandium, iron, and barium are
@@ -393,10 +444,26 @@ lime, which can then be gently heated to get limestone.
 
 [38]: https://www.fishersci.ca/shop/msdsproxy?productName=P273250&productDescription=potassium-oxalate-monohydrate-crystalline-certified-acs-fisher-chemical-2
 
+
+### Fluorides ###
+
+As pointed out by Bernd Jendrissek, a fluoride replacement reaction is
+commonly used to harden teeth and make them more acid-resistant by
+converting hydroxyapatite to fluoroapatite.  The fluoride of calcium,
+fluorspar, is both harder and less water-soluble than either its
+sulfate or its carbonate, and so a double metathesis with a soluble
+fluoride salt such as sodium fluoride might plausibly work to harden
+plaster bodies.  These salts are somewhat poisonous.
+
+Sodium monofluorophosphate, as used in some toothpastes, might be
+another alternative, doing the phosphate conversion and fluorination
+in a single step.
+
+
 Inert fillers and high-temperature activation
 ---------------------------------------------
 
-There’s a totally different approach to strengthening these
+There’s a fourth totally different approach to strengthening these
 quasi-refractory calcium compounds, one that doesn’t involve
 room-temperature gas-phase or aqueous reactions.
 
