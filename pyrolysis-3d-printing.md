@@ -220,80 +220,80 @@ Here's a list of candidates.
 [soluble]: https://en.wikipedia.org/wiki/Solubility_table
 [IUPAC-NIST database]: https://srdata.nist.gov/solubility/index.aspx
 
-| cation           | anion         |      g/100g | decomposition  |
-|                  |               |       water | temperature    |
-|                  |               |     (20° if |                |
-|                  |               |   possible) |                |
-|------------------+---------------+-------------+----------------|
-| aluminum         | nitrate       |          74 | 150°           |
-|                  | sulfate       |          36 | 900°           |
-|                  | formate       |           6 |                |
-| chromium(III)    | nitrate       |          81 | 100°           |
-|                  | sulfate       |   "readily" | 700° (to acid) |
-| ammonium         | dichromate    |        high |                |
-|                  | paratungstate |       high? | 600°           |
-| (hydronium)      | boric acid    |         low |                |
-|                  | chromic acid  |         169 |                |
-|                  | alumic acid   |             |                |
-|                  | tungstic acid |         low |                |
-|                  | titanic acid  |             |                |
-|                  | zirconic acid |             |                |
-| calcium          | nitrate       |             | 500°           |
-|                  | acetate       |             | 160°           |
-|                  | formate       |             | 200°?          |
-|                  | sulfate       |        ≈0 ☹ |                |
-| magnesium        | acetate       |          53 |                |
-|                  | oxalate       |         low | 620°           |
-|                  | chromate      |         137 |                |
-|                  | formate       |          14 |                |
-|                  | nitrate       |        69.5 |                |
-|                  | sulfate       |          35 |                |
-| zirconium        | sulfate       |        52.5 |                |
-|                  | nitrate       |         yes | 100°           |
-|                  | acetate       |           ? |                |
-|                  | formate       |           ? |                |
-|                  | tungstate     |         low |                |
-| titanium         | sulfate       |           ? |                |
-|                  | nitrate       |           ? |                |
-|                  | formate       |           ? |                |
-|                  | acetate       |           ? |                |
-| cobalt           | nitrate       |          84 |                |
-|                  | sulfate       |        less |                |
-| copper(II)       | nitrate       |        83.5 |                |
-|                  | sulfate       |        very |                |
-|                  | formate       |           7 |                |
-| ferrous ammonium | sulfate       |          27 |                |
-| iron(II)         | nitrate       |         134 |                |
-|                  | sulfate       |          29 | 680°           |
-|                  | oxalate       |        poor |                |
-| iron(III)        | nitrate       |         138 |                |
-|                  | sulfate       |      slight |                |
-|                  | oxalate       |      slight |                |
-|                  | chromate      |  decomposes |                |
-| lead(II)         | acetate       |          44 |                |
-|                  | nitrate       |          54 |                |
-|                  | sulfate       |        ≈0 ☹ |                |
-| lead(IV)         | acetate       | "reversible |                |
-|                  |               | hydrolysis" |                |
-| nickel           | acetate       |       high? |                |
-|                  | nitrate       |          94 |                |
-|                  | sulfate       |          44 |                |
-|                  | formate       |        low? |                |
-| tin(II)          | sulfate       |          19 |                |
-|                  | nitrate       |           ? |                |
-| yttrium(III)     | acetate       |           9 |                |
-|                  | formate       | 26 (at 50°) |                |
-|                  | nitrate       |         123 |                |
-|                  | sulfate       |           7 |                |
-| zinc             | formate       |         5.2 |                |
-|                  | nitrate       |          98 |                |
-|                  | sulfate       |          54 |                |
-|                  | acetate       |          30 |                |
-| thorium(IV)      | nitrate       |         191 |                |
-|                  | sulfate       |        ≈0 ☹ |                |
-| uranyl           | nitrate       |         122 |                |
-|                  | sulfate       |          21 |                |
-|                  | acetate       |           8 |                |
+    | cation           | anion         |      g/100g | decomposition  |
+    |                  |               |       water | temperature    |
+    |                  |               |     (20° if |                |
+    |                  |               |   possible) |                |
+    |------------------+---------------+-------------+----------------|
+    | aluminum         | nitrate       |          74 | 150°           |
+    |                  | sulfate       |          36 | 900°           |
+    |                  | formate       |           6 |                |
+    | chromium(III)    | nitrate       |          81 | 100°           |
+    |                  | sulfate       |   "readily" | 700° (to acid) |
+    | ammonium         | dichromate    |        high |                |
+    |                  | paratungstate |       high? | 600°           |
+    | (hydronium)      | boric acid    |         low |                |
+    |                  | chromic acid  |         169 |                |
+    |                  | alumic acid   |             |                |
+    |                  | tungstic acid |         low |                |
+    |                  | titanic acid  |             |                |
+    |                  | zirconic acid |             |                |
+    | calcium          | nitrate       |             | 500°           |
+    |                  | acetate       |             | 160°           |
+    |                  | formate       |             | 200°?          |
+    |                  | sulfate       |        ≈0 ☹ |                |
+    | magnesium        | acetate       |          53 |                |
+    |                  | oxalate       |         low | 620°           |
+    |                  | chromate      |         137 |                |
+    |                  | formate       |          14 |                |
+    |                  | nitrate       |        69.5 |                |
+    |                  | sulfate       |          35 |                |
+    | zirconium        | sulfate       |        52.5 |                |
+    |                  | nitrate       |         yes | 100°           |
+    |                  | acetate       |           ? |                |
+    |                  | formate       |           ? |                |
+    |                  | tungstate     |         low |                |
+    | titanium         | sulfate       |           ? |                |
+    |                  | nitrate       |           ? |                |
+    |                  | formate       |           ? |                |
+    |                  | acetate       |           ? |                |
+    | cobalt           | nitrate       |          84 |                |
+    |                  | sulfate       |        less |                |
+    | copper(II)       | nitrate       |        83.5 |                |
+    |                  | sulfate       |        very |                |
+    |                  | formate       |           7 |                |
+    | ferrous ammonium | sulfate       |          27 |                |
+    | iron(II)         | nitrate       |         134 |                |
+    |                  | sulfate       |          29 | 680°           |
+    |                  | oxalate       |        poor |                |
+    | iron(III)        | nitrate       |         138 |                |
+    |                  | sulfate       |      slight |                |
+    |                  | oxalate       |      slight |                |
+    |                  | chromate      |  decomposes |                |
+    | lead(II)         | acetate       |          44 |                |
+    |                  | nitrate       |          54 |                |
+    |                  | sulfate       |        ≈0 ☹ |                |
+    | lead(IV)         | acetate       | "reversible |                |
+    |                  |               | hydrolysis" |                |
+    | nickel           | acetate       |       high? |                |
+    |                  | nitrate       |          94 |                |
+    |                  | sulfate       |          44 |                |
+    |                  | formate       |        low? |                |
+    | tin(II)          | sulfate       |          19 |                |
+    |                  | nitrate       |           ? |                |
+    | yttrium(III)     | acetate       |           9 |                |
+    |                  | formate       | 26 (at 50°) |                |
+    |                  | nitrate       |         123 |                |
+    |                  | sulfate       |           7 |                |
+    | zinc             | formate       |         5.2 |                |
+    |                  | nitrate       |          98 |                |
+    |                  | sulfate       |          54 |                |
+    |                  | acetate       |          30 |                |
+    | thorium(IV)      | nitrate       |         191 |                |
+    |                  | sulfate       |        ≈0 ☹ |                |
+    | uranyl           | nitrate       |         122 |                |
+    |                  | sulfate       |          21 |                |
+    |                  | acetate       |           8 |                |
 
 I can't find any concrete information about ammonium aluminate; I
 suspect it doesn't exist, although a number of chemical suppliers have
