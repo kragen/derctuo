@@ -454,11 +454,17 @@ converting hydroxyapatite to fluoroapatite.  The fluoride of calcium,
 fluorspar, is both harder and less water-soluble than either its
 sulfate or its carbonate, and so a double metathesis with a soluble
 fluoride salt such as sodium fluoride might plausibly work to harden
-plaster bodies.  These salts are somewhat poisonous.
+plaster bodies.  These salts are somewhat poisonous; NaF's LD₅₀ is
+[about 100 mg/kg, so it's used as rat poison,][39] but also in
+toothpaste and to treat osteoporosis.
+
+[39]: https://en.wikipedia.org/wiki/Sodium_fluoride
 
 Sodium monofluorophosphate, as used in some toothpastes, might be
 another alternative, doing the phosphate conversion and fluorination
-in a single step.
+in a single step; its LD₅₀ is [about 500 mg/kg][40].
+
+[40: https://en.wikipedia.org/wiki/Sodium_monofluorophosphate
 
 
 Inert fillers and high-temperature activation
