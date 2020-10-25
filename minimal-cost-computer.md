@@ -223,3 +223,12 @@ hours, 5 months, at Commodore-64 speeds.
 (None of these figures include power consumption for electric field
 tomography, VGA signal generation, etc., or more problematically,
 the RAM mentioned above.)
+
+In [LED Computation](led-computation.md) I link to an article by James
+Bryant of Analog Devices saying that a 5-mm red LED can generate 20 μA
+in photovoltaic mode in full sunlight.  If we assume that this is at
+1.6 V, roughly the forward voltage of the LED, and we can step it up
+to a voltage the CPU can run on — or use a few smaller LEDs in
+series — then it's 32 μW.  At 1800 pJ per instruction, that's 18000
+instructions per second, not very powerful but still faster than a
+typical calculator.
