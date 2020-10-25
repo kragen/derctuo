@@ -178,6 +178,9 @@ would yield almost 21 petawatts, electric, or 620 000 "quadrillion BTU
 per year" (electric) or 180 million terawatt hours (electric) per
 year, in the medieval units used by the IEA.
 
+XXX <https://en.wikipedia.org/wiki/World_energy_consumption> say 18
+terawatts.  FEEX
+
 This is about twice current world marketed energy consumption, but
 that doesn't include sunlight on fields, which a purely subterranean
 civilization would need to include.
