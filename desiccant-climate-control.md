@@ -135,7 +135,8 @@ most industrially-produced materials are unable to approach that
 range, though perhaps a few, such as lye, oil of vitriol, and muriate
 of lime might make it.
 
-[The random Russian website opt6.ru][0] offers a tonne of 99.2%-pure
+L29Ah was kind enough to point out that
+[the random Russian website opt6.ru][0] offers a tonne of 99.2%-pure
 muriate of lime for 21000 rubles; [a ruble is presently US$0.01294][1]
 reportedly, so that’s US$272/tonne or US$0.272/kg.
 If this price is correct, it’s toward the

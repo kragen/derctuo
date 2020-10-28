@@ -210,7 +210,25 @@ irrational][24].
 [23]: https://github.com/wo/tpg
 [24]: http://us.metamath.org/mpeuni/sqrt2irr.html
 
-[Gwern licensed his entire site under CC0.][9]
+[Gwern licensed his entire site under CC0.][9] It mostly discusses IQ,
+epistemology, pharmacology, IQ, deep learning, other aspects of AI,
+statistics, genetics, IQ, politics, psychology, biology, programming,
+economics, and IQ, but occasionally strays from that focus.  Uses
+Mathjax.  He explains his motivation:
+
+> The goal of these pages is not to be a model of concision,
+  maximizing entertainment value per word, or to preach to a choir by
+  elegantly repeating a conclusion.  Rather, I am attempting to
+  explain things to my future self, who is intelligent and interested,
+  but has forgotten.  What I am doing is explaining why I decided what
+  I did to myself and noting down everything I found interesting about
+  it for future reference.  I hope my other readers, whomever they may
+  be, might find the topic as interesting as I found it, and the essay
+  useful or at least entertaining–but the intended audience is my
+  future self.
 
 [9]: https://www.gwern.net/About#license
 
+The source code of his pages (in a Pandoc-implemented language derived
+from Markdown) is accessible by appending .page to the URL.  He says
+the whole thing is kept in Git, but I don't know where.
