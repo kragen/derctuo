@@ -209,3 +209,8 @@ irrational][24].
 [22]: http://forallx.openlogicproject.org/forallxyyc.pdf
 [23]: https://github.com/wo/tpg
 [24]: http://us.metamath.org/mpeuni/sqrt2irr.html
+
+[Gwern licensed his entire site under CC0.][9]
+
+[9]: https://www.gwern.net/About#license
+

@@ -8,7 +8,7 @@ I concluded that it was a very attractive alternative to the
 miraculous salt of Glauber for domestic space heating applications,
 because although it needs to be heated to 45.5° to recharge it, by my
 calculations it holds 408 kJ/kg of heat energy and can produce
-temperature rises of well over 100°; and it's considerably more
+temperature rises of well over 100°; and it’s considerably more
 flexible in when it releases that heat, instead of trying to release
 it all the time and needing to be somewhat restrained by thick thermal
 insulation.
@@ -38,7 +38,7 @@ well-known:
 2. Store the dry desiccant until it is desired to heat, for example,
    your floor, your blanket, the air in your house, or some hot water.
 3. Add water to the dry desiccant to produce the desired heat, which
-   can be produced either at the point where it's desired, or
+   can be produced either at the point where it’s desired, or
    transferred using some kind of liquid coolant.
 4. Store the spent desiccant until heat is available to regenerate it,
    for example from sunlight.
@@ -81,8 +81,8 @@ Different desiccants have different tradeoffs, and some may not be
 well suited to some uses; for example, perchlorate of magnesia must be
 regenerated under vacuum, quicklime must be regenerated at the
 inconveniently high temperature of 512°, and the hydration of
-alabaster only produces a temperature rise of some 60° or less.  It's
-unlikely that muriate of lime is the optimal choice, but I haven't
+alabaster only produces a temperature rise of some 60° or less.  It’s
+unlikely that muriate of lime is the optimal choice, but I haven’t
 investigated the tradeoffs thoroughly.
 
 One of the chief figures of merit here is the price — either per joule
@@ -95,7 +95,7 @@ viscosity if liquid, its tendency to clump if solid (fixable in some
 cases with larnite or similar substances), and its hazards if spilled
 or inhaled.
 
-But let's look at prices first.
+But let’s look at prices first.
 
 Muriate of lime, or oil of lime, has been one of the chief desiccants
 used for centuries, and it is relatively cheap — US$1.60/kg here in
@@ -134,3 +134,13 @@ prices in the two orders of magnitude of US$0.005-US$0.5/kg.  Probably
 most industrially-produced materials are unable to approach that
 range, though perhaps a few, such as lye, oil of vitriol, and muriate
 of lime might make it.
+
+[The random Russian website opt6.ru][0] offers a tonne of 99.2%-pure
+muriate of lime for 21000 rubles; [a ruble is presently US$0.01294][1]
+reportedly, so that’s US$272/tonne or US$0.272/kg.
+If this price is correct, it’s toward the
+high end of the price per kg of the cheap desiccants, and 34× the
+price of calcined alabaster, but it’s still kind of within the range.
+
+[0]: https://opt6.ru/products/khloristyy_kaltsiy_1000_kg/
+[1]: https://www.xe.com/currencyconverter/convert/?Amount=1&From=RUB&To=USD
