@@ -137,7 +137,8 @@ of lime might make it.
 
 [The random Russian website opt6.ru][0] offers a tonne of 99.2%-pure
 muriate of lime for 21000 rubles; [a ruble is presently US$0.01294][1]
-reportedly, so that’s US$272/tonne or US$0.272/kg.  This is toward the
+reportedly, so that’s US$272/tonne or US$0.272/kg.
+If this price is correct, it’s toward the
 high end of the price per kg of the cheap desiccants, and 34× the
 price of calcined alabaster, but it’s still kind of within the range.
 

@@ -116,3 +116,10 @@ events.
 [5]: https://www.oercommons.org/courses/world-civilizations-i-open-course/view
 [6]: https://www.oercommons.org/courses/western-civilization-a-concise-history-volume-3?__hub_id=19
 [7]: https://www.oercommons.org/courses/western-civilization-a-concise-history-volume-2/view
+
+Gwern
+-----
+
+[Gwern licensed his entire site under CC0.][9]
+
+[9]: https://www.gwern.net/About#license
