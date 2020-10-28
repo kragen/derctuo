@@ -175,6 +175,14 @@ difficult.
 
 [19]: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3941824/
 
+Vitamin D₃, [cholecalciferol, is used as rat poison][21] and possum
+poison with a LD₅₀ of about 10 mg/kg, so if I were a possum the
+acutely lethal dose would be about 1.2 grams, about 48 million IU.  In
+humans there are concerns with continued doses over 4000 IU per day,
+as mentioned above.
+
+[21]: https://en.wikipedia.org/wiki/Cholecalciferol#Rodenticide
+
 ### Fish: I’d need to eat 450 g of mackerel per day costing US$1.28 ###
 
 This can of _jurel_ (“jack mackerel”, the marketing name for horse
