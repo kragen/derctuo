@@ -70,9 +70,37 @@ casting temperatures.)
 The standard way to foam fired clay is to mix it with sawdust, coffee
 grounds, used yerba mate, or a similar granular material that will
 burn off in the kiln.  This might work with alabaster plaster too.  I
-have a lump of plaster mixed with yerba hardening right now.
+have made a lump of plaster mixed with yerba; it is quite hard, less
+dense than plain plaster, and pale green, and it seems to survive fire
+a bit better than plain plaster; but I haven't yet had the chance to
+fire such an article long enough to burn out all the organics.
 
-Fired-porous-clay kitty litter is another possible aggregate, similar
+[Naphthalene] is reportedly used in this way to make porous grinding
+wheels, boiling out at quite reasonable temperatures instead of
+needing to be oxidized away like yerba mate.  A wide variety of
+substances would work as alternatives; they need to survive the
+plaster's setting process in solid form — so water ice, for example,
+will not work; be capable of breaking apart into granules and
+remaining as separate granules, ruling out, for example, chewing gum
+and candle wax; not be soluble in or reactive with water; not react
+with the plaster itself, which I think might rule out, say, iodine; be
+easily removable after the plaster is set, for example by heating (as
+naphthalene) or dissolution with another solvent (as brimstone or
+rubber in disulfuret of carbon); and, ideally, be very cheap.
+
+[Naphthalene]: https://en.wikipedia.org/wiki/Naphthalene
+
+Other compounds with these properties include para-dichlorobenzene,
+camphor, brimstone, rubber, and chlorargyrite, which last requires
+ammoniated water to dissolve.  A more extensive note on some such
+possibilities, though mostly water-soluble, is in [Inorganic
+Burnout](inorganic-burnout.md).  Many common plastics including LDPE
+are also suitable; though more expensive than the plaster itself, they
+are reusable.  Brimstone has the unique advantage of being very cheap
+as a petroleum waste product, and its common form melts into a thin
+liquid at 115°.  However, it requires precautions against fire.
+
+Fired-porous-clay kitty litter is another possible porous aggregate, similar
 to vermiculite but denser.
 
 Plaster muffins
