@@ -16,7 +16,7 @@ Memory
   with dual SPI][6]
 * US$0.29 for the [Adesto AT25SF041B-SSHB-B 85 MHz 512-KiB NOR FLASH
   with quad-I/O SPI][7]
-* US$0.15 for the [Cypress S25FL116K0XBHI030 108MHz 2MiB NOR Flash with
+* **US$0.15** for the [Cypress S25FL116K0XBHI030 108MHz 2MiB NOR Flash with
   SPI and quad-IO “SPI” in a 24-BGA][4]
 * US$0.48 for the [Winbond W25Q16JVSSIQ 133MHz 2MiB NOR Flash with SPI
   and quad-IO "SPI"][8], down to about 38¢ in quantity 100
