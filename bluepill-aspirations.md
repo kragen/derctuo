@@ -75,8 +75,12 @@ audio in) with a hacked cable.  Hmm, better find those audio plugs I
 scavenged... although alligator clips or copper wire twisted around a
 phono plug would work too.  It has real DACs, too, not just PWM.
 
+Next thing is probably hooking up these potentiometers I have here as
+analog inputs.
+
 Next thing after that is to get a voltmeter running with analog
-inputs, limiting diodes, and a voltage divider or three.  If USB
+inputs, limiting diodes, and a voltage divider or three.  (Though see
+[Multimeter metrology](multimeter-metrology.md).)  If USB
 serial is working then I can transmit the result over USB serial.
 Otherwise I'll be limited to blinking an LED or doing speech synthesis
 or something.  Or a modem.
@@ -91,7 +95,12 @@ some random component as the temperature sensor.  In particular I want
 to calibrate it to use these quartz-halogen lightbulbs as temperature
 sensors, but I suspect that at room temperature.  Averaging ADC
 readings over 16 seconds should in theory permit adding an extra 12
-bits of precision to the ADC, giving us 24 bits of precision.
+bits of precision to the ADC, giving us 24 bits of precision.  But
+what is the temperature sensor being measured *against*?
+
+As Weston said in his Weston-cell patent, a voltage standard that
+varies with temperature (like the Daniell cell or the Clark cell) is
+dependent on the thermometer for its precision.
 
 I think it has some kind of ability to write to Flash under program
 control.  This should enable me to tell whether it was turned on while
@@ -143,3 +152,10 @@ sensing, I ought to be able to measure materials more precisely.
 A couple of electronic gadgets I've been putting off doing anything
 with are this PAL acoustic delay line and these linear servos from
 inkjets.
+
+Speaking of PAL, bitbanging PAL or NTSC would be a pretty awesome
+thing to do, although in practice probably bitbanging VGA would be
+easier and more useful.
+
+Another extremely awesome thing to do with it would be to get it to be
+a USB HID so that it can type on my computer.
