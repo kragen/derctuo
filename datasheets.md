@@ -19,6 +19,15 @@ PDFs.)
 
 Most of the sites mentioned have their own search engines.
 
+Octopart has its own search engine, and it's useful if you want to buy
+things, and it does provide datasheet links, but for example
+[searching for bp2812 on Octopart][22] gives you sealed lead-acid
+batteries.  With a datasheet, mind you.  Searching for "c3205" (the
+marking on the common 1990s 2SC3205 transistor) similarly produces no
+useful results.
+
+[22]: https://octopart.com/search?q=bp2812
+
 Known-good sources
 ------------------
 
@@ -120,3 +129,20 @@ Blacklist; _never visit_ (at least if you want the datasheet)
 [10]: https://www.datasheetarchive.com/CXA1498S-datasheet.html
 [17]: https://www.y-ic.com/pdf/dc/5383541-BP2812.pdf
 [19]: http://www.datasheet26.com/search.php?sWord=BP2812
+
+Transistor part numbers
+-----------------------
+
+kludge explains:
+
+> There are three religions: Japanese numbers, Pro-Electron numbers,
+> and American JEDEC numbers. Japanese numbers all start with 2S so
+> they don't bother printing the 2S part.  American ones start with 2N
+> but they print it.  Pro-Electron ones have two letters for type and
+> then more numbers.
+
+So if you have a Japanese transistor that says C3205 on it, maybe look
+for 2SC3205.
+
+Surface-mount parts are a bitch.  There's a book I've seen
+somewhere...
