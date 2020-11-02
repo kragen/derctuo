@@ -113,14 +113,16 @@ to obtain a precise standard for the ohm; but he describes the Wenner
 method, which seems to be some kind of differential measurement that I
 don't fully understand, getting a ±5 ppm precision.  He also mentions
 using the rotation of a magnet in a coil, or a coil in the earth's
-magnetic field.
+magnetic field.  (The quantized Hall effect is the modern absolute
+standard since 1990.)
 
 He says that using computable capacitors to check the ohm measure is
 "less involved" and "may be used [text lost] an annual basis" to check
 resistance standards against absolute units in preference to the
 inductive approach.  (He also says they normally used 1-pF computable
 capacitors rather than the 88000-pF jobby I used above for
-calculations.)
+calculations.)  "Thompson-Lampard theorem" seems to be the key term
+here.
 
 Given the possibility of measuring a computable inductor or computable
 capacitor with a microcontroller, I'd think that it would be easier to
