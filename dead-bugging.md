@@ -40,3 +40,11 @@ by orders of magnitude.  Still, a regular soldering iron does work.
 Non-surface-mount components, as well as BGAs and the like, can
 perhaps be handled by dead-bugging them, gluing them with their legs
 in the air.
+
+Here's a photo of three such wires soldered to three of the pins of a
+through-hole SZIP, taken with my hand computer's built-in camera,
+which I used for the soldering as well:
+
+![(photo of sleeping-bug chip)][0]
+
+[0]: https://i.ibb.co/3y28R5n/20201104-083250.jpg
