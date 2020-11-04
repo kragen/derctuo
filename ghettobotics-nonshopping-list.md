@@ -120,13 +120,22 @@ and taped into shape using electrical tape.  The triangle firmly
 supports the cellphone's center of gravity and the place where you
 have to tap to take a photo, without obstructing its camera, "flash",
 light sensors, or power button.  This reduces non-parallelism,
-eliminates motion blur, and keeps the imaging range near optimal.
+eliminates motion blur, and keeps the imaging range near optimal (as
+close as possible without losing focus.)  So this probably gets to
+better than 1.7× resolving power, maybe 3×.
 
 Both of the cellphones I happen to have here are more or less
 equivalent for this.
 
-My equipment list
------------------
+password2 points out that there's a program called
+[scrcpy](https://github.com/Genymobile/scrcpy) which might be useful for
+this, allowing me to disable the screensaver and display the cellphone's
+screen on a laptop or netbook connected over USB or TCP/IP.  This would
+afford greater magnification, because those screens are bigger, though
+of course not greater detail, and probably with more latency.
+
+My equipment wishlist
+---------------------
 
 In addition to the stuff above that I already have, I want:
 
