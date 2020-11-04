@@ -62,6 +62,8 @@ Known-good sources
   GUID firenames.  [BP2812, for example][18].
 * ibselectronics.com: PDFs linked directly from Yandex, with good
   filenames.  [BP2832, for example][21].
+* onsemi.com: PDFs linked directly from Yandex, with good filenames,
+  but only for ON Semiconductor products.
 
 [0]: https://datasheetspdf.com/pdf/1405124/SeCoS/C3205/1
 [4]: http://www.datasheet-pdf.com/PDF/C2878-Datasheet-ToshibaSemiconductor-634662
