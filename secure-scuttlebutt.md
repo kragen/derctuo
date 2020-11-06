@@ -115,6 +115,8 @@ and Microsoft WSL's
 server implementation of the 9P protocol, so it might not be a good
 name for a protocol identifier.
 
+("p8", as in "prate", might be better.)
+
 A thing I’m not entirely sure about is whether you’d want to use the
 same *identity* to talk about two different *topics*.  Evidently, for
 example, you use a “long term public key” not only to identify a feed

@@ -11,7 +11,8 @@ metal can to exclude oxygen and avoid abrasion of the relatively weak
 insulator (very weak in the case of MgO).
 
 You can get fairly fine (≈100μm) copper wire by, among other things,
-untwisting Ethernet cables.  [Annealed copper's temperature
+untwisting Ethernet cables or some power cables.
+[Annealed copper's temperature
 coefficient of resistivity α is about 0.0039][0], comparable to
 platinum's.  You could maybe stick such a coil of fine copper wire
 inside some kind of insulator, such as quartz sand, and do a four-wire

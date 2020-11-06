@@ -68,6 +68,9 @@
 - clay
 - kaolin
 - resins?
+- red copper oxide for ceramic
+- modpodge?
+
 
 ## Paint store
 
