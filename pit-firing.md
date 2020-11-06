@@ -25,4 +25,25 @@ temperature sensors into the sand too, and they might be able to be at
 a significant distance from the thing that's heating up, so they can
 be at a lower temperature.
 
-Vermiculite, charcoal, and ash may also be usful.
+Vermiculite, charcoal, ash, cat litter, and plaster of paris may also
+be useful; they are somewhat refractory substances that thermally
+insulate better than sand.  Even perlite should be useful up to a
+point, and that point is about 900°.
+
+Higher temperatures may require the use of arc heating rather than
+solid heating elements, although carborundum heating elements can
+extend this considerably.
+
+Carborundum itself was discovered in just such a way and is still
+produced by this process: a sort of arc furnace is set up under a
+layer of silica sand with carbon electrodes, originally in an iron
+crucible, but nowadays at a much larger scale.
+
+To some extent you should be able to measure the temperature
+distribution within the pile of fluff with temperature sensors that
+are not exposed to its hottest part.  You can estimate the
+conductivity, thermal mass, thermal resistance to ambient, and heat
+input using a few sensors at known or estimated locations, a
+continuous measurement of the thermal input, and some PDE solvers.
+This could potentially permit very precise control of the temperature
+distribution within the pile.
