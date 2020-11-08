@@ -146,3 +146,8 @@ muffin in half with my hands after scoring the top and bottom surfaces
 with fingernails, and then later to drive a metal wire through the
 whole height of the cylinder.  No visible cracks propagated out from
 the wire.
+
+Another possible way to foam it: hydrate it with water with a lot of
+dissolved gas, perhaps Priestley's carbonated water, under pressure if
+necessary.  The gas will bubble out and form a foam, but not before
+the pressure is released.

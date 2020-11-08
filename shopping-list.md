@@ -31,7 +31,8 @@
 - Glauber's secret salt
 - green vitriol
 - infusorial earth
-- boric acid or borax
+- boric acid or borax (fertilizante)
+- urea (fertilizante) (or at gas station)
 
 ## Health food store
 
@@ -70,7 +71,6 @@
 - resins?
 - red copper oxide for ceramic
 - modpodge?
-
 
 ## Paint store
 
