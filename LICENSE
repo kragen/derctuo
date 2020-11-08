@@ -1,4 +1,4 @@
-http://creativecommons.org/publicdomain/zero/1.0/
+<http://creativecommons.org/publicdomain/zero/1.0/>
 
 To the extent possible under law, Kragen Javier Sitaker has waived all
 copyright and related or neighboring rights to Derctuo.  This work is
@@ -7,7 +7,9 @@ published from Argentina.
 > The contents of the `library/` directory included in Derctuo (the
 > “Work” below) are not authored by Kragen Javier Sitaker (the
 > “Affirmer” below) and are consequently not included in this
-> dedication.
+> dedication.  Each file there has its own license which permits
+> redistribution.  This license and disclaimer of copyright *does*
+> apply to the compilation, as distinct from its individual works.
 
 The text of the Creative Commons Public Domain dedication linked above
 is included below for convenience.
