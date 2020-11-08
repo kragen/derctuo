@@ -71,7 +71,9 @@ iron; alternatively some kind of desiccant such as calcined alabaster
 could sequester the water, or a more easily oxidized metal could
 reduce it.  
 
-[![(Ellingham diagram)](library/Ellingham_Richardson-diagram_english.svg "Ellingham diagram by Wikipedia user DerSilberspiegel, CC-BY-SA 4.0")](https://en.wikipedia.org/wiki/File:Ellingham_Richardson-diagram_english.svg)
+[![(Ellingham diagram)](library/Ellingham_Richardson-diagram_english.svg "Ellingham diagram by Wikipedia user DerSilberspiegel, CC-BY-SA 4.0")
+<br /><i>Ellingham diagram by Wikipedia user DerSilberspiegel, CC-BY-SA 4.0</i>
+](https://en.wikipedia.org/wiki/File:Ellingham_Richardson-diagram_english.svg)
 
 Looking at an [Ellingham diagram with hydrogen to steam ratios][0], it
 seems that for hydrogen reduction of magnetite to hematite, the
