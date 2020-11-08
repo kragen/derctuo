@@ -47,21 +47,39 @@ won't be nearly as efficient as Prolog, but that's fine.  It's
 probably efficient enough for many uses just by brute force, and a
 little indexing on infrequent words should go the rest of the way.
 
-I was thinking about this last night and got really excited.
+I was thinking about this last night and got really excited.  I think
+it might offer an easily usable system with enough expressive power to
+be useful.
+
+Basic UI
+--------
+
 Interactively or in batch mode, a UI for such a database can add a
 table of results underneath each set of premises, which are
 distinguished from ground facts by containing variables.  (Above I've
 marked these with apostrophes, but other syntax might be better,
-especially for natural languages containing contractions.)  But you
-can also add negation, using the standard Datalog stratification
-approach (done dynamically rather than statically):
+especially for natural languages containing contractions.)  In batch
+mode, it could simply process a text file and produce a file annotated
+with deductions and query results.
+
+Negation
+--------
+
+But you can also add negation, using the standard Datalog
+stratification approach (done dynamically rather than statically):
 
     'Aaron' is indicted
     \+ Aaron is guilty
     ----
     Aaron is falsely accused
 
-and you can add aggregate functions:
+I'm not totally clear on how this works without doing the kind of
+textual rule analysis that I said above was difficult.
+
+Aggregate formulas
+------------------
+
+Also you can add aggregate functions:
 
     'X' has line item 'Y'
     'Y' costs 'Z'
@@ -71,6 +89,18 @@ and you can add aggregate functions:
 where implicitly we are quantifying over all Y (or, I guess, reducing
 over all Y) because Y does not occur in the rule's conclusion outside
 of an aggregate.
+
+Aggregates include =sum(), =total(), =mean(), =stdev(), =max(),
+=min(), =list() (which separates items with commas) and =any(), which
+just picks one of the values in some unspecified way.
+
+=argmax() and =argmin() are aggregates taking *two* arguments: the
+first is the thing to be returned, while the second is the thing to be
+maximized or minimized.  So, for example, to get the material that
+provides the lowest cost, you say =argmin(material, cost).
+
+Scalar formulas
+---------------
 
 And of course you can have other formulas as well:
 
@@ -86,6 +116,15 @@ And of course you can have other formulas as well:
     Something has volume 'v'
     ----
     Something has mass =(D*v)
+
+Here because `D` and `v` occur outside of an aggregate function you
+are not aggregating over all the densities and volumes.  If it happens
+that some object has two volumes and is made of two materials, each of
+which have two densities, then the system will deduce eight masses for
+it.
+
+Abbreviation
+------------
 
 It's probably better to abbreviate this:
 
@@ -105,6 +144,9 @@ It's probably better to abbreviate this:
     Unobtainium has density 'D'
     ----
     It has mass =(D*v)
+
+Goal seek
+---------
 
 In this form the system is sort of unidirectional; it can infer the
 volume of a cylinder from its radius and height, but it can't infer
@@ -128,6 +170,36 @@ This doesn't give you the whole bidirectional power of constraint
 solvers, but it's very simple to use and implement, and perfectly
 adequate for many computations I do in Derctuo.
 
+Libraries
+---------
+
+You probably want to be able to import library modules so that you
+don't have to explain things like cylinders and densities in every
+database.  Probably the best way to do this, in a textual system, is
+to stick a line in the file saying something like
+
+    :use circuits geometry shapes
+
+But this should probably be at the end of the file.
+
+Existentials
+------------
+
+If you say that some object is a cylinder, you probably don't want the
+system to posit a material from which it is made.  But there might be
+cases where you do want such deductions:
+
+    'x' is a car
+    ----
+    'something' is the steering wheel of x
+
+Here we have a free variable in the conclusion of the rule, with the
+meaning that the system is entitled to make up an object to fill that
+role if nothing else turns up.  This involves a sort of negation.
+
+UI affordances
+--------------
+
 Tabular output can go beyond the simple column-per-variable default;
 you can, for example, specify a sort key, change the order of columns,
 change the formatting of columns, pivot one or more variables to be
@@ -137,3 +209,181 @@ entry.
 
 A non-interactive system can be implemented that just reads in a text
 file and spews out an augmented version of it.
+
+Multiple words and nesting
+--------------------------
+
+All of the above is entirely without nesting, and the lack of nesting
+is one of the great UI benefits of logic programming in general.  But
+sometimes you do need nesting in order to be able to correctly reason
+about complicated propositions, especially without existentials.
+
+A really simple approach, which doesn't go far, is to allow variables
+to match arbitrary sequences of words instead of single words:
+
+    Bob Smith is a person
+    Mary Smith is a person
+
+    'Someone' is a person
+    ----
+    Someone has skin
+
+    'John' 'Doe' is a person
+    'Richard' Doe is a person
+    ---
+    John Doe is related to Richard Doe
+
+From this we can infer, among other things, that Mary Smith has skin
+and Mary Smith is related to Bob Smith.
+
+The simplest possible approach to nesting would be *not* allowing
+variables to match arbitrary sequences of words *containing unmatches
+parentheses*.  That way you could use parentheses to supply arbitrary
+nesting structure.
+
+It might be desirable for a variable to *not* match multiple words by
+default.  This is partly a usability question that ought to be studied
+by studying users.
+
+### Regexps ###
+
+If you're trying to apply this kind of tool to parsing text that it
+wasn't intended for, it might be convenient to specify a regex to
+constrain the matches.
+
+    start 'year/\d+/'-'month/\d+/'-'day/\d+/'
+    ---
+    Session began 'day'.'month'.'year'
+
+Denesting
+---------
+
+The abbreviation facility above suggests writing:
+
+    I should buy:
+        red peppers
+        bananas
+        apples
+
+to create three facts.  But what if we're trying to assimilate
+something like
+
+    I should buy red peppers, bananas, apples
+
+Then maybe it would be useful to be able to write a rule with a
+premise like
+
+    I should buy 'food...'
+
+to match three times food=red peppers, food=bananas, food=apples,
+vaguely similar to Scheme `syntax-rules`.
+
+Syntax
+------
+
+Especially for a textual system, syntax is important for UI.  Some
+alternatives to the strawman syntax above:
+
+- Alternative syntax for variables.  Above I've only stuck sigils on
+  variables to indicate their variable nature the first time they
+  occur, but it might be worthwhile to use the sigil every time for
+  readability; Tcl and bash seem to suffer in usability compared to
+  PHP and Perl's more universal sigil usage.  Here are some possible
+  alternatives:
+
+        'It' is made of 'unobtainium'   # example above
+        «It» is made of «unobtainium»   # still harder and safer
+        <It> is made of <unobtainium>   # common metavariable syntax in grammars
+        `It` is made of `unobtainium`   # e.g., SQL
+        "It" is made of "unobtainium"   # also SQL but less weird; harder to
+                                        # type than '' but safer with contractions
+        It is made of Unobtainium       # Prolog
+        IT is made of UNOBTAINIUM       # variant
+        it IS MADE OF unobtainium       # variant, often used informally for, e.g., SQL
+        It$ is made of unobtainium$     # BASIC
+        $It is made of $unobtainium     # Perl/PHP, taken from BASIC and sh; also Tcl
+        @It is made of @unobtainium     # Perl variant
+        .It is made of .unobtainium     # minimal line noise variant
+        :It is made of :unobtainium     # Logo, almost as calm
+        It :is :made :of unobtainium    # Lisp/Ruby
+        It 'is 'made 'of unobtainium    # Lisp
+        ,It is made of ,unobtainium     # Lisp quasiquoted
+        ?It is made of ?unobtainium     # Lisp-family logic languages
+        It? is made of unobtainium?     # variant
+        ¿It? is made of ¿unobtainium?   # Spanish variant
+        {It} is made of {unobtainium}   # various templating languages
+                                        # including Python .format and f''
+        #{It} is made of #{unobtainium} # Ruby's equivalent
+        [It] is made of [unobtainium]   # easier to type on standard keyboard than {}
+        (It) is made of (unobtainium)   # the remaining ASCII nesting delimiters
+        %It% is made of %unobtainium%   # MS-DOS batch
+        %It is made of %unobtainium     # variant
+        ¤It is made of ¤unobtainium     # variant
+        |It| is made of |unobtainium|   # more little-used delimiters
+        It* is made of unobtainium*     # asterisk connotes reference
+        It† is made of unobtainium†     # though daggers connote it HARDER
+        It... is made of unobtainium... # ellipses connote indefiniteness
+
+    In a multi-font system, we could imagine writing <i>It</i> is made
+    of <i>unobtainium</i>, <u>It</u> is made of <u>unobtainium</u>,
+    <b>It</b> is made of <b>unobtainium</b>, or <span style="color:
+    #666">It</span> is made of <span style="color:
+    #666">unobtainium</span> instead.
+
+- Alternative syntax for deduction.  The line of dashes echoes the
+  sequent calculus but it's kind of heavyweight, and how many dashes
+  do you use, anyway?  Does it matter?  And then there's the question
+  of how far its scope extends (above, to the first blank line).  And
+  should the premises come before the conclusion, as above, or after
+  it?  Here is the original and some strawman alternatives;
+
+            {Alice} is {Carol}'s parent
+            {Carol} is {Bill}'s ancestor
+            ----
+            {Alice} is {Bill}'s ancestor
+
+            {Alice} is {Bill}'s ancestor :-
+                {Alice} is {Carol}'s parent
+                {Carol} is {Bill}'s ancestor
+
+            {Alice} is {Bill}'s ancestor?
+                {Alice} is {Carol}'s parent
+                {Carol} is {Bill}'s ancestor
+
+            if:
+                {Alice} is {Carol}'s parent
+                {Carol} is {Bill}'s ancestor
+            then:
+                {Alice} is {Bill}'s ancestor
+
+            {A} is {C}'s parent; {C} is {B}'s ancestor |- {A} is {B}'s ancestor
+
+            {Alice} is {Carol}'s parent
+            {Carol} is {Bill}'s ancestor
+            :. {Alice} is {Bill}'s ancestor
+
+    Of these I think I favor the last one with "∴" or anyway its
+    closest ASCII equivalent.  It avoids spurious visual suggestions
+    of nesting, it's compact, and there's only one way to do it.
+
+- Alternative syntax for formulas.  I think most formulas will
+  probably be fairly simple affairs, so it's nice to be able to
+  introduce them with just a single character instead of nested
+  delimiters; `=total(cost)` beats `[total(cost)]` on visual noise.
+  And the `=` syntax is familiar from Excel, having replaced
+  Visicalc's `@` syntax (also used in Lotus 1-2-3, though with one
+  less period for ranges): `+B1-SUM(C2...C8)`.  Still, you could
+  imagine other syntaxes.  ES5 template strings use `${2 * a + b}`.
+
+Queries and reporting
+---------------------
+
+Every set of premises is a query whose answer is a table, but it might
+be more useful to be able to include only some of these tables in a
+formatted output report.
+
+Quantities
+----------
+
+Above I've talked about quantities like `32cm` and `1 m³`, which have
+units and are expressed XXX

@@ -226,4 +226,32 @@ normal 280 mV, which seems like it ought to be enough to keep the
 output from soaring.  I guess I don't really know how to calculate
 that, but it's a pretty non-negligible amount of current.
 
-Oh shit, I forgot to sleep again.
+Or maybe just use the wire voltage for feedback
+-----------------------------------------------
+
+On ##electronics Famine suggested instead feeding the wire with a
+constant-current supply and servoing off the wire's voltage; they gave
+an example linear circuit that drives an output Darlington off an
+op-amp which compares to a reference voltage from a voltage divider.
+This still means you need measurement precision of a couple of
+millivolts, but in a linear circuit like the one they designed, that's
+totally reasonable, especially if it's running off a battery or
+something instead of a USB power bank; and it avoids having hundreds
+of volts anywhere in the circuit.  The only real drawback I see is
+that it can't step up the current from what the power supply can
+provide, the way a buck converter can, and at any reasonable input
+voltage it burns most of the power in the output Darlington.
+
+Alternative energy sources
+-------------------------
+
+Using only 150 mW means you could use even a CR2032 coin cell;
+Energizer suggests theirs has under 10Ω of internal resistance for
+much of its lifetime, and under 20Ω until it's almost dead.  3 volts
+at 20Ω is 150 mA, which is half a watt.  The battery won't last long
+at that kind of drain.  Its typical capacity is given as "235 mAh", or
+in SI units 846 coulombs, or about 2.5 kJ, but you'll be lucky to get
+a tenth of that at these high drains.  So the battery might only last
+a few minutes to half an hour or so.
+
+Various kinds of capacitors can hold a few hundred joules as well
