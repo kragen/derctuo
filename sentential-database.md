@@ -328,7 +328,9 @@ alternatives to the strawman syntax above:
     of <i>unobtainium</i>, <u>It</u> is made of <u>unobtainium</u>,
     <b>It</b> is made of <b>unobtainium</b>, or <span style="color:
     #666">It</span> is made of <span style="color:
-    #666">unobtainium</span> instead.
+    #666">unobtainium</span> instead.  (Note that if you're viewing
+    this on GitLab some of the formatting in this paragraph gets
+    mangled by their buggy Markdown parser.)
 
 - Alternative syntax for deduction.  The line of dashes echoes the
   sequent calculus but it's kind of heavyweight, and how many dashes
@@ -358,13 +360,23 @@ alternatives to the strawman syntax above:
 
             {A} is {C}'s parent; {C} is {B}'s ancestor |- {A} is {B}'s ancestor
 
+            :A is :C's parent; :C is :B's ancestor { :A is :B's ancestor }
+
             {Alice} is {Carol}'s parent
             {Carol} is {Bill}'s ancestor
             :. {Alice} is {Bill}'s ancestor
 
-    Of these I think I favor the last one with "∴" or anyway its
-    closest ASCII equivalent.  It avoids spurious visual suggestions
-    of nesting, it's compact, and there's only one way to do it.
+            {Alice} is {Carol}'s parent
+            {Carol} is {Bill}'s ancestor
+            => {Alice} is {Bill}'s ancestor
+
+    Although I like the one with ":.", the closest ASCII equivalent of
+    "∴", I think the last one with "=>", due to deltab, is better.
+    They both avoid spurious visual suggestions of nesting, it's
+    compact, and there's only one way to do (each of) them.  The
+    `premises { conclusion }` idea, also due to deltab, is also very
+    nice, but like the turnstile `|-` it clashes somewhat with the
+    overall line-oriented style.
 
 - Alternative syntax for formulas.  I think most formulas will
   probably be fairly simple affairs, so it's nice to be able to
@@ -386,4 +398,12 @@ Quantities
 ----------
 
 Above I've talked about quantities like `32cm` and `1 m³`, which have
-units and are expressed XXX
+units and are expressed in Unicode notation.  This is very valuable
+for a lot of the calculations I'm doing.  I'm not sure if you can
+implement that within the system or what.
+
+You know what else would be very valuable?  Intervals.  `32cm±5cm`.
+`1–1.5m³`.  And gradients: when a value is computed by a formula from
+some given data, it would be useful to see what its gradient is in
+terms of those givens.  Computing the gradient is of course also very
+useful for "goal seek".
