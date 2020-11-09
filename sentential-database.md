@@ -237,7 +237,7 @@ From this we can infer, among other things, that Mary Smith has skin
 and Mary Smith is related to Bob Smith.
 
 The simplest possible approach to nesting would be *not* allowing
-variables to match arbitrary sequences of words *containing unmatches
+variables to match arbitrary sequences of words *containing unmatched
 parentheses*.  That way you could use parentheses to supply arbitrary
 nesting structure.
 
