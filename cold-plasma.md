@@ -54,8 +54,12 @@ A potentially more interesting application of cold plasmas is
 reduction with *just* hydrogen.  It's been routine since at least WWII
 to anneal the iron powder in hydrogen before using it in powder
 metallurgy, to reduce the oxide film from its surface and enable it to
-cold-weld and sinter.  Surely a similar effect can be achieved with a
+cold-weld and sinter.  Similarly [experiments have successfully
+extracted oxygen from lunar regolith simulant by reducing it with
+hydrogen][1].  Surely a similar effect can be achieved with a
 cold hydrogen plasma.
+
+[1]: https://isru.nasa.gov/Hydrogen-Reduction-of-Regolith.html
 
 For example, you could pack a powder bed with a powder of an iron
 oxide, infuse it with hydrogen at above 100° to drive out all the air,
@@ -198,14 +202,23 @@ magnesiothermic) reduction of rutile, but with hydrogen acting as a
 catalyst (instead of, as previously, a fuel.)
 
 Higher pressures would tend to increase the reaction rate, but I don't
-think they'll affect the equilibrium much, because both hydrogen and
+think they'll affect the equilibrium of the metal reduction much, because both hydrogen and
 steam are gaseous, with the same number of moles as the resulting
 water.  If you instead used a reducing gas with a different number of
 hydrogens, such as methane, ammonia, maybe hydrazine if it can stand
 the heat (silane can't), nitric oxide, or even plain nitrogen, you
-might be able to use pressure to shift the equilibrium.  This might
+might be able to use pressure to shift the equilibrium.
+(Probably by reducing the pressure.)  This might
 allow you to tolerate a larger percentage of water vapor in the system
 before the metal stopped reducing.
+
+However, higher pressures *do* beneficially affect the relationship
+between the oxide equilibrium and a desiccant equilibrium!  That's
+because at a certain temperature, a certain percentage of desiccant
+being hydrated corresponds to a certain partial pressure of steam, and
+this is unaffected by the partial pressure of hydrogen.  So, by
+increasing the pressure, you proportionally increase the proportion of
+hydrogen in the desiccated gas.
 
 Zircon, zirconia, coltan, and molybdenite could likely be reduced in
 the same way.
