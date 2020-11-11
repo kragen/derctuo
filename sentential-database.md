@@ -197,6 +197,20 @@ Here we have a free variable in the conclusion of the rule, with the
 meaning that the system is entitled to make up an object to fill that
 role if nothing else turns up.  This involves a sort of negation.
 
+Quantities
+----------
+
+Above I've talked about quantities like `32cm` and `1 m³`, which have
+units and are expressed in Unicode notation.  This is very valuable
+for a lot of the calculations I'm doing.  I'm not sure if you can
+implement that within the system or what.
+
+You know what else would be very valuable?  Intervals.  `32cm±5cm`.
+`1–1.5m³`.  And gradients: when a value is computed by a formula from
+some given data, it would be useful to see what its gradient is in
+terms of those givens.  Computing the gradient is of course also very
+useful for "goal seek".
+
 UI affordances
 --------------
 
@@ -209,6 +223,21 @@ entry.
 
 A non-interactive system can be implemented that just reads in a text
 file and spews out an augmented version of it.
+
+It's probably useful to see all the inferred facts, as well as which
+given facts and rules were used to infer each inferred fact.  In rules
+with a single conclusion, there's a one-to-one correpondence between
+table rows (*pace* pivoting) and inferred facts, but if there are
+multiple conclusions there may be more than one.
+
+Filtering this list of inferences down to a usable list might be a
+challenge.  Interactively, too, we might want to know why a given
+conclusion was *not* reached from a given rule: which of the premises
+failed to hold true?  This kind of "why *not*" debugging is usually
+easy in functional programs but very difficult in imperative programs;
+it seems like it would be pretty difficult to incorporate
+non-interactively in a "program listing", but you could supply it as a
+separate batch-mode command similar to goal-seek.
 
 Multiple words and nesting
 --------------------------
@@ -297,18 +326,19 @@ alternatives to the strawman syntax above:
         `It` is made of `unobtainium`   # e.g., SQL
         "It" is made of "unobtainium"   # also SQL but less weird; harder to
                                         # type than '' but safer with contractions
-        It is made of Unobtainium       # Prolog
+        It is made of Unobtainium       # Alain Colmerauer's Prolog, without punctuation
+        it Is Made Of unobtainium.      # Darius Bacon's Pythological
         IT is made of UNOBTAINIUM       # variant
         it IS MADE OF unobtainium       # variant, often used informally for, e.g., SQL
         It$ is made of unobtainium$     # BASIC
         $It is made of $unobtainium     # Perl/PHP, taken from BASIC and sh; also Tcl
         @It is made of @unobtainium     # Perl variant
         .It is made of .unobtainium     # minimal line noise variant
-        :It is made of :unobtainium     # Logo, almost as calm
-        It :is :made :of unobtainium    # Lisp/Ruby
-        It 'is 'made 'of unobtainium    # Lisp
+        :It is made of :unobtainium     # Logo/Smalltalk/Ruby params, almost as calm
+        It :is :made :of unobtainium    # Lisp/Ruby keywords/symbols
+        It 'is 'made 'of unobtainium    # Lisp quoted symbols
         ,It is made of ,unobtainium     # Lisp quasiquoted
-        ?It is made of ?unobtainium     # Lisp-family logic languages
+        ?It is made of ?unobtainium     # Lisp-family logic languages; N3
         It? is made of unobtainium?     # variant
         ¿It? is made of ¿unobtainium?   # Spanish variant
         {It} is made of {unobtainium}   # various templating languages
@@ -394,16 +424,136 @@ Every set of premises is a query whose answer is a table, but it might
 be more useful to be able to include only some of these tables in a
 formatted output report.
 
-Quantities
-----------
+Inequalities
+------------
 
-Above I've talked about quantities like `32cm` and `1 m³`, which have
-units and are expressed in Unicode notation.  This is very valuable
-for a lot of the calculations I'm doing.  I'm not sure if you can
-implement that within the system or what.
+For a lot of calculations I care a lot about inequalities: the weight
+is less than the weight capacity, the temperature is less than the
+melting point, the change in Gibbs free energy is negative, the
+absolute pressure is positive, and so on.  It seems like the best way
+to incorporate these inequalities into rules is simply as a special
+sort of premise that is handled specially; rather than being matched
+against known or inferred facts, it is checked once the relevant
+variables are instantiated:
 
-You know what else would be very valuable?  Intervals.  `32cm±5cm`.
-`1–1.5m³`.  And gradients: when a value is computed by a formula from
-some given data, it would be useful to see what its gradient is in
-terms of those givens.  Computing the gradient is of course also very
-useful for "goal seek".
+    {The body} is:
+        made of {stuff}
+        at atmospheric pressure
+    {Stuff} has:
+        melting point {M}
+        boiling point {B}
+    => {The body} is liquid from {M} to {B}
+
+    {The body}:
+        is liquid from {M} to {B}
+        has temperature {T}
+    {M} < {T} < {B}
+    => {The body} is liquid
+
+    {The body}:
+        is liquid from {M} to {_}
+        has temperature {T}
+    {T} < {M}
+    => {The body} is solid
+
+    {The body}:
+        is liquid from {_} to {B}
+        has temperature {T}
+    {T} > {B}
+    => {The body} is gaseous
+
+    {The body}:
+        is liquid from {M} to {_}
+        is slushy
+    => {The body} has temperature {M}
+
+For point-valued scalar real quantities, these inequalities are
+trichotomous: either {T} < {M}, {T} == {M}, or {T} > {M}.  But for
+interval-valued quantities, this may not be the case; if the
+temperature of some water is known to be between -4° and +4°, we
+cannot conclude either that it is liquid or solid.  (Or gaseous, of
+course; a more powerful modal reasoning system than what I'm proposing
+could demonstrate that it is not gaseous, and that if the temperature
+is >0°, it is liquid.)
+
+Equalities can not only be *checked* in this way, but if we permit
+formulas in premises, they can also *instantiate variables*, which is
+potentially useful as a way of factoring out formulas.  However, this
+also has potentially complex interactions with interval-valued
+variables, since knowing that two masses are both in the range (100 g,
+200 g) does not demonstrate that they are equal.  (And of course this
+already pops up with the equality testing implicit in multiple
+occurrences.)
+
+Frames and modal reasoning
+--------------------------
+
+All of the above puts both rules and facts in a sort of global tuple
+space or string space.  But the system is clearly capable of
+expressing logical consequences: if the temperature is 329°, then the
+wax is liquid.  We could imagine "creating a frame" that contains some
+additional facts (and perhaps omits others), and looking to see what
+can be newly inferred from those facts.
+
+Arrays and dynamical systems
+----------------------------
+
+Computers are great at iteration.  You can integrate a system of
+ordinary differential equations with Euler's method in Python in a
+minute or two of programming, using a fraction of a second of CPU
+time:
+
+    $ time python
+    ...
+    >>> x0, y0 = 100, 0
+    >>> x, y = x0, y0
+    >>> for t in range(1000):
+    ...   x, y = x + .01 * y - .01 * x,  y - .02 *x - .01 * y
+    ...
+    >>> x, y
+    (-0.0006995268370926552, -0.006688316539762943)
+
+    real    1m11.032s
+    user    0m0.072s
+    sys     0m0.056s
+
+Systems like Modelica include robust numerical ODE solvers using much
+more efficient, higher-precision methods.
+
+Fuck RDF N3, seriously
+----------------------
+
+Consider this [example from EYE], in RDF N3:
+
+    @prefix log: <http://www.w3.org/2000/10/swap/log#>.
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+    @prefix : <http://www.agfa.com/w3c/euler/socrates#>.
+
+    :Socrates a :Man.
+    :Man rdfs:subClassOf :Mortal.
+
+    {?A rdfs:subClassOf ?B. ?S a ?A} => {?S a ?B}.
+
+[example from EYE]: https://github.com/josd/eye/blob/master/reasoning/socrates/socrates.n3
+
+This looks like a bunch of fucking line noise.  I think it's
+dramatically more understandable to express it as follows; the result,
+"Socrates is a mortal", is even more understandable than the [over a
+page of line noise generated by EYE][0].
+
+    Socrates is a man
+    Every man is a mortal
+
+    Every {X} is {Y}
+    {Z} is a {X}
+    => {Z} is {Y}
+
+[0]: https://github.com/josd/eye/blob/master/reasoning/socrates/socrates_proof.n3
+
+Also, the *input* is not only more readable, but also 85 characters
+instead of 317 characters, almost four times smaller.
+
+N3 is, of course, capable of expressing enormously more powerful forms
+of inference than that, including anonymous entities and so on.  But I
+don't think that's an excuse for it to read like line noise.
