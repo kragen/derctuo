@@ -51,7 +51,7 @@ digits of accuracy, 4200 times better.  (And it can count electrical
 pulses to a lot more accuracy than that, to the point that the concept
 of tolerance stops being meaningful.)  We can get down to probably
 1 ppm timing error if we can measure the temperature to compensate,
-0.1 ppm if we can control it.
+0.1 ppm if we can control it.  (And nowadays we can reference to GPS.)
 
 *Ratiometric* voltage measurements with the dual ADCs ought to be a
 lot more precise, and probably limited only by the 12-bit bit depth
