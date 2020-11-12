@@ -520,6 +520,9 @@ time:
 Systems like Modelica include robust numerical ODE solvers using much
 more efficient, higher-precision methods.
 
+But even without getting into dynamical systems, iteration is pretty
+useful
+
 Fuck RDF N3, seriously
 ----------------------
 

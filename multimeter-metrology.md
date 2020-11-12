@@ -246,6 +246,12 @@ the voltage to 1 ppm.  The imprecision of the specific-heat number
 only adds about 1.3 ppm to the *power* imprecision, and thus 1.7 parts
 per trillion to the voltage imprecision.
 
+XXX hmm, maybe I screwed up that resistance calculation too?
+
+XXX all of this stuff about calculating from power is based on a wrong
+logic step.  1000 ppm power error gives you 500 ppm voltage error
+(499.9 to be exact), not 1 ppm.
+
 The main sources of imprecision in such an experiment would seem to be
 the insulation of the water, which would have to leak less than 0.4
 joules during the experiment, and the original measurement of the
