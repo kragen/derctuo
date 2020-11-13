@@ -92,6 +92,11 @@ across the temperature range reached by the sound wave, and on the
 average axial flow in the tube, which is controlled by the difference
 in the amounts of gas drawn off at each end.
 
+An inefficient version of this, without the packing, was [discovered
+by accident in 2000 at Los Alamos][0].
+
+[0]: https://permalink.lanl.gov/object/tr?what=info:lanl-repo/lareport/LA-UR-01-3040 "Separation of Gas Mixtures by Thermoacoustic Waves, by D. A. Geller, P. S. Spoora, and G. W. Swift"
+
 If gas is drawn off at several points along the length of the column
 then the average flow rate through the column will change at each such
 point.  I think this permits the removal of certain components, giving
