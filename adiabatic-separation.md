@@ -1,3 +1,8 @@
+Some novel material separation techniques.
+
+Thermoacoustics basics
+----------------------
+
 Adiabatic compression and expansion of gases changes their temperature
 as well as their pressure, so every sound wave generates local
 temperature oscillations.  Sound waves in air can reach a few
@@ -65,6 +70,9 @@ where the mass of the air itself acts as a piston.  In either case,
 there is a temperature gradient along the "regenerator".  Many
 thermoacoustic machines using these two effects are known.
 
+Regular gas chromatography
+--------------------------
+
 Gas chromatography separates gases by mixing them into a mobile phase
 that passes through a stationary phase (normally a liquid supported on
 an inert solid) which preferentially adsorbs some of the gases,
@@ -72,6 +80,9 @@ slowing their passage.  Consequently the different gases arrive at the
 other end of the chromatography column at different times.  This is
 usually used for analysis rather than purification; it's kind of
 inherently a batch process.
+
+Thermoacoustic mixture separation
+---------------------------------
 
 But perhaps we can use this same thermoacoustic effect to get a sort
 of continuous-flow gas chromatography or rapid fractional
@@ -103,6 +114,9 @@ point.  I think this permits the removal of certain components, giving
 a sort of horizontal thermoacoustic version of fractional
 distillation.
 
+Liquid separation
+-----------------
+
 But what if you want to do this with liquid chromatography instead?
 You can't rapidly heat and cool the liquid or the solid stationary
 phase by running sound waves through them; they aren't compressible
@@ -112,6 +126,9 @@ The most obvious one is that if you're doing TLC, thin-layer
 chromatography, you can heat and cool your TLC layer by heating and
 cooling the plate.  But there are other more interesting
 possibilities.
+
+Fractal recuperator reciprocating liquid purification
+-----------------------------------------------------
 
 I've previously written about synthetic *retia mirabilia*, fractal
 recuperator-style heat exchangers where the heat-exchange capillary
@@ -156,6 +173,13 @@ from B1 to B2.  By adjusting the ratio of the amounts in steps 2 and
 amount added in step 2 we can adjust the number of cycles and thus the
 purification.
 
+It probably isn't possible to do this at macroscopic scales at more
+than a kilohertz or two, and maybe much less, which is a big
+disadvantage compared to the thermoacoustic approach above.
+
+An H-bridge
+-----------
+
 Another alternative approach is an H-bridge, like the motor control
 circuit.  Here you have five tubes forming the shape of a capital H.
 The horizontal tube is your packed column.  Fluid moves both left and
@@ -179,11 +203,49 @@ exotic fabrication technology.
 (It also may be reasonable to add the materials to be separated in the
 center of the column, as above.)
 
+The Hot Chocolate Effect
+------------------------
+
 It may be possible to use thermoacoustic techniques with liquids by
 filling the liquids with bubbles.  As observed in the Hot Chocolate
-Effect, even fairly small admixtures of bubbles make the liquid have
+Effect, even fairly small admixtures of bubbles give the liquid
 compressibility of the same order of magnitude as the gas in question,
 but because the mixture's density is still the same order of magnitude
 as the liquid, sound-wave speeds are extremely slow, and displacements
 are extremely small for a given sonic power level.  It seems like this
 might make these methods less effective with bubbly liquids.
+
+Pressure-swing solidification
+-----------------------------
+
+An alternative mechanism for varying the mobility of ingredients of a
+mixture is to use the change in the pressure (rather than the
+temperature) out of phase with the displacement.  With notable
+exceptions like boric acid and water, most liquids reduce in volume
+when they solidify, so they tend to solidify under higher pressure and
+liquefy under less pressure.  So by repeatedly moving a fluid to the
+right, compressing it, moving it to the left, and rarefying it, you
+can get separation of the components that more easily solidify under
+pressure.  (It will work for liquids like boric acid as well, just in
+reverse.)  This will probably work a lot better at near-gigapascal
+pressures and pressure swings, which is a very loud sound indeed.
+
+One advantage of this version of the approach are that the stationary
+phase and the mobile phase can be chosen to have nearly the same
+acoustic impedance, which is not feasible with gases (except perhaps
+at extraordinary pressures), which means that interfaces will scatter
+the sound less, so the sound will be attenuated less.  Another
+advantage is that liquids and solids can transmit much higher
+frequencies of sound than gases can.
+
+The key challenge in this variant is probably going to be getting
+enough displacement to outrun diffusion.
+
+Packed columns?
+---------------
+
+All these "packed columns" might be better as a honeycomb of narrow
+parallel tubes, a configuration already commonly used for catalyst
+support, in part to reduce acoustic losses.  You could imagine that it
+would also reduce turbulence losses, but if your passages are wide
+enough to permit turbulence, your system probably has bigger problems.
