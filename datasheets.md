@@ -64,6 +64,15 @@ Known-good sources
   filenames.  [BP2832, for example][21].
 * onsemi.com: PDFs linked directly from Yandex, with good filenames,
   but only for ON Semiconductor products.
+* st.com: PDFs linked directly from Google, with good filenames, but
+  only for ST products.  With shitty filenames.
+* alltransistors.com: iframe and "Abrir como PDF" links of the form
+  <https://alltransistors.com/pdfdatasheet_panasonic/2sd1512_e.pdf> on
+  "Foobar PDF datasheet" page with URL of form
+  <https://alltransistors.com/es/pdfview.php?doc=2sd1512_e.pdf&dire=_panasonic>
+  on link of form "2sd1512_e.pdf" on "Foobar
+  . Datasheet. Equivalente. ..." page linked from Google, for example,
+  [2SD1512](https://alltransistors.com/es/transistor.php?transistor=18229).
 
 [0]: https://datasheetspdf.com/pdf/1405124/SeCoS/C3205/1
 [4]: http://www.datasheet-pdf.com/PDF/C2878-Datasheet-ToshibaSemiconductor-634662
@@ -97,8 +106,10 @@ Malicious but sometimes usable if nothing else works
   `https://pdf1.alldatasheet.es/datasheet-pdf/download/35940/ROHM/BA3126N.html`,
   in a locked filing cabinet with a sign saying "Beware of the
   jaguar"; [BA3126N, for example][5], or [TL2842BP][13].  A last resort.
+* kynix.com: links to alldatasheet.com, for example for [STP7N60FI][23].
 
 [13]: https://www.alldatasheet.com/datasheet-pdf/pdf/168231/TI/TL2842BP.html
+[23]: https://www.kynix.com/Detail/38114/STP7N60FI.html
 
 Blacklist; _never visit_ (at least if you want the datasheet)
 -------------------------------------------------------------
@@ -122,6 +133,9 @@ Blacklist; _never visit_ (at least if you want the datasheet)
   the original page and similar ones.  [CXA1498S, for example][9].
 * y-ic.com: generates PDFs with no actual information about the chip,
   containing only advertisements.  [BP2812, for example][17].
+* transistordata.com: PDF pages are 404; also has hits for things it
+  doesn't have datasheets for
+* assets.nexperia.com: 403 Forbidden for wget
 
 [1]: https://www.datasheetarchive.com/A1286-datasheet.html
 [2]: http://www.datasheetq.com/datasheet-download/219014/1/Isahaya/A1286

@@ -376,3 +376,29 @@ A common 100-mW 0805 resistor is 2 mm × 1.25 mm × 0.5 mm, totaling
 1.25 mm³ or 1.25 μℓ; you can fit 800 of them in a milliliter.  So the
 whole collection of 4250 resistors mentioned earlier would, without the
 paper, amount to some 6 mℓ.
+
+Resistor envelopes
+------------------
+
+I'm trying out categorizing physicaly-small resistors by E12-series
+resistance and putting them into paper envelopes, one for each E12
+value (10 12 15, 18 22 29, 33 39 47, 55 68 82).  Most of the resistors
+I've salvaged so far are in the 100Ω–100kΩ range, which requires 37
+envelopes, much like Merlin Mann.  There are a few higher and quite a
+number lower, but so far I don't have an accurate way to measure
+resistances below 100Ω.  Hopefully I can rig something up soon.
+
+So far I only have on average two or three resistors of each
+denomination, many with very short leads.  I probably need at least
+four times the number of resistors I have already, a couple hundred,
+to make even smallish projects straightforward.
+
+I found my helping-hands to be very helpful for resistor measurement:
+I can connect one lead of the multimeter to one alligator clip, place
+the resistor in the other clip where I can see it through the glass,
+and touch its other lead with the other probe.  I got up to about two
+resistors a minute that way.  I suspect that a better ohmmeter and
+using alligator clips will speed me up further.
+
+I also have a partitioned plastic box, like those for fishing tackle,
+which is partitioned into E3 resistor values.

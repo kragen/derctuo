@@ -76,6 +76,49 @@ stratification approach (done dynamically rather than statically):
 I'm not totally clear on how this works without doing the kind of
 textual rule analysis that I said above was difficult.
 
+I think this approach might work:
+
+- Initially, put all the purely monotonic rules in stratum 0, and all
+  the nonmonotonic ones in stratum 1.
+
+- Do inferences stratum by stratum.
+
+- Maintain a list of inferred assertions for each rule, and of course
+  the derivation for each inferred fact.
+
+- When a newly inferred fact Ⅰ requires the retraction of some
+  previously inferred fact Ⅱ, that means that Ⅱ was inferred too
+  early.  So we retract all the assertions inferred from R(Ⅱ), add an
+  inequality constraint putting it in a *strictly greater* stratum
+  than R(Ⅰ) S(R(Ⅱ)) > S(R(Ⅰ)), and move it to the stratum after R(Ⅰ).
+  We also need to retract all assertions from other rules that are
+  constrained to be in S(R(Ⅱ)) or later and move them as well.
+
+- When a newly inferred fact Ⅰ permits the inference of another newly
+  inferred fact Ⅱ, that means that the rule R(Ⅱ) by which Ⅱ was
+  inferred should be at a stratum greater than *or equal to* the
+  stratum of the rule R(Ⅰ) by which Ⅰ was inferred.  So we add an
+  inequality S(R(Ⅱ)) ≥ S(R(Ⅰ)) to a topological sorting database on
+  that basis, if it is not already there.  This may involve moving
+  R(Ⅱ) to the current stratum, may involve moving other rules
+  constrained to be in a greater than or equal stratum to the current
+  stratum, and may require moving other rules to higher strata.
+
+- Retraction chaining from retraction to either assertion or
+  retraction is handled by the shotgun approach of retracting
+  everything from a rule that is being promoted to a stratum after the
+  current one, because any rule that transitively depended on a rule
+  being thus promoted will also be promoted and thus all its
+  assertions also retracted.
+
+- Upon encountering circular dependencies with a negation in the
+  chain, throw up hands and report them to the user.
+
+This clearly isn't the most efficient mechanism, since we may waste
+substantial work on a chain of reasoning that must be later retracted
+when it was discovered to depend on a rule that was applied too early,
+but I think it might be adequately efficient in practice.
+
 Aggregate formulas
 ------------------
 
@@ -572,6 +615,25 @@ There's a practical concern for how to get these arrays of data into
 the system as a large set of assertions like the example above in the
 first place.  But the solution for that doesn't have to be elegant; it
 just has to be practical.
+
+Consider this Numerical Python example, where I wanted to see the
+number of RC time constants needed to decay past a number of candidate
+thresholds:
+
+    >>> [round(i, 2) for i in -log((arange(99)+1)/100.0)]
+    [4.61, 3.91, 3.51, 3.22, 3.0, 2.81, 2.66, 2.53, 2.41, 2.3, 2.21,
+    2.12, 2.04, 1.97, 1.9, 1.83, 1.77, 1.71, 1.66, 1.61, 1.56, 1.51,
+    1.47, 1.43, 1.39, 1.35, 1.31, 1.27, 1.24, 1.2, 1.17, 1.14, 1.11,
+    1.08, 1.05, 1.02, 0.99, 0.97, 0.94, 0.92, 0.89, 0.87, 0.84, 0.82,
+    0.8, 0.78, 0.76, 0.73, 0.71, 0.69, 0.67, 0.65, 0.63, 0.62, 0.6,
+    0.58, 0.56, 0.54, 0.53, 0.51, 0.49, 0.48, 0.46, 0.45, 0.43, 0.42,
+    0.4, 0.39, 0.37, 0.36, 0.34, 0.33, 0.31, 0.3, 0.29, 0.27, 0.26,
+    0.25, 0.24, 0.22, 0.21, 0.2, 0.19, 0.17, 0.16, 0.15, 0.14, 0.13,
+    0.12, 0.11, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01]
+
+This is awkward to do in Numpy because Numpy doesn't have output
+format control, so I had to resort to a regular Python list
+comprehension.
 
 Fuck RDF N3 syntax, seriously
 -----------------------------

@@ -44,6 +44,15 @@ to not using a 4-wire measurement.  His current error was about
 400 ppm emf error and 500 ppm resistance error; he neglected to thus
 test its current measurement capability.
 
+I tested a shitty digital multimeter from 2016, US$6 from the hardware
+store, against another similar meter to get an idea of how bad they
+are, and also how aggressive they are.  It seems like the old
+multimeter's diode-testing range uses up to 1.4 mA at up to 2.72
+volts.  Their diode test readings differ by about 2%, resistance by
+about .03%, voltage by about .3%.  pretty impressive metrology for
+US$6.  These are lower bounds on their actual errors, but they're
+unlikely to be conservative by more than an order of magnitude or so.
+
 By contrast, the quartz crystal on the Blue Pill is 8 MHz with,
 probably, an error of about 10 ppm, common for watch crystals.  The
 damn chip can measure voltages to 1.5 digits of accuracy and time to 5
