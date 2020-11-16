@@ -273,6 +273,22 @@ STM32/CKS32
 -----------
 
 I have two Blue Pills, an STM32 and a CKS32.  These feature a 12-bit
-1Msps ADC, 128KiB of Flash, and 20KiB of SRAM, and run at 72MHz.  This
+1Msps ADC, 128KiB of Flash, and 20KiB of SRAM, a shitload of pins,
+and run at 72MHz.  This
 suggests that we ought to be able to do the whole curve tracing
-thing.  In theory with the AVR ADCs we can XXX
+thing.
+
+If we again want to get at least 5 samples before the signal drops
+below 100 counts, well, 100 counts is 1/40.96 of full scale, so 3.7
+time constants instead of 2.3, so our time constant needs to be at
+least 1.35 μs, a hundred times faster than the AVR ADC, attainable at
+47 pF with a 29-kΩ resistor.  And if we again want to make sure we get
+at least 200 counts of change within the 5-ms window, that's only 4.9%
+of full scale, about 0.05006 time constants, so our time constant can
+be up to 99.8 ms, which I'll just irresponsibly round to
+100 ms — which still requires a 100-Ω high-capacitance-scale resistor.
+
+So even with these more powerful chips, the two resistors are a factor
+of 290 apart, which doesn't give you much benefit from all the cute
+tricks at the beginning of this document; but now they cover the
+center of the range to adequate precision as well.
