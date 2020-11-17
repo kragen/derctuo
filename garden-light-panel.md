@@ -48,3 +48,18 @@ devices, possessing only a white LED.
 A potentially more appealing approach is to carefully remove the PV
 cell and graft it into something else, maybe something easier to
 carry.
+
+In really full sun, I got 2.47 V open-circuit and 2.10 V across a 105Ω
+load, thus 20 mA, 42 mW.  This suggests I'm actually not at full max
+power and could benefit from going to a lower load impedance: the load
+voltage is more than half the open-circuit voltage.  If the panel had
+an ohmic internal resistance dropping 370 mV at 20 mA, it would be
+18.5Ω.
+
+However, I think we can be reasonably sure that, although that
+"internal resistance" won't remain constant, it won't go *down*.
+Which means that the maximum power output available in this sunlight
+would be (½ 2.47 V)²/18.5Ω = 82.4 mW.  So I can squeeze at most
+another factor of 2 out with lower impedance, so this panel is at best
+5.7% efficient.  It must be an amorphous panel, not monocrystalline
+like I thought.
