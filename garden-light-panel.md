@@ -1,4 +1,4 @@
-There are these solar garden lights for sale for US$2 or so which
+There are these solar garden lights for sale for US$1.15 or so which
 contain a Ni-Cd battery, a monocrystalline solar panel to recharge it,
 an LED, and a bit of circuitry to turn the LED on only at night.  The
 battery in one of mine had died, so I took it out long ago, so I just
@@ -63,3 +63,12 @@ would be (½ 2.47 V)²/18.5Ω = 82.4 mW.  So I can squeeze at most
 another factor of 2 out with lower impedance, so this panel is at best
 5.7% efficient.  It must be an amorphous panel, not monocrystalline
 like I thought.
+
+On MercadoLibre there's a 22mW 22mm×7mm panel for US$4 (crystalline)
+and a few 1000mW panels in the range of 110mm×60mm for US$3 or so
+(also crystalline).  But there are also 310-watt panels for US$82,
+which is US$0.25 per peak watt rather than US$3.  And there are
+(supposedly) solar calculators under US$1, but those have much smaller
+cells (when they're not totally fake).  So I think this is largely a
+question of transaction costs, and these garden lights are probably
+the cheapest way to get solar cells in the 40–60mW range.
