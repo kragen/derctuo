@@ -253,8 +253,16 @@ standard capacitor, though the NP0/C0G tempco is limited to 30 ppm/K,
 and it may be possible to use the ATTiny45's on-chip temperature
 sensor to compensate for that.
 
+The [AVR TransistorTester
+manual](https://raw.githubusercontent.com/svn2github/transistortester/master/Doku/tags/english/ttester_eng112k.pdf)
+mentions that the offset voltage of the AVR's analog comparator limits
+its accuracy on low-value capacitors.
+
 So the final circuit is something like PWM1-2k2-AIN0-1μF-GND;
-Vcc-2k2-ADC0-DUT-GND; Vcc-2k2-ADC1-1nF(NP0)-GND.
+Vcc-2k2-ADC0-DUT-GND; Vcc-2k2-ADC1-1nF(NP0)-GND.  Some external
+protection diodes and a protection resistor might be useful on the DUT
+terminals to reduce the risk of damage from connecting a precharged
+capacitor.
 
 ATTiny2313
 ----------
@@ -268,6 +276,15 @@ The ATTiny2313**A** is "the picoPower version".  [Amazingly, both
 versions of the device are still in production, though the
 manufacturer Atmel is
 dead.](https://www.microchip.com/wwwproducts/en/ATtiny2313)
+
+However, the ATTiny2313 has one serious drawback compared to the
+ATTiny45 for this purpose: its analog comparator doesn't have
+multiplexed inputs, so it *always* compares pin 12 and pin 13 (AIN0
+and AIN1) (or pin 10 and pin 11 in the MLF/VQFN packages I don't
+have).  So it can't recalibrate to a calibration capacitor evey
+measurement cycle.  So getting reasonable precision on the ATTiny2313
+(better than 1%, maybe better than 10%) would probably require using a
+crystal.
 
 STM32/CKS32
 -----------
@@ -292,3 +309,26 @@ So even with these more powerful chips, the two resistors are a factor
 of 290 apart, which doesn't give you much benefit from all the cute
 tricks at the beginning of this document; but now they cover the
 center of the range to adequate precision as well.
+
+ATTiny12
+--------
+
+The 8-pin ATTiny45 or its larger version the ATTiny85 sell for US$1.50
+to US$2 on MercadoLibre here, but there's a vendor that sells the
+deprecated ATTiny12 (also 8-pin) for US$0.30 or so, so it'd be
+interesting to see if it might be usable for this kind of thing.  It
+only has 1 KiB of program memory, enough for 512 instructions, runs at
+only 8 MHz (or less in some configurations, like the ATTiny12V-1), and
+has no RAM other than its 32 8-bit registers, 64 bytes of EEPROM, and
+a 3-level hardware return stack.  It has no ADC, but it does have the
+analog comparator — without multiplexed inputs, as in the ATTiny2313,
+but with interrupts.  It has a single timer, but without hardware PWM;
+you could use it to time the discharge or recharge curve, but you'd
+have to do PWM in software, where interrupts would screw it up.  The
+internal RC oscillator runs at 1.2 MHz instead of 8 MHz, so you need
+to use an external crystal to get higher speed or consistent speed,
+which of course eats up two of the 5 GPIO pins.
+
+I feel like this chip would be pretty difficult to get anything done
+on due to its extremely limited resources.  Maaybe you could get it to
+work for measuring a capacitor, but I'm not sure how.

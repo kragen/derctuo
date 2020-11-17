@@ -409,6 +409,7 @@ alternatives to the strawman syntax above:
         It* is made of unobtainium*     # asterisk connotes reference
         It† is made of unobtainium†     # though daggers connote it HARDER
         It... is made of unobtainium... # ellipses connote indefiniteness
+        It_ is made of unobtainium_     # Mathematica
 
     In a multi-font system, we could imagine writing <i>It</i> is made
     of <i>unobtainium</i>, <u>It</u> is made of <u>unobtainium</u>,

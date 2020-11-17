@@ -18,13 +18,17 @@ still nothing to write home about.  How the fuck are you supposed to
 build a fucking voltmeter?
 
 Like, something similar to the open-source [Transistortester AVR][4]
-by Kübbeler and Frejek, now commonly known as the "[M328 Transistor
-Tester][5]" or "LCR TC1 ESR meter", which sells for US$38 here in
+by Karl-Heinz Kübbeler and Markus Frejek,
+now commonly known as the "[M328 Transistor
+Tester][5]" ([Instructables][6]) ([English manual][7])
+or "LCR TC1 ESR meter", which sells for US$38 here in
 Argentina or US$13 in the US.  But with better accuracy, precision,
 and repeatability, and ideally without any bought components.
 
 [4]: https://www.mikrocontroller.net/topic/248078
-[5]: https://www.instructables.com/AVR-Transistor-Tester/
+[5]: https://www.mikrocontroller.net/articles/AVR_Transistortester
+[6]: https://www.instructables.com/AVR-Transistor-Tester/
+[7]: https://github.com/svn2github/transistortester/blob/master/Doku/tags/english/ttester_eng112k.pdf
 
 The 0.1%-precision [LM4040CIM3X-20-NOPB][3] voltage reference costs
 US$1.67 from Mouser.

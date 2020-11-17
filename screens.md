@@ -13,7 +13,7 @@ girlfriend's apartment) and now I have a number of additional options.
     | DeV96      |    50 |    18 | LED  | 4 0-9   | red?  | 14   | SIP 2.54mm  |
     | microwave  |    45 |    12 | LED  | 4 0-9   | green | 14   | SIP 2.54mm  |
     | breadboard |    50 |    18 | LED  | 4 0-9   | red   | 36   | DIP 2.54mm  |
-    | Kenko      |    52 |    12 | LCD  | ≈8 0-9? | grey  | ≈32  | flex 1.26mm |
+    | Kenko      |    52 |    12 | LCD  | 8 0-9   | grey  | ≈32  | flex 1.26mm |
     | Kadio      |    60 |    18 | LCD  | 12 a-z? | grey  | ≈75  | flex 0.8mm  |
     |            |       |       |      | +12 0-9 |       |      |             |
     | Franklin   |    53 |    18 | LCD  | 25 a-z? | grey  | ≈105 | flex 0.5mm  |
@@ -28,6 +28,9 @@ displays, which is going to rock.  Also I think LED displays would
 look much better shining through cloth, another thing nobody ever
 does.  These LCDs are all reflective LCDs, so they would have the best
 readability in daylight.
+
+Cellphone screens are pretty interesting, especially SPI Nokia
+screens, although I don't happen to have any at the moment.
 
 DeV96
 -----
@@ -178,11 +181,10 @@ Kenko KK-9835TS
 ---------------
 
 I have a talking Kenko KK-9835TS desk clock/calculator from 2007,
-which has an extremely abrasion-resistant transparent keyboard, a
+which has an extremely abrasion-resistant transparent keyboard, an 8-digit
 7-segment LCD display, a dynamic speaker with a plastic cone, and lots
-and lots of wasted space inside.  It runs off two AA batteries, which
-are currently missing, so I don't know how many digits it has; I think
-8 or 10.  It's about 155×120×32 mm and weighs 143 g.  The mainboard is
+and lots of wasted space inside.  It runs off two AA batteries.
+It's about 155×120×32 mm and weighs 143 g.  The mainboard is
 of course a chip-on-board with a blob of epoxy over it.
 
 This display probably has the largest LCD digits of the displays I
@@ -221,7 +223,9 @@ than on the Kenko.
 
 Driving the LCD seems potentially a lot more challenging than on the
 Kenko: there are twice as many pins, and they are less than a
-millimeter apart.
+millimeter apart.  Worse, I seem to have torn the flat-flex cable off
+the LCD edge where it was connected, and so I need to figure out how
+to re-establish contact.
 
 Franklin TES-118A
 -----------------
