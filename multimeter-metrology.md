@@ -15,7 +15,8 @@ measuring temperature with a tungsten wire near room temperature, a
 temperatures.  Using a standard TL431 ripped out of some scrapped
 power supply we can cut that error to 19000 ppm or so, but that's
 still nothing to write home about.  How the fuck are you supposed to
-build a fucking voltmeter?
+build a fucking voltmeter?  Or anything that depends on voltage for
+accuracy?
 
 Like, something similar to the open-source [Transistortester AVR][4]
 by Karl-Heinz Kübbeler and Markus Frejek,

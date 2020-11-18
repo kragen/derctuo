@@ -73,10 +73,18 @@ Known-good sources
   on link of form "2sd1512_e.pdf" on "Foobar
   . Datasheet. Equivalente. ..." page linked from Google, for example,
   [2SD1512](https://alltransistors.com/es/transistor.php?transistor=18229).
+* datasheetcafe.com: link under header "Foobar Datasheet" labeled [
+  FOOBAR.PDF ] linking to link of the form
+  <http://j5d2v7d7.stackpathcdn.com/wp-content/uploads/2015/09/TT2140.pdf>,
+  for example, [TT2140][24].
+* yoreparo.com: people post service manuals in the forums.
+* tvsat.com.pl: datasheets directly linked from Google, e.g., [2SB985][26]
+* datasheet.octopart.com: datasheets directly linked from Google,
+  e.g., [2SA1015][27]
+* pdf.voron.ua: datasheets directly linked from Google, e.g., [2SA984][28]
 
 [0]: https://datasheetspdf.com/pdf/1405124/SeCoS/C3205/1
 [4]: http://www.datasheet-pdf.com/PDF/C2878-Datasheet-ToshibaSemiconductor-634662
-[5]: https://www.alldatasheet.es/datasheet-pdf/pdf/35940/ROHM/BA3126N.html
 [6]: http://www.njr.com/semicon/PDF/NJM4565_E.pdf
 [7]: https://www.mouser.com/ProductDetail/NJR/NJM4565L?qs=cYKsvIpO1PijlM%2FDhzFbCA%3D%3D
 [11]: https://www.digchip.com/datasheets/parts/datasheet/406/BA5936S.php
@@ -87,6 +95,10 @@ Known-good sources
 [18]: http://www.chinesechip.com/files/2015-06/d271a84d-12eb-4cd0-b0bb-3accb73bee96.pdf
 [20]: http://www.ndatasheet.com/noconverter/1018976/BPS/BP2812-pdf.html
 [21]: http://www.ibselectronics.com/ibsstore/datasheet/BP2832A_EN_DS_Rev.1.0.pdf
+[24]: http://www.datasheetcafe.com/tt2140-datasheet-sanyo/
+[26]: https://www.tvsat.com.pl/pdf/2/2sb985_san.pdf
+[27]: http://datasheet.octopart.com/2SA1015-Y(F)-Toshiba-datasheet-9586966.pdf
+[28]: https://pdf.voron.ua/files/pdf/tranzistor/2SA984.pdf
 
 Broken at the moment
 --------------------
@@ -108,6 +120,7 @@ Malicious but sometimes usable if nothing else works
   jaguar"; [BA3126N, for example][5], or [TL2842BP][13].  A last resort.
 * kynix.com: links to alldatasheet.com, for example for [STP7N60FI][23].
 
+[5]: https://www.alldatasheet.es/datasheet-pdf/pdf/35940/ROHM/BA3126N.html
 [13]: https://www.alldatasheet.com/datasheet-pdf/pdf/168231/TI/TL2842BP.html
 [23]: https://www.kynix.com/Detail/38114/STP7N60FI.html
 
@@ -136,6 +149,8 @@ Blacklist; _never visit_ (at least if you want the datasheet)
 * transistordata.com: PDF pages are 404; also has hits for things it
   doesn't have datasheets for
 * assets.nexperia.com: 403 Forbidden for wget
+* worldwayelec.com: generates fake datasheet PDFs containing only ads,
+  has no actual information on parts; [AVC479, for example][25].
 
 [1]: https://www.datasheetarchive.com/A1286-datasheet.html
 [2]: http://www.datasheetq.com/datasheet-download/219014/1/Isahaya/A1286
@@ -145,6 +160,7 @@ Blacklist; _never visit_ (at least if you want the datasheet)
 [10]: https://www.datasheetarchive.com/CXA1498S-datasheet.html
 [17]: https://www.y-ic.com/pdf/dc/5383541-BP2812.pdf
 [19]: http://www.datasheet26.com/search.php?sWord=BP2812
+[25]: https://www.worldwayelec.com/pro/sanyo/avc479/3488317
 
 Transistor part numbers
 -----------------------

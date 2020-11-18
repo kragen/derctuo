@@ -1,3 +1,14 @@
+> XXX rename to Heef Jumbus, Spungot (file extension: .spug),
+Facdotum, Axiopolis, Expressum, Shuntence, Nollidge, Ret-o'-Rick,
+Infoflow, Conceptium, Polythink, Knecksus, Mirrorgation, The Mind
+Machine, Databog, Thinksluice, Monad's Revenge, Itshift,
+Cherry-go-Round, Connectionalismus, Meshotron, Cogtionary,
+Equationsheet, Mathbox, Logivox, Neotinker, The Bitsmith's Forge,
+Omnilathe, Spinfluence, Elementalis, Wonderiensis, Bowdos, Monkin,
+Fleuf, Trurbus, Ploomish, Grufty, Rencum, Dolus, Mujimbo, Stooshiong,
+Treebus, Widgity, Cleophlembic, Entrisculi, Quimbrus, or Factpool?
+Thanks to sbp for the cromulentisimo suggestions.
+
 I've written a little bit previously about a sort of pattern-matching
 Prolog, where instead of dealing with explicitly given relations:
 
@@ -88,9 +99,11 @@ I think this approach might work:
 
 - When a newly inferred fact Ⅰ requires the retraction of some
   previously inferred fact Ⅱ, that means that Ⅱ was inferred too
-  early.  So we retract all the assertions inferred from R(Ⅱ), add an
+  early.  So we retract all the assertions inferred from the rule by
+  which Ⅱ was inferred — call it R(Ⅱ); add an
   inequality constraint putting it in a *strictly greater* stratum
-  than R(Ⅰ) S(R(Ⅱ)) > S(R(Ⅰ)), and move it to the stratum after R(Ⅰ).
+  than R(Ⅰ), calling Ⅰ's rule's stratum S(R(Ⅰ)): "S(R(Ⅱ)) > S(R(Ⅰ))";
+  and move it to the stratum after R(Ⅰ).
   We also need to retract all assertions from other rules that are
   constrained to be in S(R(Ⅱ)) or later and move them as well.
 
@@ -134,7 +147,7 @@ over all Y) because Y does not occur in the rule's conclusion outside
 of an aggregate.
 
 Aggregates include =count(), =sum(), =total(), =mean(), =stdev(), =max(),
-=min(), =list() (which separates items with commas) and =any(), which
+=min(), =product(), =list() (which separates items with commas) and =any(), which
 just picks one of the values in some unspecified way.
 
 =argmax() and =argmin() are aggregates taking *two* arguments: the
@@ -153,7 +166,11 @@ We may at some point have deduced that X has 3 children, and then
 later infer a fourth child of X.  The result involves not only adding
 "X has 4 children" to the database of known facts, but also
 *retracting* "X has 3 children".  So something like stratification is
-necessary to provide the aggregation feature.
+necessary to provide the aggregation feature, at least without a lot
+of wasted work, possible nondeterminism (where the result depends on
+what order the rules were applied in), and possible nontermination.
+(See the section below about dynamical systems, though, for other
+sources of nontermination.)
 
 Scalar formulas
 ---------------
@@ -377,7 +394,7 @@ alternatives to the strawman syntax above:
   alternatives:
 
         'It' is made of 'unobtainium'   # example above
-        «It» is made of «unobtainium»   # still harder and safer
+        «It» is made of «unobtainium»   # much harder to type but safer
         <It> is made of <unobtainium>   # common metavariable syntax in grammars
         `It` is made of `unobtainium`   # e.g., SQL
         "It" is made of "unobtainium"   # also SQL but less weird; harder to
@@ -390,7 +407,7 @@ alternatives to the strawman syntax above:
         $It is made of $unobtainium     # Perl/PHP, taken from BASIC and sh; also Tcl
         @It is made of @unobtainium     # Perl variant
         .It is made of .unobtainium     # minimal line noise variant
-        :It is made of :unobtainium     # Logo/Smalltalk/Ruby params, almost as calm
+        :It is made of :unobtainium     # Logo/Smalltalk/Ruby(?) params, almost as calm
         It :is :made :of unobtainium    # Lisp/Ruby keywords/symbols
         It 'is 'made 'of unobtainium    # Lisp quoted symbols
         ,It is made of ,unobtainium     # Lisp quasiquoted
@@ -424,7 +441,7 @@ alternatives to the strawman syntax above:
   do you use, anyway?  Does it matter?  And then there's the question
   of how far its scope extends (above, to the first blank line).  And
   should the premises come before the conclusion, as above, or after
-  it?  Here is the original and some strawman alternatives;
+  it?  Here is the original and some strawman alternatives:
 
             {Alice} is {Carol}'s parent
             {Carol} is {Bill}'s ancestor
@@ -635,6 +652,14 @@ thresholds:
 This is awkward to do in Numpy because Numpy doesn't have output
 format control, so I had to resort to a regular Python list
 comprehension.
+
+The Scheme `syntax-rules` macro system includes an interesting "..."
+construct, permitting you to rewrite, for example (foo (as a...) (bs
+b...)) to (bar (b a)...), without providing full list-processing
+capabilities.  That example would rewrite (foo (as 1 2 3) (bs x y z))
+to (bar (x 1) (y 2) (z 3)), for example.  You could imagine supporting
+a similar but more limited "..." construct in patterns in order to
+be able to input array data more easily.
 
 Fuck RDF N3 syntax, seriously
 -----------------------------
