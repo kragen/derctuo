@@ -62,8 +62,9 @@ Known-good sources
   GUID firenames.  [BP2812, for example][18].
 * ibselectronics.com: PDFs linked directly from Yandex, with good
   filenames.  [BP2832, for example][21].
-* onsemi.com: PDFs linked directly from Yandex, with good filenames,
-  but only for ON Semiconductor products.
+* onsemi.com: PDFs linked directly from Yandex and Google, with good filenames,
+  but only for ON Semiconductor products.  Note that they've recently
+  fucked us over by breaking the Fairchild links from Digi-Key.
 * st.com: PDFs linked directly from Google, with good filenames, but
   only for ST products.  With shitty filenames.
 * alltransistors.com: iframe and "Abrir como PDF" links of the form
@@ -82,6 +83,17 @@ Known-good sources
 * datasheet.octopart.com: datasheets directly linked from Google,
   e.g., [2SA1015][27]
 * pdf.voron.ua: datasheets directly linked from Google, e.g., [2SA984][28]
+* vishay.com: datasheets directly linked from Google, but only for
+  their products (including old Siliconix parts)
+* nxp.com: similarly, but including old Freescale and Philips parts;
+  e.g. the [mc9s08sg32][30]
+* infineon.com: similarly, but including old International Rectum
+  Fryer parts
+* irf.com: similarly, though they redirect to infineon.com (with a
+  working link to the PDF)
+* datasheet.lcsc.com: similarly, but they carry a huge array of
+  current parts, including many even Digi-Key doesn't; for example,
+  the [HT7333][29]
 
 [0]: https://datasheetspdf.com/pdf/1405124/SeCoS/C3205/1
 [4]: http://www.datasheet-pdf.com/PDF/C2878-Datasheet-ToshibaSemiconductor-634662
@@ -99,6 +111,8 @@ Known-good sources
 [26]: https://www.tvsat.com.pl/pdf/2/2sb985_san.pdf
 [27]: http://datasheet.octopart.com/2SA1015-Y(F)-Toshiba-datasheet-9586966.pdf
 [28]: https://pdf.voron.ua/files/pdf/tranzistor/2SA984.pdf
+[29]: https://datasheet.lcsc.com/szlcsc/1810171710_Holtek-Semicon-HT7333-A_C21583.pdf
+[30]: https://www.nxp.com/docs/en/data-sheet/MC9S08SG32.pdf
 
 Broken at the moment
 --------------------
