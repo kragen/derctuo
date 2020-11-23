@@ -76,6 +76,27 @@ But heating is just the beginning.
 Cooling
 -------
 
+Refrigeration is monumentally important, historically.  The
+introduction of refrigerated cadaver ships is what made Argentina the
+richest country in the world for a shining few decades, since suddenly
+we could export our virtually unlimited supply of cow corpses to
+Europe.  Lee Kuan Yew credits refrigeration, specifically air
+conditioning, for making it possible for Singapore to develop
+economically:
+
+> Question: Anything else besides multicultural tolerance that enabled
+> Singapore's success?
+>
+> Answer: Air conditioning. Air conditioning was a most important
+> invention for us, perhaps one of the signal inventions of
+> history. It changed the nature of civilization by making development
+> possible in the tropics.
+>
+> Without air conditioning you can work only in the cool early-morning
+> hours or at dusk. The first thing I did upon becoming prime minister
+> was to install air conditioners in buildings where the civil service
+> worked.  This was key to public efficiency.
+
 A simple air conditioning cycle is as follows:
 
 1. Heat the desiccant to regenerate it, as before.
@@ -136,6 +157,67 @@ simply by passing the air over it.  And of course if you can heat up
 water, as explained above under "Heating", you can humidify as well by
 passing air over the heated water.
 
+Dehydration sounds like an extremely niche use, but I think it isn't;
+it just hasn't been available at a low enough price previously.
+Consider the Earthship's list of six basic human needs satisfied by
+architecture: energy, garbage, sewage, shelter, water, and food.
+Dehydration is directly applicable to three of those basic human
+needs: garbage, sewage, and food.
+
+Garbage and sewage are mostly problems because they rot and stink and
+carry pathogens.
+
+(Garbage is a more complex problem with many aspects, though: used
+motor oil, radium paint, nickel-cadmium batteries, demolition debris,
+linseed-oil-soaked rags, and so on; but food waste in particular, like
+these chicken bones I have here, is mostly a problem for those three
+reasons.  And the physical volume of non-construction non-food garbage
+can be kept pretty minimal, like, cubic meters per person per year, or
+less.  So I'm focusing here on food waste as the central core of the
+garbage problem.)
+
+At Burning Man we deal with food waste first of all by dehydrating it,
+after which we can burn it or just store it in its inert dry state
+until it's time to carry it away.  There, it's easy to dehydrate
+things: you put them in one of those plastic netting bags they sell
+oranges in and hang them out in the sun and wind.
+
+Abundant desiccant regeneration capabiity makes it possible to
+dehydrate food waste thus even in humid climates.
+
+And similarly for sewage.  At Burning Man, we just copped out and used
+chemical toilets, and at a local ecovillage here they used to use
+potash.  Piss they would dilute with water and use as fertilizer, but
+shit they would pickle with wood ash from the cooking fires.
+Eventually, they switched to composting toilets, and getting those to
+work with aerobic mesophilic rotting instead of the usual noxious kind
+is a matter of partial dehydration: you cover your shit in the bucket
+with dry leaves, which also cut down on the relative nitrogen content,
+which gives you better rotting.  Civilized people don't have dry
+leaves, so instead they use sawdust or coir or something in their
+composting toilets.
+
+But, if you have ample desiccant capacity, you can use that to arrest
+decay completely, and then you can either burn the remains or you can
+bake them to kill all the pathogens and then use them as safe manure.
+
+In the food category, there are a lot of foods that can be preserved
+for longer periods of time by dehydration than by refrigeration,
+although the change in flavor may be agreeable or disagreeable.
+Outside of the former Tawantinsuyu, food dehydration is usually done
+hot, which also changes the flavor of the food; in particular,
+dehydrated eggs are made by a desugaring and flash-spray-drying
+process that requires significant amounts of equipment and chemistry
+to replicate.  Freeze-dried food in, for example, the US, is merely a
+novelty: Astronaut Ice Cream, etc.  The tradition of chuño from
+Tawantinsuyu is unknown.  And freeze-drying also changes the flavor of
+food, mostly through changes to mouthfeel, though chuño also owes its
+flavor to a fungus that grows during the process.
+
+I think that food preservation by desiccant drying should be feasible
+at low temperatures, and might offer possibilities for food
+preservation with much less impact on flavor.
+
 Thus a stored desiccant is a sort of all-purpose indoor climate
 control resource, capable of blowing hot or cold, like Aesop's
 traveller in the satyr's cave.
@@ -182,6 +264,16 @@ alabaster only produces a temperature rise of some 60° or less.  It’s
 unlikely that muriate of lime is the optimal choice, but I haven’t
 investigated the tradeoffs thoroughly.
 
+Muriate of lime can work as an aqueous solution, avoiding the massive
+inconvenience of your lovely pebble bed deliquescing into a sticky,
+solid, impermeable lump, but I suspect that a porous solid mass of
+alabaster may have even better heat transfer properties than the
+aqueous solution of muriate of lime.  And alabaster doesn't
+deliquesce; at worst it may crack a bit.  As explained in [Plaster
+Foam](plaster-foam.md), I got a nice porous alabaster biscuit by
+mixing calcined powdered alabaster with baking powder and baking it in
+a tin in an ordinary oven.
+
 One of the chief figures of merit here is the price — either per joule
 or per kg of water absorbed.  Other relevant quantitative information
 includes the minimal relative humidity the desiccant can reach, the
@@ -213,15 +305,15 @@ The USGS report on [magnesia] gives no explicit price but it seems to
 be about US$0.70/kg.  For [rock salt] they say US$60/tonne
 (US$0.06/kg).
 
-[alabaster]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-gypsum.pdf
-[potassa]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-potash.pdf
-[soda-ash]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-soda-ash.pdf
-[limestone]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-stone-crushed.pdf
-[zeolites]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-zeolites.pdf
-[clays]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-clays.pdf
-[infusorial earth]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-diatomite.pdf
-[magnesia]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-magnesium-compounds.pdf
-[rock salt]: https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-salt.pdf
+[alabaster]: library/mcs2020-gypsum.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-gypsum.pdf"
+[potassa]: library/mcs2020-potash.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-potash.pdf"
+[soda-ash]: library/mcs2020-soda-ash.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-soda-ash.pdf"
+[limestone]: library/mcs2020-stone-crushed.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-stone-crushed.pdf"
+[zeolites]: library/mcs2020-zeolites.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-zeolites.pdf"
+[clays]: library/mcs2020-clays.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-clays.pdf"
+[infusorial earth]: library/mcs2020-diatomite.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-diatomite.pdf"
+[magnesia]: library/mcs2020-magnesium-compounds.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-magnesium-compounds.pdf"
+[rock salt]: library/mcs2020-salt.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-salt.pdf"
 
 Waste plant material is often free or of negative cost, but often must
 be treated to stop fire and rot.
@@ -294,7 +386,8 @@ years, 235 MJ in the first ten years, 362 MJ in the first 20, 487 MJ
 in the first 50, asymptoting to 509.7 MJ at infinite time.  (That is,
 although it produces 30.6 MJ per year, the 1580 MJ it produces in its
 first 50 years are only worth 487 present MJ to us at a 6% discount
-rate.)  So photovoltaic modules work out to 680 MJ per US$.
+rate.)  So photovoltaic modules work out to 680 MJ per US$ (at 6%
+APY).
 
 If your thermochemical energy storage system can *store* 10 MJ per
 US$, which Farulla *et al.* say that current TCES systems don't come
@@ -365,3 +458,117 @@ cans" have used muriate of lime for many years, for example.
 
 You could thus scale these systems down to a wearable size, providing
 personal climate control.
+
+Innovation considerations
+-------------------------
+
+If this is such an advantageous technology, why hasn't it been adopted
+previously?  The humans have used fire to warm themselves for at least
+a million years.  The calcining of alabaster goes back at least to Old
+Kingdom Egypt, the calcining of lime even further, to the Neolithic,
+before Çatal Höyük.  Tubes of dried clay for guiding air date back, I
+think, at least to the beginning of iron smelting in the Hittite
+empire 4000 years ago.  Evaporative cooling via the qanat goes back
+3000 years in Iran.  Texts [purporting to be from 1200 years ago, by
+Jabir ibn Hayyan ("Geber"), described the "spirits of salt"][2], and
+undoubtedly observed their action on chalk, producing bubbling and oil
+of lime.  Émilie du Châtelet's discovery of energy was published in
+1756, after Leibniz's pioneering efforts in the 1670s and 1680s.
+Thermodynamics was well-developed in the 19th century.  Solvay began
+mass production of soda ash, with a byproduct of muriate of lime, in
+1864.  Gibbs described his "available energy" in 1873.  Refrigeration
+and air conditioning was developed in the late 1800s, and the hazards
+of leaks of toxic and caustic refrigerants were such a major issue
+that Einstein and Szílárd patented their ammonia-absorption
+refrigerator without moving parts in 1930, a variant of the 1922
+Munters–von Platen design, and Electrolux immediately put it into
+production; the same year, Midgley famously snuffed a candle with a
+breath of dichlorodifluoromethane, which he'd developed for the same
+humanitarian reasons, and which became the most popular refrigerant
+for decades.  Harold Ellingham published his "Ellingham diagram" in
+1944.
+
+[2]: http://www.history-science-technology.com/articles/articles%2072.html
+
+So the materials needed for thermochemical energy storage systems have
+been not only available but abundant for centuries, if not millennia;
+the theory necessary to design them for a century and a half; and they
+fulfill needs that have been universal human experiences for a hundred
+times longer than civilizations have existed.  So, if these systems
+are so advantageous, why have they not been applied widely?
+
+In the particular case of sewage, given the depth of mind-crippling
+tabus on the subject, I don't think we need much reason for slow
+diffusion of shit-handling innovations; the US still hasn't adopted
+bidets, for example.  Squat toilets like the traditional Turkish and
+Japanese designs help greatly with constipation.  The US has a huge
+constipation problem.  Nevertheless, diffusion of squat toilets is
+actually negative, because aping the less-functional English design is
+more prestigious than using a design that works better anatomically.
+Garbage suffers from similar mind-crippling tabus, but they are less
+severe, and indeed garbage-handling practices have changed
+dramatically and rapidly in past decades.
+
+So, in the case of garbage, but especially in the case of food
+preparation, air conditioning, and heating, I think we need a better
+explanation.  There are some commercial installations using desiccant
+air conditioners, dating back to the 1980s in some cases, but it is
+not a widely adopted technology.  There are even a few cases of using
+thermochemical energy storage for both heating and cooling in this
+way, though I haven't seen previous suggestions of using a single
+thermochemical energy store for so many different purposes: space
+heating, heat for cooking, air conditioning, air dehumidification,
+food refrigeration, food dehydration, garbage dehydration, and sewage
+dehydration.
+
+Moreover, many of the deployed and research systems use expensive
+desiccants such as lithium bromide; I can't find any trustworthy
+sources on its cost, but I doubt it approaches the US$0.27/kg price of
+muriate of lime or US$0.008/kg of alabaster.  [Lithium] carbonate
+costs US$13/kg and is 18.8% lithium, making the lithium cost US$69/kg.
+[Bromine] costs US$2.19/kg.  Lithium bromide is 8% lithium and 92%
+bromine.  This suggests a cost of US$5.50 for the lithium and US$2 for
+the bromine, per kg of lithium bromide, thus US$7.50.
+
+[Lithium]: library/mcs2020-lithium.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-lithium.pdf"
+[Bromine]: library/mcs2020-bromine.pdf "https://pubs.usgs.gov/periodicals/mcs2020/mcs2020-bromine.pdf"
+
+I tentatively suggest that perhaps what I am proposing in this note
+has not been tried, though I cannot imagine why not.
+
+A complement to compressed air?  Maybe
+--------------------------------------
+
+Compressed air has been a widely used temporary storage form for
+energy for over half a century; air-powered tools are common in auto
+shops all over the world, and the non-electric Amish in particular
+have developed quite an economy of compressing air with windmills,
+shipping compressed air around in tanker cars, storing it in enormous
+underground tanks, and so on, with the objective of easing their work
+without becoming dependent on the "English" for electricity.
+
+One of the disadvantages of compressed air energy storage is that,
+when air is adiabatically compressed, much of the compression energy
+is lost as heat rather than being stored in the compressed gas.
+Another is that when room-temperature compressed air expands, it
+cools, and this cooling can condense water out of it, which tends to
+cause various kinds of problems in compressed-air-powered and
+compressed-air-handling machinery.
+
+The solution, in theory, is [isothermal compressed-air energy
+storage][4], where the air is cooled to maintain a constant
+temperature as it is being compressed, and heated back up as it is
+being decompressed.
+
+[4]: https://en.wikipedia.org/wiki/Compressed_air_energy_storage#Isothermal
+
+Doing this on a small scale is difficult, because doing it the normal
+way requires access to some kind of "heat absorbing and releasing
+structure" connected to a huge heat reservoir, such as a lake or the
+ocean, to keep its temperature change minimal.  But phase-change and
+thermochemical energy-storage systems have the possibility of
+absorbing and later releasing massive amounts of heat without changing
+their temperatures; thermochemical systems additionally have the
+possibility of releasing the heat at a lower temperature than it was
+initially provided.  This reheating not only improves the efficiency
+of the energy storage device; it also avoids condensation.

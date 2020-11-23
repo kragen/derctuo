@@ -154,6 +154,7 @@ of OpenGL.
    J. S. Bach born, or July 28, 1750, Bach died (Episcopal feast day))
 0. November 8, 1848: Gottlob Frege born (died July 26, 1925; published
    the Begriffsschrift in 1879) although he was an anti-Semite
+0. November 11, 1918: 11:00: Armistice Day
 0. November 26, 1894: Norbert Wiener born (died March 18, 1964)
 0. November 30, 1858: Jagadish Chandra Bose, who invented
    semiconductor diodes and submillimeter light, born (died November

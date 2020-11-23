@@ -179,7 +179,10 @@ per year" (electric) or 180 million terawatt hours (electric) per
 year, in the medieval units used by the IEA.
 
 XXX <https://en.wikipedia.org/wiki/World_energy_consumption> say 18
-terawatts.  FEEX
+terawatts.  That means this is not "about twice world marketed energy
+consumption" but rather about 1200 times.  Also usually geothermal
+people only consider the top 6 km reasonably usable with modern
+technology.  FEEX
 
 This is about twice current world marketed energy consumption, but
 that doesn't include sunlight on fields, which a purely subterranean

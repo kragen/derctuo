@@ -15,7 +15,48 @@ measuring temperature with a tungsten wire near room temperature, a
 temperatures.  Using a standard TL431 ripped out of some scrapped
 power supply we can cut that error to 19000 ppm or so, but that's
 still nothing to write home about.  How the fuck are you supposed to
-build a fucking voltmeter?
+build a fucking voltmeter?  Or anything that depends on voltage for
+accuracy?
+
+Like, something similar to the open-source [Transistortester AVR][4]
+by Karl-Heinz Kübbeler and Markus Frejek,
+now commonly known as the "[M328 Transistor
+Tester][5]" ([Instructables][6]) ([English manual][7])
+or "LCR TC1 ESR meter", which sells for US$38 here in
+Argentina or US$13 in the US.  But with better accuracy, precision,
+and repeatability, and ideally without any bought components.
+
+[4]: https://www.mikrocontroller.net/topic/248078
+[5]: https://www.mikrocontroller.net/articles/AVR_Transistortester
+[6]: https://www.instructables.com/AVR-Transistor-Tester/
+[7]: https://github.com/svn2github/transistortester/blob/master/Doku/tags/english/ttester_eng112k.pdf
+
+The 0.1%-precision [LM4040CIM3X-20-NOPB][3] voltage reference costs
+US$1.67 from Mouser.
+
+[3]: https://www.mouser.ca/ProductDetail/Texas-Instruments/LM4040CIM3X-20-NOPB?qs=2k4gZbgf%2F9nz6KzcCN74VQ%3D%3D
+
+> Some random YouChube video from TheSignalPath (#175 (ⅱ)) found
+about 25 ppm of voltage difference between his not-recently-calibrated
+Fluke 744 Documenting Process Calibrator and his
+not-recently-calibrated 8-digit Keithley DMM 7510, so tens of ppm is
+achievable in ordinary electronics labs, but expensive; he apologized
+for the lack of calibration, so apparently he was expecting better.
+His resistance error was worse, 4600 ppm at 100Ω, 400 ppm at 1kΩ,
+20 ppm at 10kΩ; this pattern makes me suspect that this error was due
+to not using a 4-wire measurement.  His current error was about
+250 ppm.  Testing the 744 against its own meters he instead got
+400 ppm emf error and 500 ppm resistance error; he neglected to thus
+test its current measurement capability.
+
+I tested a shitty digital multimeter from 2016, US$6 from the hardware
+store, against another similar meter to get an idea of how bad they
+are, and also how aggressive they are.  It seems like the old
+multimeter's diode-testing range uses up to 1.4 mA at up to 2.72
+volts.  Their diode test readings differ by about 2%, resistance by
+about .03%, voltage by about .3%.  pretty impressive metrology for
+US$6.  These are lower bounds on their actual errors, but they're
+unlikely to be conservative by more than an order of magnitude or so.
 
 By contrast, the quartz crystal on the Blue Pill is 8 MHz with,
 probably, an error of about 10 ppm, common for watch crystals.  The
@@ -24,7 +65,7 @@ digits of accuracy, 4200 times better.  (And it can count electrical
 pulses to a lot more accuracy than that, to the point that the concept
 of tolerance stops being meaningful.)  We can get down to probably
 1 ppm timing error if we can measure the temperature to compensate,
-0.1 ppm if we can control it.
+0.1 ppm if we can control it.  (And nowadays we can reference to GPS.)
 
 *Ratiometric* voltage measurements with the dual ADCs ought to be a
 lot more precise, and probably limited only by the 12-bit bit depth
@@ -219,6 +260,12 @@ the voltage to 1 ppm.  The imprecision of the specific-heat number
 only adds about 1.3 ppm to the *power* imprecision, and thus 1.7 parts
 per trillion to the voltage imprecision.
 
+XXX hmm, maybe I screwed up that resistance calculation too?
+
+XXX all of this stuff about calculating from power is based on a wrong
+logic step.  1000 ppm power error gives you 500 ppm voltage error
+(499.9 to be exact), not 1 ppm.
+
 The main sources of imprecision in such an experiment would seem to be
 the insulation of the water, which would have to leak less than 0.4
 joules during the experiment, and the original measurement of the
@@ -250,8 +297,9 @@ capacitor's resonant frequency (with a given coil) varies linearly
 with the air pressure, then by measuring that resonant frequency with
 1 ppm accuracy, you can measure the air pressure with 1-ppm accuracy.
 If it also varies dramatically with the air's moisture content, well,
-congratulations, you have a moisture sensor too, as long as you have
-some other sensor for air pressure that varies differently with
+congratulations, you have [a moisture sensor](pet-dielectric-spectroscopy.md)
+too, as long as you have
+some other way to sense air pressure that varies differently with
 humidity.  (Inversely, ideally, or failing that, not at all.)
 Everything varies with temperature, but if some things vary more than
 others and you can keep it at the same temperature, you can measure
