@@ -95,7 +95,9 @@ bit less so; zinc seems to require a bit more hydrogen than water, and
 that only at 1100°.  Getting down to below zinc's melting point
 requires a million-to-one hydrogen-to-steam ratio, and getting down
 below 200° requires a trillion to one.  At silicon's melting point of
-1460° we should be able to reduce it with hydrogen at ten thousand
+1460°
+(XXX [Pyrolysis 3-D Printing](pyrolysis-3d-printing.md) says 1414°, maybe this is the wrong temp)
+we should be able to reduce it with hydrogen at ten thousand
 times the concentration of steam, and at a trillion to one this
 reduces to a balmy 600°.  Rutile at its melting point above 2300° can
 be reduced with hydrogen at about 3000 times the concentration of

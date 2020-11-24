@@ -155,6 +155,12 @@ of OpenGL.
 0. November 8, 1848: Gottlob Frege born (died July 26, 1925; published
    the Begriffsschrift in 1879) although he was an anti-Semite
 0. November 11, 1918: 11:00: Armistice Day
+0. November 19, 2020: USA's National Science Foundation decides to
+   demolish the Arecibo Observatory, the largest single-reflector
+   telescope until 2016, and crucial to predicting asteroid impacts;
+   it was irreparable and collapsing after being damaged in hurricanes
+   over previous years, following decades of decay.  It was built
+   1960–63.
 0. November 26, 1894: Norbert Wiener born (died March 18, 1964)
 0. November 30, 1858: Jagadish Chandra Bose, who invented
    semiconductor diodes and submillimeter light, born (died November

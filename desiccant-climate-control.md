@@ -144,7 +144,8 @@ be an even denser way to prepare for the need for cooling than water
 ice, and it certainly has a better shelf life and more flexibility.
 
 Interestingly, brine of muriate of lime is commonly used in industrial
-refrigeration as a coolant — by virtue of remaining liquid down to
+refrigeration as a coolant
+rather than a desiccant — by virtue of remaining liquid down to
 -50° it permits the transport of a whole lot of cold in a very small
 pipe.
 
@@ -157,7 +158,8 @@ simply by passing the air over it.  And of course if you can heat up
 water, as explained above under "Heating", you can humidify as well by
 passing air over the heated water.
 
-Dehydration sounds like an extremely niche use, but I think it isn't;
+Dehydration sounds like an extremely niche use (raw-food vegans and
+a few other people have 500-watt home dehydrators), but I think it isn't;
 it just hasn't been available at a low enough price previously.
 Consider the Earthship's list of six basic human needs satisfied by
 architecture: energy, garbage, sewage, shelter, water, and food.

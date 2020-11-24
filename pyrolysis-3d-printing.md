@@ -97,7 +97,9 @@ nitrogen to silicon carbide, yielding a ceramic whose mass is some
 
 An excess of silicon is preferable to an excess of carbon for
 producing high-temperature ceramics, since silicon melts at "only"
-1414°, while carborundum is stable to 2830° and graphite is stable to
+1414°,
+(XXX [Cold Plasma](cold-plasma.md) says 1460°)
+while carborundum is stable to 2830° and graphite is stable to
 3642°.  Poly(carbosilane), (H₂SiCH₂)ₙ, pyrolyzes in nitrogen to
 essentially pure carborundum, but in other precursors some carbon is
 lost as methane or carbon monoxide during pyrolysis.
