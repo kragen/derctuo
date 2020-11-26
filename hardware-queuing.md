@@ -122,9 +122,15 @@ but in order to occasionally do that, you have to *never* run
 at shift 2, you can run one other task at either shift 1 or shift 2,
 but not both; and moreover it will take 1-4 cycles before its time
 slot comes around, and each additional instruction of handler adds 4
-cycles more.  For purposes of scheduling, effectively the interrupt
-handler is a task that always exists — you have to allocate it a task
-slot.
+cycles more.  For purposes of reliable scheduling, effectively the
+interrupt handler is a task that always exists — you have to allocate
+it a task slot.
+
+(The ATTiny2313 datasheet says the AVR interrupt execution response is
+four clock cycles, minimum, plus normally a three-cycle jump, and
+possibly finishing a multi-cycle instruction that was in progress when
+the interrupt fired: 7–9 cycles, plus 4 more cycles if it was in sleep
+mode, plus the wakeup time.  So maybe this isn't actually so bad.)
 
 A perhaps more interesting approach is to have, say, 8 time slots that
 are rigidly round-robined among in this way, but to run a task at

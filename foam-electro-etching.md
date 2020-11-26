@@ -36,7 +36,7 @@ since the bubbles spawn at unpredictable places, and in batteries
 might also provide an interesting artistic texture.
 
 In addition to soap bubbles, there are several other
-surface-patterning approaches that 
+surface-patterning approaches that come to mind.
 
 Stamping patterns onto the surface of metal with a conductive rubber
 stamp (graphite-filled or copper-filled, say) and electrolyte "ink" is
@@ -126,3 +126,31 @@ off the tooltip electrode.
 For thus sputtering metal onto a non-conductive substrate you might
 want to use two separate electrodes.  I suspect such sputtering at
 atmospheric pressure should be feasible at very small scales.
+
+Local heating and reaction is most precisely attainable with focused
+electron beams or focused ion beams, but these of course require hard
+vacuum and thus cannot be used to provoke reactions with gases or
+volatile liquids, nor reactions that produce much of them.  Many
+semiconductor photoresists are routinely patterned in this way.
+
+Semiconductor etching processes offer further possibilities for
+amplifying surface patterning, including not only the acid etching
+mentioned above but also mass anisotropic etching with reactive ion
+plasmas which react selectively with the exposed substrate.
+
+If you have patterned a metal surface in such a way, you could etch
+away the substrate metal underneath it — for example, etching steel
+with alum, or aluminum with lye — to get a very thin foil of the
+deposited pattern.  I understand that Drexler prototyped a solar-sail
+material in a way similar to this, but you could also use the
+resulting perforated metal foil as a photolithography mask.  A
+three-layer technique may be the best solution here: first a massive,
+rigid, etchable substrate; then a uniform thin foil of microns up to
+hundreds of microns, which is also etchable, but resists at least one
+etchant that attacks the substrate; then a "resist" mask, perhaps of
+metal or metal oxide, deposited on top and patterned with submicron
+thickness.  Once the "resist" is patterned, you etch the foil away
+where it is exposed by the resist; once the foil has been etched all
+the way through, you switch etchants and etch away the substrate while
+leaving the foil unharmed.
+

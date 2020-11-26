@@ -79,3 +79,13 @@ use these devices as sensors before having a screen to display the
 results on, and also a way to use them for continuous data acquisition
 or later download from EEPROM data.  And because it's reasonable to
 use a crystal on it, you can meet RS-232 timing requirements!
+
+Programming AVRs with pushbuttons
+----------------------------
+
+Heinz D. [wrote an ATTiny13 tutorial in
+German](http://www.elektronik-labor.de/AVR/KursAssembler/T13asm13.html)
+which starts out by attaching switches to the reset, SCK, and MOSI
+lines of an ATTiny13 and programming it with them.
+
+The ATTiny2313 datasheet has "serial programming timing" on p. 205.

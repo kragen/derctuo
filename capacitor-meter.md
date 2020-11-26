@@ -338,19 +338,43 @@ independent of slow changes in any of these.
 Checking out the datasheet (doc8246.pdf, 8246B-AVR-09/11).  The
 microcontroller only has 128 bytes of RAM (p. 1), including the
 return/interrupt stack, plus the 32-byte register file (p. 11), which
-is mapped at addresses 0 through 0x1f; this is enough for a few state
-variables but not much of a buffer of past samples.  The 1024
-instructions of Flash may be a bit of a pinch but should be doable.
-It has two timers (p. 6), which is enough to generate PWM from one
-while using the other to measure the charging time.
+is mapped at addresses 0 through 0x1f, while the data SRAM is mapped
+into the 128 bytes at 0x60 to 0xe0 (p. 17, clearly incorrect), and
+also there are three spare bytes in the I/O register space, GPIOR[012]
+(p. 17); all together, this is enough for a few state variables but
+not much of a buffer of past samples.  The 1024 instructions of Flash
+may be a bit of a pinch but should be doable.  It has two timers
+(p. 6), which is enough to generate PWM from one while using the other
+to measure the charging time.
+
+There's a clock prescaler which can divide the master clock by any
+power of 2 from 1 to 256, and a separate CKDIV8 "fuse" which is
+initially programmed (p. 33).  I think this means the ATTiny2313 runs
+at 1 MHz by default?  The internal RC oscillator is 8MHz (p. 19) so
+you only get 40% of the chip's potential clock speed without a
+crystal.
+
+The analog comparator is specified as having less than 40 mV of offset
+voltage and typically less than 10, which is pretty reasonable — it's
+better than 0.1% of 5 volts.  And it’s specified as having an input
+leakage current of -50 to 50 nA, which is a lot better than I expected.
+
+For sourcing and sinking current it looks like the output impedance is
+in the neighborhood of 60Ω (charts on p. 242) or 25Ω when running on
+5V (pp. 243–4).  It can do 20 mA per pin.
+
+There's an "input capture unit" that can be configured to latch the
+timer value when triggered by the analog comparator on at least timer
+1, the 16-bit timer (p. 92).
+
+There's an implication that there's a clock prescaler specific to
+timer 1 (p. 94, where it says it doesn't apply to the optional noise
+canceler, which adds four cycles of latency).
 
 Datasheet questions:
 
 - what's the timer precision?
-- can you latch timers on comparator changes?
-- what's the comparator offset voltage?  noise?
-- what's the internal oscillator freq?
-- what's the GPIO pin resistance and max drive?
+- what's the comparator noise?  hysteresis?
 - can we maybe use the pullup to see if the cap is too big?
 - what's the input impedance of the pins?  might we have error from that?
 - what's the input clamp diode rated for?
