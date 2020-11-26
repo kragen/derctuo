@@ -1,8 +1,11 @@
 I have several microcontrollers: an Arduino Duemilanove with an
 ATMega328, a couple of Blue Pills (one with an STM32 and one with a
 CKS32; see [notes on STM32duino](stm32duino.md)), two or three
-ATMega8s, 18 surface-mount ATTiny45s, 19 DIP ATTiny45s, and 16
-ATTiny2313s, 57 computers in all.
+ATMega8s, 18 surface-mount ATTiny45s, 19 DIP ATTiny45s, two loose
+ATMega328s, 16 ATTiny2313s, an Arduino Nano (or is that a Teensy?),
+two Raspberry Pi Zeros, a Raspberry Pi 2 Model B 1.1 from 2014, and a
+Raspberry Pi from 2012 which I think is a Pi 1 B.  66 computers in
+all.
 
 But right now the Duemilanove is the only one I have successfully
 programmed!

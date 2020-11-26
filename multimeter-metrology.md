@@ -138,14 +138,65 @@ unfortunately are rather difficult for me to procure.
 Hamer also goes into the history of other metrological standards for
 voltage (a word he disdains to use, preferring "emf") and other
 electromagnetic units.  He points out that in theory you can use an
-absolute electrometer as a standard, using the permittivity of free
+[absolute electrometer][7] as a standard, using the permittivity of free
 space and precise measures of current, but that this gives an error on
-the order of 100 ppm.  (He doesn't go into detail, but I think this is
-a matter of charging a known capacitance, constructed as above, with a
-known current and measuring the resulting voltage change.  Presumably
-you could also use an electrostatic balance where the electrostatic
+the order of 100 ppm.  (He doesn't go into detail, but it turns out this is
+a matter of charging a known capacitance, constructed as above, to a
+known voltage or charge and measuring the resulting force; one version is
+an electrostatic balance where the electrostatic
 repulsion between two plates is countered by a sufficiently precise
 weight to return them to their original position.)
+
+[7]: https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Electrometer
+
+> I suspect that you could construct a microscopic absolute
+> electrometer that would give you much more precise readings; all the
+> absolute electrometers I can find in the literature were on the
+> order of 100 mm in diameter with on the order of 10 mm plate
+> separation, and so involve weights on the order of 10 N but
+> electrical forces on the order of 10 mN when operated at a few kV,
+> and are additionally tricky to operate under vacuum.  If you were to
+> scale it down by a factor of 10,000, you would have capacitors with
+> 10-μm-diameter plates separated by 1 μm, weighing on the order of
+> 1 ng; with those precise dimensions it would be 0.88541878
+> femtofarads.  But what would the force be?
+>
+> In a parallel-plate capacitor, *C* = *εA*/*d* = *q*/*V* =
+> 2*E*/*V*², so the capacitance varies directly with the plate area,
+> inversely with the plate spacing, inversely with the voltage at a
+> fixed charge, directly with the energy at a fixed voltage, and
+> inversely with the squared voltage at a fixed energy.  If you were
+> to start with the plates in contact (but miraculously not
+> discharging; maybe they're triboelectric insulators like packing
+> tape and its adhesive) the capacitance would be infinite, so the
+> voltage would be zero.  If you then pull the plates apart to some
+> distance, you have to add some energy as the capacitance starts to
+> fall and the voltage correspondingly to rise, proportional to the
+> distance.
+>
+> Now, if we measure d*E*/d*d* at some distance then we get the force
+> between the plates there.  *E* = ½*CV*², and as we pull the plates
+> apart at a fixed charge the capacitance drops (proportional to
+> distance) and the voltage rises (also proportional to distance):
+> *q*/*V* = *εA*/*d*, so *V* = *qd*/*εA*, so *V*² = *q*²*d*²/*ε*²*A*²,
+> and *E* = ½*CV*² = ½*εAq*²*d*²/*ε*²*A*²*d* = ½*dq*²/*εA*.  So that
+> means the force between the plates is *constant*: d*E*/d*d* =
+> ½*q*²/*εA* regardless of the distance (as long as the parallel-plate
+> approximation is valid).  So for example if we charge this cap to
+> 1 kV it would have 0.88541878 picocoulombs on it, producing a force
+> of 0.88541878 millinewtons.
+>
+> Actually you can't charge it up that far because [after 20–40 MV/m
+> you get field emission across the vacuum][8] which limits you to
+> 20–40 V/μm.  Say you charge it to 10 V instead.  Now it's only
+> 88.541878 nanonewtons.
+>
+> [8]: https://en.wikipedia.org/wiki/Dielectric_strength
+>
+> That doesn't sound like a whole lot, but it's 8000 times larger than
+> its weight instead of a thousand times less, so you could easily
+> make it overwhelmingly the largest force on the capacitor.  It's a
+> lot less than an atmosphere, though.
 
 As a standard of resistance, he describes the construction of an
 air-core inductor of known dimensions and thus computable inductance,
@@ -157,7 +208,9 @@ using the rotation of a magnet in a coil, or a coil in the earth's
 magnetic field.  (The quantized Hall effect is the modern absolute
 standard since 1990.)
 
-He says that using computable capacitors to check the ohm measure is
+He says that using computable capacitors
+(like my microscopic thought experiment above)
+to check the ohm measure is
 "less involved" and "may be used [text lost] an annual basis" to check
 resistance standards against absolute units in preference to the
 inductive approach.  (He also says they normally used 1-pF computable

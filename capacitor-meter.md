@@ -180,6 +180,11 @@ RAM and Flash.)
 It seems like it would be pretty difficult to meet the targeted
 performance on the ATTiny45, but maybe possible.
 
+(Actually I think the interrupt latency is not an issue because I
+think there's an option to latch a timer value automatically when the
+comparator fires, and I think you can run the timers at the chip's
+full clock speed, but I need to check those out.)
+
 ### Time-domain sensing is a better option here ###
 
 A much easier thing to do on this chip would be to do *only* the
@@ -258,8 +263,12 @@ manual](https://raw.githubusercontent.com/svn2github/transistortester/master/Dok
 mentions that the offset voltage of the AVR's analog comparator limits
 its accuracy on low-value capacitors.
 
-So the final circuit is something like PWM1-2k2-AIN0-1μF-GND;
-Vcc-2k2-ADC0-DUT-GND; Vcc-2k2-ADC1-1nF(NP0)-GND.  Some external
+So the final circuit is something like PWM1-2k2-AIN0-1μF-gnd;
+Vcc-2k2-ADC0-DUT-gnd; Vcc-2k2-ADC1-1nF(NP0)-gnd.
+That is, the reference-voltage pin is connected to the output of a
+single-pole RC low-pass filter from PWM1 to ground, and the
+multiplexed inputs ADC0 and ADC1 are connected to similar RC filters
+that are "filtering" just V<sub>CC</sub>.  Some external
 protection diodes and a protection resistor might be useful on the DUT
 terminals to reduce the risk of damage from connecting a precharged
 capacitor.
@@ -284,7 +293,67 @@ and AIN1) (or pin 10 and pin 11 in the MLF/VQFN packages I don't
 have).  So it can't recalibrate to a calibration capacitor evey
 measurement cycle.  So getting reasonable precision on the ATTiny2313
 (better than 1%, maybe better than 10%) would probably require using a
-crystal.
+crystal with that design.
+
+### A simpler design ###
+
+A possibly better design, at least for the ATTiny2313, is
+gnd-1kR-{1kR-AIN0 || 10nF(NP0)-GPIO1 || DUT-GPIO2}, with AIN1
+connected to a filtered PWM output as before.  With GPIO2 tristated,
+we can toggle GPIO1 to charge and discharge the 10nF NP0/C0G capacitor
+through the 1kΩ ground resistor, and observe the charging process as a
+falling voltage on AIN0.  When we're discharging it we may be in part
+discharging through the clamping diodes of GPIO2 and AIN0 (and AIN0's
+protection resistor), and also the voltage on AIN0 is negative, so
+only the charge time is visible.
+
+At 16 MHz the time constant for the specified values is 160 cycles,
+which is plenty, and maybe a bit generous.
+
+So then we tristate GPIO1 and do the same charge-discharge process
+with the device under test, allowing us to observe its time constant
+with the same 1kΩ resistor.  If it's 47 pF the time constant is 47 ns
+(0.75 cycles), which is a bit on the low side, and if it's 1000 μF the
+time constant is a full second, so we're stuck measuring it against
+high thresholds like 0.9V<sub>CC</sub> (0.105 *τ*, 105 ms) and
+0.99V<sub>CC</sub> (0.01005 *τ*, 10.05 ms).  But both of these values
+seem reasonable.
+
+The current decay curve through the GPIO pins depends on the
+capacitance (and, a little, on the supply voltage), but initially it's
+5 mA, assuming V<sub>CC</sub> = 5 V, which is a safe limit and
+probably won't even heat up the chip much.  Heating up the chip might
+be bad because it might be local and so unbalance the analog
+comparator, introducing error.  Heating up the resistor might be a
+bigger concern — the peak power there is 25 mW, and for large DUTs it
+will dissipate essentially 25 mW all the time — but most of that
+heating effect will be canceled out by alternately measuring the DUT
+and our reference capacitance.
+
+Since we're only measuring the τ₁/τ₂ ratio, by charging up to the same
+max voltage through the same resistor measured against the same
+voltage thresholds with the same clock, our measurement should be
+independent of slow changes in any of these.
+
+Checking out the datasheet (doc8246.pdf, 8246B-AVR-09/11).  The
+microcontroller only has 128 bytes of RAM (p. 1), including the
+return/interrupt stack, plus the 32-byte register file (p. 11), which
+is mapped at addresses 0 through 0x1f; this is enough for a few state
+variables but not much of a buffer of past samples.  The 1024
+instructions of Flash may be a bit of a pinch but should be doable.
+It has two timers (p. 6), which is enough to generate PWM from one
+while using the other to measure the charging time.
+
+Datasheet questions:
+
+- what's the timer precision?
+- can you latch timers on comparator changes?
+- what's the comparator offset voltage?  noise?
+- what's the internal oscillator freq?
+- what's the GPIO pin resistance and max drive?
+- can we maybe use the pullup to see if the cap is too big?
+- what's the input impedance of the pins?  might we have error from that?
+- what's the input clamp diode rated for?
 
 STM32/CKS32
 -----------

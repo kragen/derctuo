@@ -11,3 +11,6 @@ thing.
 I think it's probably worthwhile building something that
 simultaneously maintains this representation and a 2-D schematic
 representation.
+
+(For human readability it might be better to say "gnd" rather than
+"G".)
