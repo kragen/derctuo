@@ -101,8 +101,9 @@ Several other options are even worse than the GIMP
 --------------------------------------------------
 
 KGrab takes forever and doesn't have a crop option.  ScreenGrab is
-impossibly clumsy.  On this version of X11 `xwd | xwdtopnm | pnmtopng
-> foo.png` generates a totally bogus image that looks like it used the
+impossibly clumsy.  On this version of X11,
+`xwd | xwdtopnm | pnmtopng > foo.png`
+generates a totally bogus image that looks like it used the
 wrong pixel format or the wrong part of the screen or something, and
 of course it also doesn't have a crop option.  Kazam brings up a blank
 gray fullscreen window so you can indicate which part of the screen
