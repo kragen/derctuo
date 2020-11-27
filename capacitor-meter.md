@@ -4,6 +4,9 @@ with a manageable subset.  In particular what I want is something to
 use for measuring capacitors in the 47 pF to 1000 μF range to within
 about 1%.
 
+A basic design
+--------------
+
 If you put a string of two resistors between analog switchable pins A
 and B of a microcontroller, and a capacitor between the junction
 between the resistors and ground, then you have the following
@@ -347,17 +350,18 @@ may be a bit of a pinch but should be doable.  It has two timers
 (p. 6), which is enough to generate PWM from one while using the other
 to measure the charging time.
 
-There's a clock prescaler which can divide the master clock by any
+There's a clock prescaler CLKPR (p. 32) which can divide the master clock by any
 power of 2 from 1 to 256, and a separate CKDIV8 "fuse" which is
-initially programmed (p. 33).  I think this means the ATTiny2313 runs
-at 1 MHz by default?  The internal RC oscillator is 8MHz (p. 19) so
+initially programmed (p. 33), which means the ATTiny2313 runs
+at 1 MHz by default (p. 27).  The internal RC oscillator is 8MHz (p. 19) so
 you only get 40% of the chip's potential clock speed without a
-crystal.
+crystal.  (There are also 4 MHz and 128 kHz internal oscillators,
+selectable via CKSEL (p. 27).)
 
-The analog comparator is specified as having less than 40 mV of offset
-voltage and typically less than 10, which is pretty reasonable — it's
+The analog comparator  (p. 168) is specified as having less than 40 mV of offset
+voltage and typically less than 10 mV, which is pretty reasonable — it's
 better than 0.1% of 5 volts.  And it’s specified as having an input
-leakage current of -50 to 50 nA, which is a lot better than I expected.
+leakage current of -50 to 50 nA, which is a lot better than I expected. (p. ???)
 
 For sourcing and sinking current it looks like the output impedance is
 in the neighborhood of 60Ω (charts on p. 242) or 25Ω when running on
@@ -365,7 +369,12 @@ in the neighborhood of 60Ω (charts on p. 242) or 25Ω when running on
 
 There's an "input capture unit" that can be configured to latch the
 timer value when triggered by the analog comparator on at least timer
-1, the 16-bit timer (p. 92).
+1, the 16-bit timer (p. 92).  This seems like a much better option
+than using interrupts, which is four clock cycles, minimum, plus
+normally a three-cycle jump, and possibly finishing a multi-cycle
+instruction that was in progress when the interrupt fired: 7–9 cycles
+of latency.  The worst part there is the two cycles of jitter, which
+will make hash of any data about fast RC time constants.
 
 There's an implication that there's a clock prescaler specific to
 timer 1 (p. 94, where it says it doesn't apply to the optional noise
@@ -425,3 +434,14 @@ which of course eats up two of the 5 GPIO pins.
 I feel like this chip would be pretty difficult to get anything done
 on due to its extremely limited resources.  Maaybe you could get it to
 work for measuring a capacitor, but I'm not sure how.
+
+7-segment LED displays
+----------------------
+
+I'm thinking a 4-digit 7-segment LED display is probably sufficient
+for a 1%-error meter.  Possible capacitance displays might look like
+any of these:
+
+    .001F 100μ 10μ0 1μ00 100n 10n0 1n00 100p 10p0
+
+A "μ" on a 7-segment display can look like a backward 4.

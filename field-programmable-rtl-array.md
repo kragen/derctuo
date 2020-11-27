@@ -37,7 +37,7 @@ includes bits for bitwise rotation and byte swapping, which among
 other things makes division much easier to implement.
 
 Now, in a "FPRTLA", instead of routing individual bits around your
-machine, you could route bytes, or words of 12-64 bits — an 8-bit byte
+machine, you could route bytes, or words of 4-64 bits — an 8-bit byte
 suffices to crossbar four inputs to four outputs with each output
 derived from a single input, and those inputs and outputs can be full
 words.
@@ -67,7 +67,7 @@ by using open-drain transistors and pullup resistors; this might
 eliminate some of the necessity for ALU operations.
 
 An interesting question is what the minimal uniform unit cell for such
-a machine might be.  It takes two or more inputs of some arbitrary
+a machine might be.  It takes two or more inputs of some variable
 word size, generates one output, and has some configuration data.
 What's the simplest state machine that gives us a given form of
 universality?
