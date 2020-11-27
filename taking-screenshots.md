@@ -190,7 +190,9 @@ My Elisp is a little rusty, but I managed to get this to work:
           (insert "\n"))))
 
      (global-set-key [print] 'markdown-insert-screenshot)
-       
+
+     ;; XXX maybe support .jpeg too?
+
 This also displays the image inline in the Emacs buffer!  But only
 until I close and reopen the file (or reboot Emacs).
 Mysteriously the `revert-buffer` command displays the images in the

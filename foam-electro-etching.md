@@ -24,7 +24,7 @@ deepening the initially patterned etch.
 
 This is all prequel to suggesting that electro-etching or
 electroplating with a foam of soap bubbles, as from dishwashing
-liquid, should make a *freaking awesome* pattern.  The bubbles would
+liquid, should make a *freaking awesome* pattern.  The air in the bubbles would
 play the role of the vinyl resist.  Thanks to sbp for the idea.
 
 A variant of this commonly happens in a variety of electrolytic
@@ -154,3 +154,16 @@ where it is exposed by the resist; once the foil has been etched all
 the way through, you switch etchants and etch away the substrate while
 leaving the foil unharmed.
 
+If you start by depositing a *thin film* of a resist on the surface,
+you can selectively remove it more easily than the thick films
+discussed above.  [Langmuir–Blodgett films of
+poly(N-alkylmethacrylamides) are already used as UV photoresist][1]
+for photolithography, but the other patterning techniques described
+above can also be used with Langmuir–Blodgett films.  That includes
+not only LB films of that photoresist, but also of a variety of inert
+surface coating materials, and also the opposite — surface coating
+materials that functionalize an otherwise inert substrate to react
+with materials it will be exposed to later, or that eventually react
+with a surface coating that is already present, for example of oxide.
+
+[1]: https://en.wikipedia.org/wiki/Langmuir%E2%80%93Blodgett_film#Applications
