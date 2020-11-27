@@ -108,11 +108,17 @@ wrong pixel format or the wrong part of the screen or something, and
 of course it also doesn't have a crop option.  Kazam brings up a blank
 gray fullscreen window so you can indicate which part of the screen
 you want to grab; I think it's really intended for screencasting, with
-screenshots being an afterthought.  `scrot` doesn't have a crop
+screenshots being an afterthought.
+
+The well-known `scrot` command is worth a mention; it doesn't have a crop
 option, but `scrot -e 'mirage $f'` will open the full-screen
 screenshot in Mirage so you can crop it with Mirage, and hopefully not
 forget to save the cropped version.  By default `scrot` generates a
 filename but you can instead specify one: `scrot foo.png`.
+
+ImageMagick has an `import` command which I think can do
+cropping — but I think you have to specify the pixel coordinates on
+the command line, not with the mouse.
 
 Scripting screenshotting in Elisp
 ---------------------------------
@@ -165,3 +171,8 @@ My Elisp is a little rusty, but I managed to get this to work:
 
      (global-set-key [print] 'markdown-insert-screenshot)
        
+This also displays the image inline in the Emacs buffer!  But only
+until I close and reopen the file.  A little refactoring might make it
+possible to scan for such images to add such previews to, but I
+probably wouldn't want to invoke that automatically every time I
+opened a file.
