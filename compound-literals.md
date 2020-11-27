@@ -51,12 +51,12 @@ pointed out on Stack Overflow, this is an error in OCaml][1]:
 >         { r0: int; r1: int; c0: int; c1: int;
 >           typ: dtype;
 >           uid: uid (* key *) }
- >
- >    and func =
- >        { name: string;
- >          typ: dtype;
- >          params: var list;
- >          body: block }
+>
+>     and func =
+>         { name: string;
+>           typ: dtype;
+>           params: var list;
+>           body: block }
 
 [1]: https://stackoverflow.com/questions/8928970/two-fields-of-two-records-have-same-label-in-ocaml
 
