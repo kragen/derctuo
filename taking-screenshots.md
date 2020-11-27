@@ -1,7 +1,7 @@
 <!-- -*- lexical-binding: t -*- -->
 
 I often take X-Windows screenshots to include in Derctuo, for example
-the [schematic of My Very First Op-Amp](my-very-first-op-amp.md).
+the [schematic of My Very First Op-Amp](my-very-first-opamp.md).
 Typically this process has looked something like:
 
 1. Launch the GIMP.  Wait for it to finish booting.
