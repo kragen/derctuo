@@ -47,16 +47,16 @@ requires the field names of record types to be unique, like 1970s C,
 rather than scoping them within a single record type: [as SoftTimur
 pointed out on Stack Overflow, this is an error in OCaml][1]:
 
->    type name =
->        { r0: int; r1: int; c0: int; c1: int;
->          typ: dtype;
->          uid: uid (* key *) }
->
->    and func =
->        { name: string;
->          typ: dtype;
->          params: var list;
->          body: block }
+>     type name =
+>         { r0: int; r1: int; c0: int; c1: int;
+>           typ: dtype;
+>           uid: uid (* key *) }
+ >
+ >    and func =
+ >        { name: string;
+ >          typ: dtype;
+ >          params: var list;
+ >          body: block }
 
 [1]: https://stackoverflow.com/questions/8928970/two-fields-of-two-records-have-same-label-in-ocaml
 
