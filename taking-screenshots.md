@@ -1,3 +1,5 @@
+<!-- -*- lexical-binding: t -*- -->
+
 I often take X-Windows screenshots to include in Derctuo, for example
 the [schematic of My Very First Op-Amp](my-very-first-op-amp.md).
 Typically this process has looked something like:
@@ -136,7 +138,6 @@ My Elisp is a little rusty, but I managed to get this to work:
     (defun markdown-insert-screenshot (filename)
       (interactive "*FScreenshot filename to create: ")
       (if (not (string-suffix-p ".png" filename))
-          ;; XXX is setq really right for local vars?
           (setq filename (concat filename ".png")))
       
       (if (file-exists-p filename)
@@ -154,17 +155,15 @@ My Elisp is a little rusty, but I managed to get this to work:
                      (buffer-string))))
               (if (or (string-match "ERROR" screenshot-messages)
                       (not (eq screenshot-return-value 0)))
-                  (error (format "Screenshot failed: %s(return value %s)"
-                                 screenshot-messages
-                                 screenshot-return-value)))))
+                  (error "Screenshot failed: %s(return value %s)"
+                         screenshot-messages screenshot-return-value))))
         (make-frame-visible))
 
       (let ((basename (file-name-nondirectory filename)))
-        ;; XXX use concat?
         (insert (format "\n![(screenshot %s)](%s)\n" basename basename)))
       (let ((screenshot-image-descriptor
              (create-image (expand-file-name filename) nil nil :margin 4)))
-        ;;(message (format "descriptor %s" screenshot-image-descriptor))
+        ;; (message "descriptor %s" screenshot-image-descriptor)
         (if screenshot-image-descriptor
             (insert-image screenshot-image-descriptor "\n")
           (insert "\n"))))
@@ -172,7 +171,35 @@ My Elisp is a little rusty, but I managed to get this to work:
      (global-set-key [print] 'markdown-insert-screenshot)
        
 This also displays the image inline in the Emacs buffer!  But only
-until I close and reopen the file.  A little refactoring might make it
+until I close and reopen the file (or reboot Emacs).
+A little refactoring might make it
 possible to scan for such images to add such previews to, but I
 probably wouldn't want to invoke that automatically every time I
 opened a file.
+
+Efficiency
+----------
+
+Well, I've spent the last 9 hours on automating screenshots, so now I
+can insert a screenshot into my notes in only 45 seconds.  I ran
+through the previous procedure using the GIMP again and it took me 4
+minutes and 51 seconds, but I think I was usually able to do it faster
+than that — I must be getting sleepy, and I couldn't figure out where
+the GIMP had saved my screenshot.  But, suppose it's 3 minutes
+"saved".  Am I being efficient?
+
+![(XKCD comic "Is It Worth The Time", q.v.)](xkcd-time-saved.png)
+
+
+
+According to the comic, yes, as long as I insert several screenshots a
+week, and keep doing this for five years or more; that seems very
+likely to be true.  That doesn't take into account the good or bad of
+having the screenshots displayed in the notes as I'm editing them,
+though, or whether I learned anything useful in the process, or
+whether these notes are useful to somebody else.
+
+([Is It Worth The Time comic][0] by Randall Munroe, licensed CC-BY-NC
+2.5.)
+
+[0]: https://xkcd.com/1205/
