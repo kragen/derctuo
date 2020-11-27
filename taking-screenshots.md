@@ -135,7 +135,36 @@ screenshot.
 
 My Elisp is a little rusty, but I managed to get this to work:
 
+    (defun screenshot-save-to (filename)
+      "Interactively crop a screenshot with Spectacle and write to FILENAME."
+      (let ((screenshot-return-value 'unknown-return-value))
+        (let ((screenshot-messages
+               (with-temp-buffer
+                 (setq screenshot-return-value
+                       (call-process "spectacle" nil t nil
+                                     "-rbo" (expand-file-name filename)))
+                 (buffer-string))))
+          (if (or (string-match "ERROR" screenshot-messages)
+                  (not (eq screenshot-return-value 0)))
+              (error "Screenshot failed: %s(return value %s)"
+                     screenshot-messages screenshot-return-value))
+
+          (if (not (file-exists-p filename))
+              (error "Screenshot supposedly succeeded but %s doesn't exist: %s"
+                     filename screenshot-messages)))))
+
+    (defmacro with-frame-iconified (&rest body)
+      "Iconify the current frame only until BODY completes."
+      (declare (indent 0) (debug t))
+
+      `(progn
+         (iconify-frame)
+         (unwind-protect
+             (progn ,@body)
+           (make-frame-visible))))
+
     (defun markdown-insert-screenshot (filename)
+      "Crop a screenshot and insert a Markdown inline image in source and buffer."
       (interactive "*FScreenshot filename to create: ")
       (if (not (string-suffix-p ".png" filename))
           (setq filename (concat filename ".png")))
@@ -144,20 +173,8 @@ My Elisp is a little rusty, but I managed to get this to work:
           (if (not (yes-or-no-p (concat filename " already exists; overwrite? ")))
               (error (concat "Not overwriting " filename))))
 
-      (iconify-frame)
-      (unwind-protect
-          (let ((screenshot-return-value 'unknown-return-value))
-            (let ((screenshot-messages
-                   (with-temp-buffer      
-                     (setq screenshot-return-value
-                           (call-process "spectacle" nil t nil
-                                         "-rbo" (expand-file-name filename)))
-                     (buffer-string))))
-              (if (or (string-match "ERROR" screenshot-messages)
-                      (not (eq screenshot-return-value 0)))
-                  (error "Screenshot failed: %s(return value %s)"
-                         screenshot-messages screenshot-return-value))))
-        (make-frame-visible))
+      (with-frame-iconified
+        (screenshot-save-to filename))
 
       (let ((basename (file-name-nondirectory filename)))
         (insert (format "\n![(screenshot %s)](%s)\n" basename basename)))
@@ -165,13 +182,19 @@ My Elisp is a little rusty, but I managed to get this to work:
              (create-image (expand-file-name filename) nil nil :margin 4)))
         ;; (message "descriptor %s" screenshot-image-descriptor)
         (if screenshot-image-descriptor
-            (insert-image screenshot-image-descriptor "\n")
+            (progn
+              ;; If we just overwrote an image, Emacs might have it
+              ;; cached.
+              (image-flush screenshot-image-descriptor)
+              (insert-image screenshot-image-descriptor "\n"))
           (insert "\n"))))
 
      (global-set-key [print] 'markdown-insert-screenshot)
        
 This also displays the image inline in the Emacs buffer!  But only
 until I close and reopen the file (or reboot Emacs).
+Mysteriously the `revert-buffer` command displays the images in the
+right margin; I suspect this might be a bug in fill-column-indicator.el.
 A little refactoring might make it
 possible to scan for such images to add such previews to, but I
 probably wouldn't want to invoke that automatically every time I
