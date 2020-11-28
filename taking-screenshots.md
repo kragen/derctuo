@@ -16,7 +16,16 @@ Typically this process has looked something like:
 This is very cumbersome, taking about a minute.  So I just tried some
 various different screenshot programs to see what would work better.
 KDE's "Spectacle" program is wonderful, better than I had thought
-possible.
+possible, and now I can invoke it from Emacs with a single keystroke
+and automatically insert the resulting cropped screenshot into the
+Markdown document I'm editing.
+
+This has had the rather alarming effect of enabling me to add half a
+megabyte of images to Derctuo over the last couple of days, which is
+about the same as the amount of text I've added to it in the last two
+*months*.  But the year 02020 is over in another month, and Derctuo is
+still less than 10MB out of its 20MB size budget, so maybe I can
+lighten up a bit.
 
 Using KDE Spectacle from the command line
 -----------------------------------------
@@ -298,4 +307,7 @@ with `-quality 80` and PNG, but it's 9K in JPEG and 17K in PNG.
 
 I think the conclusion is that I should use JPEG for JPEG
 things (and just accept Spectacle's reasonable default quality)
-and use PNG for text and line art.
+and use PNG for text and line art.  And occasionally I should run
+`pngcrush` on all my PNGs, which is an easy batch process and
+therefore doesn't need to be automated in the Elisp interaction
+above.
