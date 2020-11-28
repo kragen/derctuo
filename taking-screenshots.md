@@ -90,13 +90,19 @@ first time you run it, though, or when you're switching directories.
 select the option to not screenshot the whole screen every fucking
 time you fucking start it.
 
+![(screenshot of Mirage)](mirage-view.jpeg)
+
+
+
 Mirage is an image viewer with a relatively accessible "crop" option
 on its "Edit" menu, as well as a full-screen or full-window screenshot
 option on its "File" menu; it's a much easier way to crop existing
 images than the GIMP.  Beware, by default it saves the screenshots
 into directories like `/tmp/mirage-EYotN0`.  The cropping
 functionality is also somewhat suboptimal since the view of the image
-in the cropping window is teensy.  Having cropped the image you can
+in the cropping window is teensy (though what's shown on the left side
+of the screenshot above is the thumbnails of other nearby files).
+Having cropped the image you can
 save it over the original with no further confirmation.
 
 Several other options are even worse than the GIMP
@@ -136,7 +142,15 @@ screenshot.
 My Elisp is a little rusty, but I managed to get this to work:
 
     (defun screenshot-save-to (filename)
-      "Interactively crop a screenshot with Spectacle and write to FILENAME."
+      "Interactively crop a screenshot with Spectacle and write to FILENAME.
+
+      This is not an interactive command because it doesn't check
+      to see if FILENAME already exists, doesn't hide and
+      redisplay the Emacs window, and doesn't append .png if
+      FILENAME isn't a PNG or JPEG filename.  `screenshot-make'
+      does those things.
+
+      "
       (let ((screenshot-return-value 'unknown-return-value))
         (let ((screenshot-messages
                (with-temp-buffer
@@ -163,10 +177,15 @@ My Elisp is a little rusty, but I managed to get this to work:
              (progn ,@body)
            (make-frame-visible))))
 
-    (defun markdown-insert-screenshot (filename)
-      "Crop a screenshot and insert a Markdown inline image in source and buffer."
+    (defun screenshot-make (filename)
+      "Take a cropped screenshot.
+
+      If FILENAME doesn't end in .png or .jpeg, this command appends .png.
+      When called as a Lisp function, it returns the real filename."
       (interactive "*FScreenshot filename to create: ")
-      (if (not (string-suffix-p ".png" filename))
+
+      (if (not (or (string-suffix-p ".png" filename)
+                   (string-suffix-p ".jpeg" filename)))
           (setq filename (concat filename ".png")))
       
       (if (file-exists-p filename)
@@ -176,8 +195,14 @@ My Elisp is a little rusty, but I managed to get this to work:
       (with-frame-iconified
         (screenshot-save-to filename))
 
-      (let ((basename (file-name-nondirectory filename)))
-        (insert (format "\n![(screenshot %s)](%s)\n" basename basename)))
+      (let ((file-size (elt (file-attributes filename) 7)))
+        (message "Screenshot %s is %dKiB." filename (/ (+ 512 file-size) 1024)))
+
+      filename)
+
+    (defun screenshot-insert-preview-line (filename)
+      "Insert a newline into the buffer with, if possible, the image FILENAME displayed."
+      (interactive "*FImage filename: ")
       (let ((screenshot-image-descriptor
              (create-image (expand-file-name filename) nil nil :margin 4)))
         ;; (message "descriptor %s" screenshot-image-descriptor)
@@ -189,9 +214,17 @@ My Elisp is a little rusty, but I managed to get this to work:
               (insert-image screenshot-image-descriptor "\n"))
           (insert "\n"))))
 
-     (global-set-key [print] 'markdown-insert-screenshot)
+    (defun markdown-insert-screenshot (filename)
+      "Crop a screenshot and insert a Markdown inline image in source and buffer."
+      (interactive "*FScreenshot filename to create: ")
+      (setq filename (screenshot-make filename))
 
-     ;; XXX maybe support .jpeg too?
+      (let ((basename (file-name-nondirectory filename)))
+        (insert (format "\n![(screenshot %s)](%s)\n" basename basename)))
+
+      (screenshot-insert-preview-line filename))
+
+     (global-set-key [print] 'markdown-insert-screenshot)
 
 This also displays the image inline in the Emacs buffer!  But only
 until I close and reopen the file (or reboot Emacs).
@@ -205,7 +238,7 @@ opened a file.
 Efficiency
 ----------
 
-Well, I've spent the last 9 hours on automating screenshots, so now I
+Well, I've spent the last 9 hours on automating screenshots†, so now I
 can insert a screenshot into my notes in only 45 seconds.  I ran
 through the previous procedure using the GIMP again and it took me 4
 minutes and 51 seconds, but I think I was usually able to do it faster
@@ -213,7 +246,7 @@ than that — I must be getting sleepy, and I couldn't figure out where
 the GIMP had saved my screenshot.  But, suppose it's 3 minutes
 "saved".  Am I being efficient?
 
-![(XKCD comic "Is It Worth The Time", q.v.)](xkcd-time-saved.png)
+![(XKCD comic "Is It Worth The Time", q.v.)](xkcd-time-saved.jpeg)
 
 
 
@@ -228,3 +261,41 @@ whether these notes are useful to somebody else.
 2.5.)
 
 [0]: https://xkcd.com/1205/
+
+† Actually, I spent some more time on it the next day to add JPEG
+support and refactor the code reasonably.
+
+Compression
+-----------
+
+By default if you ask Spectacle to write a JPEG it writes it with
+reasonably high but not impeccable quality; in the case of the
+XKCD comic above Spectacle generates about a 140K PNG (which
+`pngcrush` reduces to 107K) or a 74K JPEG, while ImageMagick
+produces an equivalent-quality JPEG with `convert -quality 50
+xkcd-time-saved.png xkcd-time-saved.jpeg` at 50K, or an
+equivalent-size JPEG with impeccable quality at `-quality
+80` (73K, monochrome).
+
+On theoretical grounds we would expect PNG to have a better
+quality/compression tradeoff than JPEG on text and line art, and
+that is somewhat borne out by experiment.  Consider this
+Schottky-diode-leakage graph from [the note on diode
+thermometers](diode-thermometer.md):
+
+![(graph of leakage)](1n5823-reverse-leakage-closeup.png)
+
+
+
+As a PNG this is 15K, which is pretty good.  It's still totally
+readable at `-quality 1`, where it's 6K, and the JPEG artifacts
+are not strikingly obvious at `-quality 10`, where it's 10K.  But
+they don't really disappear until `-quality 50`, at which point
+the JPEG is 18K.
+
+The Mirage screenshot earlier looks pretty much the same in JPEG
+with `-quality 80` and PNG, but it's 9K in JPEG and 17K in PNG.
+
+I think the conclusion is that I should use JPEG for JPEG
+things (and just accept Spectacle's reasonable default quality)
+and use PNG for text and line art.
