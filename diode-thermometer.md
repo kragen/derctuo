@@ -60,10 +60,19 @@ junction capacitance — you'd probably want to use some external
 capacitance, which might be at a different temperature.
 
 By putting several such diodes in parallel you can increase the
-leakage current, which will help to make it easier to measure.
+leakage current, which will help to make it easier to measure, and
+perhaps also average out some variation among them.
 
 Crystals
 --------
+
+Typical ADCs can't digitize a current, just a voltage, and the voltage
+is subject to a typically fairly large reference-voltage error (see
+[Multimeter Metrology](multimeter-metrology.md) for lots on the
+difficulties of measuring voltages).  To measure a current, you have
+to somehow convert it to a voltage.  One way is to use a precise
+capacitor and measure the voltage change over time.  But then you need
+to measure time.
 
 With an ordinary crystal oscillator ("SPXO") you ought to be able to
 measure the discharge rate with error of better than ±100 ppm over a
