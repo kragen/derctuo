@@ -91,7 +91,7 @@ such event, maybe a century or two.  Let’s look at every 17th country
 from [Wikipedia’s list of countries by water
 use](https://en.wikipedia.org/wiki/List_of_countries_by_freshwater_withdrawal).
 
-* [India](https://en.wikipedia.org/wiki/India)?  Partition, in 1945.
+* [India](https://en.wikipedia.org/wiki/India)?  Partition, in 1947.
 
 * [Italy](https://en.wikipedia.org/wiki/Italy)?† Following the
   Holocaust (killing some 15% of its Jewish population), in 1943 they
@@ -143,7 +143,7 @@ use](https://en.wikipedia.org/wiki/List_of_countries_by_freshwater_withdrawal).
   They were a major battleground of World War II in 1942–5.
 
 So in sorted order the last time there was a country-destroying
-catastrophe in these countries were 1819, 1867, 1943, 1945, 1945,
+catastrophe in these countries were 1819, 1867, 1943, 1945, 1947,
 1959, 1978, 1989, 2010, and 2020, with a mean date of 1947.  We can
 see some clustering there: two of the countries were destroyed in
 World War II, and India’s destruction (and subsequent glorious
