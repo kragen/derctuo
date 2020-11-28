@@ -18,6 +18,15 @@ still nothing to write home about.  How the fuck are you supposed to
 build a fucking voltmeter?  Or anything that depends on voltage for
 accuracy?
 
+By contrast, the quartz crystal on the Blue Pill is 8 MHz with,
+probably, an error of about 10 ppm, common for watch crystals.  The
+damn chip can measure voltages to 1.5 digits of accuracy and time to 5
+digits of accuracy, 4200 times better.  (And it can count electrical
+pulses to a lot more accuracy than that, to the point that the concept
+of tolerance stops being meaningful.)  We can get down to probably
+1 ppm timing error if we can measure the temperature to compensate,
+0.1 ppm if we can control it.  (And nowadays we can reference to GPS.)
+
 Like, something similar to the open-source [Transistortester AVR][4]
 by Karl-Heinz Kübbeler and Markus Frejek,
 now commonly known as the "[M328 Transistor
@@ -35,6 +44,9 @@ The 0.1%-precision [LM4040CIM3X-20-NOPB][3] voltage reference costs
 US$1.67 from Mouser.
 
 [3]: https://www.mouser.ca/ProductDetail/Texas-Instruments/LM4040CIM3X-20-NOPB?qs=2k4gZbgf%2F9nz6KzcCN74VQ%3D%3D
+
+How good are multimeters usually?
+---------------------------------
 
 > Some random YouChube video from TheSignalPath (#175 (ⅱ)) found
 about 25 ppm of voltage difference between his not-recently-calibrated
@@ -58,14 +70,8 @@ about .03%, voltage by about .3%.  pretty impressive metrology for
 US$6.  These are lower bounds on their actual errors, but they're
 unlikely to be conservative by more than an order of magnitude or so.
 
-By contrast, the quartz crystal on the Blue Pill is 8 MHz with,
-probably, an error of about 10 ppm, common for watch crystals.  The
-damn chip can measure voltages to 1.5 digits of accuracy and time to 5
-digits of accuracy, 4200 times better.  (And it can count electrical
-pulses to a lot more accuracy than that, to the point that the concept
-of tolerance stops being meaningful.)  We can get down to probably
-1 ppm timing error if we can measure the temperature to compensate,
-0.1 ppm if we can control it.  (And nowadays we can reference to GPS.)
+Canceling out voltage errors in measurements
+--------------------------------------------
 
 *Ratiometric* voltage measurements with the dual ADCs ought to be a
 lot more precise, and probably limited only by the 12-bit bit depth
@@ -76,16 +82,8 @@ we're subject to that shitty ±4.2% precision; but if we put some
 exactly known *resistance*, we can get a much higher-precision
 measurement.
 
-Every time we quadruple the measurement time, we add another bit of
-precision, because the variances of Gaussian noise combine additively.
-So the sum of four measurements has four times the variance, thus
-twice the standard deviation, as a single measurement, and their
-average thus has half the standard deviation.  The ADCs run at 1Msps,
-so if we take 1048576 samples, 1.05 seconds' worth, we can get a
-22-bit-precision reading, which has a quantization error of ±0.125
-ppm.  Probably averaging 65536 or 32768 samples is a better tradeoff,
-giving you more like 1 ppm error in exchange for much faster data
-acquisition.
+Resistance standards
+--------------------
 
 How do we get an even approximately known resistance, though?  Typical
 resistors used to be ±20%, now they're ±1%, but nothing close to
@@ -121,6 +119,23 @@ hopeless; [WP gives][0] polypropylene's relative permittivity as
 would have a capacitance of 88.5419 nF.
 
 [0]: https://en.wikipedia.org/wiki/Relative_permittivity
+
+Oversampling
+------------
+
+Every time we quadruple the measurement time, we add another bit of
+precision, because the variances of Gaussian noise combine additively.
+So the sum of four measurements has four times the variance, thus
+twice the standard deviation, as a single measurement, and their
+average thus has half the standard deviation.  The Blue Pill's ADCs run at 1Msps,
+so if we take 1048576 samples, 1.05 seconds' worth, we can get a
+22-bit-precision reading, which has a quantization error of ±0.125
+ppm.  Probably averaging 65536 or 32768 samples is a better tradeoff,
+giving you more like 1 ppm error in exchange for much faster data
+acquisition.
+
+Hamer's monograph on Clark, Daniell, and mostly Weston cells
+------------------------------------------------------------
 
 In despair, I turned to a shitty scan of NBS Monograph 84, from
 1965-12-15, titled, "Standard Cells: Their Construction, Maintenance,
@@ -293,6 +308,9 @@ measurements to within 1 mK.  Such measures applied even to the Clark
 cell would have reduced its temperature-induced voltage error to some
 0.8 ppm, at which point other errors would surely dominate.
 
+Calibrating voltage by measuring power in a bomb calorimeter
+------------------------------------------------------------
+
 It occurs to me that power might be a useful way to calibrate voltage
 given a known current or especially a known resistance, because if you
 can measure the power of a known resistance to within 1000 ppm, you
@@ -324,6 +342,9 @@ the insulation of the water, which would have to leak less than 0.4
 joules during the experiment, and the original measurement of the
 resistance.
 
+Computable inductors are easier to isolate from the environment
+---------------------------------------------------------------
+
 Which brings us back to the resistance-measurement problem.  It occurs
 to me that it a computable *inductor* might be a more precise way to
 measure a resistance, particularly if it can be made very small in
@@ -336,6 +357,9 @@ known).
 
 [2]: https://en.wikipedia.org/wiki/Magnetic_permeability
 
+Differential measurement of computable capacitors or inductors
+--------------------------------------------------------------
+
 A different tack might be to use some kind of differential measurement
 to precisely calibrate the dielectric constant or permeability of some
 material whose presence cannot be avoided but whose quantity can be
@@ -343,6 +367,9 @@ varied.  Operating the same air-gap capacitor at various air
 pressures, for example, might enable you to extrapolate its
 capacitance at hard vacuum, without having to actually produce 100-mPa
 vacuums.
+
+Sensors
+-------
 
 All these "sources of error" can equally well be seen as "observable
 variables".  The only difficulty is untangling them.  If your
@@ -364,3 +391,27 @@ them.  Force of gravity makes your watch crystal run faster when it's
 sideways?  Great, kid, you gotcherself a MEMS accelerometer that costs
 25¢.
 
+A photoelectric-effect voltage standard?
+----------------------------------------
+
+Can we use light of a precisely known color — a low-pressure sodium
+line, for example — to produce photoelectrons with a precisely known
+energy, and thus a photocell with a precisely known cutoff potential?
+Unfortunately the work function of the cathode material is subtracted
+from that energy, and this depends on the purity (and identity, and
+crystal grain orientation) of the surface material, and the
+temperature also affects the cutoff potential slightly.  [Typical
+variations between differently prepared samples of the same element are
+±10%](https://en.wikipedia.org/wiki/Work_function#Work_functions_of_elements).
+
+Still, I suspect this might be a feasible way to get some sort of
+voltage standard, even if not a very good one.
+
+It might be possible to precisely measure aging-stable photoemission
+in air if you use a metal with a sufficiently conductive and
+nonhygroscopic oxide, such as zinc.
+
+You also get photoelectric emission inside solid-state semiconductor
+junctions; that's how photodiodes work.  However, I suspect the cutoff
+voltage for this solid-state photocurrent may be fuzzier, just because
+of the messy nature of condensed matter.
