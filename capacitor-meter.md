@@ -380,6 +380,13 @@ There's an implication that there's a clock prescaler specific to
 timer 1 (p. 94, where it says it doesn't apply to the optional noise
 canceler, which adds four cycles of latency).
 
+There's also a third timer on the chip, the watchdog timer, which
+always runs at 128kHz and "can be configured to generate an interrupt
+instead of a reset" (p. 43) by setting the WDIE bit in WDTCSR (p. 45).
+Aside from the usage they suggest — waking from power-down — this
+could be useful for doing regular tasks.  I don't think you can read
+its counter value, though, just reset it.
+
 Datasheet questions:
 
 - what's the timer precision?

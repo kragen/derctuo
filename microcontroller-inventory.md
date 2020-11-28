@@ -88,8 +88,25 @@ German](http://www.elektronik-labor.de/AVR/KursAssembler/T13asm13.html)
 which starts out by attaching switches to the reset, SCK, and MOSI
 lines of an ATTiny13 and programming it with them.
 
-The ATTiny2313 datasheet has "serial programming timing" on p. 205 and
-mentions the protocol on p. 29: "If the RSTDISBL fuse is programmed,
-this start-up time will be increased to 14CK + 4 ms to ensure
-programming mode can be entered."  So apparently you program it during
-reset?
+![(screenshot attiny13-manual-programming.jpeg)](attiny13-manual-programming.jpeg)
+
+
+
+Here's Heinz D.'s schematic:
+
+![(screenshot attiny13-manual-programming-schematic.png)](attiny13-manual-programming-schematic.png)
+
+
+
+The ATTiny2313 datasheet has "serial programming timing" on p. 205:
+
+![(screenshot attiny2313-serial-programming.png)](attiny2313-serial-programming.png)
+
+
+
+This doesn't really explain how you get into serial programming mode,
+or what data gets input or output, though.  It does mention the
+protocol a bit on p. 29: "If the RSTDISBL fuse is programmed, this
+start-up time will be increased to 14CK + 4 ms to ensure programming
+mode can be entered."  So apparently you program it during reset?
+Surely I'll eventually find the full procedure.
