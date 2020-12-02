@@ -10,7 +10,9 @@ loops and function arguments).
 So consider a personal computer consisting of a 5¢ USB micro-B jack,
 three 8¢ CPUs, three 5¢ bypass capacitors, a [60¢ 8-kibibyte 20MHz SPI
 SRAM module][0], a 15¢ 2-megabyte NOR Flash chip, a 30¢ piezoelectric
-buzzer, and a resistive touch input surface made of paper and powdered
+buzzer (here in Argentina, [US$2 as part of a musical Christmas card][10],
+but [a 10-pack from Anri TV costs US$4][11]),
+and a resistive touch input surface made of paper and powdered
 graphite (rather than 3M Velostat) using [Chris Harrison's "Electrick"
 electrical field tomography technique][5].  The total BOM cost is
 US$1.49, plausibly reducible to under US$1, and it is probably capable
@@ -22,6 +24,8 @@ output signals for NTSC, PAL, or VGA.
 
 [0]: https://www.digikey.com/en/products/detail/microchip-technology/23K640T-I-SN/9643732
 [5]: https://chrisharrison.net/projects/electrick/electrick.pdf
+[10]: https://articulo.mercadolibre.com.ar/MLA-863820228-coca-cola-tarjeta-navidena-musical-c-sobre-_JM#position=5&type=item&tracking_id=bc3c0677-0f1f-419b-acd6-de075eab2180
+[11]: https://articulo.mercadolibre.com.ar/MLA-873655927-buzzer-piezoelectrico-metalico-pack-10-unidades-anri-tv-_JM#position=9&type=pad&tracking_id=3025ce0e-633d-4985-8e30-5bebfe3f04f5&is_advertising=true&ad_domain=VQCATCORE_LST&ad_position=12&ad_click_id=MTQ4ZWI0YzQtZWViYi00ZDFhLWFkYzItM2ZjMTEzNjFjMjMw
 
 Overview of the Padauk microcontrollers
 ---------------------------------------
