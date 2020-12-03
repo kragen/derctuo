@@ -22,18 +22,25 @@ usable keyboards, speakers, and microphones, as well as some radio
 stuff.  Old Nokia displays in particular are SPI and so relatively
 easy to connect up to (easier than directly driving an LCD), though
 you suffer some display latency as a result, and they only use a
-couple of microwatts.  A broken Nokia 1110 goes for AR$500 (US$4) on
+couple of microwatts.  [A broken Nokia 1110][33] goes for AR$500 (US$4) on
 MercadoLibre; a lot containing a 3200, a 9300, and a 2651 go for
 AR$1600 (US$10); a lot containing eight broken cellphones from that
 epoch, including two QWERTY phones, goes for AR$2000 (US$14); a broken
 QWERTY Nokia Asha 303 goes for AR$900 (US$7).  (The key words on
-Mercado Libre are [nokia reparar].)  But this is probably a much more
+Mercado Libre are [nokia reparar][32].)  But this is probably a much more
 advanced project.
+
+![(Broken Nokia 1100 photo)](broken-nokia-1100.jpeg)
+
+
+
+[32]: https://listado.mercadolibre.com.ar/nokia-reparar
+[33]: https://articulo.mercadolibre.com.ar/MLA-875748264-celular-nokia-1110-a-reparar-o-repuestos-no-enciende-_JM
 
 I also have a solar garden light that seems like an appealing
 possibility, though perhaps to dissect for parts; see [Garden Light
 Panel](garden-light-panel.md) for details.  I was disappointed to
-learn that it’s only 40–80 mW rather than the 300 mW I was hoping for,
+learn that the panel is only 40–80 mW rather than the 300 mW I was hoping for,
 probably because it’s amorphous, but that’s still enough to be useful.
 
 Toys
@@ -315,6 +322,21 @@ scales][23] (US$10).
 [21]: https://articulo.mercadolibre.com.ar/MLA-870915952-termometro-digital-pinchacarne-liquidos-y-verduras-50-300-_JM
 [22]: https://articulo.mercadolibre.com.ar/MLA-857590423-calibre-digital-de-medicion-crossmaster-fibra-de-carbono-_JM
 [23]: https://articulo.mercadolibre.com.ar/MLA-815753063-balanza-digital-de-cocina-tara-1gr-5kg-7-kg-10-kg-con-pilas-_JM
+
+There are also [indoor/outdoor digital weather thermometers with LCD
+displays like this 3-digit 30mm-tall TPM-10 for AR$600 (US$4)][31]
+which tend to have fairly large displays:
+
+![(photo of LCD thermometer)](lcd-thermometer.jpeg)
+
+
+
+[31]: https://articulo.mercadolibre.com.ar/MLA-875477172-termometro-digital-refrigeracion-aire-acondicionado-c-cable-_JM
+
+Some of them are larger and have more digits.  And the temperature
+sensor itself is potentially useful; simply rebraining such a
+thermometer without drilling any further holes could give you a
+logging Wi-Fi thermometer.
 
 Clocks and watches
 ------------------
