@@ -104,7 +104,11 @@ This doesn’t have much of a keyboard, but it does have lots of space
 to add one, and it has what appears to be a thumb-sized backlit LCD
 (20 mm square) with a resolution on the order of an NTSC TV.  The
 advertisement explains several times that it’s a completely functional
-replica.  Several buyers marvel at how well it works.
+replica.  Several buyers marvel at how well it works.  [Tim
+Schuerewegen says he reprogrammed a similar but somewhat larger game
+console just by reprogramming its SPI Flash ROM][37].
+
+[37]: https://hackaday.com/2019/12/09/teardown-168-in-1-retro-handheld-game/#comment-6204409
 
 I don’t know what kind of electronic interface the Pac-Man LCD takes
 but I imagine it’s pretty power-hungry.
@@ -127,7 +131,15 @@ it’s precisely NTSC or PAL resolution:
 
 This has composite video output, charges over USB, includes an 800mAh
 lithium battery, an 8-bit CPU, 8 megabytes containing 168 ROMs, and
-probably no programmability.
+probably no programmability.  [Hackaday did a teardown of one under
+the brand “Weikin” last year;][34] they found it had a 128 mebibit NOR
+Flash chip you could probably reprogram.  [Some dude on YouChube
+reviewed the games][35] and found some problems in the composite video
+output; he [also took it apart and fixed a video problem][36].
+
+[34]: https://hackaday.com/2019/12/09/teardown-168-in-1-retro-handheld-game/
+[35]: https://www.youtube.com/watch?v=XrieCn9-9GU&feature=youtu.be
+[36]: https://www.youtube.com/watch?v=ceI4CeIN1SQ
 
 There are a variety of branded variants of this device, including the
 Level-UP RetroBoy (“5 hour”, “600 mAh” battery), the NogaNet Pocky,
