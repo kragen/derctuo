@@ -183,7 +183,7 @@ of OpenGL.
    Sinclair Target in
    2018](https://twobithistory.org/2018/08/18/ada-lovelace-note-g.html)
 0. December 17, 1706: Gabrielle Émilie Le Tonnelier de Breteuil,
-   Marquise du Châtelet, who discovered energy, was born (died
+   Marquise du Châtelet, who arguably discovered energy, was born (died
    September 10, 1749)
 0. December 23, 1790: Jean-François Champollion born (died March 4,
    1832), deciphered the Egyptian demotic script in 1806 and, while

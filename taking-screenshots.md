@@ -244,6 +244,29 @@ possible to scan for such images to add such previews to, but I
 probably wouldn't want to invoke that automatically every time I
 opened a file.
 
+This is a pretty nice experience in Emacs as long as the images aren’t
+too big:
+
+![(screenshot inline-screenshots.jpeg)](inline-screenshots.jpeg)
+
+
+
+(To make this work with the same key on MATE on my craptop, I opened
+Main menu → Control Center → Hardware → Keyboard Shortcuts (*not*
+“Keyboard”) → Desktop → Take a screenshot and reconfigured it to
+“Shift+Ctrl+Print”.)
+
+![(screenshot of MATE keyboard shortcuts button.jpeg)](mate-keyboard-shortcuts-button.jpeg)
+
+
+![(screenshot of MATE Keyboard Shortcuts)](mate-keyboard-shortcuts.jpeg)
+
+
+
+Sometimes the images seem to disappear and be replaced with small
+squares; maybe Emacs is evicting them from some cache and not putting
+them back.  So far this has been a minor annoyance.
+
 Efficiency
 ----------
 
