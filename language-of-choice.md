@@ -59,7 +59,55 @@ memorylessness property:
 
     <when> ← <expr> (when <expr>)?
 
-There's a trick due to, I think, Warth, which lets Packrat parse some
+Mizushima, Maeda, and Yamaguchi published a paper in 2010 where they
+insert a Prolog-style "cut" operator into PEGs, spelled ↑; the
+construction `x ↑ y / z` is similar to `x y / z`, but although
+failures before the cut (in `x`) can backtrack to `z`, failures after
+the cut (in `y`) do not.  Analogously in `(x ↑ y)*` if there is a
+failure in `y` then the whole repetition fails.  They first
+implemented this in _Yapp_, but in the 2010 paper they explain how
+they inserted cuts and negative lookahead assertions automatically in
+semantics-preserving locations.
+
+They say `x ↑ y / z` is equivalent to `x y / z` iff there is some
+string S such that `x` matches some prefix of S and `z` matches some
+(possibly different) prefix of S.  This is an undecidable problem even
+in some trivial cases, like where `x` matches everything, so that the
+problem reduces to whether `z` can ever succeed on any input.  So they
+compute a conservative approximation that lets them insert enough cuts
+to get "mostly sequential space" on "practical grammars", including "a
+Java PEG and a JSON PEG" but not "an XML PEG."
+
+They also report that their cut-insertion improves error reporting
+from PEGs.
+
+Redziejowski wrote a 2016 paper "Cut points in PEG" where he uses a
+second kind of "cut" ↓, which I'm guessing he got from an earlier
+Mizushima et al. paper: `a ↓ b ↑ c / d` backtracks and retries `d`
+only if the failure happens within `b`, so a failure after the
+ordinary cut ↑ doesn't backtrack, but *neither does the failure before
+the backwards cut ↓*.  I'm not yet sure what this is good for.
+
+Cut insertion doesn't avoid sticking things into a memo table that we
+are never going to need, but it does allow us to discard potential
+backtracking points off the stack as soon as we know we aren't going
+to need them, which allows us to safely discard everything to the left
+of that point.
+
+Given a candidate criterion for not memoizing a callsite at all, we
+could test it by memoizing it anyway, then testing the parser on some
+input to see which callsites the criterion erred on — those whose memo
+entries were expected to be useless, but got used anyway.  It's maybe
+also worthwhile to examine which callsites don't need to *probe* the
+memo table because it's impossible for a memo-table entry to exist,
+because no preceding attempt to parse the same text could have invoked
+that nonterminal at that position.  I haven't seen any research on
+this aspect of the problem, but it seems like it would help a lot to
+reduce both the time usage and space usage of the memo table.
+
+*****
+
+There's a trick due to Warth, Douglas, and Millstein, which lets Packrat parse some
 left-recursive grammars at the expense of their linear-time guarantee,
 which I think would enable Packrat to handle the original grammar in
 PEG form:
@@ -85,6 +133,9 @@ end of input, not by `if`.  So we keep the former parse.
 
 Essentially, this left-recursion trick converts a Packrat parser
 locally from a top-down parser into a bottom-up parser.
+
+I think Medeiros, Mascarenhas, and Ierusalemschy have written a 2014
+paper on this question.
 
 ----
 
