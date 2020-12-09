@@ -125,13 +125,6 @@ Malicious but sometimes usable if nothing else works
 * datasheetarchive.com: iframe with PDF accessible via "PDF" link in
   "PDF" column — but for the wrong part!  [A1286, for example][1].
   However, I *did* get the right datasheet for [CXA1498S][10].
-* alldatasheet.es/alldatasheet.com: quite difficult: PDF with
-  application/octet-stream content-type and .html URL ending,
-  accessible via form POST of "[ Download ]" button, on page
-  accessible via "Download" link to URL of form
-  `https://pdf1.alldatasheet.es/datasheet-pdf/download/35940/ROHM/BA3126N.html`,
-  in a locked filing cabinet with a sign saying "Beware of the
-  jaguar"; [BA3126N, for example][5], or [TL2842BP][13].  A last resort.
 * kynix.com: links to alldatasheet.com, for example for [STP7N60FI][23].
 
 [5]: https://www.alldatasheet.es/datasheet-pdf/pdf/35940/ROHM/BA3126N.html
@@ -165,6 +158,15 @@ Blacklist; _never visit_ (at least if you want the datasheet)
 * assets.nexperia.com: 403 Forbidden for wget
 * worldwayelec.com: generates fake datasheet PDFs containing only ads,
   has no actual information on parts; [AVC479, for example][25].
+* alldatasheet.es/alldatasheet.com: previously quite difficult: PDF with
+  application/octet-stream content-type and .html URL ending,
+  accessible via form POST of "[ Download ]" button, on page
+  accessible via "Download" link to URL of form
+  `https://pdf1.alldatasheet.es/datasheet-pdf/download/35940/ROHM/BA3126N.html`,
+  in a locked filing cabinet with a sign saying "Beware of the
+  jaguar"; [BA3126N, for example][5], or [TL2842BP][13].  Was a last resort.
+  Now the button says "[ If You Want to View Datasheet, Click To Here !! ]"
+  instead, but doesn't work.
 
 [1]: https://www.datasheetarchive.com/A1286-datasheet.html
 [2]: http://www.datasheetq.com/datasheet-download/219014/1/Isahaya/A1286
