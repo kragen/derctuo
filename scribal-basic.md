@@ -1,6 +1,10 @@
 I was thinking about the BASIC systems of my childhood and what a
-similar system might look like now.  The overall emphasis was on
+similar system, tentatively called Scribal Basic,
+might look like now.  The overall emphasis was on
 making them *easy*.
+
+What BASIC was like
+-------------------
 
 One key aspect was the "IDE": you could interrupt the program at any
 time, type bits of code, inspect some variables (the "PRINT" command
@@ -118,6 +122,9 @@ even though I've said above that a lot of the important aspects were
 the IDE — you were always running the program "in the debugger", you
 could stop and look at variables and fix it and CONTinue, etc. — I'm
 going to focus on the purely linguistic aspects here.
+
+Syntax and control flow
+-----------------------
 
 From my experience with Logo, I don't think the absence of real
 subroutines with parameters was really a key thing that made BASIC
@@ -268,3 +275,422 @@ blocks.  You could do something grody like this:
 
 But some kind of syntax to pass multiple block arguments, or name
 them, might be better.
+
+Other cases where you might want more than one block argument include
+clipping (an operation that takes a clipping path and a
+drawing — though this is handled in PostScript by having the `clip`
+operator change the current clipping path until the next `grestore`);
+looping constructs with a "final" block; exception handling with a
+handler block; union and difference of paths; and 3-D CSG.
+
+Naming all the block arguments might be a good idea:
+
+    [handleclick x y buttons &path]
+    getmouse x y buttons
+
+    checkwithinpath within x y {
+        path
+    }
+
+    if not within {
+        buttons = 0
+    }
+
+This permits the more straightforward formulation:
+
+    [handleclick x y buttons &path &handler]
+    getmouse x y buttons
+
+    checkwithinpath within x y {
+        path
+    }
+
+    if within {
+        handler        ' invoke second block argument
+    }
+
+This might be invoked simply with two juxtaposed blocks:
+
+    handleclick a b c {
+        moveto 100 100
+        rlineto 0 200
+        rlineto -100 0
+    } {
+        print "triangle clicked" a "," b "buttons" c
+    }
+
+In fact, it might be written with them:
+
+    [handleclick x y buttons &path &handler]
+    getmouse x y buttons
+
+    ifwithin x y {
+        path
+    } {                       ' second block argument to ifwithin is handler
+        handler
+    }
+
+But if we're using the Python-like indented-block syntax, you need
+some kind of keyword to introduce the block:
+
+    [onclick x y buttons &path then: &handler]
+    getmouse x y buttons
+
+    ifwithin x y:
+        path
+    then:  ' second block argument to ifwithin is also introduced with "then:"
+        handler
+
+### Argument separation ###
+
+Logo and Tcl come down firmly on the side of juxtaposed arguments, but
+BASIC traditionally separates arguments with commas, for user-defined
+functions like DEF FNA, for built-in functions like INT and RND, and
+for some commands like SAVE "FOO",A.  Other commands separate
+arguments with semicolons (INPUT "Name";N$) or a combination (PRINT
+I;"th month", M(I)).  PV-WAVE IDL goes further and separates even the
+function name from the first argument with a comma: F,X,Y.
+
+The argument in favor of separating arguments with commas is
+redundancy for error reporting; if `rlineto 0 -100` gets interpreted
+as `rlineto (0-100)` it could be difficult to figure out why you were
+getting an error or an incorrect effect, or that you need to write
+`rlineto 0 (-100)` instead.
+
+Smalltalk uses keywords to separate arguments: ary at: pos put:
+element, which would read a little better as ary at=pos put=element or
+ary at: pos, put: element.  And I'm already considering that maybe
+Scribal Basic should use such keywords to introduce block arguments,
+at least after the first one.
+
+For the time being I'm sticking to simple Logo-like juxtaposition of
+arguments despite infix syntax, but I'm noting this as a potential
+trouble point.
+
+Data model
+----------
+
+I think the unification of strings with numbers as done in Perl, the
+Bourne shell, and Tcl is a significant improvement in usability,
+especially for novices, and worth keeping, although it undermines
+Scribal Basic's claim to be a Basic.  Awk and JS also try to do this,
+but they do it by guessing when something is supposed to be a number
+and when it's not, and there are some operations that handle the two
+differently, notably comparisons and, in JS, `+`.  I think this is a
+mistake.
+
+I also think built-in hash tables (as in awk, Perl, Tcl, Lua, and JS)
+improve usability a lot, even without being first-class values, as
+they aren't in Tcl, Perl 4, and awk.
+
+The possibility of passing a nonexistent hash table entry as an
+argument by reference as an argument suggests a lurking danger of
+autovivification.  This can be ameliorated by not making hash tables
+first-class values, so the question of what to do when reading
+a("foo")("bar") doesn't arise, and by adopting the Lua convention for
+existence: a nonexistent hash-table entry is indistinguishable from
+one to which nil has been assigned.  This is bug-prone but probably
+better than the alternatives in this context.
+
+This way, if someone says `foo bar["baz"]` and bar doesn't have "baz"
+in it yet, we can safely insert a nil at "baz" into the hash table
+`bar` before invoking `foo` with a pointer to that nil, which it can
+then set to something else if it wants.  However, this pretty picture
+is complicated by the possibility of needing to rehash the table to
+expand it before `foo` attempts to mutate it.
+
+This can be avoided, rustily, if it's impossible to insert anything
+else into `bar` in the meantime, for example because no other
+reference to `bar` is passed to `foo` or used by a block argument of
+`foo`.  Alternatively, we could pass in a writing thunk rather than a
+raw memory address, or apply a lock to `bar` to prevent insertion
+until `foo` returns, a lock the insertion routine would have to
+respect.
+
+If we're going to write subroutines that process arrays of numerical
+data, we need some way to pass the whole array as an argument.
+Traditionally in BASIC this is done, inefficiently, by sharing a
+global array, while in Algol 60 it was done with call-by-name,
+allowing constructs analogous to the following:
+
+    [sum i n item total]
+    total = 0
+    for i = 1 to n:
+        total = total + item
+
+which could be invoked as, for example, `sum i 10 a(i)*b(i) dp` to put
+a dot product into `dp`.
+
+I think call-by-name is a terrible idea, though I'm not clear that
+it's really that much worse than implicit call-by-reference.  But the
+alternative to call-by-name is to pass entire arrays by reference,
+which seems like the right choice:
+
+    [dotproduct n p q total]
+    total = 0
+    for i = 1 to n:
+        total = total + p(i) * q(i)
+
+Much of the language design is aimed at pretty high and
+highly-predictable efficiency with a simple compiler: stack discipline
+for variable storage, limited pointers, no records, and so on.  But it
+seems that if you're going to make the language stringly-typed like
+Tcl, you're going to have to do some type inference to figure out
+which variables are really numbers.  This is going to be complicated
+by pervasive mutability and call-by-reference, since potentially any
+function you call with a variable could change the type of that
+variable.  And any time you invoke `yield` (or a named block argument)
+that block can potentially mutate any global variable or by-reference
+argument, including changing its type.
+
+But I think in most cases you can infer at least numeric or string
+nature for variables, and in, out, or inout mode for parameters.  Most
+subroutines won't take block arguments; most parameters won't be
+modified; etc.
+
+Scoping
+-------
+
+Nested scopes are probably a mistake for novice usability, and
+probably implicit global is the wrong choice — it would render
+disastrous the simple `repeat` definition above, which mutates `i`
+without declaring it local — especially given the possibility to pass
+things by reference.  The usual annoying issues of producing closures
+in a loop (do they all alias the same underlying variable?) disappear
+with downward funargs.
+
+But mutable global variables probably are needed.  Ruby's solution of
+prefixing them with `$` seems like the best tradeoff, avoiding the
+"action at a distance" effect of explicit declarations.
+
+Imaging model
+-------------
+
+Making graphics was one of the most important aspects of both Logo and
+BASIC.  Even on the H89 I was making ASCII-art graphics.  Nearly all I
+did in Logo was make graphics, a fact which will surprise anyone who's
+seen my adult drawings.  Other people I've talked to about their
+childhood Logo experience also talked about making graphics.  The
+graphics capability of IBM PC BASIC, Z-BASIC, and GW-BASIC was what I
+spent all my time on when I programmed those machines.  Proce55ing is
+popular with novice programmers today and mostly focused on making
+graphics.  And James Hague [describes his experience learning to
+program][2] as follows:
+
+> ...I can talk about the Atari 800 I learned to program on.
+> 
+> Most games didn't use memory-intensive bitmaps, but a gridded
+> character mode. The graphics processor converted each byte to a
+> character glyph as the display was scanned out. By default these
+> glyphs looked like ASCII characters, but you could change them to
+> whatever you wanted, so the display could be mazes or platforms or a
+> landscape, and with multiple colors per character, too. Modify one
+> of the character definitions and all the references to it would be
+> drawn differently next frame, no CPU work involved.
+> 
+> Each row of characters could be pixel-shifted horizontally or
+> vertically via two memory-mapped hardware registers, so you could
+> smoothly scroll through levels without moving any data.
+> 
+> Sprites, which were admittedly only a single color each, were merged
+> with the tiled background as the video chip scanned out the
+> frame. Nothing was ever drawn to a buffer, so nothing needed to be
+> erased. The compositing happened as the image was sent to the
+> monitor. A sprite could be moved by poking values in position
+> registers.
+> 
+> The on-the-fly compositing also checked for overlap between sprites
+> and background pixels, setting bits to indicate collisions. There
+> was no need for even simple rectangle intersection tests in code,
+> given pixel-perfect collision detection at the video processing
+> level.
+> 
+> What I never realized when working with all of these wonderful
+> capabilities, was that to a large extent I was merely scripting the
+> hardware. The one sound and two video processors were doing the
+> heavy lifting: flashing colors, drawing characters, positioning
+> sprites, and reporting collisions. It was more than visuals and
+> audio; I didn't even think about where random numbers came
+> from. Well, that's not true: I know they came from reading memory
+> location 53770 (it was a pseudo-random number generator that updated
+> every cycle).
+> 
+> When I moved to newer systems I found I wasn't nearly the hotshot
+> game coder I thought I was. I had taken for granted all the work
+> that the dedicated hardware handled, allowing me to experiment with
+> game design ideas.
+
+[2]: https://prog21.dadgum.com/173.html
+
+A common observation of kids (and, to a lesser extent, novice adult
+programmers) is that they quickly pick up how to use the built-in
+facilities of the environment, but struggle to build their own
+abstractions for hierarchical composition, even when they aren't using
+generalization-impaired environments like BASIC-80.  Later in the
+article quoted above, Hague describes his own process of learning to
+do this when thrust into "the cold expanse of real programming".
+
+So it's really important that you can do [this kind of thing in a
+trivial amount of code in GW-BASIC][3]:
+
+    10 screen 2:for i=0 to 20:line(i*31,0)-(0,i*9):next
+
+[3]: https://hwiegman.home.xs4all.nl/gw-man/SCREENS.html
+
+This generates a graceful string-art approximation of a quadratic
+Bézier curve when you RUN it, which is super cool when you're 8.  It's
+only three bytes longer than a minimal Java program that does nothing
+at all:
+
+    class X{public static void main(String[]args){}}
+
+Further contrast this "hello, world" program with Swing, and consider
+the level of novice-accessibility it demonstrates:
+
+    import javax.swing.SwingUtilities;
+    import javax.swing.JFrame;
+    import javax.swing.JLabel;
+
+    public class HelloWorldSwing {
+        public static void main(String[] args) {
+            javax.swing.SwingUtilities.invokeLater(new Runnable() {
+                    public void run() {
+                        JFrame frame = new JFrame("HelloWorldSwing");
+                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        frame.getContentPane().add(new JLabel("hello, world"));
+                        frame.pack();
+                        frame.setVisible(true);
+                    }
+                });                        
+        }
+    }
+
+That's over an order of magnitude worse than the BASIC line-art
+program.  I don't think you can get it much more compact than that
+with Swing, and that's appalling.
+
+So I think Scribal Basic, despite the name, would need to make it easy
+to draw graphics.  But I think most people will quickly get frustrated
+with the limits of 1980s-style opaque line-art polygons in 4 or 16
+flat colors, or even 24-bit flat colors, even for cartoons.  So I
+don't think GW-BASIC-style flood-fill and XORing into the framebuffer
+is really going to get us very far.
+
+I think instead something like the PostScript/PDF/SVG imaging model is
+better, at least for 2-D graphics, where you build up two-dimensional
+paths one at a time and apply stroke/fill/eofill/clip operations to
+them, with alpha-blending and gradients.  (The GLSL fragment shader
+approach is more powerful but more challenging.)  There are a lot of
+ways for people to build graphics for that model: interactive drawing
+programs, making JPEGs or PNGs or H.264 frames that are then loaded
+in, rendering from 3-D models, constraint solvers like SKETCHPAD and
+SolidWorks, and so on.
+
+But I'm going to focus on the most straightforwardly usable imperative
+programming approach to defining paths, which I think is either turtle
+graphics or moveto/lineto with numerical coordinates.  It's fairly
+straightforward to define one in terms of the other; here's the code
+for turtle graphics in PostScript I used for Heckballs:
+
+    % Turtle graphics.
+
+    /seth { /theta exch def } def
+    /rt { theta add seth } def
+    /lt { neg rt } def
+    /pd { /turtle-pen {rlineto} def } def
+    /pu { /turtle-pen {rmoveto} def } def
+    /here { [ /turtle-pen load  theta  currentpoint ] } def
+    /return { aload pop  moveto  seth  /turtle-pen exch def } def
+    /fd { dup  theta sin mul  exch theta cos mul  turtle-pen } def
+    pd  0 seth
+
+But of course the target audience for Scribal Basic is people who
+can't figure out how to write such an adaptor layer, so you'd want it
+to be part of the base system and one that they don't accidentally get
+lost in.  In Scribal Basic as described so far, it would be
+something like this:
+
+    [seth θ] ' set heading
+    $θ = θ   ' $ to indicate global
+
+    [rt θ]       ' turn right
+    seth $θ + θ * π / 180
+
+    [lt θ]       ' turn left
+    rt -θ
+
+    [pd]         ' put turtle's pen down
+    $pendown = 1 ' can't use higher-order functions like PostScript
+
+    [pu]         ' pen up
+    $pendown = 0
+
+    [fd n]           ' go forward n paces
+    Δx = n * sin($θ)
+    Δy = n * cos($θ)
+    if $pendown:
+        rlineto Δx Δy
+    else:
+        rmoveto Δx Δy
+
+    [saveturtle pen θ x y] ' can't return a heterogeneous array like PostScript
+    pen = $pendown
+    θ = $θ
+    currentpoint x y   ' currentpoint subroutine from primitive model sets x, y
+
+    [restoreturtle pen θ x y]
+    $pendown = pen
+    seth θ
+    moveto x y
+
+    [saveexcursion]       ' do some turtle-drawing in a saveexcursion:
+    saveturtle pen θ x y  ' to return to where you started when you're done
+    yield
+    restoreturtle pen θ x y
+
+Though this is not as graceful as the PostScript, and a lot longer, I
+think it's actually easier to read.
+
+The initialization code maybe needs to get invoked somehow, although
+by using a `$penup` instead of `$pendown` we could get the right
+defaults from default initialization to zero.
+
+The higher-order function `saveexcursion` suggests using the block
+facility as a substitute for PostScript's gsave/grestore, which save
+the current stroke width, color, point, path, and so on, and then
+restore them.  And, as mentioned above, this would also work for
+`fill`:
+
+    fillcolor 128 31 45
+    fill:
+        moveto 100 100
+        fd 50
+        rt 100
+        fd 40
+
+Aside from the possibility of providing a fourth α argument to things
+like `fillcolor`, you could *also* use the block facility to do a
+drawing with a global α.  Also, you could use the same approach to
+provide double-buffering, scaling or rotation or skewing or
+perspective distortion, drawing on an offscreen canvas that you later
+composite in, and so on.
+
+Sound
+-----
+
+Similarly, sound was always a big deal for motivating programming, but
+you can do a lot more sound now on a computer than you could in 1985.
+In the article of James Hague's I mentioned above, he was setting two
+registers on his Atari 800 to produce a musical tone, but now a cheap
+soundcard can produce literally any sound a human can hear, if you
+have a precomputed CD-DA recording of it.
+
+There are existing DSLs for computer music, such as CSound,
+SuperCollider, ChucK, Sporth, and Pure Data.  Unfortunately I don't
+have enough experience with them to venture an opinion as to what
+subset of their capabilities could be reasonably replaced by a Scribal
+Basic embedded DSL.  Some of them, like Sporth, represent sounds as
+bits of code that execute (conceptually at least) on every sample;
+this is not harmonious with the way I've conceptualized Scribal Basic,
+at least so far, although you could do it if you added some kind of
+threading.
