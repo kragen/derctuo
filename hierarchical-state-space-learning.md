@@ -25,7 +25,7 @@ Given some estimates *A*<sup>?</sup>, *B*<sup>?</sup>,
 *C*<sup>?</sup>, *D*<sup>?</sup>, of the matrices *A*, *B*, *C*, and
 *D*, we can compute a residual *y<sub>t</sub>* -
 (*D<sup>?</sup>u<sub>t</sub>* +
-*C*<sup>?</sup>Σ*ᵢA*<sup>?</sup>*ⁱB*<sup>?</sup>u*<sub>*t*-*i*</sub>)
+*C*<sup>?</sup>Σ*ᵢA*<sup>?</sup>*ⁱB*<sup>?</sup>*u*<sub>*t*-*i*</sub>)
 that tells us how shitty our estimates are for a given time *t*, and
 then we can summarize this residual vector over all times *t* by, for
 example, summing the squares or absolute values of the residuals to
