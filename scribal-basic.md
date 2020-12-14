@@ -686,11 +686,24 @@ soundcard can produce literally any sound a human can hear, if you
 have a precomputed CD-DA recording of it.
 
 There are existing DSLs for computer music, such as CSound,
-SuperCollider, ChucK, Sporth, and Pure Data.  Unfortunately I don't
+SuperCollider, ChucK, Sporth, [Faust][4], and Pure Data.  Unfortunately I don't
 have enough experience with them to venture an opinion as to what
 subset of their capabilities could be reasonably replaced by a Scribal
 Basic embedded DSL.  Some of them, like Sporth, represent sounds as
 bits of code that execute (conceptually at least) on every sample;
 this is not harmonious with the way I've conceptualized Scribal Basic,
 at least so far, although you could do it if you added some kind of
-threading.
+threading.  Or you could set a global function as the "sound
+generator", which would be invoked to generate sound samples from some
+kind of event loop.
+
+[4]: https://ccrma.stanford.edu/~jos/faust/
+
+At a minimum, I'd think you need support for playing WAV and ogg files
+(with a built-in mixer), playing MIDI files (with a built-in
+soundfont), and playing sequences of pitches and durations computed by
+the program (using the same path as MIDI).  But it would be super cool
+to be able to do subtractive synthesis, additive synthesis, FM
+synthesis, distortion, flanging, pitch bending, ADSR envelopes,
+portamento, tremolo, vibrato, reverb, digital waveguide synthesis, and
+custom wavetables (from samples or otherwise).
