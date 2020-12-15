@@ -12,7 +12,10 @@ time-travel debugging, but also, it's potentially useful simply to
 look at the pending changes so far made by each of the functions on
 the stack so far.  And implementing edit-and-continue in the debugger
 becomes substantially easier under some circumstances when you can
-restart the function you've just edited.
+restart the function you've just edited.  Also, being able to see
+which transactional variables are being *depended on* at each level in
+the call stack is also a potential boon to debugging, sort of like
+`strace` at a per-function level.
 
 Rolling back to the beginning of the function and re-executing it is
 also a particularly simple way to support on-stack replacement
@@ -131,3 +134,30 @@ up to the parent function.
 This seems like a way to mostly cut the knot of error handling and
 responsiveness, without requiring static bounds of worst-case
 execution time for your entire user interface.
+
+There are further expansions.  Suppose the transaction for a function
+is logging all its reads and writes of mutable data; if it
+additionally logs which function it is, any closed-over data, its
+input parameters, then it becomes possible to use it for
+memoization — any call to the same function with the same parameters
+and closure data will necessarily perform the same writes and return
+the same value, unless one of those reads is out of date.  So it's
+valid to just perform those writes and return those results without
+actually running any of the function's code.  This is very similar to
+a build system like `make`, or to Umut Acar's "Self-Adjusting
+Computation"; it provides a way to transparently incrementalize a
+computation, so that it can be efficiently re-executed on slightly
+modified input.  Also, it automatically derives a
+guaranteed-linear-time Packrat parser from an ordinary
+exponential-time recursive-descent parser.
+
+If we're *only* using transactions for error recovery and/or
+peremptory work discarding for responsiveness (not memoization,
+multithreading with optimistic synchronization, deoptimization, or
+debugging, as suggested above), then, when a parent procedure invokes
+a child procedure at a callsite where failures in the child will
+necessarily propagate to a failure in the parent, it's not necessary
+(for execution) to preserve the separate transaction for the child
+procedure — if the child rolls back, the parent rolls back too.  This
+optimization dramatically reduces the amount of extra work imposed by
+the transaction system.
