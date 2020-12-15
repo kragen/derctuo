@@ -113,7 +113,8 @@ extend the underlying system to debug your program.
 recovery, at least as long as they don't make debugging impossible.
 What if every subroutine call were a nested transaction?  It would
 simplify exception handling, too, since rolling back the transaction
-would eliminate any need for running user-defined cleanup code.)
+would eliminate any need for running user-defined cleanup code.  See
+[transaction-per-call.md].)
 
 So, thinking about BASIC and Logo, I wondered what a modern sort of
 BASIC would look like, one that was as easy as real BASIC in the ways
