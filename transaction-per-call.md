@@ -1,7 +1,24 @@
+It looks like a new way to use transactional memory can simultaneously
+improve programming in a large number of very important ways: improved
+debugging, simplifying some of the hardest parts of JIT compilation,
+dramatically simplified error handling, fearless concurrency, improved
+interactive responsiveness (but I repeat myself), modular blocking on
+input, transparent incrementalization, simple and fast parsing, and
+enormously faster generative testing and solving of inverse problems.
+
+How does this work?
+
 Suppose that you have an imperative programming language in which
 every function call is associated with a new nested transaction, one
-covering all mutable variables and other effects, and you handle
-errors normally by rolling them back.  What does that give you?
+covering all mutable variables and other effects, and your normal means of handling
+errors is by rolling back these transactions.  What does that give you?
+
+This seems like a way to mostly cut the knot of error handling and
+responsiveness, without requiring static bounds of worst-case
+execution time for your entire user interface.
+
+Debugging
+---------
 
 Well, one thing it gives you is radical debuggability: because every
 function call you enter has to save enough information for
@@ -17,14 +34,21 @@ which transactional variables are being *depended on* at each level in
 the call stack is also a potential boon to debugging, sort of like
 `strace` at a per-function level.
 
+JIT support
+-----------
+
 Rolling back to the beginning of the function and re-executing it is
 also a particularly simple way to support on-stack replacement
-(whether for debuggability or for optimization).
+(whether deoptimization for debuggability, or optimization to get a
+speedup on a hot loop that might not run again).
+
+Error handling
+--------------
 
 Error handling becomes substantially easier.  Nonlocal exceptions are
 especially popular in pure functional languages because cleanup while
-unwinding the stack is unnecessary; C++ had so much trouble with this
-that the STL wasn't exception-safe for several years, and, if I
+unwinding the stack is unnecessary; by contrast, C++ had so much trouble with this
+that the STL wasn't exception-safe for several years after it was written!  In fact, if I
 understand correctly, exceptions are still prohibited at Google,
 because they complicate reasoning about what happens in failure
 cases — precisely what kinds of states can result.  But in such a
@@ -38,6 +62,9 @@ That's because there's no need to check a transaction for validity
 when you go to commit it — no other code could have been running
 concurrently.  You only need to buffer the writes to transactional
 variables so that you can undo them if you have to roll back.
+
+Fearless concurrency
+--------------------
 
 However, if you do additionally track reads of transactional
 variables, you can use the transaction system for multithreading with
@@ -59,6 +86,9 @@ Such a system would be sort of like the "dynamic typing" equivalent of
 Rust's fearless concurrrency through lifetime checking: your program's
 non-interference is checked dynamically at run-time, and corrected if
 necessary, rather than proven at compile-time.
+
+Modular blocking
+----------------
 
 You might think that this approach would preclude I/O anywhere but at
 some sort of top-level event loop, at least per thread, since I/O is a
@@ -89,6 +119,9 @@ that can be shoehorned into the transaction system, including input
 events — and the functions that do such waiting can be made
 nonblocking by having a fallback that always succeeds, or combined by
 falling back from one to the other.
+
+Safe aborting for guaranteed responsiveness
+-------------------------------------------
 
 Another benefit provided by pervasive transactionality — and this one
 wouldn't require either read-logging or nested transactions — is that
@@ -121,6 +154,9 @@ one transaction per function.  (However, it might make things worse
 rather than better, and of course requires integration with the OS
 kernel.)
 
+Error values
+------------
+
 With regard to error handling, it might be best in most cases for
 aborted functions to return error values rather than automatically
 propagating.  As long as these error values are either handled
@@ -131,11 +167,12 @@ error value is ignored (evaluated in void context, or stored in a
 variable whose lifetime ends without being tested) it would propagate
 up to the parent function.
 
-This seems like a way to mostly cut the knot of error handling and
-responsiveness, without requiring static bounds of worst-case
-execution time for your entire user interface.
+These error values can propagate along the program's dataflow graph,
+like floating-point quiet NaNs; they only leap over to the
+control-flow graph if they are "leaked" or "dropped".
 
-There are further expansions.
+Memoization and incrementalization
+----------------------------------
 
 Suppose the transaction for a function
 is logging all its reads and writes of mutable data; if it
@@ -143,7 +180,8 @@ additionally logs which function it is, any closed-over data, its
 input parameters, then it becomes possible to use it for
 memoization — any call to the same function with the same parameters
 and closure data will necessarily perform the same writes and return
-the same value, unless one of those reads is out of date.  So it's
+the same value, unless one of those reads is out of date, or execution
+is nondeterministic.  So it's
 valid to just perform those writes and return those results without
 actually running any of the function's code.  This is very similar to
 a build system like `make`, or to Umut Acar's "Self-Adjusting
@@ -153,16 +191,13 @@ modified input.  Also, it automatically derives a
 guaranteed-linear-time Packrat parser from an ordinary
 exponential-time recursive-descent parser.
 
-If we're *only* using transactions for error recovery and/or
-peremptory work discarding for responsiveness (not memoization,
-multithreading with optimistic synchronization, deoptimization, or
-debugging, as suggested above), then, when a parent procedure invokes
-a child procedure at a callsite where failures in the child will
-necessarily propagate to a failure in the parent, it's not necessary
-(for execution) to preserve the separate transaction for the child
-procedure — if the child rolls back, the parent rolls back too.  This
-optimization dramatically reduces the amount of extra work imposed by
-the transaction system.
+Moreover, this caching or memoization is still valid *even if the
+original memoized computation was a child of a transaction that was
+rolled back*.  That is, even computation that was "discarded" can
+affect the memo table.  (This is the same mechanism that produced the
+Spectre and Meltdown vulnerabilities in Intel CPUs — it can produce a
+subliminal leak of information.)  This means that we can speculatively
+pre-cache computations we expect to need in the future.
 
 Incrementalization is an extremely important transformation for a few
 different reasons:
@@ -198,3 +233,17 @@ different reasons:
 
 In short, incrementalization reduces the need for explicit caching and
 makes searching over the space of executions immensely more efficient.
+
+Optimizing transactions
+-----------------------
+
+If we're *only* using transactions for error recovery and/or
+peremptory work discarding for responsiveness (not memoization,
+multithreading with optimistic synchronization, deoptimization, or
+debugging, as suggested above), then, when a parent procedure invokes
+a child procedure at a callsite where failures in the child will
+necessarily propagate to a failure in the parent, it's not necessary
+(for execution) to preserve the separate transaction for the child
+procedure — if the child rolls back, the parent rolls back too.  This
+optimization dramatically reduces the amount of extra work imposed by
+the transaction system.
