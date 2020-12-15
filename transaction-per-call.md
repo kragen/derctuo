@@ -9,7 +9,7 @@ enormously faster generative testing and solving of inverse problems.
 How does this work?
 
 Suppose that you have an imperative programming language
-[like Daira Hopwood's Noether][0]
+[like Daira Hopwood’s Noether][0]
 in which
 every function call is associated with a new nested transaction, one
 covering all mutable variables and other effects, and your normal means of handling
@@ -29,17 +29,25 @@ function call you enter has to save enough information for
 backtracking if it needs to roll back.  The debugger can see this
 information, and it can restart the function from the beginning as if
 it had not started running
-(Hopwood calls this "reversible execution" in hir 2014 Strange Loop
-presentation, crediting the idea to a 1973 paper by Marvin Zelkovitz).
+(Hopwood calls this “reversible execution” in [hir 2014 Strange Loop
+presentation][2], crediting the idea to a [1973 paper by Marvin Zelkowitz][3];
+ze claims that Zelkovitz found time overheads of less than a factor of 2
+for PL/I, which features pervasive mutability.  Zelkowitz seems to have
+done his 1971 dissertation, “Reversible execution as a diagnostic tool,”
+on the topic, at Cornell, though I could only find [a 13-page tech report][4]).
 This enables efficient granular
-time-travel debugging, but also, it's potentially useful simply to
+time-travel debugging, but also, it’s potentially useful simply to
 look at the pending changes so far made by each of the functions on
 the stack so far.  And implementing edit-and-continue in the debugger
 becomes substantially easier under some circumstances when you can
-restart the function you've just edited.  Also, being able to see
+restart the function you’ve just edited.  Also, being able to see
 which transactional variables are being *depended on* at each level in
 the call stack is also a potential boon to debugging, sort of like
 `strace` at a per-function level.
+
+[2]: https://github.com/noether-lang/noether/tree/master/doc/presentations/StrangeLoop2014
+[3]: http://www.cs.umd.edu/~mvz/pub/zelkowitz-cacm-1973.pdf "Reversible Execution, CACM, September 1973, volume 16, number 9"
+[4]: https://ecommons.cornell.edu/xmlui/bitstream/handle/1813/5967/71-92.ps?sequence=2 "Reversible execution as a diagnostic tool (preliminary draft), Cornell CS TR 71-92, January 1971"
 
 JIT support
 -----------
@@ -52,22 +60,22 @@ speedup on a hot loop that might not run again).
 Error handling
 --------------
 
-This was Hopwood's primary concern in the design of Noether.
+This was Hopwood’s primary concern in the design of Noether.
 
 Error handling becomes substantially easier.  Nonlocal exceptions are
 especially popular in pure functional languages because cleanup while
 unwinding the stack is unnecessary; by contrast, C++ had so much trouble with this
-that the STL wasn't exception-safe for several years after it was written!  In fact, if I
+that the STL wasn’t exception-safe for several years after it was written!  In fact, if I
 understand correctly, exceptions are still prohibited at Google,
 because they complicate reasoning about what happens in failure
 cases — precisely what kinds of states can result.  But in such a
 transactional system, the transaction system takes care of cleaning up
-any incompletely made changes.  So you don't need RAII, destructors,
+any incompletely made changes.  So you don’t need RAII, destructors,
 or special failure handling.
 
-The basic nested-transaction feature doesn't require tracking *reads*
-of transactional variables, the way Haskell's STM does, only *writes*.
-That's because there's no need to check a transaction for validity
+The basic nested-transaction feature doesn’t require tracking *reads*
+of transactional variables, the way Haskell’s STM does, only *writes*.
+That’s because there’s no need to check a transaction for validity
 when you go to commit it — no other code could have been running
 concurrently.  You only need to buffer the writes to transactional
 variables so that you can undo them if you have to roll back.
@@ -88,28 +96,107 @@ entail logging a huge amount of read traffic to the mutable variables,
 similar to the overhead of unoptimized reference counting.  The
 per-call transactions would reduce the cost of retrying in most cases.
 
-There's the question of when the threads of such a multithreaded
+There’s the question of when the threads of such a multithreaded
 program would *not* be in a transaction, making their transactional
 mutations visible to other threads.  I think the answer is something
-like Erlang's top-level process loop, where the process evolves by
+like Erlang’s top-level process loop, where the process evolves by
 having its top-level procedure make a tail call to itself, and of
 course when a thread exits successfully.
 
-Such a system would be sort of like the "dynamic typing" equivalent of
-Rust's fearless concurrrency through lifetime checking: your program's
+Such a system would be sort of like the “dynamic typing” equivalent of
+Rust’s fearless concurrency through lifetime checking: your program’s
 non-interference is checked dynamically at run-time, and corrected if
-necessary, rather than proven at compile-time.
+necessary, rather than proven at compile-time.  But there is a crucial
+difference: unlike dynamic type checking, it’s not just turning a
+subtle failure into an easier-to-understand failure; it actually
+*removes the bug*, thus dramatically simplifying the correct code by
+factoring the hairy concurrency questions out of the application.
+
+Optimistic vs. pessimistic concurrency defined
+----------------------------------------------
+
+(This section is not specific to nested transaction systems,
+transactional memory systems, or even indeed to transactional systems
+at all; it applies to all forms of concurrency in software.)
+
+“Optimistic concurrency” means that things don’t block each other;
+instead you allow transactions to run to completion, and if there’s a
+conflict, the first one to commit wins.  This guarantees progress and
+liveness at the potential expense of machine efficiency.  “Pessimistic
+concurrency” is where you use locks to ensure that you don’t waste any
+work on transactions that would have to be rolled back due to write
+conflicts.  Most systems use a mixture rather than purely one or the
+other.
+
+Pessimistic concurrency is helpful, for example, for interoperating
+with systems outside the scope of the transactional system, because
+transactions only roll back (and possibly have to be retried) if they
+are buggy and try to commit something erroneous.  This way, the
+transaction system avoids imposing any obligation of rollback on such
+external systems, and the transaction system itself only needs to
+support rollback for error recovery.
+
+In general, doing pessimistic concurrency safely requires some kind of
+static analysis of your transaction code to find out what resources it
+*could possibly* read or write, so that it won’t be started until it
+can acquire all of them.  (This lock acquisition can be atomic, but
+it’s sufficient for it to happen in a deterministic order in every
+transaction to prevent deadlocks; and doing some computation in
+between lock acquisitions is actually okay.) To be computable, this
+analysis must be conservative, so in case of doubt, it will delay your
+transaction until it can guarantee that it will be able to succeed.
+In the limit, pessimistic concurrency reduces to no concurrency:
+acquiring a global system lock, as in Noether and other traditional
+event-loop systems like Monte, Tcl/Tk, Twisted Python, asyncore, or
+JS.
+
+This kind of static analysis is generally infeasible (for the
+transactional system to do, at least) in the context where pessimistic
+concurrency is most appealing: that of interoperation with external
+non-transactional systems, or systems that otherwise cannot fulfill a
+commitment to roll back changes.  So pessimistic concurrency tends to
+suffer deadlocks from time to time, even though this is theoretically
+avoidable.
+
+Aside from the deadlock issue, pessimistic concurrency suffers from an
+efficiency problem in the multicore era (which, for transaction
+systems, began with VAXclusters).  If your limiting resource is CPU
+cycles, then to guarantee *efficient* progress, then *pessimistic*
+synchronization is the ticket: if a transaction read-locks every
+mutable variable it reads and write-locks every mutable varible it
+writes, then you never have to retry anything, so then the only way
+you can go slower than maximum speed is if you have deadlock or run
+out of work.  And this is important — a system making sufficiently
+slow progress is effectively indistinguishable from a deadlocked
+system, as anyone will attest after trying to use a desktop Linux
+system that’s thrashing in swap.
+
+However, by never burning a CPU cycle it can’t prove will get
+committed, pessimistic synchronization fails to take advantage of
+available CPU resources in uncertain situations, thus conserving
+energy at the expense of speed.
+
+Both forms of synchronization suffer from low throughput in situations
+of high contention, and both can get high throughput in situations
+where non-contention can be detected.  So in both cases the best way
+to get high concurrency is to keep your transactions short.  But
+optimistic synchronization resolves contention with a strong bias in
+favor of short transactions, while pessimistic synchronization
+resolves contention with a strong bias in favor of long transactions;
+it’s easy to get into a situation where your
+pessimistically-synchronized 1000-transaction-per-second system is
+processing 1 transaction for 30 minutes.
 
 Modular blocking
 ----------------
 
 You might think that this approach would preclude I/O anywhere but at
 some sort of top-level event loop, at least per thread, since I/O is a
-side effect.  It's straightforward to see how you could buffer up
+side effect.  It’s straightforward to see how you could buffer up
 output (maybe logging it for debugging in case of an abort) until the
 top level is reached, but how could you do that for input?
 
-Fortunately _Composable Memory Transactions_ has a solution to taking
+Fortunately [_Composable Memory Transactions_][1] has a solution to taking
 input: if we log reads, as a multithreaded system would, then an input
 routine such as getchar() would simply `retry` if no input character
 was waiting.  This would abort its transaction, but the transaction
@@ -125,20 +212,27 @@ changes.  (This is the point where handling diverges from ordinary
 errors: if the handler for an ordinary error also fails, you just
 unwind the transaction stack until you terminate the program.)
 
-This provides, in the words of the paper, "a modular form of
-blocking" — a thread can wait on a condition variable, or an arbitrary
+[1]: https://www.microsoft.com/en-us/research/publication/composable-memory-transactions/
+
+This provides, in the words of the paper, “a modular form of
+blocking” — a thread can wait on a condition variable, or an arbitrary
 Boolean function of various transactional variables, or anything else
 that can be shoehorned into the transaction system, including input
 events — and the functions that do such waiting can be made
 nonblocking by having a fallback that always succeeds, or combined by
 falling back from one to the other.
 
+As Shae Erisson points out, this could integrate well with modern
+event-driven I/O systems like Linux's `io_uring`: a thread reading the
+event source can enqueue events in internal queues, thus inducing
+other transactions to get retried.
+
 Safe aborting for guaranteed responsiveness
 -------------------------------------------
 
 Another benefit provided by pervasive transactionality — and this one
-wouldn't require either read-logging or nested transactions — is that
-any task can always be safely aborted, which eliminates the Sophie's
+wouldn’t require either read-logging or nested transactions — is that
+any task can always be safely aborted, which eliminates the Sophie’s
 Choice we normally face in event-loop systems where we can get either
 safety from concurrency problems (by running code in the event-loop
 thread) or guaranteed responsiveness (by running code in another
@@ -163,9 +257,29 @@ transaction commits.  This requires every read of a transactional
 variable to check for a buffered write belonging to the current
 transaction before falling back to the value from the home location.
 
+This same sort of write-log consultation is also needed for
+concurrency with optimistic synchronization: if some other transaction
+might be concurrently reading the home location of a transactional
+variable, it needs to see the previous committed state, not the state
+that might possibly be committed.  (This could be done by instead
+having all reads of mutable variables check all active undo logs for
+old values, but that is even worse.)  Pessimistic synchronization is a
+way to avoid this.
+
+This possibility of abandonment through rollback solves one of the
+knottiest problems in E-style event-loop object-capability systems
+such as Monte: in a vat shared between code from mutually untrusting
+security domains, it is always possible for one security domain to
+deny service to the other by running an infinite loop.  By providing a
+guaranteed safe way to abort and retry event handlers, such
+abandonment eliminates this risk, thus enabling closer and more
+efficient cross-domain collaboration.  (However, you still have to do
+most of the communication between the domains with eventual sends to
+get this nonblocking benefit, so it may not be more convenient.)
+
 With virtual memory, one common problem for responsiveness is that
 when the system starts to thrash, responsiveness for the whole user
-interface goes to hell, because there's no reasonable way to make
+interface goes to hell, because there’s no reasonable way to make
 progress when your threads are blocked on page faults.  If, instead,
 page faults are handled by failing a transaction as needing to
 retry — just as if it were blocking on input — it should be possible
@@ -191,18 +305,20 @@ error value is ignored (evaluated in void context, or stored in a
 variable whose lifetime ends without being tested) it would propagate
 up to the parent function.
 
-These error values can propagate along the program's dataflow graph,
+These error values can propagate along the program’s dataflow graph,
 like floating-point quiet NaNs; they only leap over to the
-control-flow graph if they are "leaked" or "dropped".
+control-flow graph if they are “leaked” or “dropped”.
+
+XXX add example
 
 Modal reasoning
 ---------------
 
 Another application of transaction rollback is *code search*, as
-suggested by Hopwood in hir 2014 talk under the heading "confining
-side effects", based on Joel Galenson's† [CodeHint] (which cites the
+suggested by Hopwood in hir 2014 talk under the heading “confining
+side effects”, based on Joel Galenson’s† [CodeHint] (which cites the
 Squeak method finder): is there an existing function in my code base
-that will convert 4 and 66 into "iv" and "lxvi" respectively?  How
+that will convert 4 and 66 into “iv” and “lxvi” respectively?  How
 about a composition of two functions?  Or five methods?  An obvious
 way to implement such a query is to just run all the functions, or
 pairs of functions, and see what you get, but to do this safely you
@@ -214,32 +330,32 @@ killing them if they exceed a time limit, you can test them safely.
 through which nondeterminism could enter the system, causing any
 computation that depends on such testing to be irreproducible; if it
 counts something like function calls plus backward control flow
-transfers and is precise, it's safe, but not if it's counting
+transfers and is precise, it’s safe, but not if it’s counting
 wall-clock time or clock cycles and/or is checked only irregularly.)
 
 A generalization of this is the ability for a program to reason about
-code's behavior under conditions that do not presently prevail, simply
+code’s behavior under conditions that do not presently prevail, simply
 by running it inside a transaction that is then rolled back.  This
-does require the transaction's rollback notification to contain enough
-information to tell us what we want to know about the code's behavior,
-but that's probably a requirement for useful transaction failure
+does require the transaction’s rollback notification to contain enough
+information to tell us what we want to know about the code’s behavior,
+but that’s probably a requirement for useful transaction failure
 messages, anyway.
 
 [CodeHint]: http://people.eecs.berkeley.edu/~bjoern/papers/galenson-codehint-icse2014.pdf
 
 Given this kind of facility, you could reasonably ask questions such a
 the following: Which methods would write to some field of this object?
-Is there any live object on which calling the ".open()" method would
-read the current user ID?  What is the object whose ".destroy()"
+Is there any live object on which calling the “.open()” method would
+read the current user ID?  What is the object whose “.destroy()”
 method would return the highest value?
 
 In the debugger context, this kind of automatic cleanup would allow
-you to view "speculative" executions as well: the hypothetical flow of
+you to view “speculative” executions as well: the hypothetical flow of
 values through a piece of code, without the risk of corrupting the
-"true" state of the program under inspection with a side effect.
+“true” state of the program under inspection with a side effect.
 
-† and Philip Reames's, and Rastislav Bodik's, and Björn Hartmann's,
-and Koushik Sen's CodeHint
+† and Philip Reames’s, and Rastislav Bodik’s, and Björn Hartmann’s,
+and Koushik Sen’s CodeHint
 
 Memoization and incrementalization
 ----------------------------------
@@ -251,11 +367,11 @@ input parameters, then it becomes possible to use it for
 memoization — any call to the same function with the same parameters
 and closure data will necessarily perform the same writes and return
 the same value, unless one of those reads is out of date, or execution
-is nondeterministic.  So it's
+is nondeterministic.  So it’s
 valid to just perform those writes and return those results without
-actually running any of the function's code.  This is very similar to
-a build system like `make`, or to Umut Acar's "Self-Adjusting
-Computation"; it provides a way to transparently incrementalize a
+actually running any of the function’s code.  This is very similar to
+a build system like `make`, or to Umut Acar’s “Self-Adjusting
+Computation”; it provides a way to transparently incrementalize a
 computation, so that it can be efficiently re-executed on slightly
 modified input.  Also, it automatically derives a
 guaranteed-linear-time Packrat parser from an ordinary
@@ -263,7 +379,7 @@ exponential-time recursive-descent parser.
 
 Moreover, this caching or memoization is still valid *even if the
 original memoized computation was a child of a transaction that was
-rolled back*.  That is, even computation that was "discarded" can
+rolled back*.  That is, even computation that was “discarded” can
 affect the memo table.  (This is the same mechanism that produced the
 Spectre and Meltdown vulnerabilities in Intel CPUs — it can produce a
 subliminal leak of information.)  This means that we can speculatively
@@ -281,14 +397,17 @@ different reasons:
    (keystroke sequences) to rectangles of pixels.
 
 2. By making coordinate search practical, it can make many programs
-   invertible in practice, permitting the practical solution of a wide
+   “invertible” in practice (in the sense that you can in practice
+   find an input that produces a given output, not in the sense that
+   such an input exists or is unique),
+   permitting the practical solution of a wide
    variety of inverse problems.  The optimization procedure can
-   randomly alter the program's input, propagating the incremental
+   randomly alter the program’s input, propagating the incremental
    changes through the incrementalized program, in order to converge
    on the desired result.
 
 3. A special case of the former is generative software testing like
-   that done by Hypothesis or American Fuzzy Lop, where the "desired"
+   that done by Hypothesis or American Fuzzy Lop, where the “desired”
    output is a crash or assertion failure; this is to some extent how
    AFL works, but because it can only backtrack chronologically, its
    strategies for exploring the input space are necessarily limited.
@@ -300,10 +419,21 @@ different reasons:
 4. Another special case, one which might not work out, is
    superoptimization — search over a space of *programs* for the
    shortest or fastest program that has the desired effect.  This
-   shades into the "code search" application mentioned earlier.
+   shades into the “code search” application mentioned earlier.
 
 In short, incrementalization reduces the need for explicit caching and
 makes searching over the space of executions immensely more efficient.
+
+As an example of “invertibility in practice”, you could imagine
+applying a ray tracer like [Peter Stefek’s incremental ray tracer][5]
+to solve photogrammetry or caustic design: by searching for an input
+3-dimensional scene that closely approximates a movie taken by a
+moving camera, you can estimate the geometry of a scene.  [Mitsuba
+2][6], for example, has demonstrated this using automatic
+differentiation rather than incrementalization.
+
+[5]: https://www.peterstefek.me/incr-ray-tracer.html
+[6]: http://rgl.epfl.ch/publications/NimierDavidVicini2019Mitsuba2
 
 Integrity enforcement
 ---------------------
@@ -312,7 +442,7 @@ Hopwood also describes the use of such write logging to help with
 invariant maintenance: the write log tells you which objects have been
 changed in a transaction and whose state thus ought to be checked for
 correctness, and transaction rollback gives you the wherewithal to
-undo the damage.  This is of course precisely the "C" in "ACID" in the
+undo the damage.  This is of course precisely the “C” in “ACID” in the
 traditional RDBMS usage of transactions: transactions violating
 consistency constraints will not be committed.  (Ze also suggests
 automatic failover to alternate implementations in order to either
@@ -335,12 +465,24 @@ giving the transaction a chance to fail.
 Optimizing transactions
 -----------------------
 
-If we're *only* using transactions for error recovery and/or
+Zelkowitz’s work in 1971 found that adding comprehensive undo logs to
+PL/I only added about 70% execution time to his PL/I programs (and
+bloated the programs themselves somewhat); he didn’t report on runtime
+memory usage, which I’d think would often be the more crucial aspect.
+
+Even competing with modern compilers, you might be able to due the
+full nested transaction thing for a pervasively mutable language like
+Python at a cost comparable to CPython's existing interpretation cost.
+But for many purposes CPython's performance is unsatisfactory.
+
+XXX
+
+If we’re *only* using transactions for error recovery and/or
 peremptory work discarding for responsiveness (not memoization,
 multithreading with optimistic synchronization, deoptimization, or
 debugging, as suggested above), then, when a parent procedure invokes
 a child procedure at a callsite where failures in the child will
-necessarily propagate to a failure in the parent, it's not necessary
+necessarily propagate to a failure in the parent, it’s not necessary
 (for execution) to preserve the separate transaction for the child
 procedure — if the child rolls back, the parent rolls back too.  This
 optimization dramatically reduces the amount of extra work imposed by
@@ -357,14 +499,14 @@ no longer live.
 Plumbing transactions to the user interface, the filesystem, and the network
 ----------------------------------------------------------------------------
 
-Depending on what filesystem you're running and how deeply you've been
+Depending on what filesystem you’re running and how deeply you’ve been
 hurt, you might be able to trust the filesystem to honor your
 transaction boundaries as well, which means that code inside a
 transaction can read and write the filesystem freely — but the
 filesystem must give us a way to keep the writes within a
 transactional bubble, hidden from the rest of the world at first, and
 perhaps forever.  Also, it must give us a way to transactionally
-validate our reads when we go to commit, if there's a possibility the
+validate our reads when we go to commit, if there’s a possibility the
 data we read has been modified in the meantime.
 
 This is potentially useful because it means you can run a transaction
@@ -384,13 +526,67 @@ arbitrating transaction commits and serialization or faithfully
 deferring to some such arbitration system.  A queueing system is a
 prime candidate.
 
-If you're willing to embrace the filesystem and networked services as
+If you’re willing to embrace the filesystem and networked services as
 part of your transactions, what about users?  In particular, if you
 can run multiple entire programs inside a giant transaction, you could
 enable users to create a long-lived transaction that they then have a
 window into, as a way to experiment with new states they may not want
-to keep.  However, I'm not sure this approach can really deliver a
-usable user experience of undo and restoration from backups.  However,
-using this approach for debugging implies that it's possible for users
+to keep.  However, I’m not sure this approach can really deliver a
+usable user experience of undo and restoration from backups; NixOS has
+its fans, in part because it offers a much freer model of switching
+between configurations than simple nested commit/rollback.
+On the other hand,
+using this approach for debugging implies that it’s possible for users
 to see inside an uncommitted transaction, at least within the
-debugger.
+debugger; being able to can copy things out of the transaction history
+or an uncommitted transaction might be enough.
+
+Is there a connection with hardware transactional memory support that
+is starting to appear in modern high-end manycore systems?  It is in
+some ways a way to expose the multisocket nature of the system to
+application software so that it can avoid paying unnecessary
+synchronization costs.  How would it play with this kind of
+per-subroutine-call nested transactions?
+
+Reverse-mode automatic differentiation
+--------------------------------------
+
+Implementing this kind of rollback suffers from the same difficulties
+as reverse-mode automatic differentiation, namely that it needs to
+keep around all the intermediate values that have been overwritten, or
+anyway those that were live at a live rollback point.  The checkpoints
+it provides could in fact literally be used as the checkpoints for
+reverse-mode automatic differentiation, a further crucial technique
+for solving inverse problems.
+
+XXX
+
+First-class transactions
+------------------------
+
+What would it look like to, as Shae Erisson suggested, expose the
+per-call transactions as first-class objects to the user program?  You
+could imagine, for example, inspecting your current transaction to see
+what mutable variables it had read or written, or the rolled-back
+transaction executed by a callee, and this would provide a natural
+interface for doing much of the 
+
+XXX
+
+Doing it all in a pure functional context without transactions
+--------------------------------------------------------------
+
+20:26 < xentrac> shapr: do you have thoughts on why pure functional programming systems don't offer the kind of facilities I'm talking 
+                 about using transactions to get here?  because they could provide them without using transactions, couldn't they?
+XXX
+
+Blobs
+-----
+
+XXX
+
+Thanks
+------
+
+Thanks to sbp, Darius Bacon, simpson, and especially Shae Erisson for
+many very informative discussions that helped greatly with this note.
