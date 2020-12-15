@@ -8,10 +8,14 @@ enormously faster generative testing and solving of inverse problems.
 
 How does this work?
 
-Suppose that you have an imperative programming language in which
+Suppose that you have an imperative programming language
+[like Daira Hopwood's Noether][0]
+in which
 every function call is associated with a new nested transaction, one
 covering all mutable variables and other effects, and your normal means of handling
 errors is by rolling back these transactions.  What does that give you?
+
+[0]: https://www.thestrangeloop.com/2013/noether-symmetry-in-programming-language-design.html
 
 This seems like a way to mostly cut the knot of error handling and
 responsiveness, without requiring static bounds of worst-case
@@ -24,7 +28,10 @@ Well, one thing it gives you is radical debuggability: because every
 function call you enter has to save enough information for
 backtracking if it needs to roll back.  The debugger can see this
 information, and it can restart the function from the beginning as if
-it had not started running; this enables efficient granular
+it had not started running
+(Hopwood calls this "reversible execution" in hir 2014 Strange Loop
+presentation, crediting the idea to a 1973 paper by Marvin Zelkovitz).
+This enables efficient granular
 time-travel debugging, but also, it's potentially useful simply to
 look at the pending changes so far made by each of the functions on
 the stack so far.  And implementing edit-and-continue in the debugger
@@ -45,6 +52,8 @@ speedup on a hot loop that might not run again).
 Error handling
 --------------
 
+This was Hopwood's primary concern in the design of Noether.
+
 Error handling becomes substantially easier.  Nonlocal exceptions are
 especially popular in pure functional languages because cleanup while
 unwinding the stack is unnecessary; by contrast, C++ had so much trouble with this
@@ -62,6 +71,10 @@ That's because there's no need to check a transaction for validity
 when you go to commit it — no other code could have been running
 concurrently.  You only need to buffer the writes to transactional
 variables so that you can undo them if you have to roll back.
+
+(As Hopwood points out in zir 2014 Strange Loop presentation, logging
+writes in this way is also what you need for a concurrent or
+generational garbage collector.)
 
 Fearless concurrency
 --------------------
@@ -139,6 +152,17 @@ screen repaint.)  Or, if we *do* do read logging, we can run one
 thread for each concurrently executing event handler, retrying
 executions as necessary.
 
+This kind of abandonment can be constant-time, but only if the
+buffered writes from the transaction are not written to their home
+location; as Hopwood points out in hir talk slides, if the writes are
+written to their home locations, then rolling back a transaction
+requires undoing all the writes, one by one.  An alternative that
+provides constant-time, effectively instantaneous, abandonment is to
+only write the writes to their home locations when a (top-level)
+transaction commits.  This requires every read of a transactional
+variable to check for a buffered write belonging to the current
+transaction before falling back to the value from the home location.
+
 With virtual memory, one common problem for responsiveness is that
 when the system starts to thrash, responsiveness for the whole user
 interface goes to hell, because there's no reasonable way to make
@@ -170,6 +194,52 @@ up to the parent function.
 These error values can propagate along the program's dataflow graph,
 like floating-point quiet NaNs; they only leap over to the
 control-flow graph if they are "leaked" or "dropped".
+
+Modal reasoning
+---------------
+
+Another application of transaction rollback is *code search*, as
+suggested by Hopwood in hir 2014 talk under the heading "confining
+side effects", based on Joel Galenson's† [CodeHint] (which cites the
+Squeak method finder): is there an existing function in my code base
+that will convert 4 and 66 into "iv" and "lxvi" respectively?  How
+about a composition of two functions?  Or five methods?  An obvious
+way to implement such a query is to just run all the functions, or
+pairs of functions, and see what you get, but to do this safely you
+need to prevent the functions from looping infinitely or causing
+destructive side effects.  By running them inside a transaction and
+killing them if they exceed a time limit, you can test them safely.
+
+(Note, though, that this time limit is a potentially deadly inlet
+through which nondeterminism could enter the system, causing any
+computation that depends on such testing to be irreproducible; if it
+counts something like function calls plus backward control flow
+transfers and is precise, it's safe, but not if it's counting
+wall-clock time or clock cycles and/or is checked only irregularly.)
+
+A generalization of this is the ability for a program to reason about
+code's behavior under conditions that do not presently prevail, simply
+by running it inside a transaction that is then rolled back.  This
+does require the transaction's rollback notification to contain enough
+information to tell us what we want to know about the code's behavior,
+but that's probably a requirement for useful transaction failure
+messages, anyway.
+
+[CodeHint]: http://people.eecs.berkeley.edu/~bjoern/papers/galenson-codehint-icse2014.pdf
+
+Given this kind of facility, you could reasonably ask questions such a
+the following: Which methods would write to some field of this object?
+Is there any live object on which calling the ".open()" method would
+read the current user ID?  What is the object whose ".destroy()"
+method would return the highest value?
+
+In the debugger context, this kind of automatic cleanup would allow
+you to view "speculative" executions as well: the hypothetical flow of
+values through a piece of code, without the risk of corrupting the
+"true" state of the program under inspection with a side effect.
+
+† and Philip Reames's, and Rastislav Bodik's, and Björn Hartmann's,
+and Koushik Sen's CodeHint
 
 Memoization and incrementalization
 ----------------------------------
@@ -229,10 +299,38 @@ different reasons:
 
 4. Another special case, one which might not work out, is
    superoptimization — search over a space of *programs* for the
-   shortest or fastest program that has the desired effect.
+   shortest or fastest program that has the desired effect.  This
+   shades into the "code search" application mentioned earlier.
 
 In short, incrementalization reduces the need for explicit caching and
 makes searching over the space of executions immensely more efficient.
+
+Integrity enforcement
+---------------------
+
+Hopwood also describes the use of such write logging to help with
+invariant maintenance: the write log tells you which objects have been
+changed in a transaction and whose state thus ought to be checked for
+correctness, and transaction rollback gives you the wherewithal to
+undo the damage.  This is of course precisely the "C" in "ACID" in the
+traditional RDBMS usage of transactions: transactions violating
+consistency constraints will not be committed.  (Ze also suggests
+automatic failover to alternate implementations in order to either
+detect the bug more precisely, by using slower invariant checking, or
+to fail over to an inefficient but trivially-correct implementation of
+the mutation.)
+
+The incremental computation framework described in the previous
+section provides an efficient and simple way to do this: before
+committing, the code in the top-level transaction invokes a procedure
+which ostensibly verifies all the interesting invariants in the entire
+part of the system that it knows about, failing otherwise.  This
+procedure invokes many other procedures to check invariants on
+particular parts of the system; most of these procedures will not have
+changed their inputs since the last invocation, and thus can succeed
+instantly simply using the memo table.  But those which read
+transactional variables that have been written to will run for real,
+giving the transaction a chance to fail.
 
 Optimizing transactions
 -----------------------
@@ -247,3 +345,52 @@ necessarily propagate to a failure in the parent, it's not necessary
 procedure — if the child rolls back, the parent rolls back too.  This
 optimization dramatically reduces the amount of extra work imposed by
 the transaction system.
+
+A subroutine can mutate its local variables freely without incurring
+any transaction overhead, unless those variables are referenceable
+(something impossible in, for example, Scheme) and references to them
+have in fact escaped.  For example, Pascal-style `var` parameters can
+enable references to local variables to be passed to callees, but the
+language guarantees that once the callees return, those references are
+no longer live.
+
+Plumbing transactions to the user interface, the filesystem, and the network
+----------------------------------------------------------------------------
+
+Depending on what filesystem you're running and how deeply you've been
+hurt, you might be able to trust the filesystem to honor your
+transaction boundaries as well, which means that code inside a
+transaction can read and write the filesystem freely — but the
+filesystem must give us a way to keep the writes within a
+transactional bubble, hidden from the rest of the world at first, and
+perhaps forever.  Also, it must give us a way to transactionally
+validate our reads when we go to commit, if there's a possibility the
+data we read has been modified in the meantime.
+
+This is potentially useful because it means you can run a transaction
+that includes multiple programs all communicating through the
+filesystem.  This also potentially means you can use this sort of
+fearless concurrency in things like shell scripts, avoiding the messy
+failure cases and concurrency problems that normally plague them.
+
+(If you do this with memoization of program outputs, you have a rather
+standard build system.)
+
+A network file server can participate in your transactions in the same
+way as a local filesystem.  Indeed, a network server need not be
+implementing anything very similar to a filesystem; it just needs to
+be participating in a transactional protocol with you, either
+arbitrating transaction commits and serialization or faithfully
+deferring to some such arbitration system.  A queueing system is a
+prime candidate.
+
+If you're willing to embrace the filesystem and networked services as
+part of your transactions, what about users?  In particular, if you
+can run multiple entire programs inside a giant transaction, you could
+enable users to create a long-lived transaction that they then have a
+window into, as a way to experiment with new states they may not want
+to keep.  However, I'm not sure this approach can really deliver a
+usable user experience of undo and restoration from backups.  However,
+using this approach for debugging implies that it's possible for users
+to see inside an uncommitted transaction, at least within the
+debugger.
