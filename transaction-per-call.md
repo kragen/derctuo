@@ -135,7 +135,9 @@ This seems like a way to mostly cut the knot of error handling and
 responsiveness, without requiring static bounds of worst-case
 execution time for your entire user interface.
 
-There are further expansions.  Suppose the transaction for a function
+There are further expansions.
+
+Suppose the transaction for a function
 is logging all its reads and writes of mutable data; if it
 additionally logs which function it is, any closed-over data, its
 input parameters, then it becomes possible to use it for
@@ -161,3 +163,38 @@ necessarily propagate to a failure in the parent, it's not necessary
 procedure — if the child rolls back, the parent rolls back too.  This
 optimization dramatically reduces the amount of extra work imposed by
 the transaction system.
+
+Incrementalization is an extremely important transformation for a few
+different reasons:
+
+1. By reducing the need for manual state management for efficiency, it
+   can make direct programs much simpler.  For example, you could
+   implement a word processor as a view function from document state
+   to view state, a window function from view state to pixel state,
+   and an edit function from (document state, input event) pairs to
+   document state, or perhaps even a function from input histories
+   (keystroke sequences) to rectangles of pixels.
+
+2. By making coordinate search practical, it can make many programs
+   invertible in practice, permitting the practical solution of a wide
+   variety of inverse problems.  The optimization procedure can
+   randomly alter the program's input, propagating the incremental
+   changes through the incrementalized program, in order to converge
+   on the desired result.
+
+3. A special case of the former is generative software testing like
+   that done by Hypothesis or American Fuzzy Lop, where the "desired"
+   output is a crash or assertion failure; this is to some extent how
+   AFL works, but because it can only backtrack chronologically, its
+   strategies for exploring the input space are necessarily limited.
+   Once a failure is found, incrementalization also greatly
+   accelerates the test-case minimization process.  Additionally, the
+   introspection provided by the transaction system can be used by the
+   generative testing system to guide its search.
+
+4. Another special case, one which might not work out, is
+   superoptimization — search over a space of *programs* for the
+   shortest or fastest program that has the desired effect.
+
+In short, incrementalization reduces the need for explicit caching and
+makes searching over the space of executions immensely more efficient.
