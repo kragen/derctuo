@@ -31,13 +31,13 @@ performance; the recovery time will.)
 
 Without the voltage gain, you can build such a relaxation oscillator
 with a single RC timing circuit with a spark gap in parallel with the
-capacitor.  [Paschen's curve][0] has a minimum at one atmosphere at
+capacitor.  [Paschen’s curve][0] has a minimum at one atmosphere at
 327 V and 7.5 μm, tailing off to linear growth at 3.4 MV/m, so, for
 manual work, it might be expedient to work with some 4 kV and gaps of
 1 mm.  You can easily adjust the period of this oscillator by changing
 the RC time constant, although the arc ignites at somewhat imprecise
 times due in large part to the irregular availability of free
-so-called "seed electrons" at the cathode, provided by photoelectrons
+so-called “seed electrons” at the cathode, provided by photoelectrons
 or background ionizing light and other particles.
 
 [0]: https://en.wikipedia.org/wiki/Paschen%27s_law
@@ -46,9 +46,9 @@ or background ionizing light and other particles.
 according to Wikipedia, a much less frequently lethal current than the
 typical 500 mA of a microwave oven transformer.)
 
-In particular, it's straightforward to make a triad consisting of a
-"primary oscillator" running at, say, 500 Hz; a "reference oscillator"
-at half that frequency, say 250 Hz; and a "bit oscillator" also
+In particular, it’s straightforward to make a triad consisting of a
+“primary oscillator” running at, say, 500 Hz; a “reference oscillator”
+at half that frequency, say 250 Hz; and a “bit oscillator” also
 running at 250 Hz.  (At 1 mm the arc should ignite around 3.4 kV; with
 a 4 kV power supply, that should take about 1.9RC, and the remaining
 voltage after the arc extinguishes should be small; so, to get 250 Hz,
@@ -63,7 +63,7 @@ primary oscillator into the reference oscillator and the bit
 oscillator, we can advance the timing of the reference oscillator and
 the bit oscillator so that they run at exactly half the frequency of
 the primary oscillator, if they were running slower.  The voltage
-spike early in the charging process won't be enough by itself to fire
+spike early in the charging process won’t be enough by itself to fire
 the spark gap, but when the capacitor voltage is already nearly high
 enough to strike a spark, it will easily overwhelm the dielectric
 strength of the air in the gap.
@@ -92,8 +92,8 @@ Now that we have a reliable way of storing a bit, we have the problem
 of constructing digital processes that evolve in time rather than
 merely remaining stable, by coupling two or more bit-storage devices.
 And in particular we want to be sure we can achieve chaos or
-instability, known in the world of digital logic as "fanout" or
-"amplification".  The example of the Marx generator shows that this is
+instability, known in the world of digital logic as “fanout” or
+“amplification”.  The example of the Marx generator shows that this is
 definitely achievable.
 
 One easy way to achieve amplification, though stepping outside the
@@ -102,7 +102,7 @@ transformers.
 
 Air-gap flashes pass a lot of charge between the main electrodes at,
 typically, 20 kV, to produce the bright flash, triggering this with a
-quartz-insulated "ignition tube" electrode at a much higher voltage
+quartz-insulated “ignition tube” electrode at a much higher voltage
 like 70 kV, but a much smaller amount of charge due to a lower
 capacitance.  The higher voltage provides initial ionization in the
 gap, which triggers the discharge of the lower-voltage but
@@ -126,8 +126,8 @@ coupled in thru a coupling capacitor need not charge the 3000V
 capacitor, only the capacitance of the spark gap itself, which will
 typically be in the picofarads.  If we suppose the spark gap is 10pF
 and the pulse has a rise time of 1μs, a few hundred kilohms would
-suffice, a number not normally considered a "small resistance", but
-it's one or two orders of magnitude smaller than the other resistances
+suffice, a number not normally considered a “small resistance”, but
+it’s one or two orders of magnitude smaller than the other resistances
 discussed above.
 
 Another more indirect route is used by the Marx generator itself:
@@ -142,11 +142,11 @@ other capacitors (to ground), its voltage can be brought rapidly to a
 weighted average of their voltages, and if a spark gap is in parallel
 with it, it will either discharge repeatedly through the spark gap, or
 not, according to whether its terminal voltage is greater or less than
-the spark gap's breakdown voltage.  The pulses thus generated can be
+the spark gap’s breakdown voltage.  The pulses thus generated can be
 used to trigger other, higher-energy spark gaps (and their time of
 occurrence can be synchronized with the primary oscillator by coupling
 in a little of the primary oscillator to them), or the resulting
-larger current draw on the "input" capacitors can be sensed.
+larger current draw on the “input” capacitors can be sensed.
 
 A particularly interesting possibility here is the use of such a
 threshold device as a phase detector.  Given reasonable waveforms on
@@ -179,7 +179,7 @@ although less simple, is probably more practical.
 
 The above falls short of being a fully worked out design for digital
 sequential logic using spark gaps, resistors, and capacitors, but I
-think it amounts to a convincing argument that it's practically
+think it amounts to a convincing argument that it’s practically
 doable, though only over a fairly narrow voltage range in the normal
 atmosphere (400–4000V); it might be easier to debug something closer
 to the middle of that range, like 1200V, than designs near the limits,
@@ -240,7 +240,7 @@ volts) is close to optimal here, though, e.g., hydrogen (1488 kJ/mol =
 considering.  Perhaps also higher pressures accelerate the recovery
 time, accounting for the difference between the millisecond recovery
 time of an ordinary low-pressure xenon camera flash and the 10μs cited
-for xenon in Wikipedia's air-gap flash article.  [Electric-discharge
+for xenon in Wikipedia’s air-gap flash article.  [Electric-discharge
 machining][3] routinely uses hundreds of thousands of sparks per
 second in, typically, deionized water, which is pumped through the
 spark gap at a high flow rate; typically this uses several hundred
@@ -291,11 +291,11 @@ dielectric like water.
 
 This in turn suggests an electrical energy cost on the order of 10
 picojoules per bit operation, comparable to modern CMOS, although of
-course that doesn't account for the energy cost of pumping all that
+course that doesn’t account for the energy cost of pumping all that
 dielectric through the gap.  Also, such low energy costs per operation
 probably require much higher operational frequencies — for RC = τ =
-2.1 ms as above, you'd need a 30-teraohm resistor, which would
-normally be called an "insulator".  So 1 nJ is probably achievable but
+2.1 ms as above, you’d need a 30-teraohm resistor, which would
+normally be called an “insulator”.  So 1 nJ is probably achievable but
 10 pJ may not be.
 
 Conductive-mesh spark-gap electrodes may be a more effective way to
@@ -338,7 +338,7 @@ Another amusing application of such relaxation oscillators might be as
 microphones: below the Paschen minimum, even a very small change in
 the electrode spacing should produce a very large change in the
 breakdown voltage of the spark gap and consequently both the frequency
-and the breakdown voltage of a free-running RC oscillator.  (I'm not
+and the breakdown voltage of a free-running RC oscillator.  (I’m not
 sure if it also increases the jitter.)  Above the Paschen minimum, it
 should produce a smaller, nearly linear, but still fairly reliable
 change in these variables.
@@ -356,33 +356,33 @@ capacitors through levers.
 
 *****
 
-DTIC document 633669 from 1991, "Hydrogen spark gap for high
-repetition rates", reports 10-μs recovery times to 17% for a 1.4 MPa
-2.5-mm "unblown" hydrogen spark gap and 100-μs to 42%, about an order
-of magnitude faster than air; this is attributed to hydrogen's high
-thermal diffusivity.  That is, by "undervolting" the gap to 17% of its
+DTIC document 633669 from 1991, “Hydrogen spark gap for high
+repetition rates”, reports 10-μs recovery times to 17% for a 1.4 MPa
+2.5-mm “unblown” hydrogen spark gap and 100-μs to 42%, about an order
+of magnitude faster than air; this is attributed to hydrogen’s high
+thermal diffusivity.  That is, by “undervolting” the gap to 17% of its
 normal breakdown voltage (some 120kV), they can trigger discharges at
 100-kHz rates, or 10 kHz at 42% of its normal breakdown voltage.
 Recovery to 90% takes about 1 ms for hydrogen and 10 ms for air,
-"dominated by the cooling time of the hot channel" rather than its
+“dominated by the cooling time of the hot channel” rather than its
 deionization.  It also points out that narrower gaps permit closer gas
 contact to metal surfaces, thus cooling the gas more rapidly, as well
 as lower inductance and resistance, and that the gas requires some
 time to recover its density after being rarefied by thermal expansion.
 They were working with three-electrode trigatron-type devices and
-report that "the recovery time varied little from millijoules to
-kilojoules of transferred energy", though it would be unsurprising if
+report that “the recovery time varied little from millijoules to
+kilojoules of transferred energy”, though it would be unsurprising if
 the picojoules I contemplate above did result in significant
 variation.  (Hopefully the smaller energies would also result in
 longer electrode life than the hundreds of shots at which they
 reported substantial electrode wear.)
 
-Above I haven't considered inductance, but of course at high enough
+Above I haven’t considered inductance, but of course at high enough
 speeds at a given length scale, inductive impedance will dominate
 resistance.  Decreasing the length scale also helps with this.
 
-The related DTIC document A636361, "A laser-triggered mini-Marx for
-low-jitter, high-voltage applications", describes an interesting way
+The related DTIC document A636361, “A laser-triggered mini-Marx for
+low-jitter, high-voltage applications”, describes an interesting way
 of triggering spark gaps with ±700-ps 2σ jitter — by using ultraviolet
 light to ionize SF₆ in the spark gap (in this case by a
 frequency-quadrupled Q-switched Nd:YAG laser) it is possible to ignite
@@ -398,7 +398,7 @@ to detect ionizing light and other particles.
 
 A low-voltage way to try out some of these ideas is to replace the
 spark gaps with transistors, or perhaps diodes, in reverse avalanche
-mode, as in [Look Mum No Computer's Super Simple
+mode, as in [Look Mum No Computer’s Super Simple
 Oscillator](https://www.lookmumnocomputer.com/simplest-oscillator),
 which uses two unspecified terminals of a 2N3904 in parallel with a
 10μF capacitor.  [Another, better-explained variant of the design uses
@@ -417,7 +417,7 @@ inconveniently high breakdown voltage, which increases the chance of
 damage to the diode, as well as power consumption and electric shock
 risk.
 
-In either case you're depending on properties of the components that
-are not specified by the manufacturers because they're irrelevant to
+In either case you’re depending on properties of the components that
+are not specified by the manufacturers because they’re irrelevant to
 their usual uses, so consistent results from component to component
 may be hard to obtain.

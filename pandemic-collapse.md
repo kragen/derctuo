@@ -217,7 +217,7 @@ stabler and safer without the Pax Americana and consequent Cold War?
 Perhaps.  Or perhaps it would have been more unstable and more
 dangerous.
 
-A different objection, which I hadn't thought of until berndj raised
+A different objection, which I hadn’t thought of until berndj raised
 it, is that the weightings above are biased toward small countries.
 Any particular country on the sampled list had an 0.5% chance of being
 Cambodia and an 0.5% chance of being the UAE, but their populations
@@ -228,10 +228,10 @@ independent of country size!  It could easily be that large countries
 tend to collapse much more often than small countries, or much less
 often.  If you carried out my survey on a planet consisting of 199
 tiny countries that each collapse every year on average, and one giant
-country containing 99% of the world's population that only collapses
-every ten thousand years, you'd incorrectly conclude that people's
+country containing 99% of the world’s population that only collapses
+every ten thousand years, you’d incorrectly conclude that people’s
 mean time to living through a collapse was a year.  So we should take
-another look at large countries, even though we can't take a large
+another look at large countries, even though we can’t take a large
 sample of them.
 
 The fact that India, the largest country on the list, with 18% of the
@@ -243,19 +243,32 @@ The [other largest countries] are China, with 1.4 billion humans (also
 18% of the world population); USA, with 331 million (4.2%); Indonesia,
 with 270 million (3.4%); Pakistan, with 221 million (2.8%); Brazil,
 with 212 million (2.7%); and Nigeria, which at 206 million (2.6%)
-pushes us over the 50% mark.  I think these countries' most recent
-country-destroying disasters, where the ruling classes lost
-everything, the rich and powerful were reduced to poverty, there was
-widespread violence, populations dropped, and mass migrations ensued,
+pushes us over the 50% mark.  I think these countries’ most recent
+country-destroying disasters, where times were harder than the US’s
+Great Depression, the ruling classes lost everything, the rich and
+powerful were reduced to poverty, there was
+widespread violence, and mass emigration ensued,
 were, respectively: 1949, or 1958, if you count the Great Leap
 Forward; 1865; 1975–1999, if you count the invasion of East Timor, or
 1965–6 otherwise; 1947 again, same disaster as India; arguably the
-coup against Goulart in 1964, though the resulting countrywide
-impoverishment was slow and prolonged, but otherwise the tumultuous
-1889–1930 First Brazilian Republic, or the 1864–1870 War of the Triple
-Alliance, or the 18th-century invasion by Portugal; XXX
+military dictatorship and guerilla warfare following the coup against
+Goulart in 1964, though the resulting countrywide impoverishment was
+slow and prolonged, but otherwise the tumultuous 1889–1930 First
+Brazilian Republic, or the 1864–1870 War of the Triple Alliance, or
+the 18th-century invasion by Portugal; and one of the 1993–8 Abacha
+dictatorship, the 1976 coup, or the 1967–70 civil war.
 
 [other largest countries]: https://en.wikipedia.org/wiki/List_of_countries_and_dependencies_by_population
+
+So, based on tentative dates of 1865, 1930, 1947, 1947, 1949, 1965–6,
+and 1976 for the most recent country-destroying collapses in the seven
+largest countries that house the majority of Earth's human population,
+there doesn't seems to be strong evidence that large countries are
+either especially stable or especially unstable.  Of course, after a
+collapse a country might break into smaller pieces, as the USSR did,
+so perhaps we care more about countries that used to be part of big
+countries — but we've already covered those by sampling small
+countries.  The USA's recent stability just looks like an outlier.
 
 How about USAmerican exceptionalism?  Do we have strong reasons for
 thinking that the US is far more stable than other countries?  I don’t
