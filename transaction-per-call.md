@@ -31,7 +31,7 @@ information, and it can restart the function from the beginning as if
 it had not started running
 (Hopwood calls this “reversible execution” in [hir 2014 Strange Loop
 presentation][2], crediting the idea to a [1973 paper by Marvin Zelkowitz][3];
-ze claims that Zelkovitz found time overheads of less than a factor of 2
+ze claims that Zelkowitz found time overheads of less than a factor of 2
 for PL/I, which features pervasive mutability.  Zelkowitz seems to have
 done his 1971 dissertation, “Reversible execution as a diagnostic tool,”
 on the topic, at Cornell, though I could only find [a 13-page tech report][4]).
@@ -96,18 +96,20 @@ of transactional variables, the way Haskell’s STM does, only *writes*.
 That’s because there’s no need to check a transaction for validity
 when you go to commit it — no other code could have been running
 concurrently.  You only need to buffer the writes to transactional
-variables so that you can undo them if you have to roll back.
-
-(As Hopwood points out in zir 2014 Strange Loop presentation, logging
-writes in this way is also what you need for a concurrent or
-generational garbage collector.)
+variables so that you can undo them if you have to roll back.  (This
+is a general property of pessimistic synchronization, and this is just
+the extreme case of it, as explained later.)
 
 Fearless concurrency
 --------------------
 
+As Hopwood points out in zir 2014 Strange Loop presentation, logging
+writes in this way is also what you need for a concurrent or
+generational garbage collector.
+
 However, if you do additionally track reads of transactional
 variables, you can use the transaction system for multithreading with
-a guarantee of serializability.  This is probably only practical if
+a guarantee of serializability.  This is probably costly unless
 the language is mostly functional, like Clojure or OCaml, and only
 slightly imperative, because pervasive Python-style mutability would
 entail logging a huge amount of read traffic to the mutable variables,
@@ -128,7 +130,10 @@ necessary, rather than proven at compile-time.  But there is a crucial
 difference: unlike dynamic type checking, it’s not just turning a
 subtle failure into an easier-to-understand failure; it actually
 *removes the bug*, thus dramatically simplifying the correct code by
-factoring the hairy concurrency questions out of the application.
+factoring the hairy concurrency questions out of the application.  So,
+while dynamic typing typically makes code harder to statically prove
+correct, this kind of dynamic concurrency checking should make code
+*easier* to statically prove correct.
 
 Optimistic vs. pessimistic concurrency defined
 ----------------------------------------------
@@ -241,7 +246,7 @@ nonblocking by having a fallback that always succeeds, or combined by
 falling back from one to the other.
 
 As Shae Erisson points out, this could integrate well with modern
-event-driven I/O systems like Linux's `io_uring`: a thread reading the
+event-driven I/O systems like Linux’s `io_uring`: a thread reading the
 event source can enqueue events in internal queues, thus inducing
 other transactions to get retried.
 
@@ -309,6 +314,35 @@ system that just uses one transaction per event handler, rather than
 one transaction per function.  (However, it might make things worse
 rather than better, and of course requires integration with the OS
 kernel.)
+
+These approaches could even guarantee hard-real-time event response.
+Hardware interrupts, or software interrupts such as Unix signals, can
+be handled in this way.  If such hard-real-time tasks are to have
+strictly bounded response times, though, we must render it impossible
+for other tasks to delay their progress.  On a single-threaded
+computer this is easy — just don’t run any other code until the
+interrupt handler completes.  On a multithreaded computer, such as one
+with multiple processors or multiple hardware threads, it is necessary
+to use some kind of pessimistic synchronization to prevent any other
+top-level transaction from committing that could require the interrupt
+handler task to rollback and retry — this also makes it safe for the
+interrupt handler to manipulate the outside world without waiting for
+its transaction to commit first.
+
+Support for optimistic synchronization and running the interrupt
+handler as a top-level transaction is all that’s necessary to get it
+to *start* running promptly, and then blocking any possibly
+interfering concurrent transactions (and any other interrupts) is all
+that’s needed to ensure that it can *finish* running promptly without
+any retries.  When the interrupt handler finishes, the changes it
+commits may or may not cause other transactions (blocked or not) to
+have to retry.  So it isn’t always even necessary to *discard* the
+work in progress to guarantee responsiveness to urgent events in this
+way.  But buffering the writes of uncommitted transactions in a write
+buffer, rather than logging an undo-log record and updating mutable
+variables at their home locations, seems to be necessary for
+optimistic synchronization, and sufficient for constant-time work
+abandonment.
 
 Error values
 ------------
@@ -378,13 +412,13 @@ and Koushik Sen’s CodeHint
 Memoization and incrementalization
 ----------------------------------
 
-Suppose the transaction for a function
+Suppose the transaction for a procedure invocation
 is logging all its reads and writes of mutable data; if it
-additionally logs which function it is, any closed-over data, its
+additionally logs which procedure it is, any closed-over data, and its
 input parameters, then it becomes possible to use it for
-memoization — any call to the same function with the same parameters
+memoization — any call to the same procedure with the same parameters
 and closure data will necessarily perform the same writes and return
-the same value, unless one of those reads is out of date, or execution
+the same value, unless either one of those reads is out of date or execution
 is nondeterministic.  So it’s
 valid to just perform those writes and return those results without
 actually running any of the function’s code.  This is very similar to
@@ -416,7 +450,7 @@ different reasons:
 
 2. By making coordinate search practical, it can make many programs
    “invertible” in practice (in the sense that you can in practice
-   find an input that produces a given output, not in the sense that
+   find an input that produces a desired output, not in the sense that
    such an input exists or is unique),
    permitting the practical solution of a wide
    variety of inverse problems.  The optimization procedure can
@@ -442,13 +476,18 @@ different reasons:
 In short, incrementalization reduces the need for explicit caching and
 makes searching over the space of executions immensely more efficient.
 
-As an example of “invertibility in practice”, you could imagine
+As an example of “invertibility in practice”,
+or “solving inverse problems”, you could imagine
 applying a ray tracer like [Peter Stefek’s incremental ray tracer][5]
 to solve photogrammetry or caustic design: by searching for an input
 3-dimensional scene that closely approximates a movie taken by a
 moving camera, you can estimate the geometry of a scene.  [Mitsuba
 2][6], for example, has demonstrated this using automatic
-differentiation rather than incrementalization.
+differentiation rather than incrementalization.  (As I said in
+Dercuano, I suspect that integrating reduced affine arithmetic into
+the caching system might make it possible to do this trick much more
+effectively by permitting limited errors in the output, so that memo
+table values can be reused even for slightly changed inputs.)
 
 [5]: https://www.peterstefek.me/incr-ray-tracer.html
 [6]: http://rgl.epfl.ch/publications/NimierDavidVicini2019Mitsuba2
@@ -488,12 +527,157 @@ PL/I only added about 70% execution time to his PL/I programs (and
 bloated the programs themselves somewhat); he didn’t report on runtime
 memory usage, which I’d think would often be the more crucial aspect.
 
-Even competing with modern compilers, the cost for one transaction per
-subroutine invocation for a pervasively mutable language like
-Python might be comparable to CPython's existing interpretation cost.
-But for many purposes CPython's performance is unsatisfactory.
+Even with read logging and competing with modern compilers, the cost
+for one transaction per subroutine invocation for a pervasively
+mutable language like Python might be comparable to CPython’s existing
+interpretation cost.  But for many purposes CPython’s performance is
+unsatisfactory.
 
-XXX
+### Reducing the number of mutable variables ###
+
+As mentioned above in the “fearless concurrency” section, the cost of
+logging reads and writes ought to be proportionally lower in a
+language design with many fewer mutable variables, like Haskell,
+OCaml, or Clojure — though, by the same token, many of the potential
+benefits are smaller: for debugging you’ll need to use a smart diff
+for path-copied data structures or other FP-persistent data
+structures, tail-call looping constructs already provide on-stack
+replacement, cleanup from exceptions is rarely necessary, and in many
+cases it’s possible to confine bits of code for safe experimentation
+(for modal reasoning or debugging) using mechanisms the type system or
+object-capability discipline without resorting to transactions.  The
+benefits for concurrency, I/O composability, and responsiveness remain
+unchanged, but they pertain to transactional-memory systems in
+general, not just those with implicit per-invocation nested
+transactions.
+
+Even in pure or very-nearly-pure functional programming systems,
+acquiring the benefits of the time-limiting, automatic memoization,
+and incrementalization features described above requires other kinds
+of work, such as hash consing and the development of good cache
+eviction heuristics.  This work is needed with or without
+transactions, and promises to be the lion’s share of the job.
+
+### Aggregation ###
+
+Aggregation is another common way to reduce the cost of read barriers,
+write barriers, and dependency tracking for incremental computation
+and rollback.  The idea is that, by agglomerating mutable variables
+into larger units, we can reduce the work needed to track them.
+
+Under `make`, compilers and linkers communicate through the
+filesystem; if the compiler† changes `psmouse.o`, `make` reinvokes the
+whole linker with the whole new `psmouse.o`.  It doesn’t care which
+parts of `psmouse.o` have changed, and its devil-may-care attitude
+buys much less dependency-tracking overhead on the compiler’s workings
+in exchange for a less precise incremental recompilation, involving a
+full relink.
+
+If we try to analyze the `make` example in functional-programming
+terms, we could say that the compiler mutates the `psmouse.o` entry in
+a mutable directory to point to a new (immutable) binary string — the
+new contents of the object file; or that the compiler produces a new
+state of the filesystem in which the directory is a copy of the old
+directory except with `psmouse.o` pointing to different contents, and
+that is in fact more or less how Git implements directories in
+commits.  (Even if you wouldn’t normally commit `psmouse.o`.)  But
+another way to analyze it is that the compiler applies a sequence of
+mutation operations to `psmouse.o`: first truncating it, then
+appending various blocks of bytes, perhaps even seeking around and
+backpatching some bytes.  What strace shows is somewhere in between:
+
+    [pid 26311] stat("psmouse.o", {st_mode=S_IFREG|0644, st_size=2352, ...}) = 0
+    [pid 26311] lstat("psmouse.o", {st_mode=S_IFREG|0644, st_size=2352, ...}) = 0
+    [pid 26311] unlink("psmouse.o")         = 0
+    [pid 26311] open("psmouse.o", O_RDWR|O_CREAT|O_TRUNC, 0666) = 3
+    [pid 26311] write(3, "\0psmouse.c\0main\0read\0printf\0putc"..., 53) = 53
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1029
+    [pid 26311] lseek(3, -965, SEEK_CUR)    = 64
+    [pid 26311] write(3, "UH\211\345H\203\3540dH\213\4%(\0\0\0H\211E\3701\300\307E\320\0\0\0\0\307E"..., 516) = 516
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1029
+    [pid 26311] lseek(3, -445, SEEK_CUR)    = 584
+    [pid 26311] write(3, "\24\0\0\0\0\0\0\0\1zR\0\1x\20\1\33\f\7\10\220\1\0\0\34\0\0\0\34\0\0\0"..., 56) = 56
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1029
+    [pid 26311] lseek(3, 3, SEEK_CUR)       = 1032
+    [pid 26311] write(3, "7\0\0\0\0\0\0\0\2\0\0\0\n\0\0\0\374\377\377\377\377\377\377\377g\0\0\0\0\0\0\0"..., 384) = 384
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1416
+    [pid 26311] lseek(3, -776, SEEK_CUR)    = 640
+    [pid 26311] write(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\1\0\0\0\4\0\361\377"..., 336) = 336
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1416
+    [pid 26311] write(3, "\0.symtab\0.strtab\0.shstrtab\0.rela"..., 97) = 97
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] write(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\1\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 64) = 64
+    [pid 26311] lseek(3, 0, SEEK_SET)       = 0
+    [pid 26311] read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\1\0>\0\1\0\0\0\0\0\0\0\0\0\0\0"..., 4096) = 1513
+    [pid 26311] lseek(3, 7, SEEK_CUR)       = 1520
+    [pid 26311] write(3, "\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"..., 832) = 832
+    [pid 26311] close(3)                    = 0
+
+From the point of view of the kernel, the compiler† is mutating
+`psmouse.o` nine or ten times: first it unlinks the old file, then it
+creates the new one (`O_TRUNC`ing it if it somehow already exists),
+and then it write()s into it eight times at six different offsets.
+
+But `make` doesn’t care about that level of detail; it’s content to
+work with the knowledge that `psmouse.o` has changed.  So, for
+transactional purposes, it’s unnecessary to keep noting that
+`psmouse.o` keeps changing unless we’re creating new rollback points;
+it’s adequate to keep a snapshot of its previous state.
+
+Similarly, if we have a large numerical array we’re running a mutation
+loop over, it’s adequate for many purposes to snapshot the whole array
+before the first mutation, rather than tracking individual mutations
+on the array.  Analogously, array-computation libraries with automatic
+differentiation like TensorFlow track computational dependencies
+between entire arrays (vectors, matrices, etc.) rather than individual
+scalars within them.
+
+The card-marking write barrier developed for Self used a single dirty
+bit for each chunk of memory (of I think 32 or 64 bytes), keeping the
+write-barrier data tiny and the write-barrier code fast, at the
+expense of imposing extra scanning work on the garbage collector.
+Similarly, for purposes of swapping out individual objects to disk,
+LOOM (Kaehler & Krasner 1982) used a single dirty bit per Smalltalk
+object.  Logical logging for transactional RDBMS rollback logs
+typically stores [before-images of rows being updated][7] rather than
+the individual updated fields, and [physical logging, used for rapid
+recovery to checkpoints rather than rolling back individual
+transactions, instead stores before-images of entire pages][8].
+(Terminology varies somewhat between databases.)
+
+[7]: https://www.ibm.com/support/knowledgecenter/SSGU8G_11.50.0/com.ibm.admin.doc/ids_admin_0694.htm
+[8]: http://www.informix-dba.com/2010/07/blogging-about-logging-informix.html
+
+And, of course, virtual-memory operating systems typically track
+memory dirtiness at the granularity of a hardware page — 512 bytes on
+the VAX and 4096 bytes on most other systems — and handle
+copy-on-write data at the same granularity.  Traditional FORTHs do the
+same thing, but with 1024-byte blocks.
+
+For our transactional purposes we’d need to do more than set a dirty
+bit; as with RDBMS logging, we’d need to copy the clean data before
+modifying it, either into an undo log (as in Noether) or into a buffer
+of pending writes for the current transaction (to permit optimistic
+synchronization or constant-time rollback).
+
+In [the note on segments and blocks](segments-and-blocks.md) I
+outlined a virtual-machine system in which the virtual machine has a
+number of “descriptor registers” which mediate its access to memory,
+which consists of “segments” and “blocks”; read and write access is
+checked when a new descriptor is loaded into a descriptor register,
+while any number of accesses via an already-loaded descriptor can
+proceed with no further checking.  Loading a read/write descriptor
+register would potentially trigger a copy of the segment or block to
+be modified.  This is explained in more detail in that note.
+
+†Typically the assembler on Unix, actually.
+
+### Advancing top-of-stack rollback points rather than adding new ones ###
 
 If we’re *only* using transactions for error recovery and/or
 peremptory work discarding for responsiveness (not memoization,
@@ -504,7 +688,11 @@ necessarily propagate to a failure in the parent, it’s not necessary
 (for execution) to preserve the separate transaction for the child
 procedure — if the child rolls back, the parent rolls back too.  This
 optimization dramatically reduces the amount of extra work imposed by
-the transaction system.
+the transaction system, and in particular something like it is
+mandatory for systems like Scheme that rely on tail-call optimization
+for looping.
+
+### Local variables and escape analysis ###
 
 A subroutine can mutate its local variables freely without incurring
 any transaction overhead, unless those variables are referenceable
@@ -577,8 +765,6 @@ it provides could in fact literally be used as the checkpoints for
 reverse-mode automatic differentiation, a further crucial technique
 for solving inverse problems.
 
-XXX
-
 First-class transactions
 ------------------------
 
@@ -587,24 +773,8 @@ per-call transactions as first-class objects to the user program?  You
 could imagine, for example, inspecting your current transaction to see
 what mutable variables it had read or written, or the rolled-back
 transaction executed by a callee, and this would provide a natural
-interface for doing much of the 
-
-XXX
-
-Doing it all in a pure functional context without transactions
---------------------------------------------------------------
-
-20:26 < xentrac> shapr: do you have thoughts on why pure functional programming systems don't offer the kind of facilities I'm talking 
-                 about using transactions to get here?  because they could provide them without using transactions, couldn't they?
-XXX
-
-Blobs
------
-
-XXX
-
-Interrupt handling
--------------------
+interface for applying the technique to the various problems described
+above.
 
 Thanks
 ------

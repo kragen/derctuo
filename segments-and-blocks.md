@@ -514,6 +514,9 @@ other parts of the FPGA dynamically to assist with other computations.
 Incremental, differentiable, and concurrent computation
 -------------------------------------------------------
 
+(This is explored in more detail in [the note on transaction-per-call
+systems](transaction-per-call.md).)
+
 Above I mentioned transactional memory for concurrency control as one
 possible application of this kind of virtual machine.  The idea is
 that, to access the memory, you run some code inside a *transaction*,

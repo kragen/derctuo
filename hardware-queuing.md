@@ -1,7 +1,9 @@
 Thinking about hardware multithreading, blocking, waiting, the Padauk
 chips, etc., it occurred to me that it might be reasonable to build a
 CPU with a hardware work queue, or several, instead of interrupt
-handlers and sleeping.
+handlers and sleeping.  (A totally different thought stream involving
+many of the same features is in [the transaction-per-call
+note](transaction-per-call.md).)
 
 The idea is basically hardware multithreading, really: each work queue
 item is a machine architectural state (PC, SP, and if applicable
