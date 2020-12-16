@@ -57,12 +57,30 @@ also a particularly simple way to support on-stack replacement
 (whether deoptimization for debuggability, or optimization to get a
 speedup on a hot loop that might not run again).
 
+For example, if after entering a slow interpreted procedure, the JIT
+found that it had spent a lot of time in that procedure without
+finishing, because it contains a long loop.  The on-stack replacement
+problem is that, even if the JIT compiles a fast native-code version
+of the procedure, the interpreter is still in the middle of running
+the slow version.  To get the benefit of the compilation, it somehow
+needs to transform a state of the interpreted version (register
+settings, program counter, etc.) into a corresponding state of the
+native-code version.  Transactions give us the alternative possibility
+of rolling back from the state of the interpreted version and starting
+the compiled version from a fresh slate.
+
+Dynamic deoptimization, as in Self, is just the opposite: it requires
+transforming the current state of the machine-code program into a
+corresponding state of the source-code program so the programmer can
+debug it.
+
 Error handling
 --------------
 
-This was Hopwood’s primary concern in the design of Noether.
+This seems to have been Hopwood’s primary concern in the design of Noether.
 
-Error handling becomes substantially easier.  Nonlocal exceptions are
+With a transaction per subroutine invocation,
+error handling becomes substantially easier.  Nonlocal exceptions are
 especially popular in pure functional languages because cleanup while
 unwinding the stack is unnecessary; by contrast, C++ had so much trouble with this
 that the STL wasn’t exception-safe for several years after it was written!  In fact, if I
@@ -470,9 +488,9 @@ PL/I only added about 70% execution time to his PL/I programs (and
 bloated the programs themselves somewhat); he didn’t report on runtime
 memory usage, which I’d think would often be the more crucial aspect.
 
-Even competing with modern compilers, you might be able to due the
-full nested transaction thing for a pervasively mutable language like
-Python at a cost comparable to CPython's existing interpretation cost.
+Even competing with modern compilers, the cost for one transaction per
+subroutine invocation for a pervasively mutable language like
+Python might be comparable to CPython's existing interpretation cost.
 But for many purposes CPython's performance is unsatisfactory.
 
 XXX
@@ -585,8 +603,11 @@ Blobs
 
 XXX
 
+Interrupt handling
+-------------------
+
 Thanks
 ------
 
-Thanks to sbp, Darius Bacon, simpson, and especially Shae Erisson for
+Thanks to sbp, Darius Bacon, Corbin Simpson, and especially Shae Erisson for
 many very informative discussions that helped greatly with this note.
