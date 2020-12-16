@@ -38,12 +38,23 @@ on the topic, at Cornell, though I could only find [a 13-page tech report][4]).
 This enables efficient granular
 time-travel debugging, but also, it’s potentially useful simply to
 look at the pending changes so far made by each of the functions on
-the stack so far.  And implementing edit-and-continue in the debugger
+the stack so far.
+
+And implementing edit-and-continue in the debugger
 becomes substantially easier under some circumstances when you can
-restart the function you’ve just edited.  Also, being able to see
+restart the function you’ve just edited.
+
+Also, being able to see
 which transactional variables are being *depended on* at each level in
 the call stack is also a potential boon to debugging, sort of like
-`strace` at a per-function level.
+`strace` at a per-function level.  This could even permit you to produce
+an interactively explorable dataflow digraph of the call tree; in a
+standard bubble-and-arrow diagram, dataflow edges might be displayed
+as connecting to the lowest visible ancestors in the call tree,
+which you could interactively explode into self and callees.  Other
+forms of aggregation for debugging (grouping together all calls to a
+particular procedure, or all calls from a particular callsite) might
+also be insightful.
 
 [2]: https://github.com/noether-lang/noether/tree/master/doc/presentations/StrangeLoop2014
 [3]: http://www.cs.umd.edu/~mvz/pub/zelkowitz-cacm-1973.pdf "Reversible Execution, CACM, September 1973, volume 16, number 9"
@@ -72,12 +83,11 @@ the compiled version from a fresh slate.
 Dynamic deoptimization, as in Self, is just the opposite: it requires
 transforming the current state of the machine-code program into a
 corresponding state of the source-code program so the programmer can
-debug it.
+debug it.  This is closely related to the time-travel feature
+described in the previous section.
 
 Error handling
 --------------
-
-This seems to have been Hopwood’s primary concern in the design of Noether.
 
 With a transaction per subroutine invocation,
 error handling becomes substantially easier.  Nonlocal exceptions are
@@ -99,6 +109,8 @@ concurrently.  You only need to buffer the writes to transactional
 variables so that you can undo them if you have to roll back.  (This
 is a general property of pessimistic synchronization, and this is just
 the extreme case of it, as explained later.)
+
+This seems to have been Hopwood’s primary concern in the design of Noether.
 
 Fearless concurrency
 --------------------
@@ -344,6 +356,13 @@ variables at their home locations, seems to be necessary for
 optimistic synchronization, and sufficient for constant-time work
 abandonment.
 
+I’m not quite sure how precisely we can compute “any possibly
+interfering concurrent transactions” or whether this benefits from
+static analysis of the interrupt handler.  Clearly if another
+(top-level) transaction tries to write to a variable the interrupt
+handler has read, it needs to be at least blocked from committing
+until after the interrupt handler.
+
 Error values
 ------------
 
@@ -519,6 +538,34 @@ instantly simply using the memo table.  But those which read
 transactional variables that have been written to will run for real,
 giving the transaction a chance to fail.
 
+Relationship with dynamic scoping and graphics contexts
+-------------------------------------------------------
+
+In retained-mode graphics APIs, it’s common for graphical properties
+like fill color, line width, font, and transformation matrices to be
+implicitly inherited from parents to children in a
+hierarchically-nested scene graph; CSS properties in HTML and SVG are
+examples.  In immediate-mode graphics APIs, such as PostScript,
+`<canvas>`, and even TeX, these are typically implemented as a large
+number of stateful variables instead, whose values are saved and
+restored using a stack of graphics states, for example using `gsave`
+and `grestore` in PS, `.save()` and `.restore()` in `<canvas>`, or
+`{}` in TeX.  The same set of tricks used for dynamically-scoped
+variables in Lisp are applicable — shallow binding for best read
+performance, deep binding for fastest context switching — and indeed
+such variables were one of the major arguments for retaining "special
+variables" in Common Lisp and adding `dynamic-wind` to Scheme.
+
+This operation of temporarily obscuring the “global” value of a
+dynamically-scoped variable with one or more stack layers of “local”
+variables, then restoring it upon exit from a scope — this is all very
+closely reminiscent of the process of buffering mutable-cell writes
+and then discarding them on rollback.  But of course you don’t
+normally want to erase everything you’ve drawn when you restore these
+graphics parameters, and that’s what rolling back a transaction would
+do.  Is there an underlying unifying abstraction that can be applied
+to both cases?
+
 Optimizing transactions
 -----------------------
 
@@ -532,6 +579,15 @@ for one transaction per subroutine invocation for a pervasively
 mutable language like Python might be comparable to CPython’s existing
 interpretation cost.  But for many purposes CPython’s performance is
 unsatisfactory.
+
+How can we do better?
+
+### Only buffering writes for high-priority transactions ###
+
+As discussed in the section about interrupt handling, if a piece of
+code is protected from interference by other concurrent
+transactions — for example, by not allowing any of them to
+commit — XXX
 
 ### Reducing the number of mutable variables ###
 
@@ -629,6 +685,14 @@ transactional purposes, it’s unnecessary to keep noting that
 `psmouse.o` keeps changing unless we’re creating new rollback points;
 it’s adequate to keep a snapshot of its previous state.
 
+We could imagine a filesystem or similar tree structure in which the
+degree of detail we retain about a transaction’s writes varies
+dynamically: perhaps after we’ve accumulated a bunch of before-images
+of sibling “files” that are all being modified at once in a single
+transaction, we throw up our hands and save a before-image of the
+whole parent “directory”, thus avoiding any further requirement to
+interpose write barriers on anything within it.
+
 Similarly, if we have a large numerical array we’re running a mutation
 loop over, it’s adequate for many purposes to snapshot the whole array
 before the first mutation, rather than tracking individual mutations
@@ -677,7 +741,7 @@ be modified.  This is explained in more detail in that note.
 
 †Typically the assembler on Unix, actually.
 
-### Advancing top-of-stack rollback points rather than adding new ones ###
+### Eliding unused rollback points ###
 
 If we’re *only* using transactions for error recovery and/or
 peremptory work discarding for responsiveness (not memoization,
