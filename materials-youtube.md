@@ -11,7 +11,7 @@ processing:
   [NileBlue](https://www.youtube.com/channel/UC1D3yD4wlPMico0dss264XA)
 - [Applied Science](https://www.youtube.com/user/bkraz333) (700k subs)
 - [Nurdrage](https://www.youtube.com/user/NurdRage) (750k subs)
-- [Cody'sLab](XXX)
+- [Cody'sLab](https://www.youtube.com/user/theCodyReeder) (1.9M subs)
 - [Primitive
   Technology](https://www.youtube.com/channel/UCAL3JXZSzSm8AlZyD3nQdBA)
   (10M subs, largely bushcraft)
