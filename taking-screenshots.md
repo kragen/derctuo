@@ -233,10 +233,27 @@ My Elisp is a little rusty, but I managed to get this to work:
 
       (screenshot-insert-preview-line filename))
 
+    (defun markdown-insert-preview ()
+       "Show a preview for the previous Markdown inline image tag if possible.
+
+       Unfortunately this function modifies the buffer.
+       "
+        (interactive)
+        (if (not (re-search-backward "^!\\[.*?\\](\\(.*\\))\n\n"))
+            (message "no Markdown inline images found")
+            (save-excursion
+              (message "found %s" (match-string 1))
+              (move-end-of-line 2)
+              (delete-char 1)           ; hope this is a newline
+              (screenshot-insert-preview-line (match-string 1)))))
+
      (global-set-key [print] 'markdown-insert-screenshot)
+     (global-set-key [C-print] 'markdown-insert-preview)
 
 This also displays the image inline in the Emacs buffer!  But only
-until I close and reopen the file (or reboot Emacs).
+until I close and reopen the file (or reboot Emacs), though I can
+use Ctrl-PrtSc (`markdown-insert-preview`) to re-add them one by one
+after reopening the file.
 Mysteriously the `revert-buffer` command displays the images in the
 right margin; I suspect this might be a bug in fill-column-indicator.el.
 A little refactoring might make it

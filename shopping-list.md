@@ -18,9 +18,9 @@
 ## Hardware store
 
 - lime (not at shitty one) (not at good one)
-- caustic soda
+- caustic soda (check, though mislabeled)
 - converter (check)
-- boric acid or borax (not at shitty one) (not at good one)
+- boric acid or borax (not at shitty one) (not at good one) (check, borax)
 - infusorial earth (not at good one)
 - plaster (check)
 - magnesium (not at good one)

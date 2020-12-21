@@ -144,7 +144,8 @@ modularity, and if you’re generating, say, an audio or video signal,
 you can use them to connect it to something external.
 
 7-segment LED displays can still be found in things like discarded
-clock radios, but a better option may be to build them out of
+clock radios or microwaves,
+but a better option may be to build them out of
 now-abundant LEDs and commonplace non-electronic materials like paper
 and aluminum foil.  
 
@@ -165,6 +166,8 @@ You need to start from basic tools.  First you need a power supply
 with voltage in a reasonable range.  But you need to be able to detect
 that its voltage *is* in a reasonable range.  How do you do that
 without a multimeter?
+
+See also [the note on multimeter metrology](multimeter-metrology.md).
 
 #### A voltage detector from four LEDs and two resistors ####
 
