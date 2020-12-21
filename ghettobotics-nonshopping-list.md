@@ -402,3 +402,28 @@ using alligator clips will speed me up further.
 
 I also have a partitioned plastic box, like those for fishing tackle,
 which is partitioned into E3 resistor values.
+
+Bench power supplies
+--------------------
+
+I have a 12-volt power brick that includes current limiting, as I
+found when I used it to electrolytically dissolve some copper; for
+some 45 minutes the output voltage was well below 12 volts.  But I
+need something where I can twist a knob to scan across a range of
+voltages.  The ["Tech Ideas" YouTube channel][0] from India points out
+that there's typically a TL431 on the low-voltage side of modern
+isolated switching power supplies, directly hooked up to the feedback
+optocoupler, and the TL431 is programmed with a voltage divider, so
+you can [replace its fixed voltage divider with a pot, and maybe
+upgrade the output-side filter caps, and you get typically a 3V–25V
+adjustable switcher][1], with whatever current limiting the original
+supply had.
+
+[0]: https://www.youtube.com/user/9002845859
+[1]: https://www.youtube.com/watch?v=JGZ7FjZCYB8
+
+One difficulty is that you typically want to know what voltage you're
+getting, so you probably want to add some voltmeters on the output.
+Also it's common to want voltage down to zero; for low-power loads you
+can do this very easily with a linear output stage consisting of an
+emitter follower following a potentiometer.

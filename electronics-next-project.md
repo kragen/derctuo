@@ -3,8 +3,13 @@ project to do next to level up (to both level up my skills and my
 equipment).  This is related to [the microcontroller
 inventory](microcontroller-inventory.md) and [the nonshopping
 list](ghettobotics-nonshopping-list.md).  Here are some 58 projects I
-could try to do, in random order:
+could try to do, mostly in random order with five randomly chosen but
+with a few manually chosen to move to the top list of finalists:
 
+- **house thermometer** (indoor, outdoor, logging)
+- **Joule Thief** as a simple battery tester if nothing else
+- **7-segment display** with 7 scavenged discrete LEDs in some kind of
+  case with slits and partitions, which can be very large
 - **use a speaker as a microphone** to get bidirectional audio on a
   microcontroller.
 - **make the strip of giant LEDs shine** so we can illuminate with it
@@ -15,16 +20,20 @@ could try to do, in random order:
   energy at a calibrated power level for, for example, battery pack
   construction or hair-wire soldering
 - **ultra-low-power FM radio transmitter** to listen to music wirelessly
+- **display text on a 7-segment LED screen** from an AVR or STM32
+- **timer with relay** to turn off the water pump after 20'
+- **plant waterer** to keep the plants from dying; this probably
+  involves a microwave oven relay, a washing machine valve, a
+  microcontroller, and some transistors
+
+****
+
 - **hot air pencil**: thermostatic control of air temperature permits
   rapid localized heating, very useful for rework and electronics
   scavenging, as well as preheat for soldering
 - **ultrasound measurement** with two piezos and some oil, to see what
   frequencies I can get through the oil; this might require the Blue
   Pill
-- **plant waterer** to keep the plants from dying; this probably
-  involves a microwave oven relay, a washing machine valve, a
-  microcontroller, and some transistors
-- **timer with relay** to turn off the water pump after 20'
 - **basic Magic Kazoo**: you hum into a microphone on one end, and it
   does pitch ID and synthesizes a musical instrument out the other
 - **lightbulb thermometer** using a lightbulb as the temperature sensor
@@ -50,7 +59,6 @@ could try to do, in random order:
   function
 - **noise-based optical position encoder**: by measuring randomly varying transmissivity or reflectivity along a linear track, it can rapidly determine its precise position
 - **read and write SD card from AVR or STM32**: SD cards support SPI, and this enables a lot of projects that otherwise need way too much space.
-- **display text on a 7-segment LED screen** from an AVR or STM32
 - **air conditioner remote control** to control the air conditioner with infrared
 - **FM radio receiver** to listen to the radio
 - **Blue Pill oscilloscope**, only up to a megahertz or two but still better than a sound card
@@ -64,7 +72,6 @@ could try to do, in random order:
 - **program the ATTiny45s** so I can use them for things like my notebook
 - **dielectric spectroscopy**: identify materials, especially including humidity, capacitively through their frequency-dependent permittivity
 - **program Blink onto one of the Blue Pills** so I can start using them
-- **house thermometer** (indoor, outdoor, logging)
 - **test the PAL delay line** I scavenged from a VCR
 - **Lissajous projector**, scanning a laser pointer with a resonating
   nutating mirror.  Once the mirror has a stable resonance set up,
@@ -87,14 +94,11 @@ could try to do, in random order:
   pottery
 - **current microbalance** to weigh light things by counteracting
   their weight with a precisely measured electromagnetic force
-- **Joule Thief** as a simple battery tester if nothing else
 - **adjustable linear power supply** hanging off an ATX or power-brick
   power supply so I have an adjustable voltage; this becomes a lot
   more useful once it has some kind of readout, and ideally current
   limiting too; if it depends on the upstream power supply for voltage
   regulation it can be just a trimpot and an emitter follower
-- **7-segment display** with 7 scavenged discrete LEDs in some kind of
-  case with slits and partitions, which can be very large
 - **TransistorTester**, maybe not a super sophisticated one
 - **rotational capacitive sensor** made of paper towel tubes and
   aluminum foil to measure rotational position with some precision,
