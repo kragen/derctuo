@@ -14,6 +14,7 @@ with a few manually chosen to move to the top list of finalists:
   microcontroller.
 - **make the strip of giant LEDs shine** so we can illuminate with it
 - **audio amp** driving one or more of the speakers here
+- **metronome** with relays
 - **low-bandwidth 433MHz license-free SDR** for kilometer-scale robust
   communication
 - **pulse soldering**: a circuit to deliver a calibrated amount of
