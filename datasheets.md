@@ -167,6 +167,8 @@ Blacklist; _never visit_ (at least if you want the datasheet)
   jaguar"; [BA3126N, for example][5], or [TL2842BP][13].  Was a last resort.
   Now the button says "[ If You Want to View Datasheet, Click To Here !! ]"
   instead, but doesn't work.
+* ic-components.com: generates fake datasheet PDFs containing only
+  ads; [AS12W-K][31], for example.
 
 [1]: https://www.datasheetarchive.com/A1286-datasheet.html
 [2]: http://www.datasheetq.com/datasheet-download/219014/1/Isahaya/A1286
@@ -177,6 +179,7 @@ Blacklist; _never visit_ (at least if you want the datasheet)
 [17]: https://www.y-ic.com/pdf/dc/5383541-BP2812.pdf
 [19]: http://www.datasheet26.com/search.php?sWord=BP2812
 [25]: https://www.worldwayelec.com/pro/sanyo/avc479/3488317
+[31]: https://www.ic-components.com/products/caf694907/AS12W-K.pdf
 
 Transistor part numbers
 -----------------------
