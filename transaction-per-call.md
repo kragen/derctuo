@@ -112,8 +112,8 @@ the extreme case of it, as explained later.)
 
 This seems to have been Hopwood’s primary concern in the design of Noether.
 
-Fearless concurrency
---------------------
+Fearless concurrency and distribution
+-------------------------------------
 
 As Hopwood points out in zir 2014 Strange Loop presentation, logging
 writes in this way is also what you need for a concurrent or
@@ -147,23 +147,162 @@ while dynamic typing typically makes code harder to statically prove
 correct, this kind of dynamic concurrency checking should make code
 *easier* to statically prove correct.
 
-Optimistic vs. pessimistic concurrency defined
-----------------------------------------------
+A significant feature of this kind of concurrency is that it can be
+nested and physically distributed over a parallel virtual machine: a
+"master server" node might own the "home location" of all global
+variables, while a "pool worker" node might (in the optimistic-sync
+case) start a top-level transaction that reads them from time to time
+and then in the end sends a commit message listing all the variables
+it read and all the variables it's writing, which the master can
+accept or abort.  Meanwhile, the pool worker can create non-global
+transactional variables that exist only inside its transaction, and
+farm out work to subcontractor subtransactions potentially running on
+other subcontractor nodes, proxying their reads of transactional
+variables through the parent transaction's node.
+
+(To avoid ABA problems, probably a monotonically increasing revision
+number for each transactional variable depended on should be in the
+commit message, rather than just the value the variable happened to
+have at the time.)
+
+Worker nodes can maintain a local cache of cached values for global
+mutable variables.  It's okay if the items in the cache get outdated,
+because the master will reject the commit message for any transaction
+that has read an outdated value from such a cache — all that's lost is
+the CPU time wasted doing work that now must be retried.  The system
+would still work properly, though inefficiently, if such rejected
+commits were the only way to learn about outdated cached values, but a
+more efficient way for a wide variety of scenarios is to implicitly
+add an observer to the variable when processing a read-variable
+message, such that a single cache invalidation notification will be
+sent to the reader when the previously-read value has been updated, so
+the reader can invalidate their cache.  Since this is an optimization,
+it's okay if the invalidation messages aren't reliable, but for most
+usage scenarios it's best to discard the observer relationship after
+sending the invalidation message, so at most one invalidation packet
+(and one current-value packet) is sent per read packet.
+
+The way that works out differs depending on the access pattern.
+Global variables that are frequently read and almost never updated are
+almost always globally cached; after each update, the master sends out
+invalidation messages to nearly all workers, which respond by retrying
+a lot of in-progress transactions, which immediately send read
+messages to get the new values of the variable, so it's effectively a
+two-packet-per-node broadcast of the new value.  Global variables that
+are frequently written and almost never read are also almost never
+cached, so each write produces almost no invalidation traffic.  Global
+variables that are frequently written and also frequently read
+unavoidably produce a lot of traffic and also a lot of retried
+transactions, unless some sort of pessimistic synchronization is used,
+in which case they instead produce inefficient serialization.
+
+The cases where this caching/invalidation mechanism is insufficient
+are the extreme cases where either it results in an unacceptable waste
+of CPU time in transactions that will abort, where it's unacceptable
+to have to wait for a cache miss to be served from the master server,
+or where sending a separate copy of a new value of a popular or
+voluminous variable to every client is unacceptable.  The first case
+can be handled with pessimistic synchronization (see below) while the
+other two cases can work by supplementing the usual cache-invalidation
+mechanism with a "push" mechanism that immediately broadcasts new
+values of popular variables before anyone asks for them, for example
+using Ethernet multicast.
+
+This scheme also permits proxies which pass through your global
+transactions to the real master server (or master server cluster),
+which look just like a real worker to the master server and just like
+a real master server to the real workers.  The proxies answer almost
+all variable-read queries from their caches, without bothering the
+real master server, and when they receive a transaction commit
+message, they simply forward it on to the real master, then relay the
+COMMITTED or ABORTED response to the real worker.  This is analogous
+to the scenario described above with a worker node farming out jobs in
+subtransactions to subcontractors.  By this means it is possible to
+scale horizontally in the same way people do with MySQL readslaves.
+
+These proxies, again like a parent transaction, can run consistency
+validation code on the state of the database after a transaction,
+aborting the transaction if the consistency checks fail.  This is
+related to the "integrity enforcement" section below.
+
+Sharding the database of global mutable variables across multiple
+master servers is somewhat problematic, because each transaction needs
+to commit or abort atomically.  The standard consensus protocols for
+distributed transactions (two-phase commit, three-phase commit, Paxos,
+Raft, Chandra–Toueg, Mostefaoui–Raynal, ZooKeeper ZAB, in some cases
+Nakamoto consensus) can be used.  For some cases, you could instead
+add new "global" mutable variables belonging to a proxy described
+above, which are visible to everyone sharing the same proxy, in the
+same way that mutable variables created within a transaction and not
+exported are visible to subtransactions.
+
+So, as with the single-machine version of the system, it's important
+to limit the number of writes to global mutable variables, and in
+particular contention on them.  To the extent that you can instead
+pass around immutable data structures, for example blobs identified by
+their BLAKE3 hash, you can reduce the work centralized in the master
+server.  Note that this doesn't necessarily mean you want to minimize
+the *number of variables* that are global and mutable; if you're
+building a distributed filesystem this way, for example, you could get
+by with a single global mutable variable for the root of the
+filesystem (like how a Git HEAD refers to a commit by hash), but every
+write to the filesystem would invalidate it and force all existing
+transactions to be restarted.  Instead you would probably want at
+least one mutable variable per file, possibly one per data block, to
+prevent concurrent transactions from conflicting, even at the expense
+of increasing the load on the master.
+
+REST and the continuation-based web frameworks exemplified by Paul
+Graham's Arc and the Smalltalk system Seaside can integrate with such
+systems in an interesting way.  Consider a web server serving up an
+HTML `<form>` for changing a field in a database record.  If the
+`<form>` contains a hidden "manifest" field that lists all the
+transactional variables read to produce the page, along with the
+relevant values of their version counters, then when the form is
+submitted, the submit handler can check all of these variables to see
+if they are outdated, and in such a case produce an error page for the
+user, thus preventing lost-update conflicts where the user's desired
+change no longer makes sense in light of something else on the page.
+However, in practice you'd probably want to limit the scope of these
+dependencies, so that a change to something unrelated (the number of
+users currently online, the current time) doesn't produce spurious
+errors.
+
+This "manifest" mechanism, in a sense, permits the protection of
+(purely optimistic) transactions to be extended all the way out to
+untrusted browsers, either with no server-side session state in full
+compliance with the REST model, or by storing the session state in a
+time-limited variable on the server identified by a continuation ID.
+
+In summary, transactions, especially per-call transactions, enable the
+single-system-image programming model to be extended with acceptable
+efficiency across a distributed network of up to a few thousand nodes,
+including to some extent mutually untrusting actors, unreliable
+networks, unreliable nodes, heterogeneous software and protocols, high
+latency, though with a single root of trust ("there is one
+administrator," in Peter Deutsch's phrase).  They would do so by
+hiding latency with concurrency, avoiding latency and reducing
+bandwidth with safe caching including proxies, recovering from
+failures, and automatically retrying transactions safely after node or
+network failures.
+
+Optimistic vs. pessimistic synchronization defined
+--------------------------------------------------
 
 (This section is not specific to nested transaction systems,
 transactional memory systems, or even indeed to transactional systems
-at all; it applies to all forms of concurrency in software.)
+at all; it applies to all forms of synchronization in software.)
 
-“Optimistic concurrency” means that things don’t block each other;
+“Optimistic synchronization” means that things don’t block each other;
 instead you allow transactions to run to completion, and if there’s a
 conflict, the first one to commit wins.  This guarantees progress and
 liveness at the potential expense of machine efficiency.  “Pessimistic
-concurrency” is where you use locks to ensure that you don’t waste any
+synchronization” is where you use locks to ensure that you don’t waste any
 work on transactions that would have to be rolled back due to write
 conflicts.  Most systems use a mixture rather than purely one or the
 other.
 
-Pessimistic concurrency is helpful, for example, for interoperating
+Pessimistic synchronization is helpful, for example, for interoperating
 with systems outside the scope of the transactional system, because
 transactions only roll back (and possibly have to be retried) if they
 are buggy and try to commit something erroneous.  This way, the
@@ -171,7 +310,7 @@ transaction system avoids imposing any obligation of rollback on such
 external systems, and the transaction system itself only needs to
 support rollback for error recovery.
 
-In general, doing pessimistic concurrency safely requires some kind of
+In general, doing pessimistic synchronization safely requires some kind of
 static analysis of your transaction code to find out what resources it
 *could possibly* read or write, so that it won’t be started until it
 can acquire all of them.  (This lock acquisition can be atomic, but
@@ -180,20 +319,20 @@ transaction to prevent deadlocks; and doing some computation in
 between lock acquisitions is actually okay.) To be computable, this
 analysis must be conservative, so in case of doubt, it will delay your
 transaction until it can guarantee that it will be able to succeed.
-In the limit, pessimistic concurrency reduces to no concurrency:
+In the limit, pessimistic synchronization reduces to no synchronization:
 acquiring a global system lock, as in Noether and other traditional
 event-loop systems like Monte, Tcl/Tk, Twisted Python, asyncore, or
 JS.
 
 This kind of static analysis is generally infeasible (for the
 transactional system to do, at least) in the context where pessimistic
-concurrency is most appealing: that of interoperation with external
+synchronization is most appealing: that of interoperation with external
 non-transactional systems, or systems that otherwise cannot fulfill a
-commitment to roll back changes.  So pessimistic concurrency tends to
+commitment to roll back changes.  So pessimistic synchronization tends to
 suffer deadlocks from time to time, even though this is theoretically
 avoidable.
 
-Aside from the deadlock issue, pessimistic concurrency suffers from an
+Aside from the deadlock issue, pessimistic synchronization suffers from an
 efficiency problem in the multicore era (which, for transaction
 systems, began with VAXclusters).  If your limiting resource is CPU
 cycles, then to guarantee *efficient* progress, then *pessimistic*
@@ -221,6 +360,30 @@ resolves contention with a strong bias in favor of long transactions;
 it’s easy to get into a situation where your
 pessimistically-synchronized 1000-transaction-per-second system is
 processing 1 transaction for 30 minutes.
+
+One interesting compromise is granting a limited-time lease on a
+variable, which prevents any other transaction from altering it during
+that time.  If your transaction commits while holding the lease, you
+are guaranteed that nobody has written to the variable in the
+meantime, so if your transaction has to roll back and retry, at least
+it won't be because of *that* variable.  If it commits while holding
+such leases on all variables it read, it is guaranteed to not have to
+retry because of any of them.  Similarly, you can grant "write-leases"
+or "write options" ("put options"?), which prevent anyone from taking
+out a read-lease on the variable during the given time.  So if your
+transaction has an unexpired read lease on every variable it read, and
+an unexpired write lease on every variable it wrote, it is guaranteed
+to be able to commit without retrying.  In a distributed system that
+can tolerate node failures, this is the only kind of lock that can
+ever be granted; otherwise an unreachable node could hold locks
+forever, blocking some and perhaps eventually all transactions in the
+system.
+
+The transaction manager doesn't necessarily have to tell the
+transactions that it's granting them a lease, and if it does, it can
+choose the expiry date at will.  Leases can be purely an optimization
+to improve throughput in the face of heavy contention by reducing the
+fraction of CPU wasted on doomed transactions.
 
 Modular blocking
 ----------------
@@ -362,6 +525,62 @@ static analysis of the interrupt handler.  Clearly if another
 (top-level) transaction tries to write to a variable the interrupt
 handler has read, it needs to be at least blocked from committing
 until after the interrupt handler.
+
+Specifically with respect to screen updates, it would be useful to
+break up the screen repaint into three pieces: a top-half "push" that
+runs as part of input processing, which takes a small, bounded amount
+of time to ensure high input handling throughput to recover from
+overload conditions; a "pull" that runs as part of the vertical
+blanking interrupt or even the *horizontal* blanking interrupt, which
+is higher priority than input processing and also takes a bounded
+amount of time, and whose reason for being is to allow the top-half
+push to do less work by using a more efficiently updatable in-memory
+representation (a scenegraph, a display list, a set of sprite
+positions, a tilemap, etc., of some bounded complexity; see the notes
+in [Scribal Basic](scribal-basic.md) about the Atari 800); and a
+bottom-half push that is scheduled after input processing, can be
+abandoned and restarted if new input comes in, and can take unbounded
+time to more elaborately update the structures read by the pull
+transaction.
+
+In an OLTP database context, you could imagine handling incoming write
+transactions ("writes", including record updates, insertions,
+deletions, and schema changes) by appending them to a journal and
+scheduling additional transactions to update views and indices
+("rebuilds", though presumably incremental).  Read transactions
+("queries") that consulted a view or index would also need to read
+through whatever part of the journal was not yet accounted for by the
+view or index in question.  An OLTP workload usually won't work with a
+hard priority system, since totally starving any of writes, rebuilds,
+or queries due to a high load of the other two would be unacceptable;
+the relative priorities of writes, queries, and rebuilds could be
+adjusted through an internal pricing system, in which writes and
+queries earn "money" by spending CPU time and perhaps IOPS, writes are
+additionally billed for the expected losses from slower queries, and
+rebuilds earn "money" by reducing the expected costs of queries, which
+is at least in part an option value — Black–Scholes may be the right
+valuation.
+
+A partly completed agoric OLTP transaction would tend to be able to
+bid higher for resources than one that hadn't started — if its
+expected completion time is 2 ms and doesn't change during evaluation,
+and its expected net earnings are 2 simoleons, it can initially bid
+1000 simoleons per second, but after running for 1.5 ms, it can bid
+4000.  But, if that's not high enough because another job with much
+higher value has arrived, it's "socially optimal" to abort the
+currently running transaction and handle the higher-value job.
+
+(This same OLTP approach also applies, of course, to updating source
+code and computing executable views of it with a compiler or groveling
+over the update log with an interpreter; this could entirely eliminate
+the JIT pause problem that plagued Self, if Moore's Law hadn't already
+taken care of that.  Yet people still sometimes wait for rebuilds to
+finish.)
+
+To support simultaneous OLAP operations on the OLTP database, you
+could simply run your queries on the most recent available indices and
+views, including precomputed rollup views, without taking the
+still-unincorporated journals into account.
 
 Error values
 ------------
@@ -811,6 +1030,10 @@ to see inside an uncommitted transaction, at least within the
 debugger; being able to can copy things out of the transaction history
 or an uncommitted transaction might be enough.
 
+(Also, see above about the relationship with REST; the system can be
+extended in a natural way to prevent lost-update errors in web
+services.)
+
 Is there a connection with hardware transactional memory support that
 is starting to appear in modern high-end manycore systems?  It is in
 some ways a way to expose the multisocket nature of the system to
@@ -840,8 +1063,20 @@ transaction executed by a callee, and this would provide a natural
 interface for applying the technique to the various problems described
 above.
 
+For example, the suggested application to REST would require the web
+framework to be able to generate some kind of serializable identifier
+for each mutable variable the HTML `<form>` depends on, and also to
+retrieve those variables given those identifiers when the form is
+returned.  Facilities like those would also allow the proxy code for
+distributed nodes as described above to be written entirely at user
+level.  As another example, the modal-reasoning question "what
+variables would this randomly generated code write to if I ran it?"
+needs to be able to abort the child transaction and then inspect its
+write log.
+
 Thanks
 ------
 
-Thanks to sbp, Darius Bacon, Corbin Simpson, and especially Shae Erisson for
+Thanks to sbp, Darius Bacon, Corbin Simpson, CcxWrk,
+and especially Shae Erisson for
 many very informative discussions that helped greatly with this note.
