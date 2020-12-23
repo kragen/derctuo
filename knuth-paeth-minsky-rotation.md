@@ -193,40 +193,12 @@ gives us -*β* = *α*²*β* - 2*α*, so we want to see if *β* = 2*α* -
 (2 - 1 - 1 + *β*²))/*β* =  
 *β*.
 
-So choosing *α* and *β* in this way does give us a pure rotation.
-
-### Stupid bumbling, fix ###
-
- and we hope we
-can find a solution for both -*β* = *α*²*β* - 2*α* and cos *θ* = 1 -
-*αβ* = 1 + *α* sin *θ*.  The first gives us *β* = 2*α* - *α*²*β*, *β*
-+ *α*²*β* - 2*α* = 0 = *βα*² - 2*α* + *β*.  If I haven't swapped any
-signs, the quadratic formula gives us *α* = (2 ± √(4 - 4*β*²))/2*β*;
-for example for *β* = ½ (a 30° rotation) we get *α* = 2 ± √(4 - 2) = 2
-± √2.  This is wrong because then for either value 2*α* - *α*²*β*
-gives us 1, not 0.5 as it should, although at least it's the same
-value.  Also, though, acos(1 - *αβ*) in that case (either one) gives
-us ¾*π*, whose sin is √2, not ½.  So it's at least consistently wrong
-by a factor of √2.
-
-Let's come at it the other way.  If cos *θ* = 1 - *αβ*, and β = -sin
-*θ* = ½, *θ* = -30°, so its cos is ½√3, so *αβ* = 1 - ½√3, and *α* is
-twice that, or 2 - √3, about 0.268.  Now 2*α* - *α*²*β* = 2(2 - √3) -
-½(2 - √3)² = 4 - 2√3 - ½(4 - 4√3 + 3) = 4 - 2√3 - 2 + 2√3 - 1½ = ½.
-So *α* = 2 - √3, *β* = ½ does give us a pure rotation, and it looks
-like it really is 30°.  Maybe positive, though.
-
-Following this back through, *α* = (1 - cos (sin⁻¹ *β*))/*β*, but this
-is an unnecessarily terrible way to calculate *α*.  cos² *Θ* + sin²
-*θ* = 1, so we can rewrite this as *α* = (1 - √(1 - *β*²))/*β*.  Let's
-check the thing that's supposed to be identically equal to *β*: 2*α* -
-*α*²*β*, which becomes 2(1 - √(1 - *β*²))/*β* - *β*(1 - √(1 -
-*β*²))²/*β*² =  
-2/*β* - 2√(1 - *β*²)/*β* - (1 - √(1 - *β*²))²/*β* =  
-(2 - 2√(1 - *β*²) - (1 - √(1 - *β*²))²)/*β* =  
-(2 - 2√(1 - *β*²) - 1 + 2√(1 - *β*²) - (1 - *β*²))/*β* =  
-(2 - 1 - 1 + *β*²))/*β* =  
-*β*.
+So choosing *α* and *β* in this way does give us a pure rotation.  For
+example, for *θ* = 10°, *β* = -sin *θ* ≈ -.174, *α* = (1 - √(1 -
+*β*²))/*β* ≈ -.0877.  Starting at (100, 0), we proceed to (98.5,
+17.4), (93.9, 34.3), (86.5, 50.1).  These all have magnitude 100 and
+angles of respectively 0°, 10°, 20°, and 30°, so it seems to be
+working.
 
 Minsky's circle algorithm and two-shear image rotation
 ------------------------------------------------------
@@ -239,13 +211,21 @@ around the origin as follows:
     y -= αx;
     # no further steps
 
-This is, surprisingly, stable with exact math (the determinant of the
-resulting matrix [1, *α*; *α*, 1-*α*²] is exactly 1) and usually even
-with approximate math, including integer math.  With integer math,
-even if *α* is prescaled to be something like 3/32, each of the steps
-is computationally reversible, like Paeth's rotations; so orbits can't
-converge, and they can't grow without bound because the determinant is
-1, so they must return to the starting point.  But the circles
+This is, surprisingly, stable with exact math; the determinant of the
+resulting matrix is exactly 1:
+
+    ┎          ┒
+    ┃  1   α   ┃
+    ┃ -α  1-α² ┃
+    ┖          ┚
+
+It's usually even stable with approximate math, including integer
+math.  With integer math, even if *α* is prescaled to be something
+like 3/32, each of the steps is computationally reversible, like
+Paeth's rotations; so orbits can't converge, and they can't grow
+without bound because the determinant is 1, so they must return to the
+starting point.  (For it to be computationally irreversible, you'd
+need addition and subtraction to round sometimes.)  But the circles
 described by successive iterations are elliptical, which is obvious if
 you start with, for example, (*x*, *y*, *α*) = (1, 1, 1) — the orbit
 is (1, 1), (2, -1), (2, -1), (1, -2), (-1, -1), (-2, 1), (-1, 2), and
