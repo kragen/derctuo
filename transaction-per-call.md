@@ -541,7 +541,10 @@ in [Scribal Basic](scribal-basic.md) about the Atari 800); and a
 bottom-half push that is scheduled after input processing, can be
 abandoned and restarted if new input comes in, and can take unbounded
 time to more elaborately update the structures read by the pull
-transaction.
+transaction.  For example, the bottom-half push might read in text
+from a disk file after it's newly scrolled into view, or overwrite an
+approximate 3-D rendering with a more precise one, possibly more than
+once in multiple different transactions.
 
 In an OLTP database context, you could imagine handling incoming write
 transactions ("writes", including record updates, insertions,
@@ -730,6 +733,61 @@ table values can be reused even for slightly changed inputs.)
 [5]: https://www.peterstefek.me/incr-ray-tracer.html
 [6]: http://rgl.epfl.ch/publications/NimierDavidVicini2019Mitsuba2
 
+Above I talked about using transaction scheduling as a way to
+guarantee responsivity for real-time and OLTP systems, in particular
+allowing updating of indices and views to be deferred to some degree
+to improve query responsivity.  A simpler, though probably lower
+performance, design is to compute an index (or a view) as the cached
+result of a giant computation over one or more entire tables, or even
+the update log.  Then, queries that consult this index will first
+request the index in a cached subtransaction, made out of smaller
+subtransactions; normally this will be instant, served from the memo
+cache, but in other cases will require a partial or full recomputation
+to bring the index up to date.
+
+So, for example, you might have 99000 data blocks in an append-only
+table, each containing 10 rows.  Each data block is an immutable blob
+pointed to by a separate mutable variable, and there's another mutable
+variable that's a list of all 99000 blocks.  Every append to the table
+appends a row to the last data block (by copying the other 9 or less
+rows into a new block), or if it's full, creates a new mutable
+variable, points it to a block of one row, and adds it to the list.
+The index on column FOO is an LSM-tree, consisting of a run of the
+sorted FOO values (and record numbers) of the first 65536 rows in the
+update log, a run of 32768 FOO values, a run of 512 FOO values, a run
+of 128 FOO values, and so on for 32, 16, and 8.  So when a new row is
+added, maybe a new run gets added, or normally the smallest few runs
+get jiggered around a bit in the next query, but the 65536-item run
+and the 32768-item run are returned immediately from the cache rather
+than being recomputed.
+
+This scheme "works" with tables that are being updated "in place" (by
+replacing immutable data blocks at random offsets by slightly
+different immutable data blocks) in the sense that queries will never
+return the wrong answer, but suppose someone updates record 50000.
+This will invalidate, among other things, one of the leaves under the
+65536-item run in the index; if the FOO value has changed, this change
+will bubble up to recomputing that 65536-item run by merging together
+two 32768-item runs, the first of which is hopefully still in the
+cache despite not having been used in quite a while.  This takes some
+65536 comparisons, which is not a lot of work in an absolute sense but
+still about four orders of magnitude larger than what you would hope
+to see for a single record update.  Also when you append record 131072
+you are going to have to do 131072 comparisons the next time you run a
+query that uses that index.
+
+I think you can repair this approach to some degree by storing the
+table as a segmented journal of changes, maintaining a parallel bitmap
+or something of liveness markers for those changes, periodically
+cleaning low-occupancy segments like a log-structured filesystem by
+copying their remaining live changes to a new segment, and then using
+an incrementalized version of the LSM-tree-merging code that computes
+partial merges of soon-to-be-superseded blocks of the LSM tree.  But
+this degree of complexity seems like it kind of loses the appeal of
+having the transaction caching system do everything for you
+automatically, and it still doesn't give you the option of having
+queries grovel over the log of recent changes when churn is too high.
+
 Integrity enforcement
 ---------------------
 
@@ -801,12 +859,21 @@ unsatisfactory.
 
 How can we do better?
 
-### Only buffering writes for high-priority transactions ###
+### Only logging writes for high-priority transactions ###
 
 As discussed in the section about interrupt handling, if a piece of
 code is protected from interference by other concurrent
-transactions — for example, by not allowing any of them to
-commit — XXX
+transactions — for example, by not allowing any of them to commit — it
+is guaranteed not to need a retry.  So in that case the transaction
+mechanism is only providing error recovery, and for that the
+transaction system need only be involved in writes of transactional
+variables, not reads.  This reduces the overhead of the transaction
+system by about an order of magnitude for these transactions, perhaps
+to less than a factor of 2 for conventional mutable code.  (If we
+write transactional variables back to their home locations while doing
+this, we can use normal memory reads to read transactional variables
+inside the transaction.)  Compiling code for latency-sensitive
+transactions in this way may be a worthwhile optimization.
 
 ### Reducing the number of mutable variables ###
 
@@ -833,12 +900,22 @@ of work, such as hash consing and the development of good cache
 eviction heuristics.  This work is needed with or without
 transactions, and promises to be the lion’s share of the job.
 
+However, as mentioned in the filesystem example, reducing the number
+of mutable variables *too far* will cause unnecessary contention and
+thus reduce system throughput, either by optimistic concurrency
+control retrying transactions or by pessimistic concurrency control
+blocking them.  In some cases, we would actually benefit by
+introducing extra mutable variables to permit higher levels of
+concurrency.
+
 ### Aggregation ###
 
 Aggregation is another common way to reduce the cost of read barriers,
 write barriers, and dependency tracking for incremental computation
 and rollback.  The idea is that, by agglomerating mutable variables
-into larger units, we can reduce the work needed to track them.
+into larger units, we can reduce the work needed to track them,
+though, as above, reducing our potential concurrency as well.  (Maybe
+this is the same idea under a different name.)
 
 Under `make`, compilers and linkers communicate through the
 filesystem; if the compiler† changes `psmouse.o`, `make` reinvokes the
@@ -1033,6 +1110,39 @@ or an uncommitted transaction might be enough.
 (Also, see above about the relationship with REST; the system can be
 extended in a natural way to prevent lost-update errors in web
 services.)
+
+What about the XPra/NeWS/AJAX problem?  Above I talked about using
+transactions across a distributed network under a single administrator
+as a near-panacea for problems of distributed programming, a level of
+optimism that surely will not pan out in real life.  XPra provides
+remote access to GUI applications running on a server somewhere by
+rendering their GUIs server-side and transmitting the screen updates
+using a codec such as H.264, but this suffers from both
+computing-power-bottleneck problems (especially when many users share
+the same server) and latency problems.  NeWS tried to solve this
+problem by allowing the application author to upload snippets of
+PostScript code to the window server, which could then react instantly
+to user interface events and do as much rendering inside the window
+server as desirable, providing a smart-client/mobile-code solution
+similar to modern AJAX webapps, but with PostScript as the client-side
+programming language instead of JS.  AJAX is very good at improving
+responsivity, at least when it doesn't bloat a fucking text chat UI to
+occupy a gigabyte of RAM, and especially at reducing server load.
+
+Could distributed transactions simplify the task of programming such
+applications?  This is a degenerate case of the network of worker
+nodes all beating on a single master: one master, which is also a
+worker, and a second worker for low latency.  Maybe they could allow
+any given code to run transparently on either end of the high-latency
+connection, or indeed optimistically on both ends of the connection,
+with the results from the second-to-commit execution being discarded.
+Transactions that only *read* the database can display their results
+from the database with the possibility of being out-of-date and
+needing to be re-executed (this is more or less how Meteor works,
+although they aren't called "transactions"), while transactions that
+write to it would have to wait for the server to confirm before
+reporting success.  I don't know, I think there's maybe some potential
+here, but I don't have it thoroughly thought out.
 
 Is there a connection with hardware transactional memory support that
 is starting to appear in modern high-end manycore systems?  It is in
