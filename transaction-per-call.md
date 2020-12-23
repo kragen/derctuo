@@ -149,16 +149,16 @@ correct, this kind of dynamic concurrency checking should make code
 
 A significant feature of this kind of concurrency is that it can be
 nested and physically distributed over a parallel virtual machine: a
-"master server" node might own the "home location" of all global
-variables, while a "pool worker" node might (in the optimistic-sync
+“master server” node might own the “home location” of all global
+variables, while a “pool worker” node might (in the optimistic-sync
 case) start a top-level transaction that reads them from time to time
 and then in the end sends a commit message listing all the variables
-it read and all the variables it's writing, which the master can
+it read and all the variables it’s writing, which the master can
 accept or abort.  Meanwhile, the pool worker can create non-global
 transactional variables that exist only inside its transaction, and
 farm out work to subcontractor subtransactions potentially running on
 other subcontractor nodes, proxying their reads of transactional
-variables through the parent transaction's node.
+variables through the parent transaction’s node.
 
 (To avoid ABA problems, probably a monotonically increasing revision
 number for each transactional variable depended on should be in the
@@ -166,9 +166,9 @@ commit message, rather than just the value the variable happened to
 have at the time.)
 
 Worker nodes can maintain a local cache of cached values for global
-mutable variables.  It's okay if the items in the cache get outdated,
+mutable variables.  It’s okay if the items in the cache get outdated,
 because the master will reject the commit message for any transaction
-that has read an outdated value from such a cache — all that's lost is
+that has read an outdated value from such a cache — all that’s lost is
 the CPU time wasted doing work that now must be retried.  The system
 would still work properly, though inefficiently, if such rejected
 commits were the only way to learn about outdated cached values, but a
@@ -177,8 +177,8 @@ add an observer to the variable when processing a read-variable
 message, such that a single cache invalidation notification will be
 sent to the reader when the previously-read value has been updated, so
 the reader can invalidate their cache.  Since this is an optimization,
-it's okay if the invalidation messages aren't reliable, but for most
-usage scenarios it's best to discard the observer relationship after
+it’s okay if the invalidation messages aren’t reliable, but for most
+usage scenarios it’s best to discard the observer relationship after
 sending the invalidation message, so at most one invalidation packet
 (and one current-value packet) is sent per read packet.
 
@@ -187,7 +187,7 @@ Global variables that are frequently read and almost never updated are
 almost always globally cached; after each update, the master sends out
 invalidation messages to nearly all workers, which respond by retrying
 a lot of in-progress transactions, which immediately send read
-messages to get the new values of the variable, so it's effectively a
+messages to get the new values of the variable, so it’s effectively a
 two-packet-per-node broadcast of the new value.  Global variables that
 are frequently written and almost never read are also almost never
 cached, so each write produces almost no invalidation traffic.  Global
@@ -198,13 +198,13 @@ in which case they instead produce inefficient serialization.
 
 The cases where this caching/invalidation mechanism is insufficient
 are the extreme cases where either it results in an unacceptable waste
-of CPU time in transactions that will abort, where it's unacceptable
+of CPU time in transactions that will abort, where it’s unacceptable
 to have to wait for a cache miss to be served from the master server,
 or where sending a separate copy of a new value of a popular or
 voluminous variable to every client is unacceptable.  The first case
 can be handled with pessimistic synchronization (see below) while the
 other two cases can work by supplementing the usual cache-invalidation
-mechanism with a "push" mechanism that immediately broadcasts new
+mechanism with a “push” mechanism that immediately broadcasts new
 values of popular variables before anyone asks for them, for example
 using Ethernet multicast.
 
@@ -223,7 +223,7 @@ scale horizontally in the same way people do with MySQL readslaves.
 These proxies, again like a parent transaction, can run consistency
 validation code on the state of the database after a transaction,
 aborting the transaction if the consistency checks fail.  This is
-related to the "integrity enforcement" section below.
+related to the “integrity enforcement” section below.
 
 Sharding the database of global mutable variables across multiple
 master servers is somewhat problematic, because each transaction needs
@@ -231,18 +231,18 @@ to commit or abort atomically.  The standard consensus protocols for
 distributed transactions (two-phase commit, three-phase commit, Paxos,
 Raft, Chandra–Toueg, Mostefaoui–Raynal, ZooKeeper ZAB, in some cases
 Nakamoto consensus) can be used.  For some cases, you could instead
-add new "global" mutable variables belonging to a proxy described
+add new “global” mutable variables belonging to a proxy described
 above, which are visible to everyone sharing the same proxy, in the
 same way that mutable variables created within a transaction and not
 exported are visible to subtransactions.
 
-So, as with the single-machine version of the system, it's important
+So, as with the single-machine version of the system, it’s important
 to limit the number of writes to global mutable variables, and in
 particular contention on them.  To the extent that you can instead
 pass around immutable data structures, for example blobs identified by
 their BLAKE3 hash, you can reduce the work centralized in the master
-server.  Note that this doesn't necessarily mean you want to minimize
-the *number of variables* that are global and mutable; if you're
+server.  Note that this doesn’t necessarily mean you want to minimize
+the *number of variables* that are global and mutable; if you’re
 building a distributed filesystem this way, for example, you could get
 by with a single global mutable variable for the root of the
 filesystem (like how a Git HEAD refers to a commit by hash), but every
@@ -253,22 +253,22 @@ prevent concurrent transactions from conflicting, even at the expense
 of increasing the load on the master.
 
 REST and the continuation-based web frameworks exemplified by Paul
-Graham's Arc and the Smalltalk system Seaside can integrate with such
+Graham’s Arc and the Smalltalk system Seaside can integrate with such
 systems in an interesting way.  Consider a web server serving up an
 HTML `<form>` for changing a field in a database record.  If the
-`<form>` contains a hidden "manifest" field that lists all the
+`<form>` contains a hidden “manifest” field that lists all the
 transactional variables read to produce the page, along with the
 relevant values of their version counters, then when the form is
 submitted, the submit handler can check all of these variables to see
 if they are outdated, and in such a case produce an error page for the
-user, thus preventing lost-update conflicts where the user's desired
+user, thus preventing lost-update conflicts where the user’s desired
 change no longer makes sense in light of something else on the page.
-However, in practice you'd probably want to limit the scope of these
+However, in practice you’d probably want to limit the scope of these
 dependencies, so that a change to something unrelated (the number of
-users currently online, the current time) doesn't produce spurious
+users currently online, the current time) doesn’t produce spurious
 errors.
 
-This "manifest" mechanism, in a sense, permits the protection of
+This “manifest” mechanism, in a sense, permits the protection of
 (purely optimistic) transactions to be extended all the way out to
 untrusted browsers, either with no server-side session state in full
 compliance with the REST model, or by storing the session state in a
@@ -279,8 +279,8 @@ single-system-image programming model to be extended with acceptable
 efficiency across a distributed network of up to a few thousand nodes,
 including to some extent mutually untrusting actors, unreliable
 networks, unreliable nodes, heterogeneous software and protocols, high
-latency, though with a single root of trust ("there is one
-administrator," in Peter Deutsch's phrase).  They would do so by
+latency, though with a single root of trust (“there is one
+administrator,” in Peter Deutsch’s phrase).  They would do so by
 hiding latency with concurrency, avoiding latency and reducing
 bandwidth with safe caching including proxies, recovering from
 failures, and automatically retrying transactions safely after node or
@@ -366,10 +366,10 @@ variable, which prevents any other transaction from altering it during
 that time.  If your transaction commits while holding the lease, you
 are guaranteed that nobody has written to the variable in the
 meantime, so if your transaction has to roll back and retry, at least
-it won't be because of *that* variable.  If it commits while holding
+it won’t be because of *that* variable.  If it commits while holding
 such leases on all variables it read, it is guaranteed to not have to
-retry because of any of them.  Similarly, you can grant "write-leases"
-or "write options" ("put options"?), which prevent anyone from taking
+retry because of any of them.  Similarly, you can grant “write-leases”
+or “write options” (“put options”?), which prevent anyone from taking
 out a read-lease on the variable during the given time.  So if your
 transaction has an unexpired read lease on every variable it read, and
 an unexpired write lease on every variable it wrote, it is guaranteed
@@ -379,8 +379,8 @@ ever be granted; otherwise an unreachable node could hold locks
 forever, blocking some and perhaps eventually all transactions in the
 system.
 
-The transaction manager doesn't necessarily have to tell the
-transactions that it's granting them a lease, and if it does, it can
+The transaction manager doesn’t necessarily have to tell the
+transactions that it’s granting them a lease, and if it does, it can
 choose the expiry date at will.  Leases can be purely an optimization
 to improve throughput in the face of heavy contention by reducing the
 fraction of CPU wasted on doomed transactions.
@@ -527,10 +527,10 @@ handler has read, it needs to be at least blocked from committing
 until after the interrupt handler.
 
 Specifically with respect to screen updates, it would be useful to
-break up the screen repaint into three pieces: a top-half "push" that
+break up the screen repaint into three pieces: a top-half “push” that
 runs as part of input processing, which takes a small, bounded amount
 of time to ensure high input handling throughput to recover from
-overload conditions; a "pull" that runs as part of the vertical
+overload conditions; a “pull” that runs as part of the vertical
 blanking interrupt or even the *horizontal* blanking interrupt, which
 is higher priority than input processing and also takes a bounded
 amount of time, and whose reason for being is to allow the top-half
@@ -542,41 +542,41 @@ bottom-half push that is scheduled after input processing, can be
 abandoned and restarted if new input comes in, and can take unbounded
 time to more elaborately update the structures read by the pull
 transaction.  For example, the bottom-half push might read in text
-from a disk file after it's newly scrolled into view, or overwrite an
+from a disk file after it’s newly scrolled into view, or overwrite an
 approximate 3-D rendering with a more precise one, possibly more than
 once in multiple different transactions.
 
 In an OLTP database context, you could imagine handling incoming write
-transactions ("writes", including record updates, insertions,
+transactions (“writes”, including record updates, insertions,
 deletions, and schema changes) by appending them to a journal and
 scheduling additional transactions to update views and indices
-("rebuilds", though presumably incremental).  Read transactions
-("queries") that consulted a view or index would also need to read
+(“rebuilds”, though presumably incremental).  Read transactions
+(“queries”) that consulted a view or index would also need to read
 through whatever part of the journal was not yet accounted for by the
-view or index in question.  An OLTP workload usually won't work with a
+view or index in question.  An OLTP workload usually won’t work with a
 hard priority system, since totally starving any of writes, rebuilds,
 or queries due to a high load of the other two would be unacceptable;
 the relative priorities of writes, queries, and rebuilds could be
 adjusted through an internal pricing system, in which writes and
-queries earn "money" by spending CPU time and perhaps IOPS, writes are
+queries earn “money” by spending CPU time and perhaps IOPS, writes are
 additionally billed for the expected losses from slower queries, and
-rebuilds earn "money" by reducing the expected costs of queries, which
+rebuilds earn “money” by reducing the expected costs of queries, which
 is at least in part an option value — Black–Scholes may be the right
 valuation.
 
 A partly completed agoric OLTP transaction would tend to be able to
-bid higher for resources than one that hadn't started — if its
-expected completion time is 2 ms and doesn't change during evaluation,
+bid higher for resources than one that hadn’t started — if its
+expected completion time is 2 ms and doesn’t change during evaluation,
 and its expected net earnings are 2 simoleons, it can initially bid
 1000 simoleons per second, but after running for 1.5 ms, it can bid
-4000.  But, if that's not high enough because another job with much
-higher value has arrived, it's "socially optimal" to abort the
+4000.  But, if that’s not high enough because another job with much
+higher value has arrived, it’s “socially optimal” to abort the
 currently running transaction and handle the higher-value job.
 
 (This same OLTP approach also applies, of course, to updating source
 code and computing executable views of it with a compiler or groveling
 over the update log with an interpreter; this could entirely eliminate
-the JIT pause problem that plagued Self, if Moore's Law hadn't already
+the JIT pause problem that plagued Self, if Moore’s Law hadn’t already
 taken care of that.  Yet people still sometimes wait for rebuilds to
 finish.)
 
@@ -747,10 +747,10 @@ to bring the index up to date.
 
 So, for example, you might have 99000 data blocks in an append-only
 table, each containing 10 rows.  Each data block is an immutable blob
-pointed to by a separate mutable variable, and there's another mutable
-variable that's a list of all 99000 blocks.  Every append to the table
+pointed to by a separate mutable variable, and there’s another mutable
+variable that’s a list of all 99000 blocks.  Every append to the table
 appends a row to the last data block (by copying the other 9 or less
-rows into a new block), or if it's full, creates a new mutable
+rows into a new block), or if it’s full, creates a new mutable
 variable, points it to a block of one row, and adds it to the list.
 The index on column FOO is an LSM-tree, consisting of a run of the
 sorted FOO values (and record numbers) of the first 65536 rows in the
@@ -761,7 +761,7 @@ get jiggered around a bit in the next query, but the 65536-item run
 and the 32768-item run are returned immediately from the cache rather
 than being recomputed.
 
-This scheme "works" with tables that are being updated "in place" (by
+This scheme “works” with tables that are being updated “in place” (by
 replacing immutable data blocks at random offsets by slightly
 different immutable data blocks) in the sense that queries will never
 return the wrong answer, but suppose someone updates record 50000.
@@ -785,7 +785,7 @@ an incrementalized version of the LSM-tree-merging code that computes
 partial merges of soon-to-be-superseded blocks of the LSM tree.  But
 this degree of complexity seems like it kind of loses the appeal of
 having the transaction caching system do everything for you
-automatically, and it still doesn't give you the option of having
+automatically, and it still doesn’t give you the option of having
 queries grovel over the log of recent changes when churn is too high.
 
 Integrity enforcement
@@ -830,8 +830,8 @@ and `grestore` in PS, `.save()` and `.restore()` in `<canvas>`, or
 `{}` in TeX.  The same set of tricks used for dynamically-scoped
 variables in Lisp are applicable — shallow binding for best read
 performance, deep binding for fastest context switching — and indeed
-such variables were one of the major arguments for retaining "special
-variables" in Common Lisp and adding `dynamic-wind` to Scheme.
+such variables were one of the major arguments for retaining “special
+variables” in Common Lisp and adding `dynamic-wind` to Scheme.
 
 This operation of temporarily obscuring the “global” value of a
 dynamically-scoped variable with one or more stack layers of “local”
@@ -1126,7 +1126,7 @@ to user interface events and do as much rendering inside the window
 server as desirable, providing a smart-client/mobile-code solution
 similar to modern AJAX webapps, but with PostScript as the client-side
 programming language instead of JS.  AJAX is very good at improving
-responsivity, at least when it doesn't bloat a fucking text chat UI to
+responsivity, at least when it doesn’t bloat a fucking text chat UI to
 occupy a gigabyte of RAM, and especially at reducing server load.
 
 Could distributed transactions simplify the task of programming such
@@ -1139,10 +1139,10 @@ with the results from the second-to-commit execution being discarded.
 Transactions that only *read* the database can display their results
 from the database with the possibility of being out-of-date and
 needing to be re-executed (this is more or less how Meteor works,
-although they aren't called "transactions"), while transactions that
+although they aren’t called “transactions”), while transactions that
 write to it would have to wait for the server to confirm before
-reporting success.  I don't know, I think there's maybe some potential
-here, but I don't have it thoroughly thought out.
+reporting success.  I don’t know, I think there’s maybe some potential
+here, but I don’t have it thoroughly thought out.
 
 Is there a connection with hardware transactional memory support that
 is starting to appear in modern high-end manycore systems?  It is in
@@ -1179,8 +1179,8 @@ for each mutable variable the HTML `<form>` depends on, and also to
 retrieve those variables given those identifiers when the form is
 returned.  Facilities like those would also allow the proxy code for
 distributed nodes as described above to be written entirely at user
-level.  As another example, the modal-reasoning question "what
-variables would this randomly generated code write to if I ran it?"
+level.  As another example, the modal-reasoning question “what
+variables would this randomly generated code write to if I ran it?”
 needs to be able to abort the child transaction and then inspect its
 write log.
 
