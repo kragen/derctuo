@@ -45,11 +45,16 @@ Because
     ┖             ┚┃bd┃
                    ┖  ┚
 
+(Incidentally, the version of Method K given in Wikipedia interchanges
+*k*₂ and *k*₃, as well as *a* and *c*, and *b* and *d*.  That’s
+because I reconstructed it from memory and it has an asymmetry with
+respect to its arguments that Karatsuba multiplication does not.)
+
 Karatsuba multiplication
 ------------------------
 
 A very similar insight underlies Karatsuba multiplication for
-multiple-precision real numbers; I don't know if Karatsuba was working
+multiple-precision real numbers; I don’t know if Karatsuba was working
 directly from the above complex algorithm, but in Karatsuba
 multiplication we obtain (*a* + *br*)(*c* + *dr*) = *ac* + (*ad* +
 *bc*)*r* + *bdr*² by calculating *j*₀ + (*j*₂ - *j*₁ - *j*₀)*r* +
@@ -61,20 +66,15 @@ So, for example, with *r* = 10, we can calculate 97 × 86 as *j*₀ = 7×6
 = 42, *j*₁ = 9×8 = 72, *j*₂ = (9+7)×(8+6) - *j*₁ - *j*₀ = 16×14 - 42 -
 72 = 224 - 42 - 72 = 110, so our answer is 42 + 110×10 + 72×100 =
 8342, which is correct.  And recursively subdividing the problem this
-way gives us Karatsuba's asymptotically faster multiplication
+way gives us Karatsuba’s asymptotically faster multiplication
 algorithm, the first one discovered in millennia.
 
 Applied to the special case *r* = *i*, Karatsuba multiplication gives
-us *j*₀ - *j*₂ + (*j*₂ - *j*₁ - *j*₀)*i*, so Karatsuba multiplication
+us *j*₀ - *j*₁ + (*j*₂ - *j*₁ - *j*₀)*i*, so Karatsuba multiplication
 gives us a slightly different three-real-multiply algorithm for
 complex multiplication.  It uses two adds and three subtracts in
 addition to the multiplies, while Method K uses three adds and two
 subtracts — virtually the same computational cost.
-
-(Incidentally, the version of Method K given in Wikipedia interchanges
-*k*₂ and *k*₃, as well as *a* and *c*, and *b* and *d*.  That's
-because I reconstructed it from memory and it has an asymmetry with
-respect to its arguments that Karatsuba multiplication does not.)
 
 Partial evaluation
 ------------------
@@ -99,8 +99,8 @@ rotation in a single operation.  So, for example, you can take a
 vector figure represented as a list of (*x*, *y*) points, and scale it
 by *n* and rotate it by *θ* by multiplying each number (*x* + *yi*) by
 a complex constant (*n* cos *θ* + *ni* sin *θ*).  (Typically you also
-want translation, which is complex addition if you're still thinking
-in complex numbers, but there's no advantage in doing so.)  If you
+want translation, which is complex addition if you’re still thinking
+in complex numbers, but there’s no advantage in doing so.)  If you
 have the *x* and *y* components of various different points in some
 SIMD registers, this costs you three SIMD multiplies, two SIMD adds,
 and one SIMD subtract using the partially-evaluated Method K.
@@ -120,23 +120,23 @@ for materialized textures we commonly use nearest-neighbor or bilinear
 sampling, though there are a variety of common tradeoffs between
 aliasing and computation time.
 
-Paeth's three-shear rotation algorithm
+Paeth’s three-shear rotation algorithm
 --------------------------------------
 
-There's another famous algorithm for rotating raster images with three
-multiplies, though, by Paeth, usually called the "three-shear
-rotation".  It doesn't do any scaling, but its compensating virtue is
-that, in its usual form, it doesn't lose any pixels — under
-appropriate circumstances it's perfectly reversible, because you
+There’s another famous algorithm for rotating raster images with three
+multiplies, though, by Paeth, usually called the “three-shear
+rotation”.  It doesn’t do any scaling, but its compensating virtue is
+that, in its usual form, it doesn’t lose any pixels — under
+appropriate circumstances it’s perfectly reversible, because you
 execute it by *shearing* the raster pixels by displacing them some
-integer number of pixels.  This also means that it doesn't require
+integer number of pixels.  This also means that it doesn’t require
 per-pixel sampling operations, even rounding.
 
-The disadvantage of Paeth's three-shear rotation is that it produces a
+The disadvantage of Paeth’s three-shear rotation is that it produces a
 lot of aliasing artifacts because of the constraint of shifting the
 pixels only by integer amounts.
 
-Paeth's algorithm for rotating a vector (*x*, *y*) consist of the
+Paeth’s algorithm for rotating a vector (*x*, *y*) consist of the
 following three steps:
 
     x += αy;
@@ -149,14 +149,14 @@ the right in the first step, *βx* pixels up in the second step, and
 these shifts to integers.)
 
 We can represent this calculation with matrix concatenation as follows
-(here I'm copying my memory of Tobin Fricke's page on the subject):
+(here I’m copying my memory of Tobin Fricke’s page on the subject):
 
     ┎       ┒┎       ┒┎       ┒┎   ┒
     ┃  1  α ┃┃  1  0 ┃┃  1  α ┃┃ x ┃
     ┃  0  1 ┃┃ -β  1 ┃┃  0  1 ┃┃ y ┃
     ┖       ┚┖       ┚┖       ┚┖   ┚
 
-Let's concatenate out the matrices; first the rightmost ones:
+Let’s concatenate out the matrices; first the rightmost ones:
 
     ┎       ┒┎       ┒   ┎          ┒
     ┃  1  0 ┃┃  1  α ┃ = ┃  1   α   ┃
@@ -164,8 +164,8 @@ Let's concatenate out the matrices; first the rightmost ones:
     ┖       ┚┖       ┚   ┖          ┚
 
 That is, when we subtract off *β* of *x* from *y* in the second step,
-the *x* we're subtracting already has an *α* of the original *y* in
-it, so the *y*-to-*y* item isn't 1.  Now the third step:
+the *x* we’re subtracting already has an *α* of the original *y* in
+it, so the *y*-to-*y* item isn’t 1.  Now the third step:
 
     ┎       ┒┎          ┒   ┎                   ┒
     ┃  1  α ┃┃  1   α   ┃ = ┃ 1 - αβ   2α - α²β ┃
@@ -198,12 +198,13 @@ example, for *θ* = 10°, *β* = -sin *θ* ≈ -.174, *α* = (1 - √(1 -
 *β*²))/*β* ≈ -.0877.  Starting at (100, 0), we proceed to (98.5,
 17.4), (93.9, 34.3), (86.5, 50.1).  These all have magnitude 100 and
 angles of respectively 0°, 10°, 20°, and 30°, so it seems to be
-working.
+working, though with a bit of rounding error — the last one should
+have been (86.6 = 100√¾, 50.0 = 100/2).
 
-Minsky's circle algorithm and two-shear image rotation
+Minsky’s circle algorithm and two-shear image rotation
 ------------------------------------------------------
 
-Paeth's algorithm is strikingly similar to the Minsky circle algorithm
+Paeth’s algorithm is strikingly similar to the Minsky circle algorithm
 described in HAKMEM, which computes an approximate rotation of a point
 around the origin as follows:
 
@@ -219,12 +220,12 @@ resulting matrix is exactly 1:
     ┃ -α  1-α² ┃
     ┖          ┚
 
-It's usually even stable with approximate math, including integer
+It’s usually even stable with approximate math, including integer
 math.  With integer math, even if *α* is prescaled to be something
 like 3/32, each of the steps is computationally reversible, like
-Paeth's rotations; so orbits can't converge, and they can't grow
+Paeth’s rotations; so orbits can’t converge, and they can’t grow
 without bound because the determinant is 1, so they must return to the
-starting point.  (For it to be computationally irreversible, you'd
+starting point.  (For it to be computationally irreversible, you’d
 need addition and subtraction to round sometimes.)  But the circles
 described by successive iterations are elliptical, which is obvious if
 you start with, for example, (*x*, *y*, *α*) = (1, 1, 1) — the orbit
@@ -235,7 +236,7 @@ small.
 The reversibility property means that if you use this transformation
 to map a bunch of unique pixel coordinates, the resulting pixel
 coordinates will still be unique!  In fact we can implement this
-"rotation" on a raster image with two Paeth-like shears, and each of
+“rotation” on a raster image with two Paeth-like shears, and each of
 the pixels will describe a Minsky pseudocircle that never collides
 with any other pixel, and eventually returns to its starting point.
 The image will be distorted as it rotates (in particular any pixels
@@ -244,14 +245,14 @@ put instead of rotating!) but it will eventually return to its
 original form.  Not having tried it, I suspect that for many parameter
 values, particularly with the center of rotation well outside the
 image, the distortions will be imperceptibly small compared to the
-aliasing of Paeth's algorithm implemented with integer shears.
+aliasing of Paeth’s algorithm implemented with integer shears.
 
-Both Minsky's and Paeth's algorithm can be thought of as two timesteps
+Both Minsky’s and Paeth’s algorithm can be thought of as two timesteps
 of leapfrog integration of a simple harmonic oscillator (*ẍ* = -*kx*);
-the difference is that Paeth's algorithm starts halfway in between two
+the difference is that Paeth’s algorithm starts halfway in between two
 timesteps.  But it seems like this would imply that you can undo the
-ellipticity of Minsky's algorithm by picking a different starting
-position, and in fact you can't.
+ellipticity of Minsky’s algorithm by picking a different starting
+position, and in fact you can’t.
 
 Paeth locality and run-length slicing
 -------------------------------------
@@ -273,7 +274,7 @@ two rows of tiles.
 
 So if you pipeline the shears you only need enough dcache to hold 32
 scan lines of the image, which I think is even true without tiling; if
-it's the traditional 1024 pixels wide then that's 96 kilobytes in
+it’s the traditional 1024 pixels wide then that’s 96 kilobytes in
 24-bit color, which is coincidentally exactly the size of my L1D cache
 on my Pentium N3700 laptop.
 
