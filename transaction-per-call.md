@@ -115,7 +115,7 @@ This seems to have been Hopwood’s primary concern in the design of Noether.
 Fearless concurrency and distribution
 -------------------------------------
 
-As Hopwood points out in zir 2014 Strange Loop presentation, logging
+As Hopwood points out in hir 2014 Strange Loop presentation, logging
 writes in this way is also what you need for a concurrent or
 generational garbage collector.
 
