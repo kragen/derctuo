@@ -875,6 +875,10 @@ this, we can use normal memory reads to read transactional variables
 inside the transaction.)  Compiling code for latency-sensitive
 transactions in this way may be a worthwhile optimization.
 
+A more extreme version of this is possible if the high-priority
+transactions are read-only; see the section below about read-only
+transactions and time travel.
+
 ### Reducing the number of mutable variables ###
 
 As mentioned above in the “fearless concurrency” section, the cost of
@@ -1183,6 +1187,46 @@ level.  As another example, the modal-reasoning question “what
 variables would this randomly generated code write to if I ran it?”
 needs to be able to abort the child transaction and then inspect its
 write log.
+
+Time travel and read-only transactions
+--------------------------------------
+
+A transaction that doesn’t write any transactional variables can be
+safely run at any time, regardless of anything else that’s happening.
+The vertical-blanking-interval pull transaction mentioned above is one
+example: it might write to video RAM, but probably not to anything
+within the transaction system.  Normally you would like such a
+transaction to run in the most up-to-date state possible, but the
+usual ACID serializability requirements don’t actually require that;
+it’s perfectly valid to run it with access to some consistent past
+state, maybe a recent-past state.
+
+In a flat memory space in which transactional variables live at some
+“home” memory address, doing this without retrying or blocking any
+write transactions would normally require every read access to a
+transactional variable to be indirected through the transaction
+system, so that it could give you the results that were valid at the
+point in time you've been transported to.  Although this is a
+reasonable cost, and one that most of the above discussion assumes we
+normally pay in every transaction, it might be nice to avoid it for
+real-time things like the VBI screen redraw transaction example.
+Earlier I suggested blocking all other transactions that go to commit
+until after the real-time transaction is done, but another alternative
+is to let them commit, but buffer their writes in an update journal
+rather than write them back to their home addresses.  This allows the
+read-only real-time transaction to proceed to completion without
+interacting with the transaction system *at all*, thus running at
+maximum speed.  Other transactions can run in parallel as usual, if
+you have multiple cores, but their reads are served from the update
+log, so they can see updates that have happened since the real-time
+transaction began.
+
+To the extent that past states of the transactional variables are
+logged and don't suffer linkrot (for example, because logged past
+states are not included as GC roots) you can also provide a time
+travel facility to allow not just debuggers but ordinary application
+programs to inspect past states, by explicitly running read-only
+transactions at past points — analogous to detached HEAD state in Git.
 
 Thanks
 ------
