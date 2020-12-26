@@ -35,7 +35,8 @@ stylus system” using Gray-code-modulated light patterns projected at
 24kHz with a [TI DLP DMD “projector development kit” which costs
 US$1800][10]; the Ishikawa .\* Lab research used both a projector with
 a custom-built 1000fps tracking mirror setup (using what looks like
-the kind of galvo rotating mirrors used for laser shows) and a
+the kind of galvo rotating mirrors used for laser shows),
+later a 1000fps custom-built projector, and a
 custom-built 1000fps camera.  Lower-cost DMD devices like the [TI
 DLP4710 chip][12] can only manage 120Hz [but still cost US$170][13].
 
@@ -46,9 +47,10 @@ DLP4710 chip][12] can only manage 120Hz [but still cost US$170][13].
 Is there nothing we can do to do HCI experimentation with low-latency
 user interfaces without shelling out the big bucks?
 
-Five possibilities occur to me: light pens, Wacom tablets, theremins,
-MEMS accelerometers and gyroscopes, and inkjet-printer carriage
-feedback hardware.
+Seven possibilities occur to me: light pens, Wacom tablets, theremins,
+MEMS accelerometers and gyroscopes, inkjet-printer carriage feedback
+hardware, acoustic surface triangulation, encoded LEDs and
+photodetectors, and impedance tomography.
 
 Light pens
 ----------
@@ -194,13 +196,15 @@ So one scheme is:
   gives us 357 scan lines of actual data, which is respectably close
   to the 486 visible scan lines of normal NTSC.
 
-I suspect that boustrophedon horizontal scanning might allow us to use
-much higher raster scan rates with the same tube, since there’s no
+I suspect that [boustrophedon horizontal scanning might allow us to use
+much higher raster scan rates with the same tube][22], since there’s no
 need for an HBI, but then you have to modulate your data to avoid
 bright spots where scan lines intersect.  Also, the higher raster scan
 rates would place more demand on the light pen’s signal latency and
 the phosphor’s rise time in order to achieve the same horizontal
 positioning precision.
+
+[22]: https://www.quora.com/In-old-CRT-monitors-why-did-the-electron-beam-shut-off-to-go-back-to-the-beginning-of-the-next-line-rather-than-shoot-the-pixels-from-right-to-left-every-other-line?share=1
 
 This would give us 2.8 ms worst case input latency, 1.4 ms average,
 and almost a quarter of a megapixel.  “VGA” resolution, you might say.
@@ -227,6 +231,44 @@ This would probably be a bit superior to an NTSC TV, but maybe not as
 much as you might hope, since the vertical slew rate is still the
 limiting factor on input latency.
 
+Light pens with projectors
+--------------------------
+
+CRT projectors have similar time-domain behavior, so in theory you
+ought to be able to use a light pen by pointing it at the image from a
+CRT projector or eidophor in the same way you could use a direct-view
+CRT.  However, CRT projectors were never very common and have become
+extinct since the 1990s, so it’s hard to find them nowadays.
+
+There’s a specialized kind of CRT projector called a “flying-spot
+scanner” which projects a flat light field onto a sheet of paper, then
+using the time-domain variation in diffuse reflectance to recover the
+original paper image; this is closely analogous to structured-light
+3-D scanning, which identifies the parallax to all the points on an
+object using the same kind of binary or Gray-code images the Microsoft
+researchers used for their touchscreen.  By the 1970s flying-spot
+scanners were using specialized low-persistence phosphors to maximize
+“flicker” and thus the sharpness of the scanned image.  (Before the
+Vidicon tube, such flying-spot illumination was a favored way to take
+television images.)
+
+Several times in the past it has occurred to me that you could scan a
+time-domain-modulated laser across a surface with mirrors to make a
+flying-spot projector.  (Perhaps a planar Kerr cell or Pockels cell
+with a voltage gradient along its surface across a resistive surface
+film electrode could provide a faster-response alternative to a moving
+mirror.)  This approach of course would also work with a light pen in
+the same way as the scanning electron beam from a CRT, but without the
+problems induced by phosphor persistence and phosphor electron
+penetration depth.
+
+Ordinary LCD and DMD projectors cannot be used in this way because the
+high-resolution time-domain signal is respectively absent or not under
+the control of the computer system.  (DMDs control the brightness of
+their pixels with PWM at some kilohertz, so they would be able to
+transmit tens of kilobits pe second of data if those PWM signals could
+be fed in externally.)
+
 Wacom tablets
 -------------
 
@@ -236,6 +278,13 @@ interfaces.  Apparently the wires in the tablet grid switch between
 transmitting and receiving to the pen every 20 μs, though, and
 demanding users report higher latency with the USB versions, so I
 suspect they’re submillisecond.
+
+Wacom tablets, unlike touchscreens and stylus screens, are normally
+indirect pointing devices: what you are looking at is not what you are
+pointing to.  This makes the latency demands less demanding, but it
+also probably makes people’s performance slower, since they don’t have
+a lifetime of experience coordinating their proprioceptive and visual
+feedback channels to know how far to move their hand.
 
 Theremins
 ---------
@@ -262,6 +311,13 @@ anything, because measuring the frequency of a 440-Hz distorted sine
 wave in less than a millisecond is, if not impossible, at least
 unnecessarily difficult.
 
+A theremin is normally also an indirect pointing instrument, but you
+could imagine projecting an image with any kind of projector — even an
+LCD projector — and using the theremin to detect where your hand was
+on the projected image, having calibrated it to the projection setup.
+Other kinds of screens (LCD screens, OLED screens) would probably
+overwhelm the theremin signal with electrostatic noise.
+
 MEMS accelerometers and “gyroscopes”
 ------------------------------------
 
@@ -284,8 +340,8 @@ you 16-bit readouts on rotation speed around three axes, with 16.4 to
 131 counts per (degree per second) depending on which range you have
 set, about ±2 degrees per second of offset, and 8000-sample-per-second
 output — but with a built-in low-pass filter, which suggests that
-possibly the signal is super noisy, and which isn't really documented
-in the datasheet except to say that it's 5–250 Hz.  The specs say it
+possibly the signal is super noisy, and which isn’t really documented
+in the datasheet except to say that it’s 5–250 Hz.  The specs say it
 has 0.010 dps/√Hz noise spectral density, which suggests that at
 500 Hz (thus 1000 samples/second) you’d expect about 0.2 dps of noise,
 which sounds pretty tolerable for a low-latency pointing device.
@@ -310,6 +366,7 @@ latency.
 [ST L2G2ISTR]: https://www.digikey.com/en/products/detail/stmicroelectronics/L2G2ISTR/5268014
 
 I suspect that such chips can be scavenged from discarded cellphones.
+They would of course also be indirect pointing devices.
 
 Inkjet printer feedback strips
 ------------------------------
@@ -323,6 +380,111 @@ printer operation, suggesting about a 10kHz encoder transition rate.
 If you could arrange your input device to move such a carriage, you
 could decode the quadrature signal and probably get submillisecond
 latency out of that hardware.
+
+Inkjet-printer linear optical encoders might be used as direct or
+indirect pointing devices.
+
+Acoustic surface triangulation
+------------------------------
+
+Last year, in the “Audio Tablet” note in Dercuano, I wrote about using
+the sound conducted through a surface between a stylus and two or more
+reference transducers to detect the distance along the surface to the
+stylus.  The idea is that the audio lag time along the paths through
+the surface tells you what the distance is; then it’s just a matter of
+damping the waves when they reach the edge of the surface so they
+don’t rebound and give you multipath.  Typical sound speeds through
+solids are kilometers per second, which is millimeters per
+microsecond, so a microsecond or so is about the right level of
+precision on the lag, and so the acoustic signal needs to be a few
+MHz, which won’t propagate far through air but has no trouble with
+most solids.  You can use pulses, noise signals, or perhaps even just
+the scratching of the stylus on the surface, though in that case it
+might lack the requisite MHz-frequency components.
+
+(If you’re using lower-frequency acoustic signals, you might not be
+able to use the time lag, but be forced to use the attenuation, a
+technique I learned from David H. “n2” Christensen, [RIP, PBUH][25].)
+
+[25]: https://electro.david.promo/the-last-goodbye/
+
+This has the inherent latency of the audio propagation time, which
+might be up to a millisecond or so depending on how many transducers
+you’re using, plus several microseconds to measure the correlation.
+
+This technique should still work if the surface you’re using is a
+screen displaying an image, whether from front projection, rear
+projection, or an LCD.
+
+Encoded LEDs and photodetectors
+-------------------------------
+
+All common LEDs, except the white ones, have submicrosecond response
+times, so you can modulate them at megabits per second; so do all
+common photodiodes, although some phototransistors are a bit slower.
+If you’re modulating an LED with some random bit sequence, or even
+just a sine wave, at hundreds of kilobits per second, you should be
+able to run a correlation with the signal from such a photodetector
+(at zero lag, if they’re within a meter or two) to measure the
+strength of the coupling between the LED and the photodetector.  The
+correlation can be done with a simple analog chopper circuit, or
+digitally to get a window shape closer to the ideal boxcar; if the
+modulating signal is a simple sine wave, you can even use a simple
+tuned filter.  Since LEDs and photodetectors are somewhat directional,
+this coupling strength is a function not only of the distance between
+the devices but also their relative angles, but (unlike with a laser
+pointer) it typically doesn’t drop off to near-zero until the LED or
+the photodetector are pointed nearly 90° off-axis.
+
+If you have two such encoded LEDs mounted on an object at different
+angles, carrying different signals, this gives you two degrees of
+freedom, which allows you to separate the factor of the coupling due
+to the orientation of the object from a factor that combines the
+distance to the object and its closeness to the photodetector’s
+optical axis.  Adding two additional photodetectors gives you a total
+of six coupling constants, one between each photodetector-LED pair,
+which in theory might be enough to measure the position and
+orientation of the object in all six degrees of freedom; I suspect you
+might actually need three LEDs on the object to disambiguate
+orientations reliably.
+
+Moreover, these three photodetectors are in theory sufficient for any
+number of objects as long as their optical signals are uncorrelated
+and the photodetectors don’t saturate, or don’t saturate much.
+
+Measuring the relevant correlations to the necessary degree of
+precision should in theory take much less than a millisecond when
+using signals modulated at hundreds of kHz which are perfectly
+uncorrelated over millisecond timescales.  250kbps random bitstreams
+have a bit per 4 μs, so surely over 100 μs their Hamming distance will
+be quite large.  (An even simpler alternative is that each LED could
+simply transmit its callsign over and over, but I suspect that will
+tend to perform worse.)
+
+You can use this for either a direct pointing device positioned on a
+screen, perhaps for a ring worn on the hand, as long as the
+photodetectors are looking down at the screen from known positions on
+the same side as the user, or an indirect pointing device in an
+arbitrary place in space.
+
+I think some virtual-reality gear from the 1990s used this approach
+with an ultrasonic signal rather than an optical one, thus enabling it
+to use the 343-μm-per-μs speed of sound in air to get distance
+information.
+
+Impedance tomography
+--------------------
+
+I’ve seen some recent papers using “impedance tomography” over a
+resistive surface under a dielectric layer to detect finger touches on
+the dielectric layer; a series of eight or so electrodes around the
+edge are alternately stimulated to measure the pairwise impedance
+between all pairs of electrodes, which changes when a finger
+capacitively couples some of the surface to ground, which allows you
+to approximate the finger position.  In theory this could be done very
+quickly, but the papers I’ve seen didn’t achieve submillisecond
+latency, so maybe there’s some obstacle such as high noise.  I suspect
+this is probably unavoidably an indirect pointing method.
 
 Thanks
 ------
