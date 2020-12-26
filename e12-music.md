@@ -1,9 +1,9 @@
 Resistors, capacitors, and sometimes even inductors are conventionally
-manufactured to have a set of "preferred values" in each order of
+manufactured to have a set of “preferred values” in each order of
 magnitude: the E3 series, 10 22 47; the E6 series, which intercalates
 15 33 68; the E12 series, which additionally intercalates 12 18 29 39
-55 82; and longer series.  So it's common to see a 220-ohm resistor or
-a 220-μF capacitor, but you'll very rarely see a 200-ohm resistor or a
+55 82; and longer series.  So it’s common to see a 220-ohm resistor or
+a 220-μF capacitor, but you’ll very rarely see a 200-ohm resistor or a
 200-μF capacitor.
 
 Despite appearances, these values are fairly evenly spaced — just in
@@ -12,7 +12,7 @@ on.  The intervals all approximate 10<sup>1/12</sup> ≈ 1.2115.
 
 Component identification — knowing whether this resistor you have is a
 2k2, a 22k, or just broken — is a big challenge for salvaging
-electronics.  Especially for us old colorblind humans.  Usually it's
+electronics.  Especially for us old colorblind humans.  Usually it’s
 good enough to know which E12 value something is.  Microcontrollers
 that can easily distinguish components are easy to come by, but
 getting their output into a useful form requires some kind of
@@ -22,10 +22,10 @@ finicky to interface with.
 The humans can easily distinguish notes of the 12-tone equal
 temperament scale traditionally used for Chinese music (though this is
 far easier when presented as intervals rather than as bare notes), and
-there's a pleasing perceptual correspondence between the 12 tones in
+there’s a pleasing perceptual correspondence between the 12 tones in
 an octave and the 12 E12 values in a decade.  And speakers are cheap
 and easy; sometimes, as in surface-mount MLCCs using piezoelectric X7R
-dielectrics and similar, they're even included by accident.  Auditory
+dielectrics and similar, they’re even included by accident.  Auditory
 output also has real advantages for high temporal resolution that the
 humans can perceive.
 
@@ -58,7 +58,7 @@ and about 0.6% above 1000 Hz; between 1kHz and 2kHz their perception
 of frequency is least distorted by amplitude, while [between 2kHz and
 5kHz they are most able to detect
 sounds](https://en.wikipedia.org/wiki/Equal-loudness_contour).  This
-suggests that it's probably best to stick to the lower octaves as much
+suggests that it’s probably best to stick to the lower octaves as much
 as possible, even down below 20 Hz, since their harmonics will
 populate the most sensitive regions of hearing more densely.
 
@@ -96,7 +96,7 @@ correspondences:
 
 This of course gives *k* = 110 Hz.
 
-This assignment is a compromise between not "wasting" the lowest
+This assignment is a compromise between not “wasting” the lowest
 octaves on little-used low resistances that require Kelvin probing to
 measure accurately, assigning the best precision to values in the
 1–100 Ω range where it often matters the most, and not assigning
@@ -110,19 +110,19 @@ Capacitances, and a better resistance scale
 
 Capacitances are trickier because they span a wider range; common
 capacitors are in the 47 pF to 470 μF range, though up to 22000 μF is
-not unheard of — though anything above 1 μF probably isn't very
+not unheard of — though anything above 1 μF probably isn’t very
 precise, because the piezoelectric and electrolytic technologies used
-at those higher capacitances aren't very precise.  (And then there are
+at those higher capacitances aren’t very precise.  (And then there are
 supercaps, up to 100 F — that is, 100 000 000 000 pF.)  In the
 47 pF–4.7 μF range, though, we have only five orders of magnitude,
 which seems quite manageable.
 
-It's unclear whether to use high frequencies for high capacitances
+It’s unclear whether to use high frequencies for high capacitances
 (like, microfarads) or low capacitances (picofarads).  Arguments in
 favor of using them for *low* capacitances include:
 
 1. In real life smaller capacitances do things at higher frequencies.
-   0.01 μF is 1 kΩ at about 16 kHz; 100 pF doesn't drop to 1 kΩ until
+   0.01 μF is 1 kΩ at about 16 kHz; 100 pF doesn’t drop to 1 kΩ until
    1.6 MHz.  Whether in an LC tank, an RC oscillator, or an RC filter,
    using a smaller capacitor means your frequencies go up.
 2. Also, high capacitances tend to be physically larger, and,
@@ -136,15 +136,15 @@ include:
    used for tuning things, than for high capacitances, which are more
    used for bypassing things.  If we put 47 pF at 880 Hz so that
    perceptual precision is best around 100 pF, and go down from there,
-   then at 0.047 μF we're already at 110 Hz, and by 4.7 μF we're at
+   then at 0.047 μF we’re already at 110 Hz, and by 4.7 μF we’re at
    27.5 Hz.  What on Earth would we do with 470 μF?  The noise of an
-   idling motorcycle without a muffler, at 6.875 Hz?  And we'd be
+   idling motorcycle without a muffler, at 6.875 Hz?  And we’d be
    wasting a couple of audible octaves that correspond to capacitances
    too small to measure reliably under ordinary conditions, because
-   they're swamped by parasitics.
-2. You'll be able to transfer your numerical ear learning from
-   resistance to capacitance more easily.  ("Oh, that C# is 2.2kΩ.
-   That means it's 0.022 μF.")
+   they’re swamped by parasitics.
+2. You’ll be able to transfer your numerical ear learning from
+   resistance to capacitance more easily.  (“Oh, that C# is 2.2kΩ.
+   That means it’s 0.022 μF.”)
 3. Higher resistances move RC oscillators and filters to higher
    frequencies too, so what gives?  (Higher resistances move RL
    circuits to lower frequencies, but nobody uses RL circuits.)
@@ -156,7 +156,7 @@ capacitances include:
 
 1. Maybe high resistances should be represented as low frequencies
    too, both because they slow down RC circuits and because we think
-   of higher resistances as being "larger", so maybe they should speak
+   of higher resistances as being “larger”, so maybe they should speak
    in deeper voices too?  (Also, *really* high resistances, like 10 MΩ
    and up, tend to be used with high voltages, so they *are*
    physically large, both for power dissipation and creepage
@@ -193,10 +193,10 @@ So I propose this scale for capacitances:
 * 10 pF: 880 Hz, A₅; smallest common ceramic capacitor
 * 1 pF: 1760 Hz, A₆, but you probably have parasitic capacitances
   larger than this; the manual for the famous AVR TransistorTester
-  says, "Capacitors with value below 25pF are usually not detecte[d]."
+  says, “Capacitors with value below 25pF are usually not detecte[d].”
 
 So, for example, 120 pF would be about G#₄, 415.30 Hz, one half-step
-deeper than A₄, because it's one step higher on the E12 scale; 150 pF
+deeper than A₄, because it’s one step higher on the E12 scale; 150 pF
 would be about G₄ (392.00 Hz), and 220 pF would be about F₄
 (349.23 Hz).  These are approximate because the E12 scale is
 approximate: 120 pF would be more accurately 416.50 Hz, 150 pF more
@@ -230,22 +230,22 @@ ohm, as if we were interested in an electrical signal of 160 kHz:
   measurement at all
 
 Note that this also solves the problem of what to do with arbitrarily
-high resistances, although you have to be careful you aren't swamping
+high resistances, although you have to be careful you aren’t swamping
 the whole audio spectrum with harmonics from a spurious detection of a
-100-GΩ resistor that's really leakage through your probe insulation or
+100-GΩ resistor that’s really leakage through your probe insulation or
 something.
 
 It might be reasonable to do, say, a square wave for capacitance and a
 repeatedly plucked Karplus–Strong string (or two, slightly offset in
 frequency, like a piano) for resistance, so that you can play them at
-the same time if you're doing an ESR measurement.  Using different
+the same time if you’re doing an ESR measurement.  Using different
 envelopes will help the humans hear them as two separate sounds rather
 than one sound with a discordant timbre.
 
 Inductors
 ---------
 
-Now we're faced with another consistency dilemma: do we represent
+Now we’re faced with another consistency dilemma: do we represent
 large inductances with low pitches or with high pitches?
 
 In favor of low pitches:
@@ -299,5 +299,5 @@ to set the equivalence, we get this:
 
 This seems reasonable.
 
-It's probably worthwhile to use a different instrument again for
+It’s probably worthwhile to use a different instrument again for
 inductor detection, perhaps an FM-synthesized bell sound or something.
