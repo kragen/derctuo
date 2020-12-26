@@ -78,12 +78,17 @@ samples will tend to reduce this noise.
 (Shearing using an all-pass filter, again as described above for
 delay-line music synthesis, would eliminate the shift-dependent
 fuzzing-out low-pass filtering, still costing one multiply per sample.
+[Condat, Van de Ville, and Forster-Heinlein][3] found a way to do this
+with a more computationally expensive
+symmetrically reversible all-pass filter in 2007.
 Also, JOS claims the all-pass approach isn’t suitable for “random
 access” — computing output sample *n* without computing all the *n*
 output samples before it, which is obviously relevant to tiled
 rendering of images — because it’s recursive; but presumably you can
 apply the standard prefix-sum algorithm to the recurrence relation to
 get a more efficient way to do random access.)
+
+[3]: https://hal.archives-ouvertes.fr/hal-00377101/document
 
 Sampling different pixels in the same row (or column) being shifted
 will result in making zero copies of some of them and two copies of

@@ -183,7 +183,8 @@ So, to get a matrix for rotation by *θ* out of this, we need cos *θ* =
 1 - *αβ* and sin *θ* = -*β* = *α*²*β* - 2*α*, which is three equations
 in two unknowns.  We have directly that *β* = -sin *θ*, and to
 calculate *α* we can observe that cos *θ* = √(1 - sin² *θ*) = √(1 -
-*β*²) = 1 - *αβ*.  Thus *α* = (1 - √(1 - *β*²))/*β*.
+*β*²) = 1 - *αβ*.  Thus *α* = (1 - √(1 - *β*²))/*β*.  (As it turns
+out, this is -tan ½*θ*, but that’s a terrible way to calculate it.)
 
 But our problem was overdetermined, so we still have to check if this
 gives us -*β* = *α*²*β* - 2*α*, so we want to see if *β* = 2*α* -
