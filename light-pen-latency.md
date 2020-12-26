@@ -46,7 +46,9 @@ DLP4710 chip][12] can only manage 120Hz [but still cost US$170][13].
 Is there nothing we can do to do HCI experimentation with low-latency
 user interfaces without shelling out the big bucks?
 
-Two possibilities occur to me: light pens and Wacom tablets.
+Five possibilities occur to me: light pens, Wacom tablets, theremins,
+MEMS accelerometers and gyroscopes, and inkjet-printer carriage
+feedback hardware.
 
 Light pens
 ----------
@@ -156,18 +158,19 @@ moving up or down according to where pixels need painting.  So if the
 cursor is in the middle of the screen, for example, you can paint each
 field in two halves, one starting from the cursor and going up, the
 other starting from the cursor and going down.  This might save you
-the return fare from your round-trip ticket.  (I'm not convinced it
+the return fare from your round-trip ticket.  (I’m not convinced it
 will actually help, though.)
 
 Sometimes, though, especially if the cursor is close to the top or
-bottom of the screen, you'll have to spend the time to jump up or down
+bottom of the screen, you’ll have to spend the time to jump up or down
 to the cursor, then jump back to what you were drawing.
 
 So one scheme is:
 
 - 15.73 kHz horizontal raster scan most of the time.
 - 29.97 Hz raster frame rate (33.37 ms per frame).
-- 4:1 interlacing, so each field is 8.34 ms.
+- 4:1 interlacing, so each field is 8.34 ms, implying a 120 Hz vertical
+  retrace frequency, which is probably feasible but may be challenging.
 - Three cursor probes per field: one when it happens to reach the
   cursor and thus costs no travel time; one from a worst-case vertical
   distance of ⅓ field away from the cursor and thus 0.41 ms each way,
@@ -187,31 +190,139 @@ So one scheme is:
   images around the cursor to reduce visual feedback latency.
 - So, out of the 33.37 ms per frame, we spend 0.72 ms probing for the
   cursor 12 times, 9.92 moving the beam vertically to and from where
-  we're tracking the cursor, leaving 22.7 ms to draw pixels.  This
+  we’re tracking the cursor, leaving 22.7 ms to draw pixels.  This
   gives us 357 scan lines of actual data, which is respectably close
   to the 486 visible scan lines of normal NTSC.
 
 I suspect that boustrophedon horizontal scanning might allow us to use
 much higher raster scan rates with the same tube, since there’s no
 need for an HBI, but then you have to modulate your data to avoid
-bright spots where scan lines intersect.
+bright spots where scan lines intersect.  Also, the higher raster scan
+rates would place more demand on the light pen’s signal latency and
+the phosphor’s rise time in order to achieve the same horizontal
+positioning precision.
 
 This would give us 2.8 ms worst case input latency, 1.4 ms average,
 and almost a quarter of a megapixel.  “VGA” resolution, you might say.
 This is capable of supporting some HCI experiments with about two
-orders of magnitude better latency than XXX
+orders of magnitude better latency than commonly deployed user
+interface hardware.
+
+A less demanding way to use the device would be to only draw things in
+a narrow band, like ½ of the screen height, around the cursor.  Maybe
+you could occasionally sneak away to draw something on the outer parts
+of the display, or maybe you could just leave letterboxing black
+strips at the top and bottom of the screen.
 
 Light pens with VGA CRTs
 ------------------------
 
 I also regularly find discarded computer CRT monitors on the sidewalk,
 also usually with the deflection yokes having been already recycled by
-scavengers.  XXX
+scavengers.  These are similar to NTSC TVs, but typically support at
+least 1024×768 pixels at 72 Hz, implying a horizontal deflection
+frequency of at least 55 kHz.
+
+This would probably be a bit superior to an NTSC TV, but maybe not as
+much as you might hope, since the vertical slew rate is still the
+limiting factor on input latency.
 
 Wacom tablets
 -------------
 
-XXX
+I can’t find good information about the latency of Wacom tablets,
+although they’re popular for experimental musical instrument
+interfaces.  Apparently the wires in the tablet grid switch between
+transmitting and receiving to the pen every 20 μs, though, and
+demanding users report higher latency with the USB versions, so I
+suspect they’re submillisecond.
+
+Theremins
+---------
+
+A theremin, invented in 1920, capacitively senses the distance to the
+user’s hand by inducing a small frequency shift in an RF oscillator of
+a few hundred kHz, whose resonator is a tank circuit including the
+user as part of the capacitor.  A second RF oscillator is calibrated
+to have nearly the same frequency; by heterodyning the two, an audio
+difference frequency is produced.  Thus a difference that is very
+small in relative terms — the difference between 100 Hz and 2000 Hz is
+only 1900 Hz, and on a signal resonating around 400 kHz, that’s only a
+difference of about 0.25%, [produced by a difference of about 0.01
+pF][theremin WP].  But this difference can be easily detected.
+
+[theremin WP]: https://en.wikipedia.org/wiki/Theremin#Operating_principles
+
+If I understand correctly, the theremin’s memory, and thus its maximum
+possible response latency, is around a millisecond.  If you want to
+use the theremin principle for low-latency gesture detection, though,
+you probably want to use slightly higher beat frequencies, or directly
+measure the frequency of the oscillations rather than heterodyning
+anything, because measuring the frequency of a 440-Hz distorted sine
+wave in less than a millisecond is, if not impossible, at least
+unnecessarily difficult.
+
+MEMS accelerometers and “gyroscopes”
+------------------------------------
+
+Every new cellphone or tablet computer has one of these MEMS
+accelerometer chips.  I think the [ADXL350] is typical of the genre:
+3×4 mm, 3200 samples per second, 2 milligee resolution, typically a
+few tens of milligees offset error.  A pointing device containing such
+a chip could in theory give you hand orientation and movement feedback
+at 300-μs latency, but of course a cellphone can’t manage anything
+like such low latencies; from Digi-Key these devices cost US$7.38 in
+quantity 10.
+
+[ADXL350]: https://www.digikey.com/en/products/detail/analog-devices-inc/ADXL350BCEZ-RL7/3672596
+
+There are also similar “gyroscope” chips that directly detect
+rotation, as well as “IMU” chips combining both; rotation might
+actually be a more amenable input modality for pointing at things.
+The [TDK IAM-20380] MEMS gyro costs US$10.32 in quantity 10 and gives
+you 16-bit readouts on rotation speed around three axes, with 16.4 to
+131 counts per (degree per second) depending on which range you have
+set, about ±2 degrees per second of offset, and 8000-sample-per-second
+output — but with a built-in low-pass filter, which suggests that
+possibly the signal is super noisy, and which isn't really documented
+in the datasheet except to say that it's 5–250 Hz.  The specs say it
+has 0.010 dps/√Hz noise spectral density, which suggests that at
+500 Hz (thus 1000 samples/second) you’d expect about 0.2 dps of noise,
+which sounds pretty tolerable for a low-latency pointing device.
+
+[TDK IAM-20380]: https://www.digikey.com/en/products/detail/tdk-invensense/IAM-20380/9953664
+
+Even the 2 ms latency implied by the 250 ms low-pass filter setting
+would be a vast improvement over conventional I/O devices.
+
+A cheaper option is the [ST L2G2ISTR], which costs US$2.54 in quantity
+10 and has only two axes; it has 131–262 counts per (degree per
+second) and 9090 samples per second.  Its target market is “optical
+image stabilization”, so presumably digital cameras use it to tilt
+their mirrors around, and high sample rates and low latency are
+obviously a *sine qua non* there.  It has a worse offset rating of
+±5°/s and a better noise density rate of 0.006°/s/√Hz.  It also has a
+built-in LPF, which goes up to 350 Hz, but it can be disabled with the
+`LPF_D` bit in the `CTRL_REG3` register; it claims that this LPF
+imposes 7° of phase delay at 20 Hz, which is about a millisecond of
+latency.
+
+[ST L2G2ISTR]: https://www.digikey.com/en/products/detail/stmicroelectronics/L2G2ISTR/5268014
+
+I suspect that such chips can be scavenged from discarded cellphones.
+
+Inkjet printer feedback strips
+------------------------------
+
+Inkjet printer carriages have precise positional feedback with about
+20-μm precision, typically using an optical quadrature encoder made of
+four differential slit photointerruptors with some integrated
+comparators and a strip of transparent plastic with black stripes
+printed on it; typically these operate at about 200 mm/s in normal
+printer operation, suggesting about a 10kHz encoder transition rate.
+If you could arrange your input device to move such a carriage, you
+could decode the quadrature signal and probably get submillisecond
+latency out of that hardware.
 
 Thanks
 ------

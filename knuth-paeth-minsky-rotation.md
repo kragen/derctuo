@@ -134,7 +134,9 @@ per-pixel sampling operations, even rounding.
 
 The disadvantage of Paeth’s three-shear rotation is that it produces a
 lot of aliasing artifacts because of the constraint of shifting the
-pixels only by integer amounts.
+pixels only by integer amounts.  See [the note on stochastic
+fractional delay lines](stochastic-fractional-delay-lines.md) for some
+approaches to this problem.
 
 Paeth’s algorithm for rotating a vector (*x*, *y*) consist of the
 following three steps:
@@ -200,6 +202,11 @@ example, for *θ* = 10°, *β* = -sin *θ* ≈ -.174, *α* = (1 - √(1 -
 angles of respectively 0°, 10°, 20°, and 30°, so it seems to be
 working, though with a bit of rounding error — the last one should
 have been (86.6 = 100√¾, 50.0 = 100/2).
+
+[Toffoli and Quick] in 1997 reported a similar three-shear algorithm
+for three-dimensional rotation, but I haven’t read the paper.
+
+[Toffoli and Quick]: https://www.sciencedirect.com/science/article/abs/pii/S1077316997904202
 
 Minsky’s circle algorithm and two-shear image rotation
 ------------------------------------------------------
