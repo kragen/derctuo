@@ -55,8 +55,9 @@ photodetectors, and impedance tomography.
 Light pens
 ----------
 
-A light pen — described in Ivan Sutherland’s SKETCHPAD dissertation,
-but I forget if he invented the thing or not — is a
+A light pen — described in Ivan Sutherland’s SKETCHPAD dissertation
+and [his 1994 talk about SKETCHPAD][22], and he seems to have been
+the first to draw with it, but apparently didn’t invent the thing — is a
 high-temporal-resolution light sensor in a tube.  You point it at a
 CRT screen, and it detects the time when the electron beam illuminates
 the point the pen is pointed at on the screen.  A [6-ns photodiode
@@ -98,6 +99,7 @@ across 525 lines, that’s only 762 pixels per line, only 52.7/63.6 =
 [19]: https://apps.dtic.mil/dtic/tr/fulltext/u2/a221095.pdf "USAARL Report No. 83-5, Analysis of image smear in CRT displays due to scan rate and phosphor persistence, Clarence E. Rash, October 1982"
 [20]: https://en.wikipedia.org/wiki/NTSC#Transmission_modulation_method
 [21]: https://en.wikipedia.org/wiki/Phosphor
+[22]: https://www.youtube.com/watch?v=-sbeghygOt4 "Sketchpad - A Man-Machine Graphical Information System, a talk at the Bay Area Computer History Perspectives lecture series, organized by Peter Nurkse and Jeanie Treichel, recorded on '3/22/94', distributed by Sun Microsystems, Inc., in 1996"
 
 However, because each point on the screen is only scanned once every
 33.3 ms, your average latency *in the light pen itself* would be
@@ -105,7 +107,7 @@ However, because each point on the screen is only scanned once every
 unpromising place to start.
 
 However, in SKETCHPAD, Sutherland was driving the TX-2’s “scope” with
-two registers that were wired up to (12-bit?) DACs; so, by writing to
+two registers that were wired up to (10-bit) DACs; so, by writing to
 these registers, he could position the electron beam at any position
 on the screen immediately.  To track the light pen, he drew a
 crosshair around the point where the pen was believed to be pointing,
@@ -260,7 +262,8 @@ film electrode could provide a faster-response alternative to a moving
 mirror.)  This approach of course would also work with a light pen in
 the same way as the scanning electron beam from a CRT, but without the
 problems induced by phosphor persistence and phosphor electron
-penetration depth.
+penetration depth.  Ordinary laser-show galvos are capable of much
+faster response than typical CRT vertical deflection yokes.
 
 Ordinary LCD and DMD projectors cannot be used in this way because the
 high-resolution time-domain signal is respectively absent or not under
@@ -268,6 +271,17 @@ the control of the computer system.  (DMDs control the brightness of
 their pixels with PWM at some kilohertz, so they would be able to
 transmit tens of kilobits pe second of data if those PWM signals could
 be fed in externally.)
+
+A potentially more interesting way to do this would be to use a
+separate infrared (or green + infrared) tracking laser to track the
+light pen, so that you would never have to move the tracking laser
+away from the indicated point, except when you lost it.
+
+Such light pens would probably also usually be indirect pointing
+devices, where the user relies on projected feedback from the computer
+system to find out where their “hand” is, although with rear
+projection (like large multitouch screens use) you could get direct
+pointing out of them.
 
 Wacom tablets
 -------------
