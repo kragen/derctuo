@@ -5,10 +5,9 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- it’s prepending notes/ to all my https:// links in the PDF
 - ugh, is there a way to include jpegs and pngs in the PDF?
   apparently jpegs are sort of easy https://stackoverflow.com/questions/9505098/proper-way-to-add-an-image-file-inside-a-pdf-document-generated-with-reportlab-o
-  story.append(Image(open('foo.jpeg', 'rb')))
+  story.append(reportlab.platypus.Image(open('foo.jpeg', 'rb')))
 - add machine-teeth and language-of-choice and ancient-batteries and atkinson-differential-blower and abbe-limited-dro and field-programmable-rtl-array and hardware-queuing subtitles
 - fix rigid-glider typo
 - accidental italic in stepped-planetary
@@ -34,6 +33,7 @@ Watch for problems with:
 - link in stepped-planetary to lantern-gears fails in PDF (as do other
   such links); it's because they don't start with "../notes/".
 - sentential-database and line-numbered-isam-buffers markdown syntax
+- external links (it was prepending notes/ to all my https:// links in the PDF)
 
 Next up:
 

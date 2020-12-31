@@ -319,7 +319,7 @@ def resolve_link(corpus, url, base):
         dirname = dirname[:dirname.rindex('/')] if '/' in dirname else ''
     url = dirname + '/' + url if dirname else url
     #print("got %s resolving %s in %s" % (url, orig_url, base))
-    return 'bookmark' if url in corpus else 'URL', url
+    return ('bookmark', url) if url in corpus else ('URL', orig_url)
 
 def add_link(c, box, link):
     if not link:
