@@ -7,15 +7,17 @@ Urgent to fix:
 
 - import notes
 - fix .md links
-- put .jpeg and .png into liabilities and fix links to them
+- put .jpeg and .png into liabilities and fix links to them.  or just into notes
 - does it include library/?
 - write introduction?
 - divide notes by month
 - prefix 0 to dates
-- fix sentential-database markdown syntax
-- rigid-glider typo
-- delete spiral-house
+- fix sentential-database and  line-numbered-isam-buffers markdown syntax
+- delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
+- add machine-teeth and language-of-choice subtitles
+- fix rigid-glider typo
+- fix missing link [8] in multimeter-metrology
 
 Next up:
 

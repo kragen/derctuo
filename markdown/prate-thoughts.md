@@ -185,21 +185,25 @@ and “commit”) and “event”.
 Detached and batched signatures
 -------------------------------
 
-    22:43 < xentrac> I hadn't thought about separating the signatures from the commit bodies.  that could 
-                     certainly speed up verification of updates
-    22:44 < xentrac> like, if I have commits 1-8, and you send me commits 9-16, I can just verify the commit-16 
-                     signature instead of the signatures of all eight commits
-    22:45 < xentrac> OTOH I'd still have to get the other seven signatures in order to be able to send commits 
-                     9-10 to somebody else who doesn't have time/bandwidth for the other six yet
-    22:46 < xentrac> because I'd need to send them commit 10's signature.  and then what if it turns out to be 
-                     invalid?
-    Day changed to 07 Oct 2020
-    19:37 < Remosi> xentrac, instead of the signatures for all of them, you can just transmit the hashes
-    19:37 < Remosi> and then the final signature
-    19:37 < Remosi> the hash presumably being no more bits than the signature.
-    19:46 < xentrac> you're saying that I can send mr. low bandwidth the full commits 9 and 10, and then only the 
-                     hashes of commits 11-16, and then the signature for commit 16?
-    19:48 < xentrac> I guess that's possible if the commit hashes in the chain are calculated over the previous 
-                     commit hash and a hash of the current commit body
-    19:53 < Remosi> it does mean however you have to send hashes for 11-16 rather than just a signature for 10.
-    19:56 < xentrac> yeah, but maybe that's a reasonable tradeoff for not having to receive signatures for 11-16
+As Remosi pointed out when I brought it up, it might be useful to
+separate the signature from the page, so that a single
+signature-verification operation is sufficient to validate all pages
+up to a given point in the journal.  Moreover, a Merkle chain over the
+pages permits verifying the whole journal up to that point with some
+degree of independence from actually reading the pages.
+
+That is, given a signing operation S<sub>k</sub>(hashval) and a
+hashing operation H(data), when you author a page Pᵢ, you can compute
+aᵢ = H(Pᵢ), bᵢ = H("cons" || bᵢ₋₁ || aᵢ) and sᵢ = S<sub>k</sub>(bᵢ),
+and distribute all three of them.  (We can take b₀ to be some
+convenient public value such as “”.)  Someone who wants to verify the
+journal signature up to i needs only sᵢ and all the aⱼ and bⱼ for j ≤
+i, which is (for many signing algorithms) considerably more compact
+than a signature per page and also faster to verify.  This then allows
+them to verify particular page data if and when they actually get the
+pages.
+
+Thanks
+------
+
+To Remosi for a very helpful discussion.
