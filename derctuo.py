@@ -408,20 +408,20 @@ def note_date(note):
 
 def index_html(bundle):
     notes = sorted(bundle.notes, key=note_date)
-    note_years = []
-    last_year = None
+    note_months = []
+    last_month = None
     for note in notes:
-        year = re.compile('[- ]').split(note.date_string())[0]
-        if year != last_year:
-            if last_year != None:
-                note_years.append(ol(current_ol))
-            note_years.append(h3(year))
+        month = '-'.join(re.compile('[- ]').split(note.date_string())[0:2])
+        if month != last_month:
+            if last_month != None:
+                note_months.append(ol(current_ol))
+            note_months.append(h3(month))
             current_ol = []
-            last_year = year
+            last_month = month
         current_ol.append(li(note.link_ley(level=0), note.extra_ley(), "\n"))
 
-    if last_year != None:
-        note_years.append(ol(current_ol))
+    if last_month != None:
+        note_months.append(ol(current_ol))
 
     bundle_title = bundle.get_title()
     categories = sorted(bundle.categories())
@@ -430,7 +430,7 @@ def index_html(bundle):
                     h1(bundle_title),
                     bundle.get_intro(),
                     h2('Notes'),
-                    note_years,
+                    note_months,
                     div(h2('Topics'),
                         ul([li(bundle.category_link(category, level=0),
                                " (%d notes)" % bundle.category_size(category),
