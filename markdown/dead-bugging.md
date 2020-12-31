@@ -47,4 +47,4 @@ which I used for the soldering as well:
 
 ![(photo of sleeping-bug chip)][0]
 
-[0]: https://i.ibb.co/3y28R5n/20201104-083250.jpg
+[0]: 20201104-083250.jpeg

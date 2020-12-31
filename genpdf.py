@@ -81,6 +81,8 @@ from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase.cidfonts import UnicodeCIDFont
 
+from PIL import Image
+
 
 def style_override(style, prop, val):
     rv = style.copy()
@@ -278,6 +280,22 @@ class Textobject:
             self.color = style['color']
             self.drawn_anything = False
 
+    def image_block(self, style, img):
+        # Let’s scale it to 75 dpi, or to fit in the page
+        # width, whichever is smaller.
+        width = min(img.size[0] * 72 / 75.0,
+                    pagesize[0] - right_margin - left_margin)
+        height = width * img.size[1] / img.size[0]
+        assert height < pagesize[1] - top_margin - bottom_margin  # XXX rescale tall images
+        self.newline(style, height - style['font-size'])
+        if self.t.getY() + height > pagesize[1] - top_margin:
+            print("at top, going down")
+            self.newline(style, height - style['font-size'])
+        print("at y=%s of %s, height=%s" % (self.t.getY(), pagesize[1], height))
+
+        self.c.drawInlineImage(img, left_margin, self.t.getY(),
+                               width=width, height=height)
+
     def flush(self):
         if self.drawn_anything:
             self.c.drawText(self.t)
@@ -309,15 +327,16 @@ class Textobject:
     def set_rise(self, rise):
         return self.t.setRise(rise)
 
+def absolute_url(base, relative_url):
+    return os.path.normpath(os.path.join(os.path.dirname(base), relative_url))
+
+assert absolute_url('index.html', 'notes/foo.html') == 'notes/foo.html'
+assert absolute_url('notes/foo.html', '../topics/bar.html') == 'topics/bar.html'
+assert absolute_url('notes/foo.html', 'foo.png') == 'notes/foo.png'
+
 def resolve_link(corpus, url, base):
     orig_url = url
-    # Ugh, there has to be a better way to handle relative path traversal...
-    # but I guess this’ll do for now
-    dirname = base[:base.rindex('/')] if '/' in base else ''
-    while url.startswith('../'):
-        url = url[3:]
-        dirname = dirname[:dirname.rindex('/')] if '/' in dirname else ''
-    url = dirname + '/' + url if dirname else url
+    url = absolute_url(base, url)
     #print("got %s resolving %s in %s" % (url, orig_url, base))
     return ('bookmark', url) if url in corpus else ('URL', orig_url)
 
@@ -512,7 +531,7 @@ def push_style(stack, current_style, prop, value):
     stack.append(('restore', (prop, current_style[prop])))
     current_style[prop] = value
 
-def render(pagenos, corpus, bookmark, c, xml, fonts, base):
+def render(pagenos, corpus, bookmark, c, xml, fonts, base, filename):
     print("PDFing", bookmark)
     c.bookmarkPage(bookmark, fit='XYZ')  # `fit` to suppress zooming out to whole page
     pagenos[bookmark] = c.getPageNumber()
@@ -582,6 +601,12 @@ def render(pagenos, corpus, bookmark, c, xml, fonts, base):
                 text_out(fonts, t, current_style, u'• ')
             elif obj.tag == 'pre':
                 push_style(stack, current_style, 'white-space', 'pre')
+            elif obj.tag == 'img':
+                imgname = absolute_url(filename, obj.get('src'))
+                print("img.@src=%r" % imgname)
+                if imgname.endswith('.jpeg') or imgname.endswith('.png'):
+                    imgfile = Image.open(imgname)
+                    t.image_block(start_page_style, imgfile)
 
             if obj.tag in inline_fonts:
                 # XXX maybe refactor how these are specced
@@ -782,7 +807,7 @@ def main(path):
         else:
             root = parse_html(filename)
 
-        render(pagenos, corpus, bookmarkname, canvas, root, fonts, base=bookmarkname)
+        render(pagenos, corpus, bookmarkname, canvas, root, fonts, base=bookmarkname, filename=filename)
 
     pagenos.save()
     canvas.save()

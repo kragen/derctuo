@@ -103,6 +103,7 @@ scribal-basic written 02020-12-12
     concerns programming-languages hci basic python clu logo debugging
     concerns tcl nostalgia perl js imgui music
 js category-titled The+JS+language
+clu category-titled The+CLU+language
 
 secure-scuttlebutt written 02020-10-02
     updated 02020-11-06
@@ -223,6 +224,7 @@ stm32 category-titled The+STM32+microcontroller+family
 stochastic-fractional-delay-lines written 02020-12-26
     updated 02020-12-26
     concerns karplus-strong dsp music math graphics paeth-rotation algorithms performance
+karplus-strong category-titled Karplus–Strong
 
 successive-approximation-ui written 02020-12-28
     updated 02020-12-28
