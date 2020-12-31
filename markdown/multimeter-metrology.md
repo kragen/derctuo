@@ -206,12 +206,12 @@ weight to return them to their original position.)
 > 20–40 V/μm.  Say you charge it to 10 V instead.  Now it's only
 > 88.541878 nanonewtons.
 >
-> [8]: https://en.wikipedia.org/wiki/Dielectric_strength
->
 > That doesn't sound like a whole lot, but it's 8000 times larger than
 > its weight instead of a thousand times less, so you could easily
 > make it overwhelmingly the largest force on the capacitor.  It's a
 > lot less than an atmosphere, though.
+
+[8]: https://en.wikipedia.org/wiki/Dielectric_strength
 
 As a standard of resistance, he describes the construction of an
 air-core inductor of known dimensions and thus computable inductance,
