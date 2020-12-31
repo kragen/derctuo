@@ -6,13 +6,14 @@ Just ganked from Dercuano.
 Urgent to fix:
 
 - no PDF
-- write introduction?
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
-- add machine-teeth and language-of-choice subtitles
+- add machine-teeth and language-of-choice and ancient-batteries and atkinson-differential-blower and abbe-limited-dro and field-programmable-rtl-array and hardware-queuing subtitles
 - fix rigid-glider typo
 - fix ''"" dumbquotes and ---
+- expand introduction?
+- title page?
 
 Watch for problems with:
 

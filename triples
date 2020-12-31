@@ -35,6 +35,8 @@ veskeno-outline written 02020-06-17
 vector-vm written 02020-04-21
     updated 02020-06-17
     titled A+reproducible+vector-instruction+VM?
+    concerns derctuo reproducibiity arrays performance numpy python lush chifir c simd octave r
+simd category-titled SIMD
 
 ultra-machining written 02020-07-06
     updated 02020-07-18
@@ -173,6 +175,7 @@ relay-buzzer written 02020-11-23
 
 rep-2-cuboid written 02020-11-13
     updated 02020-11-13
+    titled The+rep-2+cuboid
 
 retro-teletext written 02020-07-18
     updated 02020-07-23
@@ -251,10 +254,12 @@ punk-zine-look written 02020-11-28
 pure-functional-ui written 02020-04-21
     updated 02020-04-21
     titled Pure+functional+UI
+    concerns guis hci caching
 
 pure-functional-vm written 02020-04-21
     updated 02020-04-21
     titled Pure+functional+VM
+    concerns derctuo reproducibiity instruction-sets
 
 pyrolysis-3d-printing written 02020-08-02
     updated 02020-11-24
@@ -384,6 +389,8 @@ long-distance-radio written 02020-07-17
 
 abbe-limited-dro written 02020-10-24
     updated 02020-10-24
+    titled Abbe-limited+DRO
+    concerns metrology mechanical digital-fabrication manufacturing
 
 adiabatic-separation written 02020-11-12
     updated 02020-11-14
@@ -398,12 +405,16 @@ all-pass-fonts written 02020-05-18
 
 aluminum-air-batteries written 02020-09-23
     updated 02020-09-23
+    titled Aluminum-air+batteries
+    concerns materials energy electrolysis electronics
 
 ancient-batteries written 02020-09-23
     updated 02020-10-12
 
 ancient-machinists written 02020-10-08
     updated 02020-10-08
+    concerns egypt history manufacturing facepalm crackpots
+egypt category-titled Egypt    
 
 atkinson-differential-blower written 02020-10-14
     updated 02020-10-15
@@ -456,9 +467,11 @@ ccn category-titled Content-centric+networking/named-data+networking
 
 cheapest-ics written 02020-10-27
     updated 02020-10-30
+    titled Some+of+the+cheapest+memory+ICs
 
 cheating-etendue written 02020-12-26
     updated 02020-12-26
+    titled Cheating+étendue?
 
 circle-portal-gui-ii written 02020-12-22
     updated 02020-12-23
@@ -467,9 +480,11 @@ circle-portal-gui-ii written 02020-12-22
 
 circuit-text written 02020-11-11
     updated 02020-11-26
+    titled A+compact+textual+format+for+interchange+of+electronic+circuit+designs
 
 cmg-walker written 02020-10-11
     updated 02020-10-12
+    titled A+seamless+CMG-driven+walker
 
 cold-plasma written 02020-11-08
     updated 02020-11-24
@@ -480,12 +495,14 @@ commit-log-transfer written 02020-05-16
 
 compound-literals written 02020-11-27
     updated 02020-11-27
+    titled Using+C99+compound+literals+unjustifiably
 
 compressed-imaging written 02020-12-06
     updated 02020-12-06
 
 compressed-sensing-oscilloscope written 02020-11-17
     updated 02020-11-17
+    titled Oscilloscope+superresolution+via+compressed+sensing?
 
 convincingness written 02020-06-20
     updated 02020-06-20
@@ -495,6 +512,8 @@ copper-salts written 02020-09-21
 
 copper-segelin written 02020-11-06
     updated 02020-11-08
+    titled Copper+segelín
+    concerns digital-fabrication electronics
 
 covid-deaths written 02020-07-10
     updated 02020-07-10
@@ -503,6 +522,8 @@ covid-deaths written 02020-07-10
 
 covid-vitamin-d written 02020-10-27
     updated 02020-10-28
+    titled COVID-19+risk+and+vitamin+D
+    concerns health covid household
 
 cutting-steel-with-steam written 02020-11-11
     updated 02020-11-11
@@ -532,18 +553,27 @@ differential-dividing-plate written 02020-12-31
 
 digital-dagarti written 02020-09-23
     updated 02020-09-23
+    titled A+digital+Dagarti+might+save+your+life
 
 diode-thermometer written 02020-11-27
     updated 02020-11-27
+    titled A+revere-biased+diode+thermometer
+    concerns metrology electronics
 
 dns-rendezvous written 02020-10-07
     updated 02020-10-07
+    titled DNS+Cache+Rendezvous:+a+permissionless+signaling+channel+for+bootstrapping+end-to-end+connections
+    concerns protocols security dns
+dns category-titled DNS
 
 e12-music written 02020-11-17
     updated 02020-12-26
+    titled Representing+E12+electronic+component+values+musically
 
 ecm-engraving written 02020-12-31
     updated 02020-12-31
+    titled ECM+engraving
+    concerns ecm digital-fabrication archival materials manufacturing
 
 electrodeposition-3d-printing written 02020-08-15
     updated 02020-08-15
@@ -555,6 +585,8 @@ electrodeposition-welding written 02020-12-31
 
 electro-etching-graded-index-optics written 02020-12-31
     updated 02020-12-31
+    titled Electro-etching+graded-index+optics+in+porous+silicon
+    concerns optics materials digital-fabrication
 
 electroforming-networks written 02020-12-22
     updated 02020-12-22
@@ -568,15 +600,21 @@ electronics-next-project written 02020-12-21
 
 estimation written 02020-04-20
     updated 02020-04-20
+    titled Difficulty+estimation+of+programming+tasks
+    concerns programming psychology derctuo dercuano bubbleos
+bubbleos category-titled BubbleOS
 
 field-programmable-rtl-array written 02020-11-26
     updated 02020-11-27
+    titled A+field-programmable+RTL+array:+a+more+efficient+alternative+to+FPGAs?
 
 fluidic-household-pumping written 02020-10-18
     updated 02020-10-19
 
 foam-electro-etching written 02020-11-26
     updated 02020-12-31
+    titled Foam+electro-etching+and+related+techniques
+    concerns electrolysis digital-fabrication materials
 
 foaming-infiltration written 02020-11-06
     updated 02020-11-06
@@ -592,6 +630,7 @@ fossil-geothermal written 02020-08-02
 
 garden-light-panel written 02020-11-17
     updated 02020-12-01
+    titled A+solar+panel+from+an+LED+garden+light
 
 geomagnetic-energy-harvesting written 02020-11-24
     updated 02020-11-24
@@ -651,6 +690,7 @@ knuth-paeth-minsky-rotation written 02020-12-23
 
 nodebook written 02020-10-07
     updated 02020-10-07
+    titled Nodebook:+autotagging+quantities+for+ad-hoc+calculation+and+example-based+end-user+programming
 
 non-numerical-numpy written 02020-06-29
     updated 02020-06-30

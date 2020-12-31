@@ -270,7 +270,7 @@ If you're indexing along multiple dimensions at once, the indices must
 be conformable, as if you were adding or multiplying them together,
 which in a sense you are (see above about `xs + width * ys`):
 
-   >>> y[[0, 1, 0], [2, 2, 1, 2]]
+    >>> y[[0, 1, 0], [2, 2, 1, 2]]
     Traceback (most recent call last):
       File "<stdin>", line 1, in <module>
     IndexError: shape mismatch: indexing arrays could not be broadcast together with shapes (3,) (4,) 
