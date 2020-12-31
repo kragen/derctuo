@@ -1,6 +1,18 @@
 derctuo version 020201230
     by Kragen+Javier+Sitaker
 
+# Popular categories from Dercuano:
+# 3d-printing algorithms archival arrays asm audio avr c caching ceramic
+# communication compilers compression convolution databases
+# digital-fabrication dsp economics electronics energy facepalm forth
+# ghettobotics graphics guis hci history household incremental-computation
+# independence instruction-sets intervals latency manufacturing materials
+# math mechanical metrology microcontrollers music operating-systems optics
+# optimization performance physical-computation physics politics prefix-sums
+# pricing programming programming-languages protocols psychology python
+# sa self-replication small-is-beautiful solar stacks syntax the-future
+# thermodynamics utopias
+
 yablochkov-arc-cutter written 02020-12-09
     updated 02020-12-09
 
@@ -381,6 +393,8 @@ alien-screws written 02020-11-06
 
 all-pass-fonts written 02020-05-18
     updated 02020-05-18
+    titled Font+rendering+with+all-pass+filters
+    concerns performance graphics fonts all-pass-filters dsp
 
 aluminum-air-batteries written 02020-09-23
     updated 02020-09-23
@@ -412,9 +426,13 @@ bluepill-aspirations written 02020-10-30
 
 bok-outline written 02020-06-06
     updated 02020-10-28
+    titled Tentative+outline+of+a+body+of+knowledge
+    concerns derctuo
 
 buck-speaker written 02020-06-29
     updated 02020-06-29
+    titled Trying+to+drive+a+speaker+with+a+buck+converter
+    concerns audio electronics facepalm
 
 caching-layout written 02020-12-03
     updated 02020-12-03
@@ -427,9 +445,14 @@ capacitor-meter written 02020-11-16
 
 ccn-static-hypertext written 02020-05-16
     updated 02020-05-16
+    titled Static+hypertext+on+CCN
+    concerns ccn protocols
 
 ccn-streams written 02020-05-16
     updated 02020-05-16
+    titled Feeds+or+streams+on+CCNs
+    concerns sa ccn feeds kafka protocols merkle-graphs economics
+ccn category-titled Content-centric+networking/named-data+networking    
 
 cheapest-ics written 02020-10-27
     updated 02020-10-30
@@ -439,6 +462,8 @@ cheating-etendue written 02020-12-26
 
 circle-portal-gui-ii written 02020-12-22
     updated 02020-12-23
+    titled Circle-portal+GUI+Ⅱ
+    concerns guis hci small-is-beautiful
 
 circuit-text written 02020-11-11
     updated 02020-11-26
@@ -451,6 +476,7 @@ cold-plasma written 02020-11-08
 
 commit-log-transfer written 02020-05-16
     updated 02020-05-16
+    concerns kafka protocols performance sa flatbuffers pubsub
 
 compound-literals written 02020-11-27
     updated 02020-11-27
@@ -472,6 +498,8 @@ copper-segelin written 02020-11-06
 
 covid-deaths written 02020-07-10
     updated 02020-07-10
+    titled Importing+the+WHO’s+COVID-19+data+into+SQLite
+    concerns covid sql derctuo
 
 covid-vitamin-d written 02020-10-27
     updated 02020-10-28
@@ -481,9 +509,14 @@ cutting-steel-with-steam written 02020-11-11
 
 cyclic-fabrication-systems written 02020-08-17
     updated 02020-09-10
+    concerns independence metrology manufacturing digital-fabrication materials the-future thermodynamics utopias edm ecm
+edm category-titled Electric+discharge+machining
+ecm category-titled Electrochemical+machining
 
 cyclopaedia-1880 written 02020-09-17
     updated 02020-10-23
+    titled An+index+of+the+1880+edition+of+Cooley’s+Cyclopædia
+    concerns materials history
 
 datasheets written 02020-11-02
     updated 02020-12-22
@@ -514,6 +547,8 @@ ecm-engraving written 02020-12-31
 
 electrodeposition-3d-printing written 02020-08-15
     updated 02020-08-15
+    titled 3-D+printing+iron+by+electrodeposition?
+    concerns electrolysis materials digital-fabrication manufacturing
 
 electrodeposition-welding written 02020-12-31
     updated 02020-12-31
@@ -526,6 +561,7 @@ electroforming-networks written 02020-12-22
 
 electronics-kit written 02020-05-23
     updated 02020-12-20
+    concerns electronics ghettobotics metrology
 
 electronics-next-project written 02020-12-21
     updated 02020-12-22
@@ -547,9 +583,12 @@ foaming-infiltration written 02020-11-06
 
 foil-marking-glass written 02020-08-18
     updated 02020-08-18
+    titled Foil-marking+glass
+    concerns manufacturing materials
 
 fossil-geothermal written 02020-08-02
     updated 02020-11-13
+    concerns geothermal energy mole-people
 
 garden-light-panel written 02020-11-17
     updated 02020-12-01
@@ -562,12 +601,15 @@ ghettobotics-nonshopping-list written 02020-11-04
 
 ghettobotics-soldering-iron written 02020-06-17
     updated 02020-06-17
+    concerns ghettobotics electronics edc
 
 globoflexia written 02020-10-05
     updated 02020-10-10
 
 guecs written 02020-07-18
     updated 02020-07-18
+    concerns sa simulation programming muds
+muds category-titled MUDs    
 
 hacker-calendar written 02020-06-28
     updated 02020-12-03
@@ -586,9 +628,11 @@ hot-fabrication written 02020-09-21
 
 icp-torch written 02020-09-10
     updated 02020-09-10
+    titled Inductively-coupled+plasma+torches
 
 inorganic-burnout written 02020-09-11
     updated 02020-09-12
+    concerns materials digital-fabrication
 
 inspiration written 02020-10-15
     updated 02020-10-15
@@ -610,6 +654,11 @@ nodebook written 02020-10-07
 
 non-numerical-numpy written 02020-06-29
     updated 02020-06-30
+    titled Using+Numpy+for+non-numerical+computation:+what+would+a+good+example+be?
+    concerns python numpy programming arrays
 
 6-trit-variac written 02020-06-06
     updated 02020-06-06
+    titled A+6-bit+“variac+casero”
+    concerns electronics ghettobotics ternary edc
+edc category-titled Espacio+de+César

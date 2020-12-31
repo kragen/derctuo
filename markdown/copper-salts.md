@@ -1,4 +1,4 @@
-For [Micro-casting fabrication](micro-casting-fabrication.md) I was
+For [Hot fabrication](hot-fabrication.md) I was
 thinking it might be useful to be able to smelt copper into a mold
 with a thermite reaction.  But for that you need cuprite, cuprous
 oxide, which I do not know where to buy.

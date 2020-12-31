@@ -5,13 +5,14 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- why are there no topics pages?
+- no PDF
 - write introduction?
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
 - add machine-teeth and language-of-choice subtitles
 - fix rigid-glider typo
+- fix ''"" dumbquotes and ---
 
 Watch for problems with:
 
@@ -21,6 +22,7 @@ Watch for problems with:
 - library/ directory copied
 - prefix 0 to dates
 - divide notes by month
+- topics pages
 
 Next up:
 
