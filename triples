@@ -382,7 +382,7 @@ machine-readable-microcontroller-output written 02020-11-26
     concerns dsp coding communication ultrasound avr arduino leds radio
 
 machine-teeth written 02020-08-02
-    updated 02020-08-17
+    updated 02020-12-31
     concerns materials strength carborundum sapphire zirconia self-replication
     concerns digital-fabrication mechanical steel contrivances archaeology
 
@@ -502,7 +502,8 @@ oxygen-generator-rocket written 02020-09-10
     concerns energy materials physics rockets facepalm contrivances flying-machines
 
 language-of-choice written 02020-12-09
-    updated 02020-12-09
+    updated 02020-12-31
+    titled The+Language+of+Choice,+and+other+languages
     concerns logic programming algorithms performance pegs parsing laws-of-form
     concerns prolog notations
 
@@ -570,9 +571,10 @@ long-distance-radio written 02020-07-17
 naomi-wu category-titled Naomi+Wu
 
 abbe-limited-dro written 02020-10-24
-    updated 02020-10-24
+    updated 02020-12-31
     titled Abbe-limited+DRO
     concerns metrology mechanical digital-fabrication manufacturing contrivances
+    concerns metamaterials materials control sparkle optics leds scanning-probe-microscopes
 
 adiabatic-separation written 02020-11-12
     updated 02020-11-14
@@ -594,16 +596,17 @@ aluminum-air-batteries written 02020-09-23
     concerns materials energy electrolysis electronics batteries contrivances
 
 ancient-batteries written 02020-09-23
-    updated 02020-10-12
-    concerns electrolysis history batteries materials experiment-report
+    updated 02020-12-31
+    concerns electrolysis history batteries materials experiment-report batteries crackpots
+    concerns archaeology
 
 ancient-machinists written 02020-10-08
     updated 02020-10-08
-    concerns egypt history manufacturing facepalm crackpots collapse
+    concerns egypt history manufacturing facepalm crackpots collapse archaeology
 egypt category-titled Egypt    
 
 atkinson-differential-blower written 02020-10-14
-    updated 02020-10-15
+    updated 02020-12-31
     concerns mechanical thermodynamics plumbing heat-engines contrivances
 
 audio-vector-image written 02020-11-04
@@ -796,6 +799,7 @@ ecm-engraving written 02020-12-31
     updated 02020-12-31
     titled ECM+engraving
     concerns ecm digital-fabrication archival materials manufacturing
+    concerns scanning-probe-microscopes
 
 electrodeposition-3d-printing written 02020-08-15
     updated 02020-08-15
@@ -809,7 +813,7 @@ electrodeposition-welding written 02020-12-31
 electro-etching-graded-index-optics written 02020-12-31
     updated 02020-12-31
     titled Electro-etching+graded-index+optics+in+porous+silicon
-    concerns optics materials digital-fabrication
+    concerns optics materials digital-fabrication metamaterials
 
 electroforming-networks written 02020-12-22
     updated 02020-12-22
@@ -833,8 +837,9 @@ field-programmable-rtl-array written 02020-11-26
     updated 02020-11-27
     titled A+field-programmable+RTL+array:+a+more+efficient+alternative+to+FPGAs?
     concerns digital-logic bootstrapping minsky-algorithm sketchpad graphics
-    concerns algorithms efficiency math physical-computation history
+    concerns algorithms efficiency math physical-computation history bresenham
     concerns electronics mechanical-computation calculation fpgas contrivances
+    concerns long-now
 fpgas category-titled FPGAs
 
 fluidic-household-pumping written 02020-10-18

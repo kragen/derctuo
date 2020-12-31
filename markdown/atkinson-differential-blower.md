@@ -4,6 +4,9 @@ with one another.  It can use reed valves, like a two-stroke engine;
 both the intake valve and the exhaust valve are at the same end of the
 cylinder.
 
+The orthodox Atkinson cycle
+---------------------------
+
 The sequence is as follows.  Suppose the intake and exhaust valve are
 at the right end of the cylinder, and the pistons are close together,
 with the intake and exhaust valve between them.  First the pumping
@@ -15,6 +18,9 @@ spark fires, and the working piston moves to the right, providing the
 power stroke.  Finally the working piston passes the exhaust valve,
 the hot gas escapes through it, and the pumping piston follows it to
 the right, preparing to pump in the new fuel-air mixture.
+
+Quiet piston blowers
+--------------------
 
 On ##electronics cloudevil was talking about piston-powered blowers,
 displacing multiple liters of air per stroke, suggesting that they

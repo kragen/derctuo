@@ -5,6 +5,9 @@ handlers and sleeping.  (A totally different thought stream involving
 many of the same features is in [the transaction-per-call
 note](transaction-per-call.md).)
 
+The CPU should have a priority queue of runnable instructions
+-------------------------------------------------------------
+
 The idea is basically hardware multithreading, really: each work queue
 item is a machine architectural state (PC, SP, and if applicable
 accumulators, index registers, status flags, MMU tags, etc.), and the

@@ -51,7 +51,7 @@ figure out what values of *A*, *B*, *C*, and *D* that gives us.  If
 there are less degrees of freedom in the observations *y<sub>t</sub>*
 than there are in the four matrices we’re trying to estimate, I think
 the problem is underdetermined.  For example, if we have single scalar
-observations at 100 points in time *y<sub>t<sub>* for a scalar-input
+observations at 100 points in time *y<sub>t</sub>* for a scalar-input
 system (i.e., *u<sub>t</sub>* is also one-dimensional), and we suppose
 that the state space *x<sub>t</sub>* is 10-dimensional, then *A* has
 100 degrees of freedom, *B* has 10, *C* has 10, and *D* has 1, so the

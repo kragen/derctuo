@@ -5,9 +5,6 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- add machine-teeth and language-of-choice and ancient-batteries and atkinson-differential-blower and abbe-limited-dro and field-programmable-rtl-array and hardware-queuing subtitles
-- accidental italic in stepped-planetary
-- accidental subscript italic in hierarchical-state-space-learning
 - expand introduction?
 - title page?
 - notes on copyrights

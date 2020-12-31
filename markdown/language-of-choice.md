@@ -3,6 +3,9 @@ yesterday, which is an introduction to binary decision diagrams;
 chatting with Bacon, a couple of ideas came out that I thought I ought
 to write down.
 
+Eliminating left recursion
+--------------------------
+
 (I’m going to ignore tokenization and thus whitespace here, since it
 would add more heat than light.)
 
@@ -28,6 +31,9 @@ and the other left-associative:
 Of course, once you have a parse tree, it’s a simple pattern-matching
 exercise to construct a parse tree with a different associativity.
 
+(Of course Bacon is aware he didn’t invent left-recursion removal; I
+just had never understood it until he explained it.)
+
 XXX verify these
 
 In this form the language is missing a little bit of expressivity; it
@@ -37,6 +43,11 @@ able to handle arbitrary boolean functions:
 
     <expr> ← ("(" <expr> ")" / <var> / <const>) (if <expr> else <expr>)?
     <const> ← 0 / 1
+
+Memoization sparsity
+--------------------
+
+(See also file `peg-memo-sparsity.md`.)
 
 I was thinking that this grammar might be a good example of when you
 benefit from Packrat’s memoization, but in fact it’s not, once the
@@ -58,6 +69,9 @@ But if we refactor that rule as follows, we regain the desirable
 memorylessness property:
 
     <when> ← <expr> (when <expr>)?
+
+PEG cuts
+--------
 
 Mizushima, Maeda, and Yamaguchi published a paper in 2010 where they
 insert a Prolog-style “cut” operator into PEGs, spelled ↑; the
@@ -94,6 +108,9 @@ backtracking points off the stack as soon as we know we aren’t going
 to need them, which allows us to safely discard everything to the left
 of that point.
 
+Empirical testing of cut insertion
+----------------------------------
+
 Given a candidate criterion for not memoizing a callsite at all, we
 could test it by memoizing it anyway, then testing the parser on some
 input to see which callsites the criterion erred on — those whose memo
@@ -105,7 +122,8 @@ that nonterminal at that position.  I haven’t seen any research on
 this aspect of the problem, but it seems like it would help a lot to
 reduce both the time usage and space usage of the memo table.
 
-*****
+Left-recursive PEGs
+-------------------
 
 There’s a trick due to Warth, Douglas, and Millstein, which lets Packrat parse some
 left-recursive grammars at the expense of their linear-time guarantee,
@@ -137,6 +155,7 @@ locally from a top-down parser into a bottom-up parser.
 I think Medeiros, Mascarenhas, and Ierusalemschy have written a 2014
 paper on this question.
 
+Alternative Boolean syntax
 ----
 
 An earlier draft of Bacon’s article, if I recall correctly, chose the

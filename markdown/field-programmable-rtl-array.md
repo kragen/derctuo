@@ -2,6 +2,9 @@ What if, instead of individual registered LUTs, you programmed a
 synchronous register-transfer-level machine whose individual units
 were more like an ALU, or a GreenArrays x18 core, than like a gate?
 
+Inspirational computing systems
+-------------------------------
+
 I’m thinking of the TECS NAND-to-Tetris Hack CPU, based on the DG Nova
 and the PDP-8, where individual bits in ALU instructions control
 various aspects of the ALU instruction; and about the kinds of
@@ -35,6 +38,9 @@ The [PDP-8’s similar
 setup](https://github.com/johnwcowan/pdp8x/blob/master/arch.md)
 includes bits for bitwise rotation and byte swapping, which among
 other things makes division much easier to implement.
+
+The FPRTLA
+----------
 
 Now, in a “FPRTLA”, instead of routing individual bits around your
 machine, you could route bytes, or words of 4-64 bits — an 8-bit byte

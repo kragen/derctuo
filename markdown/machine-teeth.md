@@ -4,6 +4,9 @@ correlate, although there is substantial deviation — the plastics have
 immense deformations at break, the metals smaller, the ceramics
 smaller still.
 
+Material hardness and the tooth principle
+-----------------------------------------
+
 Here’s a table of very approximate quantitative figures:
 
     |                              | Young’s | yield   |      tensile |

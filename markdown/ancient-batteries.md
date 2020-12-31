@@ -5,6 +5,9 @@ total of four volts and successfully electroplated a token.
 
 [0]: https://en.wikipedia.org/wiki/Baghdad_Battery
 
+Did the ancients use electrochemistry without knowing it?
+---------------------------------------------------------
+
 I wonder if particular applications of electrochemistry were actually
 used but not understood.  For example, in, I think, Huckleberry Finn,
 which is full of folk beliefs about such things, a character is at one

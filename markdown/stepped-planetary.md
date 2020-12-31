@@ -71,9 +71,9 @@ to the frame of reference of the 106-tooth ring gear and let the
 planet cage spin.  Every time the planet rotates through 106 teeth
 (and 106/71 rotations) in its own frame of reference, the planet
 carrier rotates by one revolution in this frame of reference.  Its
-inner ring rotates by 50*106/71 teeth in its own frame of reference;
+inner ring rotates by 50\*106/71 teeth in its own frame of reference;
 from this we must subtract the single rotation of the frame of
-reference itself, so 50*(-1 + 106/71) teeth, which works out to about
+reference itself, so 50\*(-1 + 106/71) teeth, which works out to about
 24.64789 teeth.  This is about 3.52113 rotations of the pinion.
 
 Remember that, if the dubious and probably wrong calculations above
