@@ -14,6 +14,7 @@ def go(dirname):
     bundle.generate_categories()
     bundle.generate_index()
     bundle.install_liabilities()
+    bundle.install_images()
     bundle.generate_archive()
 
 

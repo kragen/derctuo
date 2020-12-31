@@ -91,10 +91,22 @@ class Bundle:
         with open(self.filename('intro.md'), 'rb') as f:
             return RawHTML(markdown.markdown(f.read().decode('utf-8')))
 
+    def is_image(self, maybe_note_filename):
+        return any(maybe_note_filename.endswith(ext) for ext in ['~', '.png', '.jpeg'])
+
+    def install_images(self):
+        dirname = self.filename('markdown')
+        for filename in sorted(os.listdir(dirname)):
+            if not self.is_image(filename):
+                continue
+            subprocess.check_call(['cp', '-a',
+                                   os.path.join(dirname, filename),
+                                   os.path.join(self.output_dir, 'notes')])
+
     def _notes(self):
         dirname = self.filename('markdown')
         for filename in sorted(os.listdir(dirname)):
-            if filename.endswith('~') or filename[0] in '.#':
+            if filename.endswith('~') or self.is_image(filename) or filename[0] in '.#':
                 continue
             notename = filename[:-3] if filename.endswith('.md') else filename
             yield Note(self, notename, os.path.join(dirname, filename))
