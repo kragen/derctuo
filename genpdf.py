@@ -309,9 +309,16 @@ class Textobject:
     def set_rise(self, rise):
         return self.t.setRise(rise)
 
-def resolve_link(corpus, url):
+def resolve_link(corpus, url, base):
+    orig_url = url
+    # Ugh, there has to be a better way to handle relative path traversal...
+    # but I guess this’ll do for now
+    dirname = base[:base.rindex('/')] if '/' in base else ''
     while url.startswith('../'):
         url = url[3:]
+        dirname = dirname[:dirname.rindex('/')] if '/' in dirname else ''
+    url = dirname + '/' + url if dirname else url
+    #print("got %s resolving %s in %s" % (url, orig_url, base))
     return 'bookmark' if url in corpus else 'URL', url
 
 def add_link(c, box, link):
@@ -505,7 +512,7 @@ def push_style(stack, current_style, prop, value):
     stack.append(('restore', (prop, current_style[prop])))
     current_style[prop] = value
 
-def render(pagenos, corpus, bookmark, c, xml, fonts):
+def render(pagenos, corpus, bookmark, c, xml, fonts, base):
     print("PDFing", bookmark)
     c.bookmarkPage(bookmark, fit='XYZ')  # `fit` to suppress zooming out to whole page
     pagenos[bookmark] = c.getPageNumber()
@@ -598,7 +605,7 @@ def render(pagenos, corpus, bookmark, c, xml, fonts):
             if obj.tag == 'title':
                 title = re.compile(r'\s*Derctuo\s*$').sub('', obj.text).strip()
             if get_link(obj):
-                link_dest = resolve_link(corpus, get_link(obj))
+                link_dest = resolve_link(corpus, get_link(obj), base)
                 push_style(stack, current_style, 'link destination', link_dest)
 
                 if link_dest[0] == 'bookmark':
@@ -775,7 +782,7 @@ def main(path):
         else:
             root = parse_html(filename)
 
-        render(pagenos, corpus, bookmarkname, canvas, root, fonts)
+        render(pagenos, corpus, bookmarkname, canvas, root, fonts, base=bookmarkname)
 
     pagenos.save()
     canvas.save()

@@ -5,12 +5,12 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- link in stepped-planetary to lantern-gears fails in PDF
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
 - add machine-teeth and language-of-choice and ancient-batteries and atkinson-differential-blower and abbe-limited-dro and field-programmable-rtl-array and hardware-queuing subtitles
 - fix rigid-glider typo
+- accidental italic in stepped-planetary
 - fix ''"" dumbquotes and ---
 - expand introduction?
 - title page?
@@ -25,7 +25,12 @@ Watch for problems with:
 - divide notes by month
 - topics pages
 - PDF generation
-- PDF failed on mismatched tag in lithium-fuel, no tidylib; also stm32duino (not well-formed) and sentential-database (mismatched tag) and hierarchical-state-space-learning (mismatched tag)
+- PDF failed on mismatched tag in lithium-fuel; also stm32duino (not
+  well-formed) and sentential-database (mismatched tag) and
+  hierarchical-state-space-learning (mismatched tag) (fixed with
+  tidylib)
+- link in stepped-planetary to lantern-gears fails in PDF (as do other
+  such links); it's because they don't start with "../notes/".
 
 Next up:
 
