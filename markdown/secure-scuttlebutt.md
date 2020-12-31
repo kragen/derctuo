@@ -8,8 +8,11 @@ sort of true, due to problems with JSON canonicalization).  So I’m
 looking at it with more of an eye to implementing a similar but
 incompatible protocol than with an eye to implementing SSB itself.
 
-My overall sense is that the protocol seems pretty sloppy, although
-probably workable for its intended purpose.
+My overall sense is that the protocol seems pretty sloppy, to the
+point that it is probably not workable for its intended purpose.
+
+More detailed stream-of-consciousness notes from reading the spec
+-----------------------------------------------------------------
 
 The formatting of the document seems okay but I’m not wild about
 essential parts of it being represented as PNGs.
