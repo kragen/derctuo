@@ -1,3 +1,8 @@
+<p style="text-align: center; margin: 4em"><i>Kragen Javier Sitaker<br />
+Buenos Aires<br />
+December, 02020<br />
+Public domain work</i></p>
+
 Derctuo is a book of notes on various topics, mostly science and
 engineering with some math, from the first year of the COVID-19
 pandemic, 02020 CE.  Its primary published form is a gzipped tarball
@@ -10,9 +15,10 @@ readability on hand computers.
 My original plan was to write a reproducible
 computation system so that the book would be entirely reproducible
 from a minimal computational core, allowing all of its calculations to
-be not only verified but also extended, reused, and studied.  Instead
+be not only verified but also easily extended, reused, and studied.
+I didn’t get very far on that plan.  Instead
 it’s mostly just about a quarter million words of dead text, with some
-inline images, plus a [bundled library of source
+static inline images, plus a [bundled library of source
 material](notes/library), which is not included in the PDF version.
 
 It contains some novel discoveries, but some of it is just my notes
@@ -44,7 +50,7 @@ current fad in academia (over the last, say, half century) to use
 publication and approved as such by means of scholarly peer review”.
 This is usually not what I mean.
 
-### Public-domain dedication ###
+## Public-domain dedication ##
 
 As far as I’m concerned, everyone is free to redistribute Derctuo, in
 whole or in part, modified or unmodified, with or without credit; I
@@ -63,7 +69,7 @@ fonts, [whose copyright notices are also
 included](liabilities/dejavu-copyright), but DejaVu and FreeFont are
 not used in the HTML tarball.
 
-### Gitlab ###
+## Gitlab ##
 
 At this writing, there’s [a replica of this repo on
 Gitlab](https://gitlab.com/kragen/derctuo).

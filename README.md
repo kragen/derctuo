@@ -253,6 +253,8 @@ the notes to fail to render to PDF.
 PDF generation also depends on the PIL library to include inline
 images in the PDF file.  I’m using 1.1.7.
 
+To build the HTML tarball and the PDF, type `make`.
+
 Errata
 ------
 

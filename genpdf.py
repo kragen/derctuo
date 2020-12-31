@@ -288,10 +288,10 @@ class Textobject:
         height = width * img.size[1] / img.size[0]
         assert height < pagesize[1] - top_margin - bottom_margin  # XXX rescale tall images
         self.newline(style, height - style['font-size'])
+
         if self.t.getY() + height > pagesize[1] - top_margin:
-            print("at top, going down")
+            # We’re at the top of a new page now
             self.newline(style, height - style['font-size'])
-        print("at y=%s of %s, height=%s" % (self.t.getY(), pagesize[1], height))
 
         self.c.drawInlineImage(img, left_margin, self.t.getY(),
                                width=width, height=height)
@@ -603,7 +603,7 @@ def render(pagenos, corpus, bookmark, c, xml, fonts, base, filename):
                 push_style(stack, current_style, 'white-space', 'pre')
             elif obj.tag == 'img':
                 imgname = absolute_url(filename, obj.get('src'))
-                print("img.@src=%r" % imgname)
+                #print("img.@src=%r" % imgname)
                 if imgname.endswith('.jpeg') or imgname.endswith('.png'):
                     imgfile = Image.open(imgname)
                     t.image_block(start_page_style, imgfile)

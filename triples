@@ -363,7 +363,7 @@ pure-functional-ui written 02020-04-21
     titled Pure+functional+UI
     concerns guis hci caching
 guis category-titled GUIs
-hci category-titled HCI
+hci category-titled HCI+(human-computer+interaction)
 
 pure-functional-vm written 02020-04-21
     updated 02020-04-21
