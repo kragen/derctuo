@@ -5,6 +5,7 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
+- it’s prepending notes/ to all my https:// links in the PDF
 - ugh, is there a way to include jpegs and pngs in the PDF?
   apparently jpegs are sort of easy https://stackoverflow.com/questions/9505098/proper-way-to-add-an-image-file-inside-a-pdf-document-generated-with-reportlab-o
   story.append(Image(open('foo.jpeg', 'rb')))
@@ -14,6 +15,7 @@ Urgent to fix:
 - fix ''"" dumbquotes and ---
 - expand introduction?
 - title page?
+- notes on copyrights
 
 Watch for problems with:
 

@@ -18,6 +18,12 @@ internet to anyone who takes the time to taste of it, and some other
 parts are explorations that didn’t pan out — left here only as a
 cautionary tale to the next explorer.
 
+There are lots of notes in here that aren’t “finished” in the usual
+sense; they end in the middle of a sentence, or say “XXX”, or have a
+note in them that the foregoing is wrong in such-and-such a way.  But
+I am publishing the final version of Derctuo today.  I might make
+future versions of some of these notes, but not of Derctuo itself.
+
 Derctuo is the sequel to
 [Dercuano](http://canonical.org/~kragen/dercuano), a larger collection
 of my notes which I published in 02019.
