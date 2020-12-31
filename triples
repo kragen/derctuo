@@ -1,4 +1,4 @@
-derctuo version 020201231pre2
+derctuo version 020201231pre3
     by Kragen+Javier+Sitaker
 
 # Popular categories from Dercuano:
@@ -170,7 +170,7 @@ smart-plumbing written 02020-09-10
 sm-scraping written 02020-10-01
     updated 02020-10-05
     titled Scraping+Sciencemadness
-    concerns practical materials web-scraping
+    concerns practical materials web-scraping linux
 
 sodium-silicate written 02020-06-04
     updated 02020-06-04
@@ -302,7 +302,7 @@ the-programmable-world written 02020-09-10
 
 pandemic-collapse written 02020-05-17
     updated 02020-12-16
-    concerns the-future history covid politics facepalm collapse
+    concerns the-future history covid politics facepalm regrettable collapse
 
 peg-memo-sparsity written 02020-12-24
     updated 02020-12-28
@@ -329,7 +329,7 @@ phosphate-precipitation written 02020-09-10
 
 pit-firing written 02020-11-06
     updated 02020-11-06
-    concerns heating refractory materials contrivances
+    concerns heating refractory materials contrivances minerals archaeology
 
 plaster-foam written 02020-10-16
     updated 02020-11-08
@@ -352,7 +352,7 @@ imgui category-titled Immediate-mode+GUIs
 
 programming-in-the-debugger written 02020-12-15
     updated 02020-12-15
-    concerns end-user-programming programming-by-example hci debugging
+    concerns end-user-programming programming-by-example hci debugging basic
 
 punk-zine-look written 02020-11-28
     updated 02020-11-28
@@ -373,7 +373,7 @@ pure-functional-vm written 02020-04-21
 pyrolysis-3d-printing written 02020-08-02
     updated 02020-11-24
     titled Pyrolysis+3-D+printing
-    concerns digital-fabrication materials silicone composites
+    concerns digital-fabrication materials silicone composites zirconia minerals
 composites category-titled Composite+materials
 
 machine-readable-microcontroller-output written 02020-11-26
@@ -410,6 +410,7 @@ leveldb category-titled LevelDB
 mica-composites written 02020-11-14
     updated 02020-11-14
     concerns history gelbart materials ghettobotics composites refractory pricing
+    concerns minerals
 
 microcontroller-inventory written 02020-11-18
     updated 02020-11-28
@@ -417,7 +418,7 @@ microcontroller-inventory written 02020-11-18
 
 micro-material-sorting written 02020-09-12
     updated 02020-09-12
-    concerns self-replication materials mining metrology independence purification
+    concerns self-replication materials mining metrology independence purification minerals
 
 migrating-app-snapshots written 02020-07-10
     updated 02020-07-11
@@ -455,7 +456,7 @@ muldiv written 02020-11-26
 
 multimeter-metrology written 02020-11-01
     updated 02020-11-27
-    concerns metrology electronics history microcontrollers physics pricing
+    concerns metrology electronics history microcontrollers physics pricing analog
 
 muriate-thermal-mass written 02020-10-18
     updated 02020-10-28
@@ -546,7 +547,7 @@ leds category-titled LEDs
 linear-ocr written 02020-11-06
     updated 02020-11-06
     titled OCR+with+linear+optimization
-    concerns optimization gradient-descent
+    concerns optimization gradient-descent algorithms performance
 
 line-numbered-isam-buffers written 02020-07-18
     updated 02020-07-23
@@ -707,6 +708,7 @@ compound-literals written 02020-11-27
 compressed-imaging written 02020-12-06
     updated 02020-12-06
     concerns projectors actuators leds math graphics sparkle optimization optics
+    concerns compressed-sensing
 
 compressed-sensing-oscilloscope written 02020-11-17
     updated 02020-11-17
