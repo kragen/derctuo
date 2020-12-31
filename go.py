@@ -15,6 +15,7 @@ def go(dirname):
     bundle.generate_index()
     bundle.install_liabilities()
     bundle.install_images()
+    bundle.install_library()
     bundle.generate_archive()
 
 

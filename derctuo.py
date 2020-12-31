@@ -6,8 +6,6 @@ Just ganked from Dercuano.
 Urgent to fix:
 
 - import notes
-- put .jpeg and .png into liabilities and fix links to them.  or just into notes
-- does it include library/?
 - write introduction?
 - divide notes by month
 - prefix 0 to dates
@@ -16,11 +14,12 @@ Urgent to fix:
 - ugh, is there a way to include jpegs and pngs in the PDF?
 - add machine-teeth and language-of-choice subtitles
 - fix rigid-glider typo
-- fix missing link [8] in multimeter-metrology
 
-Watch for:
+Watch for problems with:
 
 - fix .md links
+- put .jpeg and .png into notes
+- library/ directory copied
 
 Next up:
 
@@ -102,6 +101,12 @@ class Bundle:
             subprocess.check_call(['cp', '-a',
                                    os.path.join(dirname, filename),
                                    os.path.join(self.output_dir, 'notes')])
+
+    def install_library(self):
+        subprocess.check_call(['cp', '-a',
+                               self.filename('library'),
+                               os.path.join(self.output_dir, 'notes')])
+
 
     def _notes(self):
         dirname = self.filename('markdown')
