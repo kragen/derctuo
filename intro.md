@@ -1,7 +1,10 @@
-<p style="text-align: center; margin: 4em"><i>Kragen Javier Sitaker<br />
+<p style="text-align: center; margin: 4em"><i><br/>
+⁘⁛⁛⁘<br/>
+Kragen Javier Sitaker<br />
 Buenos Aires<br />
 December, 02020<br />
-Public domain work</i></p>
+Public domain work<br />
+⁘⁛⁛⁘</i><br /><br /></p>
 
 Derctuo is a book of notes on various topics, mostly science and
 engineering with some math, from the first year of the COVID-19
@@ -44,7 +47,7 @@ knowledge.  It is best thought of as working notes published despite
 their incomplete state.
 
 Often in Derctuo, as in Dercuano, I refer to something being
-"published".  By this I generally mean “made public”.  There’s a
+“published”.  By this I generally mean “made public”.  There’s a
 current fad in academia (over the last, say, half century) to use
 “published” to mean “brought up to the standards of scholarly
 publication and approved as such by means of scholarly peer review”.
