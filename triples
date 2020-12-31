@@ -1,4 +1,4 @@
-derctuo version 020201230
+derctuo version 020201231
     by Kragen+Javier+Sitaker
 
 # Popular categories from Dercuano:
@@ -35,7 +35,7 @@ veskeno-outline written 02020-06-17
 vector-vm written 02020-04-21
     updated 02020-06-17
     titled A+reproducible+vector-instruction+VM?
-    concerns derctuo reproducibiity arrays performance numpy python lush chifir c simd octave r
+    concerns derctuo reproducibility arrays performance numpy python lush chifir c simd octave r
 simd category-titled SIMD
 
 ultra-machining written 02020-07-06
@@ -76,12 +76,15 @@ scribal-basic written 02020-12-12
 secure-scuttlebutt written 02020-10-02
     updated 02020-11-06
     titled Secure+Scuttlebutt+is+a+cool+idea+whose+realization+has+fatal+flaws
+    concerns protocols security chat
 
 segments-and-blocks written 02020-06-20
     updated 02020-12-16
 
 sentential-database written 02020-11-06
-    updated 02020-11-18
+    updated 02020-12-31
+    concerns hci programming databases logic prolog programming-languages
+    concerns file-formats
 
 sequestered-co2-volume written 02020-10-25
     updated 02020-10-25
@@ -194,13 +197,16 @@ rigid-glider written 02020-10-12
 rns written 02020-10-26
     updated 02020-10-26
     titled Residue+number+systems
+    concerns math
 
 rosining-chip written 02020-11-08
     updated 02020-11-08
     titled Rosining+chips
+    concerns electronics independence materials ghettobotics
 
 table-text written 02020-12-31
     updated 02020-12-31
+    concerns file-formats hci
 
 taking-screenshots written 02020-11-27
     updated 02020-12-20

@@ -100,8 +100,8 @@ can be FP-persistent.
 Ropes don't have an obvious way to handle markers, though.  Rope nodes
 are immutable.  If you store markers in an immutable rope node, you
 can copy them to a new node if you make modified versions of it,
-easily supporting operation #3 --- but how do you support operation
-#4, jumping to a marker?  Storing a pointer to a rope node in a marker
+easily supporting operation #3 --- but how do you support
+operation #4, jumping to a marker?  Storing a pointer to a rope node in a marker
 doesn't help --- even if that rope node *is* in the version of the
 buffer of interest, you can't traverse the graph to its parent,
 because it may have many parents, some of which are in the version of

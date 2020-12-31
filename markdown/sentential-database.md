@@ -1,15 +1,7 @@
-> XXX rename to Heef Jumbus, Spungot (file extension: .spug),
-Facdotum, Axiopolis, Expressum, Shuntence, Nollidge, Ret-o'-Rick,
-Infoflow, Conceptium, Polythink, Knecksus, Mirrorgation, The Mind
-Machine, Databog, Thinksluice, Monad's Revenge, Itshift,
-Cherry-go-Round, Connectionalismus, Meshotron, Cogtionary,
-Equationsheet, Mathbox, Logivox, Neotinker, The Bitsmith's Forge,
-Omnilathe, Spinfluence, Elementalis, Wonderiensis, Bowdos, Monkin,
-Fleuf, Trurbus, Ploomish, Grufty, Rencum, Dolus, Mujimbo, Stooshiong,
-Treebus, Widgity, Cleophlembic, Entrisculi, Quimbrus, or Factpool?
-Thanks to sbp for the cromulentisimo suggestions.
+The Spungot sentential database for end-user logic programming
+==============================================================
 
-I've written a little bit previously about a sort of pattern-matching
+I’ve written a little bit previously about a sort of pattern-matching
 Prolog, where instead of dealing with explicitly given relations:
 
     father(fred, mary).
@@ -51,10 +43,10 @@ From this we can deduce:
 
 In Prolog-style top-down search, this is kind of tricky, since you
 kind of have to guess which inference rules can match which patterns,
-but in Datalog bottom-up inference, there's no difficulty; each newly
+but in Datalog bottom-up inference, there’s no difficulty; each newly
 inferred sentence need only be matched against the premises of all the
 rules to see if it enables additional sentences to be inferred.  This
-won't be nearly as efficient as Prolog, but that's fine.  It's
+won’t be nearly as efficient as Prolog, but that’s fine.  It’s
 probably efficient enough for many uses just by brute force, and a
 little indexing on infrequent words should go the rest of the way.
 
@@ -67,7 +59,7 @@ Basic UI
 
 Interactively or in batch mode, a UI for such a database can add a
 table of results underneath each set of premises, which are
-distinguished from ground facts by containing variables.  (Above I've
+distinguished from ground facts by containing variables.  (Above I’ve
 marked these with apostrophes, but other syntax might be better,
 especially for natural languages containing contractions.)  In batch
 mode, it could simply process a text file and produce a file annotated
@@ -84,7 +76,7 @@ stratification approach (done dynamically rather than statically):
     ----
     Aaron is falsely accused
 
-I'm not totally clear on how this works without doing the kind of
+I’m not totally clear on how this works without doing the kind of
 textual rule analysis that I said above was difficult.
 
 I think this approach might work:
@@ -102,7 +94,7 @@ I think this approach might work:
   early.  So we retract all the assertions inferred from the rule by
   which Ⅱ was inferred — call it R(Ⅱ); add an
   inequality constraint putting it in a *strictly greater* stratum
-  than R(Ⅰ), calling Ⅰ's rule's stratum S(R(Ⅰ)): "S(R(Ⅱ)) > S(R(Ⅰ))";
+  than R(Ⅰ), calling Ⅰ’s rule’s stratum S(R(Ⅰ)): “S(R(Ⅱ)) > S(R(Ⅰ))”;
   and move it to the stratum after R(Ⅰ).
   We also need to retract all assertions from other rules that are
   constrained to be in S(R(Ⅱ)) or later and move them as well.
@@ -127,7 +119,7 @@ I think this approach might work:
 - Upon encountering circular dependencies with a negation in the
   chain, throw up hands and report them to the user.
 
-This clearly isn't the most efficient mechanism, since we may waste
+This clearly isn’t the most efficient mechanism, since we may waste
 substantial work on a chain of reasoning that must be later retracted
 when it was discovered to depend on a rule that was applied too early,
 but I think it might be adequately efficient in practice.
@@ -143,7 +135,7 @@ Also you can add aggregate functions:
     X totals =total(Z)
 
 where implicitly we are quantifying over all Y (or, I guess, reducing
-over all Y) because Y does not occur in the rule's conclusion outside
+over all Y) because Y does not occur in the rule’s conclusion outside
 of an aggregate.
 
 Aggregates include =count(), =sum(), =total(), =mean(), =stdev(), =max(),
@@ -164,8 +156,8 @@ above.  Suppose you want to count the children of each node in a tree:
 
 We may at some point have deduced that X has 3 children, and then
 later infer a fourth child of X.  The result involves not only adding
-"X has 4 children" to the database of known facts, but also
-*retracting* "X has 3 children".  So something like stratification is
+“X has 4 children” to the database of known facts, but also
+*retracting* “X has 3 children”.  So something like stratification is
 necessary to provide the aggregation feature, at least without a lot
 of wasted work, possible nondeterminism (where the result depends on
 what order the rules were applied in), and possible nontermination.
@@ -199,7 +191,7 @@ it.
 Abbreviation
 ------------
 
-It's probably better to abbreviate this:
+It’s probably better to abbreviate this:
 
     'C':
         is a cylinder
@@ -222,10 +214,10 @@ Goal seek
 ---------
 
 In this form the system is sort of unidirectional; it can infer the
-volume of a cylinder from its radius and height, but it can't infer
+volume of a cylinder from its radius and height, but it can’t infer
 its radius from its volume and height.  Spreadsheets use a special
-"goal seek" interaction for this; you identify which cells are "design
-variables" the optimizer can twiddle and which cell you want to give a
+“goal seek” interaction for this; you identify which cells are “design
+variables” the optimizer can twiddle and which cell you want to give a
 given value, and it twiddles the design variables to approximate it as
 closely as possible.  This could be supported syntactically, using the
 same syntactic distinction between variables and constants as in
@@ -239,15 +231,15 @@ premises:
             volume 1 m³
             radius 'r'
 
-This doesn't give you the whole bidirectional power of constraint
-solvers, but it's very simple to use and implement, and perfectly
+This doesn’t give you the whole bidirectional power of constraint
+solvers, but it’s very simple to use and implement, and perfectly
 adequate for many computations I do in Derctuo.
 
 Libraries
 ---------
 
 You probably want to be able to import library modules so that you
-don't have to explain things like cylinders and densities in every
+don’t have to explain things like cylinders and densities in every
 database.  Probably the best way to do this, in a textual system, is
 to stick a line in the file saying something like
 
@@ -258,7 +250,7 @@ But this should probably be at the end of the file.
 Existentials
 ------------
 
-If you say that some object is a cylinder, you probably don't want the
+If you say that some object is a cylinder, you probably don’t want the
 system to posit a material from which it is made.  But there might be
 cases where you do want such deductions:
 
@@ -273,16 +265,16 @@ role if nothing else turns up.  This involves a sort of negation.
 Quantities
 ----------
 
-Above I've talked about quantities like `32cm` and `1 m³`, which have
+Above I’ve talked about quantities like `32cm` and `1 m³`, which have
 units and are expressed in Unicode notation.  This is very valuable
-for a lot of the calculations I'm doing.  I'm not sure if you can
+for a lot of the calculations I’m doing.  I’m not sure if you can
 implement that within the system or what.
 
 You know what else would be very valuable?  Intervals.  `32cm±5cm`.
 `1–1.5m³`.  And gradients: when a value is computed by a formula from
 some given data, it would be useful to see what its gradient is in
 terms of those givens.  Computing the gradient is of course also very
-useful for "goal seek".
+useful for “goal seek”.
 
 UI affordances
 --------------
@@ -297,19 +289,19 @@ entry.
 A non-interactive system can be implemented that just reads in a text
 file and spews out an augmented version of it.
 
-It's probably useful to see all the inferred facts, as well as which
+It’s probably useful to see all the inferred facts, as well as which
 given facts and rules were used to infer each inferred fact.  In rules
-with a single conclusion, there's a one-to-one correpondence between
+with a single conclusion, there’s a one-to-one correpondence between
 table rows (*pace* pivoting) and inferred facts, but if there are
 multiple conclusions there may be more than one.
 
 Filtering this list of inferences down to a usable list might be a
 challenge.  Interactively, too, we might want to know why a given
 conclusion was *not* reached from a given rule: which of the premises
-failed to hold true?  This kind of "why *not*" debugging is usually
+failed to hold true?  This kind of “why *not*” debugging is usually
 easy in functional programs but very difficult in imperative programs;
 it seems like it would be pretty difficult to incorporate
-non-interactively in a "program listing", but you could supply it as a
+non-interactively in a “program listing”, but you could supply it as a
 separate batch-mode command similar to goal-seek.
 
 Multiple words and nesting
@@ -430,9 +422,10 @@ alternatives to the strawman syntax above:
 
     In a multi-font system, we could imagine writing <i>It</i> is made
     of <i>unobtainium</i>, <u>It</u> is made of <u>unobtainium</u>,
-    <b>It</b> is made of <b>unobtainium</b>, or <span style="color:
-    #666">It</span> is made of <span style="color:
-    #666">unobtainium</span> instead.  (Note that if you're viewing
+    <b>It</b> is made of <b>unobtainium</b>, or
+    <span style="color: #666">It</span> is made of
+    <span style="color: #666">unobtainium</span> instead.
+   (Note that if you're viewing
     this on GitLab some of the formatting in this paragraph gets
     mangled by their buggy Markdown parser.)
 
@@ -474,8 +467,8 @@ alternatives to the strawman syntax above:
             {Carol} is {Bill}'s ancestor
             => {Alice} is {Bill}'s ancestor
 
-    Although I like the one with ":.", the closest ASCII equivalent of
-    "∴", I think the last one with "=>", due to deltab, is better.
+    Although I like the one with “:.”, the closest ASCII equivalent of
+    “∴”, I think the last one with “=>”, due to deltab, is better.
     They both avoid spurious visual suggestions of nesting, it's
     compact, and there's only one way to do (each of) them.  The
     `premises { conclusion }` idea, also due to deltab, is also very
@@ -565,7 +558,7 @@ Frames and modal reasoning
 All of the above puts both rules and facts in a sort of global tuple
 space or string space.  But the system is clearly capable of
 expressing logical consequences: if the temperature is 329°, then the
-wax is liquid.  We could imagine "creating a frame" that contains some
+wax is liquid.  We could imagine “creating a frame” that contains some
 additional facts (and perhaps omits others), and looking to see what
 can be newly inferred from those facts.
 
@@ -653,12 +646,12 @@ This is awkward to do in Numpy because Numpy doesn't have output
 format control, so I had to resort to a regular Python list
 comprehension.
 
-The Scheme `syntax-rules` macro system includes an interesting "..."
+The Scheme `syntax-rules` macro system includes an interesting “...”
 construct, permitting you to rewrite, for example (foo (as a...) (bs
 b...)) to (bar (b a)...), without providing full list-processing
 capabilities.  That example would rewrite (foo (as 1 2 3) (bs x y z))
 to (bar (x 1) (y 2) (z 3)), for example.  You could imagine supporting
-a similar but more limited "..." construct in patterns in order to
+a similar but more limited “...” construct in patterns in order to
 be able to input array data more easily.
 
 Fuck RDF N3 syntax, seriously
@@ -678,9 +671,9 @@ Consider this [example from EYE], in RDF N3:
 
 [example from EYE]: https://github.com/josd/eye/blob/master/reasoning/socrates/socrates.n3
 
-This looks like a bunch of fucking line noise.  I think it's
+This looks like a bunch of fucking line noise.  I think it’s
 dramatically more understandable to express it as follows; the result,
-"Socrates is a mortal", is even more understandable than the [over a
+“Socrates is a mortal”, is even more understandable than the [over a
 page of line noise generated by EYE][0].
 
     Socrates is a man
@@ -703,3 +696,18 @@ match.)
 N3 is, of course, capable of expressing enormously more powerful forms
 of inference than that, including anonymous entities and so on.  But I
 don't think that's an excuse for it to read like line noise.
+
+Naming
+------
+
+Names considered: Heef Jumbus, Spungot (file extension: .spug),
+Facdotum, Axiopolis, Expressum, Shuntence, Nollidge, Ret-o'-Rick,
+Infoflow, Conceptium, Polythink, Knecksus, Mirrorgation, The Mind
+Machine, Databog, Thinksluice, Monad's Revenge, Itshift,
+Cherry-go-Round, Connectionalismus, Meshotron, Cogtionary,
+Equationsheet, Mathbox, Logivox, Neotinker, The Bitsmith's Forge,
+Omnilathe, Spinfluence, Elementalis, Wonderiensis, Bowdos, Monkin,
+Fleuf, Trurbus, Ploomish, Grufty, Rencum, Dolus, Mujimbo, Stooshiong,
+Treebus, Widgity, Cleophlembic, Entrisculi, Quimbrus, or Factpool?
+Thanks to sbp for the cromulentisimo suggestions.
+
