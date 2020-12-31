@@ -8,18 +8,18 @@ as well as their pressure, so every sound wave generates local
 temperature oscillations.  Sound waves in air can reach a few
 megahertz over meter-like distances and much higher amplitudes than we
 are commonly used to, up to nearly an atmosphere even at atmospheric
-pressure, and higher amplitudes still at higher pressures.  Let's
+pressure, and higher amplitudes still at higher pressures.  Let’s
 consider a sinusoid.
 
 Normally the oscillation of pressure, volume, and temperature is
 almost perfectly in phase; especially at high frequencies, the hot
 compressed gas only has time to lose a tiny amount of heat through
-radiation or conduction before it's being decompressed and thus
+radiation or conduction before it’s being decompressed and thus
 cooled, and once cold it only has time to *gain* a tiny amount of heat
 by absorbing radiation or conduction before the cycle starts again.
 In a traveling wave, 90° out of phase to this oscillation of volume
 (and, to a very good approximation, temperature and pressure, XXX no
-that's exactly backwards), is an oscillation of displacement.
+that’s exactly backwards), is an oscillation of displacement.
 Assuming no overall movement, a parcel of air passes its average
 position when it is either maximally small or maximally large.
 Suppose the wave is moving to the right.  When it is maximally small,
@@ -30,7 +30,7 @@ velocity is zero, but its displacement is at its maximum.
 
 That is, the velocity oscillation in the direction of wave travel is
 180° out of phase with the volume oscillation (and, to an excellent
-approximation, pressure and temperature, XXX no that's exactly
+approximation, pressure and temperature, XXX no that’s exactly
 backwards); the velocity oscillation in the direction opposite wave
 travel is in perfect phase with the volume oscillation.  The
 displacement oscillation lags the velocity oscillation by 90°: the
@@ -51,7 +51,7 @@ Now, if we have some liquid or solid particles suspended in the air,
 such as fine dust, they will move with it — effectively increasing its
 density by a bit — but will not be subject to the same adiabatic
 heating and cooling, since their volume changes with pressure orders
-of magnitude less than the air's does, basically a rounding error in
+of magnitude less than the air’s does, basically a rounding error in
 this context.  They *will* change temperature, but only because they are
 exchanging heat with the air they are suspended in.  This will cause
 the temperature oscillation to lag the pressure variation a little,
@@ -67,7 +67,7 @@ which makes the heat pumping substantially more useful.  This allows
 the moving gas to leave the heat behind.  The process is reversible,
 so it can also be used as a heat engine, essentially a Stirling engine
 where the mass of the air itself acts as a piston.  In either case,
-there is a temperature gradient along the "regenerator".  Many
+there is a temperature gradient along the “regenerator”.  Many
 thermoacoustic machines using these two effects are known.
 
 Regular gas chromatography
@@ -78,7 +78,7 @@ that passes through a stationary phase (normally a liquid supported on
 an inert solid) which preferentially adsorbs some of the gases,
 slowing their passage.  Consequently the different gases arrive at the
 other end of the chromatography column at different times.  This is
-usually used for analysis rather than purification; it's kind of
+usually used for analysis rather than purification; it’s kind of
 inherently a batch process.
 
 Thermoacoustic mixture separation
@@ -118,11 +118,11 @@ Liquid separation
 -----------------
 
 But what if you want to do this with liquid chromatography instead?
-You can't rapidly heat and cool the liquid or the solid stationary
-phase by running sound waves through them; they aren't compressible
+You can’t rapidly heat and cool the liquid or the solid stationary
+phase by running sound waves through them; they aren’t compressible
 enough.  But there are other possibilities.
 
-The most obvious one is that if you're doing TLC, thin-layer
+The most obvious one is that if you’re doing TLC, thin-layer
 chromatography, you can heat and cool your TLC layer by heating and
 cooling the plate.  But there are other more interesting
 possibilities.
@@ -130,7 +130,7 @@ possibilities.
 Fractal recuperator reciprocating liquid purification
 -----------------------------------------------------
 
-I've previously written about synthetic *retia mirabilia*, fractal
+I’ve previously written about synthetic *retia mirabilia*, fractal
 recuperator-style heat exchangers where the heat-exchange capillary
 surface, which separates the hot and cold reservoirs, is convoluted
 like the surface of a cauliflower in order to maximize its area.  Such
@@ -166,14 +166,14 @@ capillaries.
 So, components of the B liquid that are more than twice as mobile at
 the hot temperature tend to move from B2 to B1, while components that
 are less than twice as mobile tend to move from B1 to B2.  And on
-average the liquid goes through twenty of these "fractional
-distillation" cycles in the capillaries before making it all the way
+average the liquid goes through twenty of these “fractional
+distillation” cycles in the capillaries before making it all the way
 from B1 to B2.  By adjusting the ratio of the amounts in steps 2 and
-4, we can adjust "twice" to whatever ratio we want; by adjusting the
+4, we can adjust “twice” to whatever ratio we want; by adjusting the
 amount added in step 2 we can adjust the number of cycles and thus the
 purification.
 
-It probably isn't possible to do this at macroscopic scales at more
+It probably isn’t possible to do this at macroscopic scales at more
 than a kilohertz or two, and maybe much less, which is a big
 disadvantage compared to the thermoacoustic approach above.
 
@@ -210,7 +210,7 @@ It may be possible to use thermoacoustic techniques with liquids by
 filling the liquids with bubbles.  As observed in the Hot Chocolate
 Effect, even fairly small admixtures of bubbles give the liquid
 compressibility of the same order of magnitude as the gas in question,
-but because the mixture's density is still the same order of magnitude
+but because the mixture’s density is still the same order of magnitude
 as the liquid, sound-wave speeds are extremely slow, and displacements
 are extremely small for a given sonic power level.  It seems like this
 might make these methods less effective with bubbly liquids.
@@ -244,7 +244,7 @@ enough displacement to outrun diffusion.
 Packed columns?
 ---------------
 
-All these "packed columns" might be better as a honeycomb of narrow
+All these “packed columns” might be better as a honeycomb of narrow
 parallel tubes, a configuration already commonly used for catalyst
 support, in part to reduce acoustic losses.  You could imagine that it
 would also reduce turbulence losses, but if your passages are wide

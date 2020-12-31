@@ -1,6 +1,6 @@
 A standard TL431 voltage reference is only accurate to ±0.5% at best,
-more often ±2%.  TI's REF5050 is accurate to ±0.1% or ±0.05% in the
-"high-grade" version, with 3 ppm/K temperature drift and 50 ppm/1000
+more often ±2%.  TI’s REF5050 is accurate to ±0.1% or ±0.05% in the
+“high-grade” version, with 3 ppm/K temperature drift and 50 ppm/1000
 hours, but those cost US$5–10.  The internal voltage reference in the
 STMF103C8 used in many Blue Pill boards is specified as 1.16–1.26V
 over the -40° to 105° range, an error of about ±4.2%, with a
@@ -13,7 +13,7 @@ This is pretty shitty fucking accuracy.  4.2% is 42000 ppm.  For
 measuring temperature with a tungsten wire near room temperature, a
 ±4.2% error is a ±10° error, and it gets larger at higher
 temperatures.  Using a standard TL431 ripped out of some scrapped
-power supply we can cut that error to 19000 ppm or so, but that's
+power supply we can cut that error to 19000 ppm or so, but that’s
 still nothing to write home about.  How the fuck are you supposed to
 build a fucking voltmeter?  Or anything that depends on voltage for
 accuracy?
@@ -29,9 +29,9 @@ of tolerance stops being meaningful.)  We can get down to probably
 
 Like, something similar to the open-source [Transistortester AVR][4]
 by Karl-Heinz Kübbeler and Markus Frejek,
-now commonly known as the "[M328 Transistor
-Tester][5]" ([Instructables][6]) ([English manual][7])
-or "LCR TC1 ESR meter", which sells for US$38 here in
+now commonly known as the “[M328 Transistor
+Tester][5]” ([Instructables][6]) ([English manual][7])
+or “LCR TC1 ESR meter”, which sells for US$38 here in
 Argentina or US$13 in the US.  But with better accuracy, precision,
 and repeatability, and ideally without any bought components.
 
@@ -64,10 +64,10 @@ test its current measurement capability.
 I tested a shitty digital multimeter from 2016, US$6 from the hardware
 store, against another similar meter to get an idea of how bad they
 are, and also how aggressive they are.  It seems like the old
-multimeter's diode-testing range uses up to 1.4 mA at up to 2.72
+multimeter’s diode-testing range uses up to 1.4 mA at up to 2.72
 volts.  Their diode test readings differ by about 2%, resistance by
 about .03%, voltage by about .3%.  pretty impressive metrology for
-US$6.  These are lower bounds on their actual errors, but they're
+US$6.  These are lower bounds on their actual errors, but they’re
 unlikely to be conservative by more than an order of magnitude or so.
 
 Canceling out voltage errors in measurements
@@ -77,7 +77,7 @@ Canceling out voltage errors in measurements
 lot more precise, and probably limited only by the 12-bit bit depth
 and whatever the noise is.  So, for example, if we run an exactly
 known *current* through a tungsten lightbulb and measure the voltage,
-we're subject to that shitty ±4.2% precision; but if we put some
+we’re subject to that shitty ±4.2% precision; but if we put some
 *unknown* voltage across a series combination of the lightbulb and an
 exactly known *resistance*, we can get a much higher-precision
 measurement.
@@ -86,11 +86,11 @@ Resistance standards
 --------------------
 
 How do we get an even approximately known resistance, though?  Typical
-resistors used to be ±20%, now they're ±1%, but nothing close to
+resistors used to be ±20%, now they’re ±1%, but nothing close to
 1 ppm.  On MercadoLibre we can buy a temperature standard resistance
-made of Weston's manganin, intended for converting precise voltage
+made of Weston’s manganin, intended for converting precise voltage
 measurements to current measurements or vice versa, for US$20.  At 25°
-manganin's temperature coefficient of resistance crosses zero, having
+manganin’s temperature coefficient of resistance crosses zero, having
 fallen from 6 ppm/K at 12° on its way to -42 ppm/K at 100° and -52
 ppm/K at 250°, before crossing zero again at 475°.  This suggests that
 a ±10° error of temperature measurement around 25° would give you
@@ -100,22 +100,22 @@ are correctly annealed or even truly made of manganin.  Better
 precision calibration resistors are available.
 
 A better option might be a known capacitance; you can easily measure
-the RC time constant as long as your voltage reference isn't too noisy
-over the short time involved.  *C* = *εA*/*d*, so it's straightforward
+the RC time constant as long as your voltage reference isn’t too noisy
+over the short time involved.  *C* = *εA*/*d*, so it’s straightforward
 to construct a capacitor with a known capacitance; however, if we want
 its capacitance to be known to within, say, 10 ppm, we need less than
 10 ppm error on all of *ε*, *A*, and *d*.  *A* is relatively easy: a 1
 m x 1 m square of foil is a square meter to within 10 ppm if its width
 and height are each accurate to within 7 ppm (i.e., an average of
-7 μm) and it's square to within cos⁻¹(1-10ppm), which is about 15
+7 μm) and it’s square to within cos⁻¹(1-10ppm), which is about 15
 minutes of arc.  Getting *d* accurate to within 10 ppm is more
 difficult; if the dielectric is intended to be 100 microns, its
 average thickness must be correct to within 1 nm.  But getting *ε*
 accurate to within 10 ppm is feasible in only one way: vacuum.  Even
 the permittivity of air is 590 ppm higher than vacuum, and it varies
 according to pressure and temperature.  Common solid dielectrics are
-hopeless; [WP gives][0] polypropylene's relative permittivity as
-"2.2–2.36", i.e. ±35000 ppm.  A vacuum capacitor of these dimensions
+hopeless; [WP gives][0] polypropylene’s relative permittivity as
+“2.2–2.36”, i.e. ±35000 ppm.  A vacuum capacitor of these dimensions
 would have a capacitance of 88.5419 nF.
 
 [0]: https://en.wikipedia.org/wiki/Relative_permittivity
@@ -127,19 +127,19 @@ Every time we quadruple the measurement time, we add another bit of
 precision, because the variances of Gaussian noise combine additively.
 So the sum of four measurements has four times the variance, thus
 twice the standard deviation, as a single measurement, and their
-average thus has half the standard deviation.  The Blue Pill's ADCs run at 1Msps,
-so if we take 1048576 samples, 1.05 seconds' worth, we can get a
+average thus has half the standard deviation.  The Blue Pill’s ADCs run at 1Msps,
+so if we take 1048576 samples, 1.05 seconds’ worth, we can get a
 22-bit-precision reading, which has a quantization error of ±0.125
 ppm.  Probably averaging 65536 or 32768 samples is a better tradeoff,
 giving you more like 1 ppm error in exchange for much faster data
 acquisition.
 
-Hamer's monograph on Clark, Daniell, and mostly Weston cells
+Hamer’s monograph on Clark, Daniell, and mostly Weston cells
 ------------------------------------------------------------
 
 In despair, I turned to a shitty scan of NBS Monograph 84, from
-1965-12-15, titled, "Standard Cells: Their Construction, Maintenance,
-and Characteristics", by one Walter J. Hamer.  He explains to some
+1965-12-15, titled, “Standard Cells: Their Construction, Maintenance,
+and Characteristics”, by one Walter J. Hamer.  He explains to some
 extent the construction of the Daniell cell, the Clark cell, and the
 Weston cell, which served as laboratory references from 1836 until
 1990.  A Daniell cell, using copper, zinc, and their sulfates, is
@@ -151,11 +151,11 @@ coefficient, which it achieves by the use of cadmium salts, which
 unfortunately are rather difficult for me to procure.
 
 Hamer also goes into the history of other metrological standards for
-voltage (a word he disdains to use, preferring "emf") and other
+voltage (a word he disdains to use, preferring “emf”) and other
 electromagnetic units.  He points out that in theory you can use an
 [absolute electrometer][7] as a standard, using the permittivity of free
 space and precise measures of current, but that this gives an error on
-the order of 100 ppm.  (He doesn't go into detail, but it turns out this is
+the order of 100 ppm.  (He doesn’t go into detail, but it turns out this is
 a matter of charging a known capacitance, constructed as above, to a
 known voltage or charge and measuring the resulting force; one version is
 an electrostatic balance where the electrostatic
@@ -182,7 +182,7 @@ weight to return them to their original position.)
 > fixed charge, directly with the energy at a fixed voltage, and
 > inversely with the squared voltage at a fixed energy.  If you were
 > to start with the plates in contact (but miraculously not
-> discharging; maybe they're triboelectric insulators like packing
+> discharging; maybe they’re triboelectric insulators like packing
 > tape and its adhesive) the capacitance would be infinite, so the
 > voltage would be zero.  If you then pull the plates apart to some
 > distance, you have to add some energy as the capacitance starts to
@@ -201,14 +201,14 @@ weight to return them to their original position.)
 > 1 kV it would have 0.88541878 picocoulombs on it, producing a force
 > of 0.88541878 millinewtons.
 >
-> Actually you can't charge it up that far because [after 20–40 MV/m
+> Actually you can’t charge it up that far because [after 20–40 MV/m
 > you get field emission across the vacuum][8] which limits you to
-> 20–40 V/μm.  Say you charge it to 10 V instead.  Now it's only
+> 20–40 V/μm.  Say you charge it to 10 V instead.  Now it’s only
 > 88.541878 nanonewtons.
 >
-> That doesn't sound like a whole lot, but it's 8000 times larger than
+> That doesn’t sound like a whole lot, but it’s 8000 times larger than
 > its weight instead of a thousand times less, so you could easily
-> make it overwhelmingly the largest force on the capacitor.  It's a
+> make it overwhelmingly the largest force on the capacitor.  It’s a
 > lot less than an atmosphere, though.
 
 [8]: https://en.wikipedia.org/wiki/Dielectric_strength
@@ -218,23 +218,23 @@ air-core inductor of known dimensions and thus computable inductance,
 and the measurement of its E–I relationship at different frequencies
 to obtain a precise standard for the ohm; but he describes the Wenner
 method, which seems to be some kind of differential measurement that I
-don't fully understand, getting a ±5 ppm precision.  He also mentions
-using the rotation of a magnet in a coil, or a coil in the earth's
+don’t fully understand, getting a ±5 ppm precision.  He also mentions
+using the rotation of a magnet in a coil, or a coil in the earth’s
 magnetic field.  (The quantized Hall effect is the modern absolute
 standard since 1990.)
 
 He says that using computable capacitors
 (like my microscopic thought experiment above)
 to check the ohm measure is
-"less involved" and "may be used [text lost] an annual basis" to check
+“less involved” and “may be used [text lost] an annual basis” to check
 resistance standards against absolute units in preference to the
 inductive approach.  (He also says they normally used 1-pF computable
 capacitors rather than the 88000-pF jobby I used above for
-calculations.)  "Thompson-Lampard theorem" seems to be the key term
+calculations.)  “Thompson-Lampard theorem” seems to be the key term
 here.
 
 Given the possibility of measuring a computable inductor or computable
-capacitor with a microcontroller, I'd think that it would be easier to
+capacitor with a microcontroller, I’d think that it would be easier to
 do the measurements in the time domain rather than the frequency
 domain.
 
@@ -264,7 +264,7 @@ imbalance can produce an easily visible displacement, particularly if
 you use it to deflect a mirror reflecting a laser pointer across the
 room.
 
-It's feasible, though not an everyday occurrence, to get weights that
+It’s feasible, though not an everyday occurrence, to get weights that
 are calibrated to within 1 ppm, though care must be taken to
 compensate for local gravitational fields and atmospheric pressure and
 humidity.  Atmospheric pressure can diminish by as much as 14% in
@@ -303,7 +303,7 @@ cell.
 
 We can see why the NBS controlled the temperature of its Weston-cell
 room to within 1°, the temperature of its oil baths for the Weston
-cells to within 10 mK, and the oil baths' temperature during
+cells to within 10 mK, and the oil baths’ temperature during
 measurements to within 1 mK.  Such measures applied even to the Clark
 cell would have reduced its temperature-induced voltage error to some
 0.8 ppm, at which point other errors would surely dominate.
@@ -349,10 +349,10 @@ Which brings us back to the resistance-measurement problem.  It occurs
 to me that it a computable *inductor* might be a more precise way to
 measure a resistance, particularly if it can be made very small in
 physical dimensions so that its magnetic dipole does not impinge on
-materials with a substantial permeability; [wood's, for example, is
+materials with a substantial permeability; [wood’s, for example, is
 0.43 ppm][2] higher than the vacuum, a situation three orders of
 magnitude more promising than the corresponding situation with
-capacitors, and teflon's is even closer (how much closer is not
+capacitors, and teflon’s is even closer (how much closer is not
 known).
 
 [2]: https://en.wikipedia.org/wiki/Magnetic_permeability
@@ -371,12 +371,12 @@ vacuums.
 Sensors
 -------
 
-All these "sources of error" can equally well be seen as "observable
-variables".  The only difficulty is untangling them.  If your
-capacitor's resonant frequency (with a given coil) varies linearly
+All these “sources of error” can equally well be seen as “observable
+variables”.  The only difficulty is untangling them.  If your
+capacitor’s resonant frequency (with a given coil) varies linearly
 with the air pressure, then by measuring that resonant frequency with
 1 ppm accuracy, you can measure the air pressure with 1-ppm accuracy.
-If it also varies dramatically with the air's moisture content, well,
+If it also varies dramatically with the air’s moisture content, well,
 congratulations, you have [a moisture sensor](pet-dielectric-spectroscopy.md)
 too, as long as you have
 some other way to sense air pressure that varies differently with
@@ -387,7 +387,7 @@ the temperature.  If you find something that varies a *lot* with
 temperature, maybe like the leakage current in a Schottky, you have a
 very precise temperature sensor, which you can use to cancel out
 temperature effects on other things, as long as you can characterize
-them.  Force of gravity makes your watch crystal run faster when it's
+them.  Force of gravity makes your watch crystal run faster when it’s
 sideways?  Great, kid, you gotcherself a MEMS accelerometer that costs
 25¢.
 
@@ -412,6 +412,6 @@ in air if you use a metal with a sufficiently conductive and
 nonhygroscopic oxide, such as zinc.
 
 You also get photoelectric emission inside solid-state semiconductor
-junctions; that's how photodiodes work.  However, I suspect the cutoff
+junctions; that’s how photodiodes work.  However, I suspect the cutoff
 voltage for this solid-state photocurrent may be fuzzier, just because
 of the messy nature of condensed matter.

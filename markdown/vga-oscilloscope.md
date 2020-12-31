@@ -14,16 +14,16 @@ orders of magnitude crappier.
 
 Once you can bring the problem into the digital domain, everything
 else becomes easy, because you can do it as slowly as you like.  But
-how can you digitize a 20MHz signal if you don't have access to the
+how can you digitize a 20MHz signal if you don’t have access to the
 market?  50Msps ADCs are quite scarce in the municipal waste stream.
 
 Analog oscilloscopes achieved these bandwidths by using a cathode-ray
-tube; the beam's Y deflection was what you observed on the screen.  So
+tube; the beam’s Y deflection was what you observed on the screen.  So
 you might think that you could salvage an old TV and use its CRT, but
 TV CRT beams are magnetically deflected, while oscilloscope CRT beams
 are electrostatically deflected, allowing deflection frequencies two
 or three orders of magnitude higher at reasonable voltages.  TV CRTs
-are not going to be useful for that; they're designed for horizontal
+are not going to be useful for that; they’re designed for horizontal
 scanning with a 15.734-kHz sawtooth wave (for NTSC; PAL and SECAM vary
 slightly.)
 
@@ -32,13 +32,13 @@ to about 5 MHz in the case of NTSC, PAL, or SECAM TV; more promisingly
 still, tens of MHz in the case of computer monitors, whose VGA
 connectors still accept analog waveforms for red, green, and blue.  A
 monitor running at 1600×1200 at 85 Hz, which was high-end in the 1990s
-but quite likely junk today if it's a CRT, is drawing 163 million
-pixels a second, so it can "sample" signals up to 80 MHz or so.  A
+but quite likely junk today if it’s a CRT, is drawing 163 million
+pixels a second, so it can “sample” signals up to 80 MHz or so.  A
 lower-end 60Hz 1024×768 monitor is only drawing 47 million pixels per
-second, but that's still enough for more than the 20 MHz for a basic
+second, but that’s still enough for more than the 20 MHz for a basic
 oscilloscope.  Pixel brightness is not linear in signal voltage, being
-transformed by the "gamma curve", but it's not outrageously nonlinear.
-And an RGB VGA monitor, like nearly all of them, will "sample" three
+transformed by the “gamma curve”, but it’s not outrageously nonlinear.
+And an RGB VGA monitor, like nearly all of them, will “sample” three
 channels at once, which is very respectable indeed.
 
 You also need electronics to generate sync pulses, of course.
@@ -53,7 +53,7 @@ pixels from an individual video frame off a monitor.
 scan the laser beam across a reflective screen — certainly doable with
 discarded materials, but substantially more difficult.)
 
-Once you have that data, it's a Simple Matter of Programming to find
+Once you have that data, it’s a Simple Matter of Programming to find
 the individual scan lines, compensate for lighting and viewing-angle
 variability, undo the gamma-curve transformation, look for triggers in
 the signal stream, and draw a waveform with the resulting data.
@@ -63,10 +63,10 @@ the horizontal blanking interval and vertical blanking interval,
 unless you are driving three separate monitors out of phase to avoid
 this.  (Two monitors is not enough to eliminate these dropouts because
 the VBI of each monitor will inevitably contain many HBIs of the
-other.)  There are cases where this matters: where you're watching for
+other.)  There are cases where this matters: where you’re watching for
 a single-shot event and you really need a lot of data on both sides of
 it, for example.  Calibration may drift, since slight brightness
-changes don't affect the normal use of monitors; occasionally
+changes don’t affect the normal use of monitors; occasionally
 displaying a calibration frame or two instead of the input signal may
 help with this.
 

@@ -92,7 +92,7 @@ Now, the reason I say this has some bidirectional potential is that,
 if the 3V3 pin isn’t driving anything (you disconnect the square-wave
 source), then you can drive the “output” directly with 0V or 5V, which
 is also enough to overpower the latch.  The leftover part is that your
-tri-stated 3V3 pin isn't being driven to 3V3; it’s being driven to
+tri-stated 3V3 pin isn’t being driven to 3V3; it’s being driven to
 just a Vbe.
 
 This can be remedied by [driving the feedback override in the level
@@ -141,8 +141,8 @@ unidirectional level shifters made from three resistors each — but it
 contains two transistors, which are both more expensive and often
 slower than resistors.
 
-(It's kind of goofy to describe a resistor by itself as "slow" or
-"fast"; it's really the whole circuit.  But I did it anyway.)
+(It’s kind of goofy to describe a resistor by itself as “slow” or
+“fast”; it’s really the whole circuit.  But I did it anyway.)
 
 DocScrutinizer05 proposed [the following alternative bidirectional
 level-shifter circuit][3], based on a design he saw from NXP, which

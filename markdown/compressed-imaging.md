@@ -2,10 +2,10 @@ In compressed sensing we sense a signal, for example an image, via
 some kind of linear basis that’s incoherent with respect to some
 underlying basis in which we expect the signal to be sparse, and then
 attempt to estimate a sparse signal in that underlying basis that best
-"explains" our observation.  If we are correct in our prior that the
+“explains” our observation.  If we are correct in our prior that the
 signal should be sparse in that underlying basis, this does a great
 job at reproducing the true signal.  (And often we can choose the
-underlying basis such that when we're wrong about that, it’s one of
+underlying basis such that when we’re wrong about that, it’s one of
 the cases we care less about.)
 
 It occurs to me that you can use this for producing images as well.
@@ -42,7 +42,7 @@ for such compressed imaging include:
 If you use an optimization algorithm in a Fourier-like basis whose
 objective function selectively neglects phase and precise frequency,
 you may gain useful degrees of freedom with respect to human vision
-and audition, among other things: the humans can't hear the phase of
+and audition, among other things: the humans can’t hear the phase of
 the tenth harmonic of a vocal signal, nor see if all the hairs in an
 area of a closeup photo of a person have been shifted half a
 hairsbreadth to the right, nor hear the difference between 60Hz and

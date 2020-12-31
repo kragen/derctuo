@@ -240,7 +240,7 @@ So we will generate these larger merged nodes gradually, over the
 course of adding several leafnodes.  And I think the amount of work we
 do per leafnode will gradually increase, but only logarithmically.  I
 haven’t worked out the reality yet.  Each new leafnode might include
-some logarithmically large set of pointers to segments it's merging
+some logarithmically large set of pointers to segments it’s merging
 and cursor positions in them, and a chunk of merged data.
 
 What does this have to do with blockchains?  Well, you could plausibly

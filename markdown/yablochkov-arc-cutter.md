@@ -15,5 +15,5 @@ onto things, thus perhaps cutting them; this gives you a plasma cutter
 suitable for non-metals.  And with a modern constant-current supply
 (or even a ghetto version consisting of a quartz-halogen lightbulb or
 ten in series with the carbon rods and a voltage source high enough to
-strike the arc) you maybe don't even need the fuse wire.
+strike the arc) you maybe don’t even need the fuse wire.
 

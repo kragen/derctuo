@@ -1,4 +1,4 @@
-I'm suffering from analysis paralysis as I ponder what electronic
+I’m suffering from analysis paralysis as I ponder what electronic
 project to do next to level up (to both level up my skills and my
 equipment).  This is related to [the microcontroller
 inventory](microcontroller-inventory.md) and [the nonshopping
@@ -38,7 +38,7 @@ with a few manually chosen to move to the top list of finalists:
 - **basic Magic Kazoo**: you hum into a microphone on one end, and it
   does pitch ID and synthesizes a musical instrument out the other
 - **lightbulb thermometer** using a lightbulb as the temperature sensor
-- **read the digital caliper's output port** to get another
+- **read the digital caliper’s output port** to get another
   20-micron-precision positional feedback source
 - **stepper controller**: drive a low-power stepper motor with some
   transistors and a microcontroller
@@ -50,7 +50,7 @@ with a few manually chosen to move to the top list of finalists:
 - **micro-engraver** with three piezos, or two piezos and
   electro-etching, or one piezo and several electrodes, as a testbed
   for micro-engraving ideas
-- **stainless steel wool foam cutter**: it's about 0.2Ω per 100mm,
+- **stainless steel wool foam cutter**: it’s about 0.2Ω per 100mm,
   which is in the same ballpark as thinner copper wire for the [copper
   segelín](copper-segelin.md), but instead of burning at 300° it can
   get to over 800°, which is plenty for cutting styrofoam.

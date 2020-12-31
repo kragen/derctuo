@@ -42,7 +42,7 @@ conquest of the Americas); 100 Level 2 Vital Articles, including 10
 articles on history (the “[early modern period][0]” article has a
 couple of sentences on the European conquest out of 18000 words and
 120kB and mentions the Aztecs, and so does “[civilization][1]”) and 11
-on geography (the “[North America][2]” article's 18000 words in 123kB
+on geography (the “[North America][2]” article’s 18000 words in 123kB
 does explain, “The Mayan culture was still present in southern Mexico
 and Guatemala when the Spanish conquistadors arrived, but political
 dominance in the area had shifted to the Aztec Empire, whose capital
@@ -97,7 +97,7 @@ definition of limits][8] survive in part.  [OERCommons] has a search
 engine over thousands of freely licensed educational resources, of
 which nearly a thousand few are [textbooks][5], such as [Jim
 Hefferon’s linear algebra book][4] (CC-BY-SA, 7.5MB, 507pp.).
-(See also the section on "particular textbooks" below about Hefferon's work.)
+(See also the section on “particular textbooks” below about Hefferon’s work.)
 They
 also link to OpenStax (which I’d forgotten about), Delft OCW, CMU OLI,
 and another dozen or so similar initiatives.
@@ -114,19 +114,19 @@ GWU has a [guide to open textbooks][16] which links to most of the above.
 
 Wikipedia has a [list of notable CC works][17], including Connexions
 (which I guess is cnx.org), Khan Academy (cc-by-nc-sa), OpenLearn,
-OCW, something called "The Saylor Foundation", WikiEducator, 375000
+OCW, something called “The Saylor Foundation”, WikiEducator, 375000
 CC0 artworks from the Metropolitan Museum of Art, deviantART, Flickr,
 Open Game Art, Openclipart, etc.
 
 [17]: https://en.wikipedia.org/wiki/List_of_major_Creative_Commons_licensed_works
 
 Many public-domain books, including some nonfiction, are in Project
-Gutenberg and Wikisource, as well as the Internet Archive's books
+Gutenberg and Wikisource, as well as the Internet Archive’s books
 collection.  [Everything up to 1924 is PD in the US now, including
 _Rhapsody in Blue_][18].  [Parker Higgins collated many striking 1923
 works in a zine last year][19], though I think [a more striking work
-still is Kahlil Gibran's _The Prophet_][20].  Also, perhaps, the
-Russells' _The Prospects of Industrial Civilization_.  The Hathi Trust
+still is Kahlil Gibran’s _The Prophet_][20].  Also, perhaps, the
+Russells’ _The Prospects of Industrial Civilization_.  The Hathi Trust
 catalogues [53940 works published in 1923][21], of which 33105 are
 books.
 
@@ -155,10 +155,10 @@ events.
 Particular textbooks to check out
 ---------------------------------
 
-[Jim Hefferon's _Linear Algebra_, _Theory of Computation_, and
+[Jim Hefferon’s _Linear Algebra_, _Theory of Computation_, and
 _Introduction to Proofs_][8] are cc-by-sa 3.0 disjunction GFDL, with
-LaTeX source.  He says the linear algebra text is "a popular text".  I
-haven't reviewed the books yet, but some people seem to like them,
+LaTeX source.  He says the linear algebra text is “a popular text”.  I
+haven’t reviewed the books yet, but some people seem to like them,
 though [others tar them as unrigorous][12].  And they come with
 exercise solutions and video lectures.
 
@@ -167,7 +167,7 @@ exercise solutions and video lectures.
 
 [SICP][9] is under cc-by-sa 4.0.  I think [_Structure and
 Interpretation of Classical Mechanics_][10] is under cc-nc-by-sa 4.0.
-It's using MathJax.
+It’s using MathJax.
 
 [9]: https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-2.html
 [10]: https://tgvaughan.github.io/sicm/toc.html
@@ -177,13 +177,13 @@ covering things like graphs, satisfiability, and linear recurrences.
 
 [11]: https://courses.csail.mit.edu/6.042/spring17/mcs.pdf
 
-I am greatly enjoying [Reuleaux]'s presentation of kinematics, which
+I am greatly enjoying [Reuleaux]’s presentation of kinematics, which
 is in the public domain due to its age.  However, the idea of reducing
 it to files of a manageable size seems daunting.
 
 [Reuleaux]: reuleaux.md
 
-I really liked MacKay's _[Sustainable Energy Without the Hot Air]_.
+I really liked MacKay’s _[Sustainable Energy Without the Hot Air]_.
 Disappointingly, his book on information theory is not available under
 a free license, and neither is _Without the Hot Air_/_SEWTHA_ as it
 turns out.
@@ -191,11 +191,11 @@ turns out.
 [13]: https://www.withouthotair.com/
 
 PLOS ONE has [a systematic reviews category][14], but most of the 1507
-reviews therein are pretty narrow: "Healthcare-associated infection
+reviews therein are pretty narrow: “Healthcare-associated infection
 and its determinants in Ethiopia: A systematic review and
-meta-analysis" and the like, although "[Fecal microbiota
+meta-analysis” and the like, although “[Fecal microbiota
 transplantation in inflammatory bowel disease patients: A systematic
-review and meta-analysis][15]" sounds pretty interesting.
+review and meta-analysis][15]” sounds pretty interesting.
 
 [14]: https://journals.plos.org/plosone/browse/systematic_reviews
 [15]: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0238910
@@ -231,4 +231,4 @@ Mathjax.  He explains his motivation:
 
 The source code of his pages (in a Pandoc-implemented language derived
 from Markdown) is accessible by appending .page to the URL.  He says
-the whole thing is kept in Git, but I don't know where.
+the whole thing is kept in Git, but I don’t know where.

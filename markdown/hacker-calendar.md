@@ -147,7 +147,7 @@ of OpenGL.
 0. the fourth month of the inundation season: when Ahmose wrote the
    Rhind Papyrus
 0. October 30, 1961: Tsar Bomba test
-0. October 31: octal Newtonmas --- oct 31 = dec 25
+0. October 31: octal Newtonmas — oct 31 = dec 25
 0. November 2, 1988: the helminthiasis of the internet with the Morris
    worm
 0. November 6, 1717: J. S. Bach imprisoned (or March 31, 1685:

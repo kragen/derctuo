@@ -56,17 +56,17 @@ the cuprous hydroxide; or reducing alkaline cupric solutions with
 reducing sugars in Fehling’s or Benedict’s tests, where the copper is
 complexed with potassium sodium tartrate or sodium citrate,
 respectively, to prevent precipitation of cupric carbonate.
-(Fehling's test is mentioned in Cooley's 1880 Cyclopædia, for example
-under "Urine", along with Trommer's test, under "Sugar", which mixes
-blue vitriol with sugar and "an excess of hydrate of potassium [KOH]",
+(Fehling’s test is mentioned in Cooley’s 1880 Cyclopædia, for example
+under “Urine”, along with Trommer’s test, under “Sugar”, which mixes
+blue vitriol with sugar and “an excess of hydrate of potassium [KOH]”,
 then heats it to precipitate what sounds like cuprous oxide.  [The
-advantage of Fehling's test][21] is reputedly that it was more
-selective toward sugars and easier to prepare.  Benedict's test wasn't
+advantage of Fehling’s test][21] is reputedly that it was more
+selective toward sugars and easier to prepare.  Benedict’s test wasn’t
 introduced until 1907.)
 
 [21]: https://theskepticalchemist.com/demonstration-benedicts-test-reducing-sugars/
 
-Benedict's test sounds relatively easy, but it consumes reducing sugars,
+Benedict’s test sounds relatively easy, but it consumes reducing sugars,
 such as glucose, fructose, or lactose — but not sucrose!  Though you
 can hydrolyze sucrose with HCl — or, apparently, by boiling it with
 citric acid.

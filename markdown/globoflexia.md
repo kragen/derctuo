@@ -8,7 +8,7 @@ manipulate sculptures far larger than themselves.  Because the
 balloons leak, the sculptures are ephemeral, lasting at most a few
 days.
 
-Much to my surprise, there's a world globoflexia conference every two
+Much to my surprise, there’s a world globoflexia conference every two
 years at which teams from dozens of countries compete.
 
 What if you could use globoflexia as a medium of expression for more
@@ -16,7 +16,7 @@ permanent ideas?  Obviously you can photograph the sculptures, thus
 making images or videos of them, but the underlying three-dimensional
 form of the object is lost.
 
-So I've been thinking about three different ways to do this:
+So I’ve been thinking about three different ways to do this:
 photogrammetry, spray foam, and papier-mâché.
 
 Photogrammetry
@@ -41,10 +41,10 @@ around twists, around specular highlights, and outside the balloons.
 These highlights give a fairly precise read on the surface angle and
 curvature at a particular point, as do the silhouette edges.
 
-Moreover the balloon sculptures' shapes are themselves well-behaved:
+Moreover the balloon sculptures’ shapes are themselves well-behaved:
 the surface at most points has a relatively smooth curvature
 determined mostly by the gauge pressure and the tensions in two
-directions.  Rubber's complex pseudoelastic thermodynamic behavior is
+directions.  Rubber’s complex pseudoelastic thermodynamic behavior is
 not so complex as to make this a very difficult problem.
 
 Further information can be obtained by looking at the balloon
@@ -64,7 +64,7 @@ What if you fill the balloons with a hardening foam instead of air?
 
 Conventional polyurethane expanding spray foam insulation has been
 available for decades.  You spray it as a thixotropic liquid foam,
-which accommodates itself to the container it's in before slowly
+which accommodates itself to the container it’s in before slowly
 polymerizing into a light, hard, thermally and electrically insulating
 foam with substantial mechanical strength.  Some formulations form
 waterproof closed-cell foams, while others form lighter-weight
@@ -73,30 +73,30 @@ to be mixed in a gun, for high-volume applications, and other
 formulations that you just squirt out of a can.
 
 The materials that form polyurethane foams are fairly reactive until
-they've finished forming the foam, and that may be a fatal flaw for
+they’ve finished forming the foam, and that may be a fatal flaw for
 squirting them into rubber balloons: they may corrode the balloons and
 pop them before the foam has hardened.
 
 Polyurethane is not the only possible hardening foam.  Latex foam is
 widely used for pillows, mattresses, and theater special-effects
-makeup ("prosthetics"), in which last use it is typically cast in
+makeup (“prosthetics”), in which last use it is typically cast in
 molds before curing.  Protein foam is a popular dessert, both as
 meringue (with air whipped into it) and as gelatin foam in so-called
-"molecular gastronomy" or "modernist cuisine", where the gelatin gel
+“molecular gastronomy” or “modernist cuisine”, where the gelatin gel
 is mixed with nitrous oxide under high pressure and low temperature,
 like canned whipped cream.  Gelatin foam is also widely used for
 makeup, sometimes whipped like meringue, but sometimes foamed with
 non-double-acting baking powder (for example baking soda with cream of
 tartar) or even yeast.
 
-There's also been a lot of work in recent years on foamed concrete,
-sometimes called "aircrete".  This consists of portland cement, water,
+There’s also been a lot of work in recent years on foamed concrete,
+sometimes called “aircrete”.  This consists of portland cement, water,
 a surfactant (Suave shampoo is reputed to work well, though there are
 also specific surfactant mixes from companies like Drexel), possibly
 some foam stabilizers (I suspect gelatin might work well for this),
 and a great deal of gas.  Sometimes sand is used, but rocks are never
-used.  The original 1920s process for foaming concrete ("autoclaved
-aerated concrete") used aluminum powder mixed into the concrete mix.
+used.  The original 1920s process for foaming concrete (“autoclaved
+aerated concrete”) used aluminum powder mixed into the concrete mix.
 After molding the concrete was heated in an autoclave to react the
 aluminum with some of the lime in the concrete, thus foaming the
 concrete with hydrogen gas, as well as accelerating the formation of
@@ -104,7 +104,7 @@ the calcium silicate hydrates that bond the concrete.  The more common
 method nowadays is more like meringue: air is mechanically mixed into
 some of the water before mixing in the wetted cement.
 
-You probably can't foam any traditional concrete with anything similar
+You probably can’t foam any traditional concrete with anything similar
 to baking powder, because the strongly basic nature of portland
 cement, lime, Sorel cement, and refractory calcium aluminate will
 destroy the baking-powder acid without producing any gas.
@@ -117,8 +117,8 @@ The strongly basic nature of these cements might also cause them to
 attack the balloons.
 
 Most resins can be foamed in a way similar to polyurethane spray foam.
-Radio-controlled airplane hobbyists commonly mix a secret "foaming
-agent" from R&G into two-component epoxy to get an epoxy foam, for
+Radio-controlled airplane hobbyists commonly mix a secret “foaming
+agent” from R&G into two-component epoxy to get an epoxy foam, for
 example.  One publication on the use of polysilazane for this purpose
 suggests that powdered aluminum mixed with soda lye is the usual
 foaming agent!
@@ -151,26 +151,26 @@ For the adhesive, rather than wheat paste, you could use:
 - PVA glue;
 - hide glue;
 - silicone;
-- epoxy resin and similar resin systems, if they don't attack the
+- epoxy resin and similar resin systems, if they don’t attack the
   balloons;
 - cyanoacrylate adhesive;
 - plaster of Paris (thank you, Javier Candeira!);
 - sodium silicate waterglass;
-- slaked lime, if it doesn't attack the balloons or fibers;
-- portland cement, if it doesn't attack the balloons or fibers and the
-  color isn't a problem;
-- calcium aluminate cement, if it doesn't attack the balloons or
+- slaked lime, if it doesn’t attack the balloons or fibers;
+- portland cement, if it doesn’t attack the balloons or fibers and the
+  color isn’t a problem;
+- calcium aluminate cement, if it doesn’t attack the balloons or
   fibers, and refractoriness is desired;
-- Sorel cement, if it doesn't attack the balloons or fibers, and
+- Sorel cement, if it doesn’t attack the balloons or fibers, and
   maximal strength is desired;
-- a so-called "geopolymer cement";
+- a so-called “geopolymer cement”;
 - latex paint;
 - shellac;
 - polyurethanes;
 - urea-formaldehyde resin;
 - phenolic resin;
 - various kinds of solvent-based plastic cements such as PVC dissolved
-  in acetone, if the solvent doesn't attack the balloons or fibers;
+  in acetone, if the solvent doesn’t attack the balloons or fibers;
 - constant-tack adhesives like those used in scotch tape;
 - wet clay, whether simply allowed to dry or later fired;
 - tar, though probably using a solvent rather than heat;
@@ -216,18 +216,18 @@ For the fiber reinforcement, instead of paper, you could use:
   tie-ups, hardware cloth, chicken wire, or expanded sheet metal;
 - copper wires;
 - gel-spun ultra-high-molecular-weight polyethylene fibers;
-- nonwoven bargain-basement felted polyester fabric ("friselina");
+- nonwoven bargain-basement felted polyester fabric (“friselina”);
 - other fibers;
 - some mix of the above.
 
 If the adhesive is less flexible than the fiber reinforcement (e.g.,
-has a higher Young's modulus), then the fiber reinforcement may just
+has a higher Young’s modulus), then the fiber reinforcement may just
 weaken the binder instead of strengthening it, although it can produce
-some "strain hardening" behavior where the adhesive cracks but the
+some “strain hardening” behavior where the adhesive cracks but the
 fiber keeps the adhesive cracks from opening wider and thus continuing
 to propagate.  Still, even weak fibers can hold the adhesive in
 position until it sets, and for some purposes the adhesive alone will
-be strong enough without any help from the "reinforcement".
+be strong enough without any help from the “reinforcement”.
 
 The fiber reinforcement may have other purposes as well, other than
 shaping or strengthening; for example, if the adhesive is transparent,
@@ -287,7 +287,7 @@ whether inert fillers or reactive; for example:
 
 In some cases you will want to start with a lightweight,
 fast-hardening system such as gauze and plaster of Paris, then overlay
-it with a heavier system that the balloons alone wouldn't be able to
+it with a heavier system that the balloons alone wouldn’t be able to
 support.  There are many other reasons you might want to use multiple
 layers, including making sandwich panels with a light, weak inner core
 and stronger faces, and allowing earlier layers time to dry.
@@ -317,19 +317,19 @@ produced by some other method than globoflexia; for example:
 - modeling with clay or other modeling compounds;
 - origami, whether with paper, sheets of PET or other plastic,
   aluminum foil, or other materials;
-- commanding a motorized reusable "armature" to assume a certain
+- commanding a motorized reusable “armature” to assume a certain
   position until the papier-mâché draped over it hardens;
 - CNC machining;
 - cutting, folding, and assembling shapes out of cardboard or MDF,
-  though this requires special attention to the adhesive's water
+  though this requires special attention to the adhesive’s water
   content;
 - laser cutting;
 - piling up sand or other soil, whether with an additional binder or
   not;
 - assembling Legos, Meccano, Ramagon, Heckballs, modular T-slot
-  aluminum framing, or other reusable "construction set" parts;
+  aluminum framing, or other reusable “construction set” parts;
 - building latticework structures out of other kinds of members, for
-  example, metal trusses or Tensegrities like Kenneth Snelson's;
+  example, metal trusses or Tensegrities like Kenneth Snelson’s;
 - manual carving of carveable materials such as metals, wood, foamed
   concrete, alabaster, graphite, lightweight refractory bricks, tuff,
   sandstone (natural or artificial), or papercrete;
@@ -372,7 +372,7 @@ are already in use:
 
 - The ordinary kinds of papier-mâché, which commonly use untwisted
   balloon forms, but sometimes wire armatures.
-- "Cloth mache" [sic] in which fine cotton cloth is used instead of
+- “Cloth mache” [sic] in which fine cotton cloth is used instead of
   paper, either as the last layer or as several layers, sometimes with
   PVA glue rather than wheat paste.
 - Duct tape, masking tape, strapping tape, scotch tape, and electrical
@@ -380,14 +380,14 @@ are already in use:
   strapping tape fibers are often parallel glass fibers with a PET or
   polypropylene backing, masking tape is paper, scotch tape is
   cellophane, electrical tape is generally plasticized PVC, and duct
-  tape is often polyester scrim with an LDPE backing.  (Velma Stoudt's
-  original "duck tape" used cotton duck, as the name implies.)  Duct
+  tape is often polyester scrim with an LDPE backing.  (Velma Stoudt’s
+  original “duck tape” used cotton duck, as the name implies.)  Duct
   tape also typically includes a powdered aluminum filler in the LDPE
   for reflectivity.  All of them can use a wide variety of so-called
   pressure-sensitive adhesives.  So, pre-combining the adhesive with
   the reinforcing fiber makes for a very convenient and versatile way
   to make and repair things.
-- Découpage, in which the "fiber reinforcement" is primarily
+- Découpage, in which the “fiber reinforcement” is primarily
   decorative and the adhesive is transparent, and the form is usually
   made by carpentry rather than globoflexia.
 - Standard fiberglass composite construction uses one or more layers
@@ -396,7 +396,7 @@ are already in use:
   with epoxy.  Often additional layers of epoxy without cloth are
   added after the first in order to provide a smooth surface without
   any fiberglass sticking out of it.
-- "Textile-reinforced concrete" is ordinary portland cement reinforced
+- “Textile-reinforced concrete” is ordinary portland cement reinforced
   with high-modulus cloth rather than rebar; typical fibers used for
   the textile include carbon fiber, AR glass, and basalt fiber.  The
   forms are typically made of wood or styrofoam rather than by
@@ -409,9 +409,9 @@ are already in use:
   portland cement and quartz construction sand, which is wetted with
   water before inflation.
 - The same kind of concrete canvas is commonly used as a geotextile,
-  in which case the form is just the earth's surface.
-- "Ferrocement" uses a form made by bending rebar and "fiber
-  reinforcement" made of lighter-weight metal cloth, such as hardware
+  in which case the form is just the earth’s surface.
+- “Ferrocement” uses a form made by bending rebar and “fiber
+  reinforcement” made of lighter-weight metal cloth, such as hardware
   cloth or chicken wire; once the first layer of fiber reinforcement
   is in place on the form, an adhesive system of typically portland
   cement, quartz construction sand, and water is troweled on, often
@@ -419,7 +419,7 @@ are already in use:
   adhesive is also added to the *inside* of the structure to cover up
   the steel.  The first layer of adhesive often includes a
   chopped-fiber additive more to control the rheology of the mix so it
-  doesn't fall through the holes in the fiber reinforcement than to
+  doesn’t fall through the holes in the fiber reinforcement than to
   strengthen the final product.  This has been used for decades for
   lightweight buildings and cheap boats.
 - Very similar to ferrocement, fine-art sculptors commonly build forms
@@ -435,7 +435,7 @@ are already in use:
   were an inspiration, as mentioned above.  In this case the form is
   grown in a womb rather than twisted from balloons.  This technique
   turns out to go back to the Middle Kingdom of ancient Egypt, around
-  4000 years ago; archaeologists call it "cartonnage".
+  4000 years ago; archaeologists call it “cartonnage”.
 - Shotcrete has been on many occasions sprayed onto inflated domes to
   make Barbapapa-style houses.  In this case the balloons are very
   large and not twisted.  Typically the concrete is portland cement,
@@ -479,7 +479,7 @@ the usual way, is optional.
 
 A balloon for twisting is inflated but not twisted.  It is wrapped in
 five layers of paper towels dipped in wet portland cement, sand, and
-chopped basalt fiber, leaving the balloon's ends exposed.  The entire
+chopped basalt fiber, leaving the balloon’s ends exposed.  The entire
 resulting concrete tube is wrapped in stretch plastic wrap to keep it
 from drying out.  After 48 hours, the balloon is popped, exposing the
 inner surface of the pipe, which is then painted with a solution of
@@ -513,7 +513,7 @@ mildly [acidic flocculating additive] such as vinegar,
 using a porous mold made of
 plaster of Paris.  The hollow slipcast clay form is demolded and
 tightly wrapped in four layers of loosely woven cotton or linen cloth,
-richly smeared with high-temperature acetic-acid-catalyzed silicone ("red RTV").
+richly smeared with high-temperature acetic-acid-catalyzed silicone (“red RTV”).
 Once the silicone has cured, the still-wet clay interior is washed out with
 water and a mild base such as baking soda in order to deflocculate the
 clay.  The resulting piece, once the acetic acid has escaped, can
@@ -525,7 +525,7 @@ continuously or brief exposures to 320°.
 
 (Other reversible flocculants might be epsom salts, which can be
 deactivated by barium carbonate, and muriate of lime, which can be
-deactivated by soda ash or barium carbonate.  I've also seen muriate
+deactivated by soda ash or barium carbonate.  I’ve also seen muriate
 of lime recommended as a *de*flocculant, presumably to throw down
 vitriol in the form of alabaster.)
 
@@ -536,8 +536,8 @@ platinum-catalyzed varieties, or (with lower certainty) by
 impregnating the cotton with a buffer of, for example, baking soda.
 
 This is a case where a balloon form shaped by globoflexia is probably
-better than clay, actually, because it's both easier to shape to the
-appropriate smooth blobby shape and easier to remove.  But it's
+better than clay, actually, because it’s both easier to shape to the
+appropriate smooth blobby shape and easier to remove.  But it’s
 important to remove it completely, because the balloon latex will
 probably fail at a much lower temperature.
 
@@ -545,7 +545,7 @@ probably fail at a much lower temperature.
 
 By wrapping your twisted balloons in gauze soaked in shellac, you can
 get a waterproof, light, flexible material that allows significant
-light through, due to the gauze's light weave.  Alcohol is emitted as
+light through, due to the gauze’s light weave.  Alcohol is emitted as
 the shellac dries, but this is a fast process; once dry the material
 emits almost no VOCs.
 
@@ -573,7 +573,7 @@ consistent mesh protection thickness.
 
 By cutting the shape of a stirrer out of, for example, styrofoam, you
 can get a very lightweight tool.  But styrofoam is soluble in all
-kinds of solvents, and it's kind of weak.  By wrapping it with
+kinds of solvents, and it’s kind of weak.  By wrapping it with
 fiberglass cloth, as is done to construct some boats and aircraft, you
 can greatly strengthen it.  A coating of, for example, paraffin,
 low-density polyethylene, teflon, epoxy, or polyester casting resin,
@@ -639,7 +639,7 @@ this is a problem, a possible alternative to traditional glazing is
 waterglass allowed to dry on the ceramic and then crosslinked by, for
 example, exposure to calcium chloride.
 
-#### "Ceracement": refractory "ferrocement" ####
+#### “Ceracement”: refractory “ferrocement” ####
 
 The usual ferrocement recipe uses iron (and consequently a little iron
 oxide), portland cement, and quartz, none of which is very friendly to
@@ -649,8 +649,8 @@ replace the quartz, but what can replace the iron?
 
 Refractory metals like tantalum and niobium are well known, but very
 expensive.  Ceramic fibers like those mentioned above (zirconia,
-alumina, carborundum) might be adequate; the "ceracement" structure
-won't need flexurally-stiff reinforcement to hold it up, since it can
+alumina, carborundum) might be adequate; the “ceracement” structure
+won’t need flexurally-stiff reinforcement to hold it up, since it can
 hold itself up once the cement is set.
 
 At even higher temperatures calcium aluminate fails and needs to be

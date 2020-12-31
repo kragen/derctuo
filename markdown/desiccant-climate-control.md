@@ -85,7 +85,7 @@ conditioning, for making it possible for Singapore to develop
 economically:
 
 > Question: Anything else besides multicultural tolerance that enabled
-> Singapore's success?
+> Singapore’s success?
 >
 > Answer: Air conditioning. Air conditioning was a most important
 > invention for us, perhaps one of the signal inventions of
@@ -116,7 +116,7 @@ A simple air conditioning cycle is as follows:
 Optionally, after step 3, you can cool the dried, warm air by running
 it through a heat exchanger with outdoor air.  This improves the
 efficiency of the system.  As with the heating cycle, you can improve
-the system's temperature range by cascading the reaction, cooling the
+the system’s temperature range by cascading the reaction, cooling the
 air (and dry desiccant) through two or more stages.
 
 Several different kinds of mass-exchange contact between the desiccant
@@ -138,7 +138,7 @@ options for contact with liquid water.
 It can be used as well for refrigeration and even freezing of food or
 water, and water ice may be a denser and cheaper way to store cold
 until it is needed than as dry desiccant; water ice is 333.55 kJ/kg.
-Depending on the efficiencies of the cycle, though, it's entirely
+Depending on the efficiencies of the cycle, though, it’s entirely
 plausible that storage of energy in the form of some desiccants might
 be an even denser way to prepare for the need for cooling than water
 ice, and it certainly has a better shelf life and more flexibility.
@@ -155,13 +155,13 @@ Dehumidifying
 In addition to the above-mentioned heating and cooling applications,
 stored dry desiccant can of course be used to dehumidify indoor air
 simply by passing the air over it.  And of course if you can heat up
-water, as explained above under "Heating", you can humidify as well by
+water, as explained above under “Heating”, you can humidify as well by
 passing air over the heated water.
 
 Dehydration sounds like an extremely niche use (raw-food vegans and
-a few other people have 500-watt home dehydrators), but I think it isn't;
-it just hasn't been available at a low enough price previously.
-Consider the Earthship's list of six basic human needs satisfied by
+a few other people have 500-watt home dehydrators), but I think it isn’t;
+it just hasn’t been available at a low enough price previously.
+Consider the Earthship’s list of six basic human needs satisfied by
 architecture: energy, garbage, sewage, shelter, water, and food.
 Dehydration is directly applicable to three of those basic human
 needs: garbage, sewage, and food.
@@ -175,12 +175,12 @@ linseed-oil-soaked rags, and so on; but food waste in particular, like
 these chicken bones I have here, is mostly a problem for those three
 reasons.  And the physical volume of non-construction non-food garbage
 can be kept pretty minimal, like, cubic meters per person per year, or
-less.  So I'm focusing here on food waste as the central core of the
+less.  So I’m focusing here on food waste as the central core of the
 garbage problem.)
 
 At Burning Man we deal with food waste first of all by dehydrating it,
 after which we can burn it or just store it in its inert dry state
-until it's time to carry it away.  There, it's easy to dehydrate
+until it’s time to carry it away.  There, it’s easy to dehydrate
 things: you put them in one of those plastic netting bags they sell
 oranges in and hang them out in the sun and wind.
 
@@ -195,7 +195,7 @@ Eventually, they switched to composting toilets, and getting those to
 work with aerobic mesophilic rotting instead of the usual noxious kind
 is a matter of partial dehydration: you cover your shit in the bucket
 with dry leaves, which also cut down on the relative nitrogen content,
-which gives you better rotting.  Civilized people don't have dry
+which gives you better rotting.  Civilized people don’t have dry
 leaves, so instead they use sawdust or coir or something in their
 composting toilets.
 
@@ -221,15 +221,15 @@ at low temperatures, and might offer possibilities for food
 preservation with much less impact on flavor.
 
 Thus a stored desiccant is a sort of all-purpose indoor climate
-control resource, capable of blowing hot or cold, like Aesop's
-traveller in the satyr's cave.
+control resource, capable of blowing hot or cold, like Aesop’s
+traveller in the satyr’s cave.
 
-But wait!  Don't touch that dial!  There's more!
+But wait!  Don’t touch that dial!  There’s more!
 
 Water harvesting
 ----------------
 
-Water supplies are a major concern for the humans' survival in many
+Water supplies are a major concern for the humans’ survival in many
 places, to say nothing of their ability to farm.  But if you can
 dehumidify by sucking water out of the air into a desiccant — and the
 equilibrium relative humidity for some of these desiccants is very low
@@ -270,7 +270,7 @@ Muriate of lime can work as an aqueous solution, avoiding the massive
 inconvenience of your lovely pebble bed deliquescing into a sticky,
 solid, impermeable lump, but I suspect that a porous solid mass of
 alabaster may have even better heat transfer properties than the
-aqueous solution of muriate of lime.  And alabaster doesn't
+aqueous solution of muriate of lime.  And alabaster doesn’t
 deliquesce; at worst it may crack a bit.  As explained in [Plaster
 Foam](plaster-foam.md), I got a nice porous alabaster biscuit by
 mixing calcined powdered alabaster with baking powder and baking it in
@@ -341,10 +341,10 @@ out to 1.5 MJ/$, 666 nanodollars per joule.
 [1]: https://www.xe.com/currencyconverter/convert/?Amount=1&From=RUB&To=USD
 
 Alabaster is especially tempting due to its 34 times lower price per
-mass, and also because it doesn't glom together into a sticky mass
+mass, and also because it doesn’t glom together into a sticky mass
 when you regenerate it, though it can when you hydrate it.
 
-Alabaster's molar mass is 136.14 g/mol anhydrous, 145.15 g/mol as
+Alabaster’s molar mass is 136.14 g/mol anhydrous, 145.15 g/mol as
 hemihydrate, and 172.172 g/mol as dihydrate.  Converting the dihydrate
 back to the hemihydrate is more difficult than with muriate of lime,
 requiring 100°–150°, and conversion back to the anhydrous form
@@ -353,17 +353,17 @@ datum I lack here for comparison is the enthalpy of formation of the
 different hydrated forms.
 
 Quicklime is notorious for producing enough heat to boil water when
-rehydrated, and it's very nearly as cheap as alabaster.  However,
-regenerating it requires inconveniently high temperatures, and it's
+rehydrated, and it’s very nearly as cheap as alabaster.  However,
+regenerating it requires inconveniently high temperatures, and it’s
 lethally caustic.
 
-[Farulla et al.] characterize "thermochemical thermal energy storage"
+[Farulla et al.] characterize “thermochemical thermal energy storage”
 systems like these as storing 120–250 kWh/t, or 430–900 kJ/kg in SI
 units, much higher than sensible-heat thermal energy storage systems
 at 10–50 kWh/t (36–180 kJ/kg); but it claims TCTESs also cost
 €8–100/kWh (2500–32000 nanodollars per joule), far more than the
 €0.1-10/kWh (32–3200 n$/J) of sensible TES, identifying these high
-capital costs as a key reason for TCTES's non-adoption.
+capital costs as a key reason for TCTES’s non-adoption.
 
 [Farulla et al.]: https://www.mdpi.com/2076-3417/10/9/3142/htm "A Review of Thermochemical Energy Storage Systems for Power Grid Support, March 2020, Appl. Sci. 2020, 10, 3142; doi:10.3390/app10093142"
 
@@ -392,34 +392,34 @@ rate.)  So photovoltaic modules work out to 680 MJ per US$ (at 6%
 APY).
 
 If your thermochemical energy storage system can *store* 10 MJ per
-US$, which Farulla *et al.* say that current TCES systems don't come
+US$, which Farulla *et al.* say that current TCES systems don’t come
 close to, how does that compare?  How about the 2500–32000 nanodollars
 per joule (0.03–0.4 MJ/$, US$2.50–32/MJ) reported by Farulla *et al.*?
 How do you measure energy storage against energy generation?
 
-Well, they aren't really commensurable.  No amount of photovoltaic
+Well, they aren’t really commensurable.  No amount of photovoltaic
 modules on your roof will allow you to run the air conditioner at
 night, and no amount of calcium chloride will heat or cool your house
-if it's all fully hydrated; the TCES as such trades off against
-batteries, not solar panels.  And it doesn't trade off against all
+if it’s all fully hydrated; the TCES as such trades off against
+batteries, not solar panels.  And it doesn’t trade off against all
 uses of batteries.  And it also trades off somewhat against other
 climate control systems like vapor-compression refrigerators.
 
 But when I was looking at balcony batteries a couple of years ago in
-Dercuano, lead-acid batteries cost US$23-73/MJ, which I don't think
+Dercuano, lead-acid batteries cost US$23-73/MJ, which I don’t think
 has changed much (though possibly lithium-ion will surpass them in a
 year or two).  In crude terms this is about 1 to 700 times more
 expensive than a TCES, depending on whether you rely on Farulla *et
-al.*'s reports on existing prototype systems or my optimistic
+al.*’s reports on existing prototype systems or my optimistic
 projections from possibly impractical but very cheap desiccant
-materials.  But that doesn't include the cost of the vapor-compression
+materials.  But that doesn’t include the cost of the vapor-compression
 air conditioning system itself.
 
 Energy storage is strongly complementary, in the economic sense, to
 solar energy, and this is responsible for much of the interest in
 thermal energy storage systems in recent years.  The cheaper TES is,
 the more valuable solar modules become; the cheaper solar modules
-become, the more valuable TES is.  TES can't fulfill all of the energy
+become, the more valuable TES is.  TES can’t fulfill all of the energy
 storage needs for intermittent solar and wind energy, because it has
 very poor round-trip efficiency for mechanical energy, light, and so
 on.  So batteries will still be needed.
@@ -428,19 +428,19 @@ on.  So batteries will still be needed.
 might be a useful backup power source, perhaps using a thermoelectric
 generator or a Stirling engine.)
 
-However, it's very likely that you can get more solar energy for your
+However, it’s very likely that you can get more solar energy for your
 TES by gathering solar thermal energy than by gathering electrical
 energy with solar cells with an efficiency of 16% or 21%.  And you can
 do it with collectors that are cheaper than photovoltaic modules,
 which still cost US$0.15 per peak watt.  For example, you can use 1 m
 × 1 m × 19 mm boxes made of thin styrofoam, open at the top (one of
 the large faces), painted black on the inside, with plastic wrap
-wrapped around them to let light in, and smeared with a "chemical
-sunscreen" to slow UV damage.  The airspace within permits air to be
+wrapped around them to let light in, and smeared with a “chemical
+sunscreen” to slow UV damage.  The airspace within permits air to be
 blown through there, using a couple of holes in the back of the box,
 to harvest the heat.  I think these will be about 30% efficient.  The
-material would cost about US$20 for a 4'×8' sheet (3.0 m² in
-non-medieval units), so that's about 1000W peak for US$20, US$0.02 per
+material would cost about US$20 for a 4’×8’ sheet (3.0 m² in
+non-medieval units), so that’s about 1000W peak for US$20, US$0.02 per
 peak watt.
 
 (Rather than plastic wrap, you might be able to use UV-blocking
@@ -453,10 +453,10 @@ Scaling down
 ------------
 
 One of the great advantages of thermochemical energy storage is that
-you don't need to insulate it.  This, in turn, means that you can
+you don’t need to insulate it.  This, in turn, means that you can
 scale it down from building-sized systems to very small systems, and
-the stored energy has a shelf life of potentially years; "self-heating
-cans" have used muriate of lime for many years, for example.
+the stored energy has a shelf life of potentially years; “self-heating
+cans” have used muriate of lime for many years, for example.
 
 You could thus scale these systems down to a wearable size, providing
 personal climate control.
@@ -464,7 +464,7 @@ personal climate control.
 Innovation considerations
 -------------------------
 
-If this is such an advantageous technology, why hasn't it been adopted
+If this is such an advantageous technology, why hasn’t it been adopted
 previously?  The humans have used fire to warm themselves for at least
 a million years.  The calcining of alabaster goes back at least to Old
 Kingdom Egypt, the calcining of lime even further, to the Neolithic,
@@ -472,22 +472,22 @@ before Çatal Höyük.  Tubes of dried clay for guiding air date back, I
 think, at least to the beginning of iron smelting in the Hittite
 empire 4000 years ago.  Evaporative cooling via the qanat goes back
 3000 years in Iran.  Texts [purporting to be from 1200 years ago, by
-Jabir ibn Hayyan ("Geber"), described the "spirits of salt"][2], and
+Jabir ibn Hayyan (“Geber”), described the “spirits of salt”][2], and
 undoubtedly observed their action on chalk, producing bubbling and oil
-of lime.  Émilie du Châtelet's discovery of energy was published in
-1756, after Leibniz's pioneering efforts in the 1670s and 1680s.
+of lime.  Émilie du Châtelet’s discovery of energy was published in
+1756, after Leibniz’s pioneering efforts in the 1670s and 1680s.
 Thermodynamics was well-developed in the 19th century.  Solvay began
 mass production of soda ash, with a byproduct of muriate of lime, in
-1864.  Gibbs described his "available energy" in 1873.  Refrigeration
+1864.  Gibbs described his “available energy” in 1873.  Refrigeration
 and air conditioning was developed in the late 1800s, and the hazards
 of leaks of toxic and caustic refrigerants were such a major issue
 that Einstein and Szílárd patented their ammonia-absorption
 refrigerator without moving parts in 1930, a variant of the 1922
 Munters–von Platen design, and Electrolux immediately put it into
 production; the same year, Midgley famously snuffed a candle with a
-breath of dichlorodifluoromethane, which he'd developed for the same
+breath of dichlorodifluoromethane, which he’d developed for the same
 humanitarian reasons, and which became the most popular refrigerant
-for decades.  Harold Ellingham published his "Ellingham diagram" in
+for decades.  Harold Ellingham published his “Ellingham diagram” in
 1944.
 
 [2]: http://www.history-science-technology.com/articles/articles%2072.html
@@ -500,8 +500,8 @@ times longer than civilizations have existed.  So, if these systems
 are so advantageous, why have they not been applied widely?
 
 In the particular case of sewage, given the depth of mind-crippling
-tabus on the subject, I don't think we need much reason for slow
-diffusion of shit-handling innovations; the US still hasn't adopted
+tabus on the subject, I don’t think we need much reason for slow
+diffusion of shit-handling innovations; the US still hasn’t adopted
 bidets, for example.  Squat toilets like the traditional Turkish and
 Japanese designs help greatly with constipation.  The US has a huge
 constipation problem.  Nevertheless, diffusion of squat toilets is
@@ -517,14 +517,14 @@ explanation.  There are some commercial installations using desiccant
 air conditioners, dating back to the 1980s in some cases, but it is
 not a widely adopted technology.  There are even a few cases of using
 thermochemical energy storage for both heating and cooling in this
-way, though I haven't seen previous suggestions of using a single
+way, though I haven’t seen previous suggestions of using a single
 thermochemical energy store for so many different purposes: space
 heating, heat for cooking, air conditioning, air dehumidification,
 food refrigeration, food dehydration, garbage dehydration, and sewage
 dehydration.
 
 Moreover, many of the deployed and research systems use expensive
-desiccants such as lithium bromide; I can't find any trustworthy
+desiccants such as lithium bromide; I can’t find any trustworthy
 sources on its cost, but I doubt it approaches the US$0.27/kg price of
 muriate of lime or US$0.008/kg of alabaster.  [Lithium] carbonate
 costs US$13/kg and is 18.8% lithium, making the lithium cost US$69/kg.
@@ -547,7 +547,7 @@ shops all over the world, and the non-electric Amish in particular
 have developed quite an economy of compressing air with windmills,
 shipping compressed air around in tanker cars, storing it in enormous
 underground tanks, and so on, with the objective of easing their work
-without becoming dependent on the "English" for electricity.
+without becoming dependent on the “English” for electricity.
 
 One of the disadvantages of compressed air energy storage is that,
 when air is adiabatically compressed, much of the compression energy
@@ -565,8 +565,8 @@ being decompressed.
 [4]: https://en.wikipedia.org/wiki/Compressed_air_energy_storage#Isothermal
 
 Doing this on a small scale is difficult, because doing it the normal
-way requires access to some kind of "heat absorbing and releasing
-structure" connected to a huge heat reservoir, such as a lake or the
+way requires access to some kind of “heat absorbing and releasing
+structure” connected to a huge heat reservoir, such as a lake or the
 ocean, to keep its temperature change minimal.  But phase-change and
 thermochemical energy-storage systems have the possibility of
 absorbing and later releasing massive amounts of heat without changing

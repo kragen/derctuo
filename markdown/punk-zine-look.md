@@ -164,14 +164,14 @@ scruffy hand-drawing is still expedient.
 Of course when it comes to *documents* we have a Web-native vernacular
 for such things, or really several now: plain-text mailing lists and
 their archives; the GeoCities epoch of garish backgrounds, animated
-GIFs, "under construction" signs, and `<blink>` and `<marquee>` tags;
+GIFs, “under construction” signs, and `<blink>` and `<marquee>` tags;
 README.md on GitHub; Yahoo Groups; Facebook groups; and so on.  But
-what I'm interested in here is *user interfaces*.
+what I’m interested in here is *user interfaces*.
 
 User interfaces are not documents.  Their appearance changes over
 time, and not in a predetermined way — rather, in a way that arises
 from *interaction* with the user, who is in a significant sense the
 coauthor of what they are seeing.
 
-What's the equivalent of the typewriter and xerox for user interface
+What’s the equivalent of the typewriter and xerox for user interface
 design?  Hypercard?

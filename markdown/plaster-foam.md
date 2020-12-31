@@ -72,14 +72,14 @@ grounds, used yerba mate, or a similar granular material that will
 burn off in the kiln.  This might work with alabaster plaster too.  I
 have made a lump of plaster mixed with yerba; it is quite hard, less
 dense than plain plaster, and pale green, and it seems to survive fire
-a bit better than plain plaster; but I haven't yet had the chance to
+a bit better than plain plaster; but I haven’t yet had the chance to
 fire such an article long enough to burn out all the organics.
 
 [Naphthalene] is reportedly used in this way to make porous grinding
 wheels, boiling out at quite reasonable temperatures instead of
 needing to be oxidized away like yerba mate.  A wide variety of
 substances would work as alternatives; they need to survive the
-plaster's setting process in solid form — so water ice, for example,
+plaster’s setting process in solid form — so water ice, for example,
 will not work; be capable of breaking apart into granules and
 remaining as separate granules, ruling out, for example, chewing gum
 and candle wax; not be soluble in or reactive with water; not react
@@ -148,6 +148,6 @@ whole height of the cylinder.  No visible cracks propagated out from
 the wire.
 
 Another possible way to foam it: hydrate it with water with a lot of
-dissolved gas, perhaps Priestley's carbonated water, under pressure if
+dissolved gas, perhaps Priestley’s carbonated water, under pressure if
 necessary.  The gas will bubble out and form a foam, but not before
 the pressure is released.

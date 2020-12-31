@@ -172,7 +172,7 @@ Sigma, or the US$2850 he estimates, to US$78.  This 36× reduction has
 a significant impact on the economic plausibility of such systems!
 Also, it’s likely that the wholesale vendor is selling the anhydrous
 salt, since that’s the most useful form for use as a desiccant, while
-what Giglio bought from Sigma is likely the hexahydrate, since that's
+what Giglio bought from Sigma is likely the hexahydrate, since that’s
 the form most stable when exposed to air at room temperature.
 
 (The heat transfer rate of a bubbler is limited by the size of the

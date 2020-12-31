@@ -11,11 +11,11 @@ to support a few operations efficiently:
 
 From the point of view of the beginning of the buffer, text moves when
 you insert and delete things before it.  The tricky part is that the
-markers need to move with the text; it isn't good enough to just store
+markers need to move with the text; it isn’t good enough to just store
 a byte offset for each marker.
 
-Ideally we'd like all of these operations to be sublinear in the size
-of the buffer, and we'd like the buffer to be able to be at least
+Ideally we’d like all of these operations to be sublinear in the size
+of the buffer, and we’d like the buffer to be able to be at least
 nearly as big as RAM, if not the disk, and we might have many markers
 per line, for example to store syntax-highlighting properties of the
 text, so the number of markers also grows linearly as the text grows.
@@ -25,7 +25,7 @@ unbearably slow when we open a gigabyte-sized file, much less a
 terabyte-sized one.
 
 I think Raph Levien has come up with a design for this in Xi based on
-ropes, but I don't know what it is.
+ropes, but I don’t know what it is.
 
 I was lying in bed thinking about G-code and BASIC interpreters and
 the HP 3000, and I realized that you can more or less solve this with
@@ -43,7 +43,7 @@ the following operations efficiently:
 6. Insert a new key-value pair into the file.
 
 All of these take at most logarithmic time; 2 and 3 are typically
-constant time.  (It's common for ISAM systems to support an update
+constant time.  (It’s common for ISAM systems to support an update
 operation as well, but in the absence of concurrency, this can be
 synthesized from read, delete, and insert.)  There are a variety of
 ways to implement this, though B*-trees and LSM-trees are the most
@@ -60,7 +60,7 @@ byte offset in the marker.
 When you change text within a block, you must keep the block from
 growing too large; you may need to split the block, perhaps splitting
 block AAB into AAB and AABA.  This requires updating the key stored in
-each marker that has moved to the new block.  If you don't split the
+each marker that has moved to the new block.  If you don’t split the
 block, you must update the byte offset stored in each marker that
 would have moved to the new block.
 
@@ -88,7 +88,7 @@ ISAM as well.  And ISAM adds a logarithmic slowdown to the
 jump-to-a-marker operation, which would instead be constant-time with
 pointers to pieces.  So is there any advantage of ISAM here?
 
-Well, ISAM can provide FP-persistence.  Ropes are "persistent" in the FP sense: a
+Well, ISAM can provide FP-persistence.  Ropes are “persistent” in the FP sense: a
 reference to a rope refers to a given state of that rope, so an undo
 history can be implemented simply as a list of pointers to ropes that
 share structure.  You can implement ISAM in an FP-persistent way, and
@@ -97,27 +97,27 @@ through an FP-persistent dictionary data structure (whether some
 variant of ISAM or just a hash table) then the whole buffer structure
 can be FP-persistent.
 
-Ropes don't have an obvious way to handle markers, though.  Rope nodes
+Ropes don’t have an obvious way to handle markers, though.  Rope nodes
 are immutable.  If you store markers in an immutable rope node, you
 can copy them to a new node if you make modified versions of it,
 easily supporting operation #3 --- but how do you support
 operation #4, jumping to a marker?  Storing a pointer to a rope node in a marker
-doesn't help --- even if that rope node *is* in the version of the
-buffer of interest, you can't traverse the graph to its parent,
+doesn’t help --- even if that rope node *is* in the version of the
+buffer of interest, you can’t traverse the graph to its parent,
 because it may have many parents, some of which are in the version of
 interest and some of which are not.
 
 The ISAM approach provides FP-persistence, like ropes, without losing
 the ability to track down a marker; its compensating drawback is that
 copying text from one buffer to another, or from one place to another
-in the same buffer, requires copying all the text's characters.
+in the same buffer, requires copying all the text’s characters.
 (*Cut* and paste can avoid this.)
 
 ### Monoidal computations ###
 
 (See also [Monoid prefix sum](monoid-prefix-sum.md).)
 
-Aside from simple undo, there's another set of operations commonly
+Aside from simple undo, there’s another set of operations commonly
 required in text editors which can be supported efficiently by ISAM or
 ropes, but not in any way I can see with a simple linked-list piece
 table: things like syntax highlighting, line numbers, and display
@@ -129,10 +129,10 @@ is line 123 or line 124 depends on all the bytes before that line;
 inserting a single newline early in the buffer increments the line
 numbers of everything after it, but if this takes time proportional to
 the number of lines in the buffer, then it will be unusable on
-sufficiently large buffers.  On the other hand, if you don't store any
+sufficiently large buffers.  On the other hand, if you don’t store any
 line-number information, then going to a given line number will be
-unusably slow on sufficiently large buffers.  (It's okay for that to
-require a full buffer scan the first time, since there's no way to
+unusably slow on sufficiently large buffers.  (It’s okay for that to
+require a full buffer scan the first time, since there’s no way to
 avoid that, but not every time.)
 
 #### Parallel prefix sums ####
@@ -211,7 +211,7 @@ a few NFA states possible at its end, sometimes only one.
 #### Monoidal incremental layout ####
 
 Typically the column at which you display a character depends on the
-font you're using, your wrap width, the kind of wrapping you're using
+font you’re using, your wrap width, the kind of wrapping you’re using
 (character, word, or hyphenated, say), and the characters before it on
 the (logical) line, which may be arbitrarily long.  As described in
 [Monoid prefix sum](monoid-prefix-sum.md), you can efficiently compute

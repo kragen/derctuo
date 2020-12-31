@@ -8,21 +8,21 @@ Typically this process has looked something like:
 2. Take a screenshot with it.
 3. Crop the screenshot in the GIMP (shift-C), zooming in and out as
    necessary.
-4. "Export" the screenshot (ctrl-E).
+4. “Export” the screenshot (ctrl-E).
 5. Exit the GIMP.
-6. Confirm that, yes, I really do want to "exit without saving"
+6. Confirm that, yes, I really do want to “exit without saving”
    (ctrl-D, I think).
 
 This is very cumbersome, taking about a minute.  So I just tried some
 various different screenshot programs to see what would work better.
-KDE's "Spectacle" program is wonderful, better than I had thought
+KDE’s “Spectacle” program is wonderful, better than I had thought
 possible, and now I can invoke it from Emacs with a single keystroke
 and automatically insert the resulting cropped screenshot into the
-Markdown document I'm editing.
+Markdown document I’m editing.
 
 This has had the rather alarming effect of enabling me to add half a
 megabyte of images to Derctuo over the last couple of days, which is
-about the same as the amount of text I've added to it in the last two
+about the same as the amount of text I’ve added to it in the last two
 *months*.  But the year 02020 is over in another month, and Derctuo is
 still less than 10MB out of its 20MB size budget, so maybe I can
 lighten up a bit.
@@ -30,9 +30,9 @@ lighten up a bit.
 Using KDE Spectacle from the command line
 -----------------------------------------
 
-Boudhayan Gupta's Spectacle is *the shit*.  It is *totally awesome*.
+Boudhayan Gupta’s Spectacle is *the shit*.  It is *totally awesome*.
 
-I ran `sudo apt install kde-spectacle` because I don't have KDE
+I ran `sudo apt install kde-spectacle` because I don’t have KDE
 installed.
 
 ![(screenshot of Spectacle in operation)](spectacle-screenshot.png)
@@ -46,14 +46,14 @@ as it will finally appear.  Then you can hit Enter to save it to
 confirmation for overwriting or errors for unsupported file
 extensions — be careful!)
 
-You can even use Spectacle to take a screenshot of Spectacle's own
+You can even use Spectacle to take a screenshot of Spectacle’s own
 cropping UI in operation; I think it works by taking a full-screen
 screenshot when it starts, then covering up the screen with it for
 this `-r` region cropping UI.  In fact, sometimes the cropping UI sort
 of turns back time a little bit, showing what the screen looked like a
 second or two earlier.
 
-The whole interaction takes about 15 seconds, even though I'm not
+The whole interaction takes about 15 seconds, even though I’m not
 running KDE.
 
 This is the ideal mode of operation for invocation from a script; the
@@ -67,7 +67,7 @@ stderr every time you run it:
     Make sure to deploy Qt with accessibility plugins.
 
 Another problem is that if you cancel the screenshot, or if it fails,
-you don't get a nonzero exit status; instead you just get another
+you don’t get a nonzero exit status; instead you just get another
 stderr message:
 
     ERROR:  "Screenshot capture canceled or failed"
@@ -85,15 +85,15 @@ more convenient than what I was doing with the GIMP.
 ![(xfce4-screenshooter screenshot)](xfce4-screenshooter.png)
 
 `xfce4-screenshooter -s somedir -r` is nearly as good as Spectacle,
-and it's even faster (maybe 6 seconds rather than 15 on this netbook),
-but it doesn't let you interactively adjust the dotted-line crop box
-shown above before saving — once you release the mouse button, that's
+and it’s even faster (maybe 6 seconds rather than 15 on this netbook),
+but it doesn’t let you interactively adjust the dotted-line crop box
+shown above before saving — once you release the mouse button, that’s
 it!  But then it prompts you for a filename.  At least it has the
 option of specifying what directory to put it in.
 
 `mate-screenshot -a` is similar, but you have to manually navigate
 through the filesystem to the right directory with its GUI.  Only the
-first time you run it, though, or when you're switching directories.
+first time you run it, though, or when you’re switching directories.
 
 `gnome-screenshot -i` is similar, except that you additionally have to
 select the option to not screenshot the whole screen every fucking
@@ -103,13 +103,13 @@ time you fucking start it.
 
 
 
-Mirage is an image viewer with a relatively accessible "crop" option
-on its "Edit" menu, as well as a full-screen or full-window screenshot
-option on its "File" menu; it's a much easier way to crop existing
+Mirage is an image viewer with a relatively accessible “crop” option
+on its “Edit” menu, as well as a full-screen or full-window screenshot
+option on its “File” menu; it’s a much easier way to crop existing
 images than the GIMP.  Beware, by default it saves the screenshots
 into directories like `/tmp/mirage-EYotN0`.  The cropping
 functionality is also somewhat suboptimal since the view of the image
-in the cropping window is teensy (though what's shown on the left side
+in the cropping window is teensy (though what’s shown on the left side
 of the screenshot above is the thumbnails of other nearby files).
 Having cropped the image you can
 save it over the original with no further confirmation.
@@ -117,17 +117,17 @@ save it over the original with no further confirmation.
 Several other options are even worse than the GIMP
 --------------------------------------------------
 
-KGrab takes forever and doesn't have a crop option.  ScreenGrab is
+KGrab takes forever and doesn’t have a crop option.  ScreenGrab is
 impossibly clumsy.  On this version of X11,
 `xwd | xwdtopnm | pnmtopng > foo.png`
 generates a totally bogus image that looks like it used the
 wrong pixel format or the wrong part of the screen or something, and
-of course it also doesn't have a crop option.  Kazam brings up a blank
+of course it also doesn’t have a crop option.  Kazam brings up a blank
 gray fullscreen window so you can indicate which part of the screen
-you want to grab; I think it's really intended for screencasting, with
+you want to grab; I think it’s really intended for screencasting, with
 screenshots being an afterthought.
 
-The well-known `scrot` command is worth a mention; it doesn't have a crop
+The well-known `scrot` command is worth a mention; it doesn’t have a crop
 option, but `scrot -e 'mirage $f'` will open the full-screen
 screenshot in Mirage so you can crop it with Mirage, and hopefully not
 forget to save the cropped version.  By default `scrot` generates a
@@ -142,7 +142,7 @@ Scripting screenshotting in Elisp
 
 The workflow I really want is to be editing a Markdown document in
 Emacs, press a magic key (Print Screen, which Emacs calls `<print>` or
-`[print]`, actually works, since, for whatever reason, my XFCE doesn't
+`[print]`, actually works, since, for whatever reason, my XFCE doesn’t
 intercept it), type a filename to store the screenshot in, hide the
 Emacs window, spawn off Spectacle to capture the file, unhide the
 Emacs window, and insert a Markdown inline image tag for the
@@ -258,7 +258,7 @@ Mysteriously the `revert-buffer` command displays the images in the
 right margin; I suspect this might be a bug in fill-column-indicator.el.
 A little refactoring might make it
 possible to scan for such images to add such previews to, but I
-probably wouldn't want to invoke that automatically every time I
+probably wouldn’t want to invoke that automatically every time I
 opened a file.
 
 This is a pretty nice experience in Emacs as long as the images aren’t
@@ -287,22 +287,22 @@ them back.  So far this has been a minor annoyance.
 Efficiency
 ----------
 
-Well, I've spent the last 9 hours on automating screenshots†, so now I
+Well, I’ve spent the last 9 hours on automating screenshots†, so now I
 can insert a screenshot into my notes in only 45 seconds.  I ran
 through the previous procedure using the GIMP again and it took me 4
 minutes and 51 seconds, but I think I was usually able to do it faster
-than that — I must be getting sleepy, and I couldn't figure out where
-the GIMP had saved my screenshot.  But, suppose it's 3 minutes
-"saved".  Am I being efficient?
+than that — I must be getting sleepy, and I couldn’t figure out where
+the GIMP had saved my screenshot.  But, suppose it’s 3 minutes
+“saved”.  Am I being efficient?
 
-![(XKCD comic "Is It Worth The Time", q.v.)](xkcd-time-saved.jpeg)
+![(XKCD comic “Is It Worth The Time”, q.v.)](xkcd-time-saved.jpeg)
 
 
 
 According to the comic, yes, as long as I insert several screenshots a
 week, and keep doing this for five years or more; that seems very
-likely to be true.  That doesn't take into account the good or bad of
-having the screenshots displayed in the notes as I'm editing them,
+likely to be true.  That doesn’t take into account the good or bad of
+having the screenshots displayed in the notes as I’m editing them,
 though, or whether I learned anything useful in the process, or
 whether these notes are useful to somebody else.
 
@@ -336,18 +336,18 @@ thermometers](diode-thermometer.md):
 
 
 
-As a PNG this is 15K, which is pretty good.  It's still totally
-readable at `-quality 1`, where it's 6K, and the JPEG artifacts
-are not strikingly obvious at `-quality 10`, where it's 10K.  But
-they don't really disappear until `-quality 50`, at which point
+As a PNG this is 15K, which is pretty good.  It’s still totally
+readable at `-quality 1`, where it’s 6K, and the JPEG artifacts
+are not strikingly obvious at `-quality 10`, where it’s 10K.  But
+they don’t really disappear until `-quality 50`, at which point
 the JPEG is 18K.
 
 The Mirage screenshot earlier looks pretty much the same in JPEG
-with `-quality 80` and PNG, but it's 9K in JPEG and 17K in PNG.
+with `-quality 80` and PNG, but it’s 9K in JPEG and 17K in PNG.
 
 I think the conclusion is that I should use JPEG for JPEG
-things (and just accept Spectacle's reasonable default quality)
+things (and just accept Spectacle’s reasonable default quality)
 and use PNG for text and line art.  And occasionally I should run
 `pngcrush` on all my PNGs, which is an easy batch process and
-therefore doesn't need to be automated in the Elisp interaction
+therefore doesn’t need to be automated in the Elisp interaction
 above.

@@ -40,13 +40,13 @@ if the tension on each cable varies in proportion to its velocity as
 before, the power transmitted by a cable at phase angle *φ* is
 ReLU(sin *xt* + *φ*)².  I think these still sum up to a constant, but
 if not, varying the tension according to some different curve can
-clearly provide constant power transmission over three cables.  I'm
+clearly provide constant power transmission over three cables.  I’m
 not entirely sure that this would also provide constant torque, but
-actually I don't care.
+actually I don’t care.
 
-That's because the reason I think this is interesting is for
+That’s because the reason I think this is interesting is for
 continuously transmitting power between parts of a flexure; flexagons
-aside, most flexures can't manage continuous rotation, so the
+aside, most flexures can’t manage continuous rotation, so the
 traditional forms of continuous mechanical power transmission such as
 belts, shafts, and gears are unhelpful.  Cable transmission also has
 the generally-noted property of fitting conveniently into smaller
@@ -67,8 +67,8 @@ can only transmit 200 W/mm² at this speed.  In theory you could
 increase the cable speed arbitrarily — for example, your wimpy 200 MPa
 cable would transmit 4 MW/mm² at 20 km/s — but, aside from concerns
 about sonic booms and friction heating, the process of reversing the
-cable's direction of movement involves accelerating it, which also
-requires force, and that force adds to the cable's tension.
+cable’s direction of movement involves accelerating it, which also
+requires force, and that force adds to the cable’s tension.
 
 However, for cable lengths short compared to the free breaking length
 of the cable material, this acceleration can reach many gees before
@@ -81,9 +81,9 @@ on one end at about 31 million gees before it breaks.
 
 Return strokes faster than some 10–100 times the acoustic length of
 the cable will result in waves noticeably propagating back and forth
-in the cable, unless it's properly acoustically terminated to prevent
+in the cable, unless it’s properly acoustically terminated to prevent
 such reflections.  This is precisely analogous to the phenomenon in RF
-electronics with unterminated transmission lines, but I don't know of
+electronics with unterminated transmission lines, but I don’t know of
 any electrical power transmission scheme for which it is essential to
 keep the mean drift velocity of the charge carriers in the cable to
 zero, so the analogy only goes so far.
@@ -99,16 +99,16 @@ As one point among many in this possible design space, consider four
 parallel cables oscillating in simple sinusoidal motion in quadrature,
 carved from ASTM A36 steel, each 100 μm square.  According to [Machine
 Teeth](machine-teeth.md)
-A36 yields at 250 MPa, and its Young's modulus is 200 GPa.  It weighs
-7.9 g/cc, so if they're 200 mm long, each weighs about 16 mg.  Suppose
-they're oscillating longitudinally at 3 kHz by a distance of 100 μm.
+A36 yields at 250 MPa, and its Young’s modulus is 200 GPa.  It weighs
+7.9 g/cc, so if they’re 200 mm long, each weighs about 16 mg.  Suppose
+they’re oscillating longitudinally at 3 kHz by a distance of 100 μm.
 Their peak speed is only 1.9 m/s, but their peak acceleration is
 36 km/s/s, 3600 gees, which requires about 570 mN peak acceleration
-force, working out to 57 MPa, comfortably below A36's yield stress.
+force, working out to 57 MPa, comfortably below A36’s yield stress.
 Such a stress will elongate the wire by 0.03%.  If the one or two
 wires actively transmitting power at any given time are loaded
 sinusoidally up to 125 MPa, the peak power transmitted on a wire is
-2.4 watts, but about 1.1 W of that is "returned" during the return
+2.4 watts, but about 1.1 W of that is “returned” during the return
 stroke for the wire.  I think this means that the total net power is
 consistently about 1.3 watts for the whole assemblage.
 
@@ -159,7 +159,7 @@ temperature; tens of milliwatts of such dissipation would likely be
 fatal.)
 
 With the acoustic traveling wave mode of energy transmission mentioned
-earlier, the maximum power per unit area is the energy's elastic
+earlier, the maximum power per unit area is the energy’s elastic
 energy density (half its yield stress multiplied by its yield strain)
 multiplied by the speed of sound in the substance.
 
@@ -171,7 +171,7 @@ cable. You could run three-phase AC power over it at whatever
 frequency was convenient; your phase-to-phase voltage would be limited
 by the breakdown voltage of 40 μm of Kynar, while your RMS current
 would be limited by the resistance per meter and heat dissipation per
-meter of the cable at Kynar's maximum service temperature
+meter of the cable at Kynar’s maximum service temperature
 of 149°.  You can
 decrease the radius of the conductor and increase the thickness of the
 Kynar by an equal amount, thus increasing the voltage linearly but
@@ -179,11 +179,11 @@ also increasing resistance as the square of the remaining wire.
 
 [Kynar]: https://www.ipolymer.com/pdf/PVDF.pdf
 
-The dielectric strength is supposedly "1700 V/mil" for a short period
-of time; if we figure that's 1000 V/milli-inch in practice, that's
+The dielectric strength is supposedly “1700 V/mil” for a short period
+of time; if we figure that’s 1000 V/milli-inch in practice, that’s
 about 40 volts per micron, so 1600 volts peak, 1100 VAC RMS
 phase-to-phase.  [40-gauge wire is rated for 90 milliamps over short
 runs][wire].  I think this ends up at a few hundred watts, too, so
-it's the same ballpark.
+it’s the same ballpark.
 
 [wire]: https://www.powerstream.com/Wire_Size.htm

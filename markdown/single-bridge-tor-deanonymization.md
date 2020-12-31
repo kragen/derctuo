@@ -29,21 +29,21 @@ connections from users who use it, a normal event that can be provoked
 by backbone routing problems or Wi-Fi signal fades, after which the
 user will retry connecting to Tor.  If you log the time of this event
 while simultaneously observing Freenode, you can see if it correlates
-with your target Freenode users going offline with a "Remote host
-closed the connection" message.  If so, you log the IP address and
+with your target Freenode users going offline with a “Remote host
+closed the connection” message.  If so, you log the IP address and
 port.
 
 These are relatively rare events; I observed one 8 minutes ago and
 another 11 minutes ago in this same channel, giving a rate on the
-order of 200 kiloseconds, so even a single "hit" is a p < .001% event
+order of 200 kiloseconds, so even a single “hit” is a p < .001% event
 --- good enough, as they say, for government work.  Two hits on
 different days would be a stronger confirmation and would also allow
-you to characterize the Tor user's IP address distribution.
+you to characterize the Tor user’s IP address distribution.
 
 An uncertainty that I need to test out is whether closing the circuit
 from its origination point within the Tor network will immediately
 close all the outgoing TCP connections from that circuit from the Tor
-exit node, and if so, whether it's a "connection closed" kind of
+exit node, and if so, whether it’s a “connection closed” kind of
 normal situation or more an RST RST RST kind of thing.
 
 Another uncertainty is how many Tor entry nodes a given user will end
@@ -58,12 +58,12 @@ single bridge against a single user, you will fail with high
 probability; if you try to launch it against many users, you will
 succeed with only a few of them.
 
-I'm not clear that this is something anybody needs to respond to or
-defend against in any way, even if I'm correct, since Tor is not
+I’m not clear that this is something anybody needs to respond to or
+defend against in any way, even if I’m correct, since Tor is not
 designed or claimed to defend against a global passive adversary ---
 that is a very difficult problem to solve.  And of course there are
 some well-known problems with malicious exit nodes, and at least one
 person has been prosecuted for sending a bomb threat to his university
 over Tor, because he was the only person connecting to the Tor network
-from the campus at the time the threat was sent.  But I'm surprised
+from the campus at the time the threat was sent.  But I’m surprised
 that such a simple *active* attack seems so likely to work.

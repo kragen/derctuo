@@ -1,9 +1,9 @@
-It's been Norbert Wiener's birthday today, and although he wasn't the
+It’s been Norbert Wiener’s birthday today, and although he wasn’t the
 inventor of the op-amp, he was the key person in explaining the
-significance of the op-amp and similar things.  So I thought I'd
+significance of the op-amp and similar things.  So I thought I’d
 celebrate by building my very first op-amp.  If I could.
 
-I got a four-transistor circuit working in [Falstad's circuit
+I got a four-transistor circuit working in [Falstad’s circuit
 simulator](https://tinyurl.com/yyjol6yg):
 
 ![(schematic screenshot)](my-very-first-opamp-sim.png)
@@ -54,10 +54,10 @@ simulator](https://tinyurl.com/yyjol6yg):
     o 28 1 0 4098 5 0.1 2 2 28 3
 
 It seems to have open-loop differential gain of at least 100 and
-outputs down to the negative rail ("single-supply op-amp") but it
+outputs down to the negative rail (“single-supply op-amp”) but it
 wastes a ridiculous amount of power in its class-A output stage.  Also
 it has an input offset voltage of about 50 mV and an offset current of
-a couple of milliamps.  So it's not a very *good* op-amp, but it *is*
+a couple of milliamps.  So it’s not a very *good* op-amp, but it *is*
 an op-amp.
 
 I feel like it ought to be possible to get the output stage down to
@@ -67,6 +67,6 @@ too much) and so I just brute-forced it with a PNP emitter follower.
 The emitter-follower loading is still probably the culprit for the
 rather poor offset voltage.
 
-I haven't breadboarded it yet, and I had a hard time figuring out why
-the previous circuit simulation weren't working, and I'd like to see
+I haven’t breadboarded it yet, and I had a hard time figuring out why
+the previous circuit simulation weren’t working, and I’d like to see
 if I can get the output stage down to one transistor.

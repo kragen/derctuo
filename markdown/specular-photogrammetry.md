@@ -12,7 +12,7 @@ percentage specularity, and the surface is in some environment with
 some lighting and reflecting some scene around it, in front of and
 occluding part of that same scene; and the surface has some
 orientation in space that is changing.  Given all these parameters,
-it's straightforward, if somewhat expensive, to do the computation to
+it’s straightforward, if somewhat expensive, to do the computation to
 ray-trace a photorealistic image.
 
 By solving the inverse problem through iterative methods, and in
@@ -34,10 +34,10 @@ blurriness exponent is generally taken to be an approximation of
 surface microfaceting, and one of the major effects of such wetting is
 to make such microfacets larger, so you can actually see them
 individually.  This allows you to track them from frame to frame, even
-if the surface's Lambertian texture is too uniform.
+if the surface’s Lambertian texture is too uniform.
 
 If you have two different linearly polarized cameras, you can use
-Brewster's angle to additionally estimate the refractive index of the
+Brewster’s angle to additionally estimate the refractive index of the
 surface gloss, and this polarization data gives you an additional
 measurement of the angle and magnitude of the surface normal, as
 projected on the focal plane.  This should serve to improve surface

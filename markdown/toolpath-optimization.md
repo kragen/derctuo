@@ -3,7 +3,7 @@ requirement Q: given a simulation of the construction process S and a
 sort of distance measurement M, minimize M(S(P), Q) for some given Q;
 P is some sort of plan, such as a toolpath.
 
-In many cases it's convenient to separate the simulation S(P) into a
+In many cases it’s convenient to separate the simulation S(P) into a
 simulation C of the construction process and a simulation E of the
 usage or testing of the artifact produced by it, E(C(P)).  For
 example, C might convert a toolpath into 3-dimensional geometry and an
@@ -13,9 +13,9 @@ M(E(C(P)), Q).
 
 This simple recipe ramifies in all sorts of interesting ways.
 
-Probably nothing in here is original; it's all pretty obvious to
-someone who knows this stuff.  But I haven't seen it presented this
-way anywhere else, it wasn't obvious to me, and I don't see it used in
+Probably nothing in here is original; it’s all pretty obvious to
+someone who knows this stuff.  But I haven’t seen it presented this
+way anywhere else, it wasn’t obvious to me, and I don’t see it used in
 practice much.
 
 Construction simulation C
@@ -44,11 +44,11 @@ the mechanical properties of such parts, you need to simulate these
 effects.
 
 A particularly interesting class of techniques achieving prominence in
-computer graphics in recent years are the "material point methods",
+computer graphics in recent years are the “material point methods”,
 which are hybrid particle–field simulation methods capable of
 achieving surprisingly visually convincing simulations of snow, cloth,
 sand, water, hair, cracking mud, and other difficult materials, as
-well as complex material interactions.  It's possible that the MPM
+well as complex material interactions.  It’s possible that the MPM
 might make it possible to adequately simulate more complex material
 dynamics during the construction process, such as the thixotropic and
 frictional behavior of clay smeared by a spatula.  If not, perhaps
@@ -65,8 +65,8 @@ using reverse-mode automatic differentiation.
 Evaluation simulation E
 -----------------------
 
-Once you've simulated the thing being made, you need to evaluate the
-simulated thing's simulated performance.  Perhaps you are interested
+Once you’ve simulated the thing being made, you need to evaluate the
+simulated thing’s simulated performance.  Perhaps you are interested
 in its appearance from a certain angle, or the load it can bear over a
 certain area, or its acoustic frequency response; literally anything
 that can be quantified in simulation can be used for evaluation.
@@ -78,7 +78,7 @@ of rapidity and possibly differentiability.
 Measurement M of fitness for purpose Q
 --------------------------------------
 
-Once you've computed the total performance evaluation, you want to
+Once you’ve computed the total performance evaluation, you want to
 measure how *fit* that performance is for the purpose you had in mind,
 reducing its badness (or equivalently its goodness) down to a single
 scalar score, so that optimization becomes a meaningful concept.  This
@@ -96,7 +96,7 @@ optimizing ANN parameters, are variants of gradient descent such as
 Adam; but you can also use things like Nelder–Mead, genetic
 algorithms, and the goofy hybrid of Nelder–Mead and the method of
 secants that I wrote about in Dercuano, and probably also lots of
-things I don't know about yet.
+things I don’t know about yet.
 
 Some of these algorithms require the gradient of the loss function
 with respect to the design variable vector P.
@@ -106,7 +106,7 @@ constant, finite dimensionality over which to optimize; depending on
 the structure of the problem, it may be straightforward to add more
 design variables over time.
 
-It's worth noting that finding the *true* optimum is often unnecessary
+It’s worth noting that finding the *true* optimum is often unnecessary
 and nearly always infeasible in practice.  The above algorithms
 generally give a *close approximation* of a *local optimum*, but are
 not guaranteed to be able to do even that.
@@ -122,7 +122,7 @@ searched; the nearest random sample is selected, and continuous
 optimization algorithms such as gradient descent are applied to
 generate the nearest point in the property space (E) reachable by any
 design in the parameter space (our P, or perhaps C(P), since the
-Disney group generally doesn't try to simulate the fabrication process
+Disney group generally doesn’t try to simulate the fabrication process
 itself).  Sometimes multiple components from the database are combined
 into a single design.  Sometimes additional optimization algorithms
 are used, often in a new, higher-dimensional parameter space.
@@ -156,8 +156,8 @@ calculate the gradient of M with respect to P, and finally run a
 optimization step.  But in most cases P is almost the same as a
 previous P, so most of the answers will also be almost the same.
 
-Caching-based incrementalization approaches, like Umut Acar's
-"self-adjusting computation", can often provide speedups of five or so
+Caching-based incrementalization approaches, like Umut Acar’s
+“self-adjusting computation”, can often provide speedups of five or so
 orders of magnitude if P is *almost the same* in a very particular
 sense: if most of its components have *no* change, but some of them
 have *arbitrary* change.  Incrementalizing the procedure in this way
@@ -165,9 +165,9 @@ is not helpful for gradient descent as such, since very few of the
 components of the gradient are ever precisely 0, but if we modify the
 optimization procedure to search along only one or a few dimensions of
 P at a time
-("coordinate descent") — perhaps the ones whose component in the gradient is
+(“coordinate descent”) — perhaps the ones whose component in the gradient is
 largest — then we may be able to get a big speedup out of this kind of
-incrementalization.  SKETCHPAD's constraint-satisfaction algorithm
+incrementalization.  SKETCHPAD’s constraint-satisfaction algorithm
 used a relaxation approach somewhat similar to this.
 
 (Self-adjusting computation and similar approaches also suffer from
@@ -196,7 +196,7 @@ the computation incrementally as before, updating just those
 components.
 
 There are some loose ends there with respect to how big a bounding box
-you pick, and when you decide to shrink it, but I think it's
+you pick, and when you decide to shrink it, but I think it’s
 tractable.
 
 This hybridization of self-validating arithmetic with self-adjusting
@@ -217,11 +217,11 @@ response is to rerun the whole planning process, given the current (or
 near-future) state as the starting point, in order to take advantage
 of the new information.
 
-At times it's necessary to plan out expectations which will permit the
+At times it’s necessary to plan out expectations which will permit the
 original plan to continue to be followed.  For example, perhaps the
 profile of light on a rotating clay object should be within certain
 limits; if not, actuation should immediately cease, reverting to some
-sort of "safe" or "home" position likely to do minimal further damage,
+sort of “safe” or “home” position likely to do minimal further damage,
 until a new plan can be formulated.  Less dangerous departures from
 expected results may permit the original plan to continue while new
 plans are hatching.
@@ -242,11 +242,11 @@ than a single-point cutter can; grinding the form tool may save you
 time.  Adding an assembly step at the end of a process can allow you
 to stamp a product out of sheet steel instead of milling it out of a
 billet, making it orders of magnitude cheaper.  A PLA FDM 3-D printer
-can't make things out of sheet steel, but it can definitely print
+can’t make things out of sheet steel, but it can definitely print
 press-forming dies for a sheet-metal brake, or beading dies for a
 bead-rolling machine.
 
-So it's worthwhile to keep in mind the possibility of *indirect*
+So it’s worthwhile to keep in mind the possibility of *indirect*
 construction, by constructing tools or parts that are then
 used — perhaps many times — for the desired final product.
 
@@ -262,19 +262,19 @@ Research Zurich linkages mentioned above.
 
 The invention of reusable approaches that can be applied to many parts
 of a design is not limited to physical tooling, though; things like
-"gusset", "tube", and "truss" are commonly useful to reduce the mental
-effort of mechanical engineering, and things like "differential pair",
-"negative feedback", and "cascode" are commonly useful in the same way
+“gusset”, “tube”, and “truss” are commonly useful to reduce the mental
+effort of mechanical engineering, and things like “differential pair”,
+“negative feedback”, and “cascode” are commonly useful in the same way
 in analog electronic design.
 
-There's a hypothesis that the reason structures like bipinnate
+There’s a hypothesis that the reason structures like bipinnate
 compound leaves occur in totally unrelated families of plants (ferns,
 mimosas, and fishtail palms, for example) is that they are
 computationally simple to describe in some absolute sense.  But
-another possibility is that they're simple to describe *in terms of
+another possibility is that they’re simple to describe *in terms of
 highly conserved plant genetic capabilities*.  With this in mind, you
 could imagine optimizing not a specific toolpath itself but a sort of
-"genome" or "program" to generate a toolpath — an indirection in the
+“genome” or “program” to generate a toolpath — an indirection in the
 design process analogous to the indirection of a reusable drillbit in
 the construction process.  Doing this successfully will give a design
 containing reusable parts, not just in the sense of actual immutable
@@ -288,18 +288,18 @@ Above I described C as a function of one variable: P is the design
 toolpath, C(P) is the object or range of objects resulting from
 executing that toolpath, and E(C(P)) is the performance of that
 object.  But really C is also a function of the manufacturing process
-and the materials' properties; we could say C(P, T), where T is this
+and the materials’ properties; we could say C(P, T), where T is this
 description of the process and materials.
 
 In some cases not enough is known about either the manufacturing
-process or the materials' behavior in use — T, that is — to simulate
+process or the materials’ behavior in use — T, that is — to simulate
 them with any confidence.  In such a case we have a different design
 objective, one in some sense diametrically opposite to the
-"tolerances" section above: we want to know the cheapest and quickest
+“tolerances” section above: we want to know the cheapest and quickest
 toolpath that will reduce our uncertainty about the unknown variables.
 So, for example, to shape something out of plastic clay so that it
 will work, we would like to use a toolpath whose results vary as
-little as possible over a wide range of plasticities, since the clay's
+little as possible over a wide range of plasticities, since the clay’s
 plasticity varies rapidly over time and in different parts of the
 clay.  But, to find out what that plasticity *is*, we would like to
 use a toolpath whose results vary *as much as possible*.  This is
@@ -307,14 +307,14 @@ perhaps in a sense the difference between science and engineering, or
 exploration and exploitation in reinforcement learning, but we still
 want the results to vary minimally with *other* unknown properties
 such as ambient illumination, so that we can confidently interpret our
-experiment's results.
+experiment’s results.
 
 To some extent it may be possible to mix such experimentation into the
 construction process to support replanning; perhaps prodding the clay
 a bit in a spot we will smooth over later anyway, for example, can
 yield useful observations without affecting the final result.  In
 general constantly adding a little bit of noise well within tolerances
-can provide a "subliminal" experimental result of the effect of that
+can provide a “subliminal” experimental result of the effect of that
 noise; to the extent that the phenomena involved are linear, we can
 confidently extrapolate from these very small effects to much larger
 ones.  The noise can even be much smaller than existing noise in the
@@ -325,19 +325,19 @@ acquired from real spaces in this way by using white-noise excitation.
 
 The simplest way to interpret the results of such experiments is to
 use the same simulation-optimization process as used for design,
-minimizing M(E(C(P, T)), Q); but now the toolpath P is fixed (it's the
+minimizing M(E(C(P, T)), Q); but now the toolpath P is fixed (it’s the
 experiment we performed), Q is our observations from the experiment, T
-(the description of the process and materials) is the "design
-variables" for the optimizer, and E and M are the observations we have
+(the description of the process and materials) is the “design
+variables” for the optimizer, and E and M are the observations we have
 available and the probability of various kinds of errors and
 corruptions in them, instead of real-world performance of a design and
 how well that performance fulfills engineering requirements.
 
-"Making things"
+“Making things”
 ---------------
 
-Although above I've focused on manufacturing, this approach is quite
-generally applicable to control and design problems; the "things"
+Although above I’ve focused on manufacturing, this approach is quite
+generally applicable to control and design problems; the “things”
 being made need not be physical objects.  In the cybernetics
-literature approaches like the above are commonly called "optimal
-control theory".
+literature approaches like the above are commonly called “optimal
+control theory”.

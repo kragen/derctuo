@@ -66,7 +66,8 @@ frame occur to me as one possibility.
 The mechanical power going *into* the wire is about 20 m/s · 40 N =
 800 W, but almost all of that is being transmitted from one sawblade
 puller to the other over the wire, then returned 25 μs later; only a
-small amount of it goes into the workpiece being cut.
+small amount of it goes into the workpiece being cut.  You’d still
+probably have to water-cool it.
 
 An interesting feature of this device is that, because it runs at
 40 kHz, its cutting action should be uncannily almost silent.

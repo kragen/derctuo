@@ -32,7 +32,7 @@ It was hard to find [the Chinese datasheet][1] but I did finally find
 it in an [stm32duino forum thread][2].  [Another page of the forum
 thread][3] has [another datasheet][4].  It seems to have two 12-bit 1
 Msps ADCs, some kind of DAC including an LFSR, 2 I²C channels, 2
-18Mbps SPI channels, CAN (!), 3 USARTs, JTAG, USB, an RTC, etc.  (I'm
+18Mbps SPI channels, CAN (!), 3 USARTs, JTAG, USB, an RTC, etc.  (I’m
 not sure the STM32 part has all of these!)  Officially the clock only
 goes up to 72 MHz.
 
@@ -42,23 +42,23 @@ goes up to 72 MHz.
 [4]: ??? "2623596 bytes"
 
 Apparently you can run it at 80 MHz, though not the 120MHz or 128MHz
-of the GD32 parts.  User Macbeth says they couldn't get the stm32duino
+of the GD32 parts.  User Macbeth says they couldn’t get the stm32duino
 bootloaders to work on their *possibly* CKS chips (which claim to be
 brand-name STM32) but could get mecrisp to work:
 
 > I figured these dodgy STM32s just have a crippled USB port but then
-  I flashed 'mecrisp' which is an implementation of Forth running over
+  I flashed ‘mecrisp’ which is an implementation of Forth running over
   its own USB serial and it works perfectly! Very odd.
 
 Maybe it would be worthwhile to look at the [boot ROM][5] to compare
-it to ST's with `$ st-flash read system.bin 0x1ffff000 2048` using the
-st-flash program from Arduino's STM32Tools.  User ag123 says the
-bootloader matches ST's.
+it to ST’s with `$ st-flash read system.bin 0x1ffff000 2048` using the
+st-flash program from Arduino’s STM32Tools.  User ag123 says the
+bootloader matches ST’s.
 
 [5]: https://stm32duinoforum.com/forum/trebisky/stm32f103/blob/master/serial_boot/boot.txt
 
-Aha, I measured R10; it's 1.5kΩ as it ought to be, not 10kΩ as in the
-original Blue Pill design.  Hopefully the silkscreen hasn't been
+Aha, I measured R10; it’s 1.5kΩ as it ought to be, not 10kΩ as in the
+original Blue Pill design.  Hopefully the silkscreen hasn’t been
 switched around, so that R10 is the correct R10.
 
 Possible things to try
@@ -70,7 +70,7 @@ that works, so that I can program it (with the Arduino IDE?) without
 the ST-Link dongle.
 
 The next thing to try is probably something with audio: generate some
-bytebeat and try to feed it into my microphone port (or this speaker's
+bytebeat and try to feed it into my microphone port (or this speaker’s
 audio in) with a hacked cable.  Hmm, better find those audio plugs I
 scavenged... although alligator clips or copper wire twisted around a
 phono plug would work too.  It has real DACs, too, not just PWM.
@@ -82,7 +82,7 @@ Next thing after that is to get a voltmeter running with analog
 inputs, limiting diodes, and a voltage divider or three.  (Though see
 [Multimeter metrology](multimeter-metrology.md).)  If USB
 serial is working then I can transmit the result over USB serial.
-Otherwise I'll be limited to blinking an LED or doing speech synthesis
+Otherwise I’ll be limited to blinking an LED or doing speech synthesis
 or something.  Or a modem.
 
 Being able to run it off two AAA (or AA or C) cells, or a CR2032,
@@ -106,10 +106,10 @@ I think it has some kind of ability to write to Flash under program
 control.  This should enable me to tell whether it was turned on while
 disconnected from USB.
 
-I'd like to then see about using scavenged LEDs as light sensors and
+I’d like to then see about using scavenged LEDs as light sensors and
 photocells.  Three or four LEDs in series ought to be enough to
 provide it with 5V which can then get regulated down, but this
-probably involves disconnecting the power LED.  (Too bad it's in the
+probably involves disconnecting the power LED.  (Too bad it’s in the
 wrong direction to use as a photocell...)
 
 It would be good to verify that the part really does have 128K of
@@ -149,7 +149,7 @@ Dimming some colored LEDs also seems promising.
 If I can rig up some kind of weighing scale, maybe using capacitive
 sensing, I ought to be able to measure materials more precisely.
 
-A couple of electronic gadgets I've been putting off doing anything
+A couple of electronic gadgets I’ve been putting off doing anything
 with are this PAL acoustic delay line and these linear servos from
 inkjets.
 

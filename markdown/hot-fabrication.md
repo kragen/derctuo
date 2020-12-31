@@ -24,7 +24,7 @@ better because of its higher resistance; presumably less pure forms of
 carbon such as charcoal have higher resistivities and therefore work
 down to lower temperatures as well.
 
-I've also had success igniting arcs between pieces of charcoal and
+I’ve also had success igniting arcs between pieces of charcoal and
 steel wool inside a microwave oven, and such arcs would also work to
 heat up the interior of an insulated ceramic space like that.  (I also
 left a glass of water elsewhere in the microwave to limit the risk of
@@ -51,7 +51,7 @@ thermite or copper from an aluminum/cuprite thermite.  Moreover, if
 the reaction chamber is sufficiently refractory for the reaction not
 to melt through its bottom, it can be used to heat an insulated
 reaction chamber rapidly to 2500° to 2800°, a temperature that can be
-calibrated by the thermite's stoichiometry rather than regulated by
+calibrated by the thermite’s stoichiometry rather than regulated by
 feedback, and which may be useful for other reactions that are
 difficult to perform at more convenient temperatures, such as the
 graphitization of amorphous carbon foam, carbothermic reduction of
@@ -60,9 +60,9 @@ metals with refractory oxides, and so on.
 (This process is routinely used with graphite crucibles or sand molds
 for welding copper conductors and railway tracks.)
 
-Here in Argentina, on Mercado Libre, hematite ("pigmento oxido de
-hierro rojo") costs US$4 to US$6 per kg, while magnetite is in around
-the same range.  I can't find cuprite; see [the note on copper
+Here in Argentina, on Mercado Libre, hematite (“pigmento oxido de
+hierro rojo”) costs US$4 to US$6 per kg, while magnetite is in around
+the same range.  I can’t find cuprite; see [the note on copper
 salts](copper-salts.md) for more.  Cupric oxide (tenorite) is much
 easier to prepare in bulk, but the resulting thermite acts with deadly
 rapidity; you might be able to reduce this menace by diluting the
@@ -95,7 +95,7 @@ in a sealed pressure vessel.  This poses the risk of the sulfur
 boiling if the reaction is not fast enough and pressure is not
 contained, but it has a couple of very interesting benefits.  First,
 it is possible to weld aluminum with this method, producing only
-aluminum sulfide (melting point 1100°, well above aluminum's 660°;
+aluminum sulfide (melting point 1100°, well above aluminum’s 660°;
 very hard but decomposes in water to aluminum hydroxide and hydrogen
 sulfide, from which the sulfur can easily be recovered).  Second, iron
 pyrite is a beautiful and interesting material in its own right, quite
@@ -117,7 +117,7 @@ spheroidize, the loss in strength may be minimal.  As I wrote in
 Dercuano, it may be possible to use such a process as a way to rapidly
 sinter a green body primarily composed of metal grains.
 
-(I suspect it's possible to weld magnesium by this method as well, a
+(I suspect it’s possible to weld magnesium by this method as well, a
 task which is challenging in general and impossible with ordinary
 thermite.)
 
@@ -160,11 +160,11 @@ immediately atop a mold, so as to drop it into the mold once it
 finishes melting and immediately make a cast, include the use of a
 small in-place carbon-electrode electric arc furnace (as demonstrated
 by, for example, The King of Random, RIP); a small induction heating
-coil, which can be placed outside the refractory chamber itself (I've
+coil, which can be placed outside the refractory chamber itself (I’ve
 written about sealed insulated induction furnaces previously in
 Dercuano); and optical heating through a peephole, either by a focused
-laser or by focused sunlight, perhaps previously "collimated" by
-passing it through a "pinhole" before focusing, in order to permit the
+laser or by focused sunlight, perhaps previously “collimated” by
+passing it through a “pinhole” before focusing, in order to permit the
 usage of smaller solar ovens.
 
 Peepholes of transparent silica aerogel or aerogels of other
@@ -188,7 +188,7 @@ Zirconium-based ceramics
 ------------------------
 
 Another potentially interesting powder-bed 3-D printable end product,
-which I didn't appreciate at the time, is the possibility of printing
+which I didn’t appreciate at the time, is the possibility of printing
 in yttria-stabilized cubic zirconia.  This could be done either by
 sintering or fusing a bed or green body of powder of the ceramic with
 any of the thermite compositions described above, or, more
@@ -216,12 +216,12 @@ remaining zirconium, so depositing a bit of zirconium into a bed of
 graphite or diamond dust might be better than vice versa.  Zirconium
 carbide is even more refractory than zirconia (to the point that I
 doubt the above-mentioned thermites can sinter it), but its standard
-enthalpy of formation is smaller, only -207 kJ/mol to zirconia's -1080
-kJ/mol and [alumina]'s -1675.7 kJ/mol; so it's conceivable that it
+enthalpy of formation is smaller, only -207 kJ/mol to zirconia’s -1080
+kJ/mol and [alumina]’s -1675.7 kJ/mol; so it’s conceivable that it
 might need a boost to fully fuse upon ignition.  Analogous
 considerations apply to [zirconium boride], for which this process is
-already in use, under the name "[self-propagating high-temperature
-synthesis]".
+already in use, under the name “[self-propagating high-temperature
+synthesis]”.
 
 One clever trick from zirconium boride SHS, probably applicable to
 this entire class of processes, is to include metallic magnesium in
@@ -250,15 +250,15 @@ high-temperature stability than traditional yttria-stabilized zirconia.
 [40]: https://www.preciseceramic.com/blog/advantages-of-yttria-stabilized-zirconia-ysz-compared-to-other-stabilizers/
 
 Including aluminum in the zirconium mix might offer some additional
-advantages.  I think it won't give you hotter results — while I
+advantages.  I think it won’t give you hotter results — while I
 *think* aluminum has a higher [energy density] of 83.8 MJ/ℓ than
-zirconium; alumina's molar mass is 101.960 g/mol, while zirconia's is
+zirconium; alumina’s molar mass is 101.960 g/mol, while zirconia’s is
 123.218 g/mol, giving respectively standard enthalpies of formation of
 -16.4 MJ/kg and -8.8 MJ/kg, advantage aluminum; however, while
-alumina's specific heat is the low 0.88 J/kg/K, zirconia's specific
+alumina’s specific heat is the low 0.88 J/kg/K, zirconia’s specific
 heat is a super-low 0.27 J/g/K, so I think zirconium as a thermite
-fuel will actually get hotter than aluminum, though I think it's
-entirely likely I'm misunderstanding how to apply the thermodynamics.
+fuel will actually get hotter than aluminum, though I think it’s
+entirely likely I’m misunderstanding how to apply the thermodynamics.
 Also, though, the resulting alumina–zirconia composites offer [better
 mechanical properties than either ceramic alone][51], being harder
 than zirconia but tougher (higher tenacity) and consequently stronger

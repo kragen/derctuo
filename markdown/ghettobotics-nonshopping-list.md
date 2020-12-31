@@ -99,17 +99,17 @@ works out to about 3.8/6/1600 ≈ 400 μrad ≈ 1'20" of resolution for the
 eyes, or 700 μrad or 2'30" for the camera; double these numbers for
 resolution in terms of distance between lines.)  So even without any
 additional optical magnification the cellphone can provide about 1.7×
-magnification of small objects, and of course it's easy to expand the
+magnification of small objects, and of course it’s easy to expand the
 resulting blurry pictures on the screen to be much larger, which I
-measure as 20× the linear size of the original object; this doesn't make
+measure as 20× the linear size of the original object; this doesn’t make
 any new details visible but does make the same details more obvious.
 
 It is of course common to use cellphones as flashlights or to use an
 LED on them to illuminate an object being photographed.
 
 Attempts to use cheap pocket Fresnel magnifiers to improve the
-resolving power of the cellphone have so far met with failure.  I'm
-considering buying one of those "60×" clip-on "cellphone microscopes".
+resolving power of the cellphone have so far met with failure.  I’m
+considering buying one of those “60×” clip-on “cellphone microscopes”.
 
 Closeup image quality is improved substantially by supporting the
 cellphone on top of a table on a a 75-to-76-mm-tall triangular prism,
@@ -117,8 +117,8 @@ with triangle sides of 55, 55, and 60 mm, folded from a 75-mm-wide
 strip cut from a cardboard box discarded by the supermarket using box
 cutters, measured with the tape measure, marked with a ballpoint pen,
 and taped into shape using electrical tape.  The triangle firmly
-supports the cellphone's center of gravity and the place where you
-have to tap to take a photo, without obstructing its camera, "flash",
+supports the cellphone’s center of gravity and the place where you
+have to tap to take a photo, without obstructing its camera, “flash”,
 light sensors, or power button.  This reduces non-parallelism,
 eliminates motion blur, and keeps the imaging range near optimal (as
 close as possible without losing focus.)  So this probably gets to
@@ -127,9 +127,9 @@ better than 1.7× resolving power, maybe 3×.
 Both of the cellphones I happen to have here are more or less
 equivalent for this.
 
-password2 points out that there's a program called
+password2 points out that there’s a program called
 [scrcpy](https://github.com/Genymobile/scrcpy) which might be useful for
-this, allowing me to disable the screensaver and display the cellphone's
+this, allowing me to disable the screensaver and display the cellphone’s
 screen on a laptop or netbook connected over USB or TCP/IP.  This would
 afford greater magnification, because those screens are bigger, though
 of course not greater detail, and probably with more latency.
@@ -240,16 +240,16 @@ cardboard.  Panel-mount components I would poke through all the way,
 then screw them down to the cardboard as normal; for through-hole
 components, I would poke just the leads through.  Then I could connect
 the leads inside the box using alligator-clip jumpers.  All of this was
-made easier by the use of parts that hadn't been used yet, so the leads
+made easier by the use of parts that hadn’t been used yet, so the leads
 were still long, and the near complete nonexistence of surface-mount
 parts.  This approach is convenient; construction paper is of the
 appropriate weight, and so are the inner and outer walls of single-wall
 corrugated cardboard, which can be soaked apart in water.
 
-A disadvantage to this approach is that it doesn't scale to more than
+A disadvantage to this approach is that it doesn’t scale to more than
 a few dozen connections.
 
-At the time, I also had a Radio Shack "300 in 1" electronics kit,
+At the time, I also had a Radio Shack “300 in 1” electronics kit,
 which had about 50 components mounted on a piece of cardboard next to
 some extension springs.  By thumbing a spring to the side, you opened
 up space between its coils to insert one or more wires into.
@@ -283,7 +283,7 @@ make nets of any degree of complexity.
 
 These female–female jumpers seem to be more or less the standard that
 the Arduino world is converging on: each component is on its own little
-PCB, with some 2.54-mm-pitch pins sticking off the edge.  (I've even
+PCB, with some 2.54-mm-pitch pins sticking off the edge.  (I’ve even
 seen such a PCB for an ULN2803, which is a 2.54-mm-pitch DIP with eight
 Darlingtons on it.)  You can either plug it into your breadboard or you
 can hook up each of the pins directly to some other pin on some other
@@ -302,7 +302,7 @@ So, connectors are the most immediate, urgent necessity.
 Tool chest
 ----------
 
-How can the lab fit into a portable toolchest?  Suppose it's 15 kg, if
+How can the lab fit into a portable toolchest?  Suppose it’s 15 kg, if
 it has wheels, and maybe 200 mm × 400 mm × 500 mm, an acceptable size to
 carry on the bus, stuff under your seat, or carry through a doorway.
 (This ATX tower PC in front of me is 200 mm × 450 mm × 450 mm, a very
@@ -311,24 +311,24 @@ similar size, though a marginally more inconvenient one.)
 The toolchest needs to be able to contain the 7 pieces of equipment I
 have, plus the 27 other pieces of equipment I want, and the 44 kinds of
 consumable parts.  In a very crude averaging sense this allocates about
-190 g to each of these 79 "items", including the toolchest itself, and
-just over 500 mℓ per "item".  Because any item larger than these
+190 g to each of these 79 “items”, including the toolchest itself, and
+just over 500 mℓ per “item”.  Because any item larger than these
 averages must be compensated for by items additively smaller, the vast
 majority will need to be smaller than that; I think it makes sense to
-"budget" 40 g and 100 mℓ per "normal item" in order to have space left
-over for the few that can't squeeze in that way.
+“budget” 40 g and 100 mℓ per “normal item” in order to have space left
+over for the few that can’t squeeze in that way.
 
 As some motivating examples, this multimeter — a lightweight handheld
 one — weighs 152 g without its leads, 202 g with its leads, and occupies
 70 mm × 25 mm × 125 mm without its leads, 219 mℓ.  The flush cutters
-weigh 64 g; the soldering iron weighs 174 g with its stand and "sponge".
+weigh 64 g; the soldering iron weighs 174 g with its stand and “sponge”.
 The iron is some 230 mm long and, with the cord, 60 mm in diameter, thus
 occupying some 650 mℓ.  The flush cutters occupy 150 mm × 60 mm × 10 mm
 when closed, thus some 90 mℓ, the only item to come in under the 100 mℓ
-"normal item" threshold, though they exceed the weight threshold by more
+“normal item” threshold, though they exceed the weight threshold by more
 than half.
 
-So the vast majority of "items" need to be much smaller than this, and
+So the vast majority of “items” need to be much smaller than this, and
 probably these three in particular need to be replaced by smaller and
 lighter items.
 
@@ -343,8 +343,8 @@ g.  In particular this gives the quartiles as about 50, 100, and 150 g.
 And the top few volumes out of 40 ℓ are 8 ℓ, 4 ℓ, 2.7 ℓ, 2 ℓ, 1.6 ℓ,
 etc.; and the quartiles are roughly 130 mℓ, 200 mℓ, and 400 mℓ.
 
-This suggests that my "normal item" quotas above were maybe a bit too
-stingy.  A "normal item" can be 100 g and 200 mℓ; every item over the
+This suggests that my “normal item” quotas above were maybe a bit too
+stingy.  A “normal item” can be 100 g and 200 mℓ; every item over the
 threshold must be compensated for by an item below it.  Still, of the
 three test items, only the flush cutters are under these thresholds.
 
@@ -357,17 +357,17 @@ of which are trimpots) and they weigh about 3 grams, so I think this is
 realistic.
 
 But how can I keep them organized?  This is actually far more pressing
-than the problem described above of how to reduce the multimeter's
-weight by half; to build circuits with the hundreds of components I've
+than the problem described above of how to reduce the multimeter’s
+weight by half; to build circuits with the hundreds of components I’ve
 already scavenged from discarded machinery, I must be able to find the
 components I need quickly, I must be able to connect them together, and
 then I must be able to probe the resulting assemblage in some way to
-find out why it's broken.
+find out why it’s broken.
 
-Ideally I'd press the "heat" button to heat the smart tweezers' tips to
+Ideally I’d press the “heat” button to heat the smart tweezers’ tips to
 desoldering temperature, pick up a component with them, and the smart
 tweezer would chime, indicating that the component had been successfully
-characterized; I could then press a "print" button with my foot, storing
+characterized; I could then press a “print” button with my foot, storing
 the test results and printing a tiny envelope describing the component
 and giving the crucial test values.  Then I would put the component into
 the envelope, and file the envelope in the larger envelope for its type.
@@ -380,12 +380,12 @@ paper, amount to some 6 mℓ.
 Resistor envelopes
 ------------------
 
-I'm trying out categorizing physicaly-small resistors by E12-series
+I’m trying out categorizing physicaly-small resistors by E12-series
 resistance and putting them into paper envelopes, one for each E12
 value (10 12 15, 18 22 29, 33 39 47, 55 68 82).  Most of the resistors
-I've salvaged so far are in the 100Ω–100kΩ range, which requires 37
+I’ve salvaged so far are in the 100Ω–100kΩ range, which requires 37
 envelopes, much like Merlin Mann.  There are a few higher and quite a
-number lower, but so far I don't have an accurate way to measure
+number lower, but so far I don’t have an accurate way to measure
 resistances below 100Ω.  Hopefully I can rig something up soon.
 
 So far I only have on average two or three resistors of each
@@ -410,8 +410,8 @@ I have a 12-volt power brick that includes current limiting, as I
 found when I used it to electrolytically dissolve some copper; for
 some 45 minutes the output voltage was well below 12 volts.  But I
 need something where I can twist a knob to scan across a range of
-voltages.  The ["Tech Ideas" YouTube channel][0] from India points out
-that there's typically a TL431 on the low-voltage side of modern
+voltages.  The [“Tech Ideas” YouTube channel][0] from India points out
+that there’s typically a TL431 on the low-voltage side of modern
 isolated switching power supplies, directly hooked up to the feedback
 optocoupler, and the TL431 is programmed with a voltage divider, so
 you can [replace its fixed voltage divider with a pot, and maybe
@@ -422,8 +422,8 @@ supply had.
 [0]: https://www.youtube.com/user/9002845859
 [1]: https://www.youtube.com/watch?v=JGZ7FjZCYB8
 
-One difficulty is that you typically want to know what voltage you're
+One difficulty is that you typically want to know what voltage you’re
 getting, so you probably want to add some voltmeters on the output.
-Also it's common to want voltage down to zero; for low-power loads you
+Also it’s common to want voltage down to zero; for low-power loads you
 can do this very easily with a linear output stage consisting of an
 emitter follower following a potentiometer.

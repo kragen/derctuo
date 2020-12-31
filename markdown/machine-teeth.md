@@ -1,12 +1,12 @@
 Yield strengths and ultimate tensile strengths cover a similar-sized,
-but lower and narrower, range than Young's moduli.  They generally
+but lower and narrower, range than Young’s moduli.  They generally
 correlate, although there is substantial deviation — the plastics have
 immense deformations at break, the metals smaller, the ceramics
 smaller still.
 
-Here's a table of very approximate quantitative figures:
+Here’s a table of very approximate quantitative figures:
 
-    |                              | Young's | yield   |      tensile |
+    |                              | Young’s | yield   |      tensile |
     |                              | modulus | stress  |      rupture |
     |                              |   (GPa) | (MPa)   |        (MPa) |
     | diamond                      |    1000 | brittle |        60000 |
@@ -32,13 +32,13 @@ Here's a table of very approximate quantitative figures:
 Critters (the technical term) use teeth, claws, and beaks to cut
 things, maneuvering them into position with softer tissues.  A
 smallish tooth can have an even smaller point that digs into the
-material to cut, supported by a wider base rooted in a "handle" of
+material to cut, supported by a wider base rooted in a “handle” of
 material softer than the tooth itself, which is held in still softer
 material.
 
 Machines can use the same technique, and sometimes do: lathes, fly
 cutters, boring bars, shapers, and D-bits all cut with a single point,
-often made of a cermet; it's common to dress grinding wheels with a
+often made of a cermet; it’s common to dress grinding wheels with a
 single-pointed diamond mounted at the end of a steel dressing tool; a
 woodworking plane commonly uses a steel blade held in a wooden frame;
 and a hand file commonly consists of case-hardened steel teeth on the
@@ -46,15 +46,15 @@ surface of a piece of softer steel, held in a softer wooden handle,
 held in a still softer hand.
 
 For example, you could imagine a tungsten-carbide tooth (sometimes
-these are called "teeth", other times "tools", "bits", or "inserts";
-analogous artifacts in archaeological contexts are called "microliths")
-shaving a 100-micron-thick, one-millimeter-wide shaving ("chip") as it
+these are called “teeth”, other times “tools”, “bits”, or “inserts”;
+analogous artifacts in archaeological contexts are called “microliths”)
+shaving a 100-micron-thick, one-millimeter-wide shaving (“chip”) as it
 scrapes along a steel surface.  WC (the most unfortunate chemical
 formula ever) is several times stronger in compression, some 1500 MPa,
 but suppose we limit ourselves to its 300 MPa tensile strength; then
 the tungsten carbide will keep cutting as long as the force is less
 than 30 N.  This is enough to get the steel to yield so that the
-carbide can propagate a crack under the chip.  (Carbide's higher
+carbide can propagate a crack under the chip.  (Carbide’s higher
 compressive strength clearly helps a lot here.)
 
 The carbide can be held in a softer material such as steel or even
@@ -70,8 +70,8 @@ say, an 800-micron circular tip, 3 mm height, and a 3-mm-diameter
 circular base, supported on wood, HDPE, PMMA, PET, or many other
 possible materials.
 
-It probably isn't practical to cut most steels with something much
-smaller than that tooth, because the steel is too ductile; you'll end
+It probably isn’t practical to cut most steels with something much
+smaller than that tooth, because the steel is too ductile; you’ll end
 up just forming the steel instead of cutting it.  The surprising thing
 is that 0.2 mm³ of tungsten carbide, about π milligrams, is sufficient
 to enable cutting steel.  200 surface feet per minute (in the medieval
@@ -93,7 +93,7 @@ zirconia would work.  (You could try zircon, but I suspect it would be
 too fragile.)
 
 As economic context, here in the kitchen I have a cheap zirconia
-kitchen knife that's about 100 mm × 25 mm × 1.5 mm, which is about
+kitchen knife that’s about 100 mm × 25 mm × 1.5 mm, which is about
 2800 mm³ of zirconia, enough for some 14000 such teeth; such a knife
 costs some US$7, about 0.05¢ (US$0.0005) per tooth.  I also have a
 high-speed steel hacksaw blade, which is about 310 mm × 12.7 mm × 600
@@ -112,7 +112,7 @@ especially the tungsten carbide mentioned above.
 Three other hard ceramics mentioned above — sapphire, carborundum, and
 zirconia — may be more easily produced from terrestrial materials than
 tungsten carbide.  Tungsten atoms are outnumbered by silicon in
-Earth's crust about a million to one.  Sapphire is made from aluminum
+Earth’s crust about a million to one.  Sapphire is made from aluminum
 and oxygen; aluminum is very nearly as common as silicon, while oxygen
 is even more common.  Carborundum is made from silicon and carbon;
 carbon is outnumbered by silicon only about 300 to 1, and of course
@@ -139,11 +139,11 @@ Historically carborundum was discovered by Acheson running an electric
 arc through a mixture of clay and coke in an iron crucible, insulated
 by the granular materials themselves, in 1890; but Despretz probably
 made it without knowing in 1849 by joule-heating of a carbon rod
-embedded in silica sand, which is essentially the "Acheson process"
+embedded in silica sand, which is essentially the “Acheson process”
 used today; sawdust and salt are former additives now little used.
 (This is also the first process for making synthetic graphite, by
 heating the carborundum until the silicon sublimes at 4150°.  XXX
-wouldn't graphite sublime too?  Shouldn't that be 2830°?)
+wouldn’t graphite sublime too?  Shouldn’t that be 2830°?)
 
 Sapphire is normally refined as an intermediate step in the production
 of aluminum, for example by the Bayer process: low-silica bauxite is
@@ -154,4 +154,4 @@ neutralization with CO₂, or simply by evaporation with seed crystals).
 
 Zirconium carbide can be made simply by carbothermic reduction of
 zirconia with graphite; it is even harder than zirconia itself (?),
-though it has "poor oxidation resistance over 800°".
+though it has “poor oxidation resistance over 800°”.

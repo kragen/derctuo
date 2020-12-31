@@ -8,7 +8,7 @@ or pivoting joints, other than the bearings for the reaction wheels
 themselves.  It would be interesting to do something similar using
 CMGs.
 
-The idea is that you'd have something like an opaque, matte
+The idea is that you’d have something like an opaque, matte
 tetrahedron with rounded corners, or perhaps some more irregular
 shape, of a few hundred mm in diameter, mostly made of some very light
 material; however, inside of it would be hidden two or more gimbaled
@@ -29,7 +29,7 @@ is mostly or entirely made of lead, 11.34 g/cc, then it will weigh
 about 95 kg, too heavy for most humans to lift.  I think it should be
 possible to build the rest of the machine — frame, bearings, smaller
 gyros, gimbals, motors, cables, etc. — under 5 kg.  So 95% of the
-machine's mass will be in its primary gyro, which can safely be spun
+machine’s mass will be in its primary gyro, which can safely be spun
 at some 30 m/s.
 
 At this speed its kinetic energy would be some 43 kJ, enough to drain
@@ -70,16 +70,16 @@ of gravity is over the opposite edge.
 More irregular shapes would offer more versatility.
 
 A prototype of 1% the mass could probably be constructed.  Instead of
-weighing 100 kg, it would weigh about 1 kg.  You'd scale it down by a
+weighing 100 kg, it would weigh about 1 kg.  You’d scale it down by a
 linear factor of, say, 0.22.  So the tetrahedron would be 158 mm tall,
 the incribed sphere 79 mm diameter, the rotor rim 22 mm thick,
 centered 37 mm from the center (74 mm major diameter).  This rim has a
 volume of 89 ml, 1.01 kg.  If we also scale down the rotor linear
-speed and leave its angular speed alone, it's only going 6.6 m/s,
+speed and leave its angular speed alone, it’s only going 6.6 m/s,
 which is still 1700 rpm.  (I guess I should work out what the scaling
 laws for CMGs are; I think that small CMGs are worse than reaction
 wheels.)  The kinetic energy has dropped even more: now
-it's only 22 J.  I feel like this would still probably work but you
+it’s only 22 J.  I feel like this would still probably work but you
 might need to spin up the motors.
 
 The total mass left over, if it scaled the same way, would be about

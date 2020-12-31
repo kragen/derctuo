@@ -169,4 +169,4 @@ lubricated.
 As the space between the pistons can be reduced indeed to zero,
 requiring no accommodation for the opening of valves, the spark-plug
 is redundant in these classes of engines; it can be designed to ignite
-purely by adiabatic heating as in Diesel's engine.
+purely by adiabatic heating as in Diesel’s engine.

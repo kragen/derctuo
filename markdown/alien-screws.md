@@ -61,8 +61,8 @@ ideally, both.  A better tradeoff can be provided in many applications
 by making the threads at each end a hollow cylinder maintained in
 *compression*, free to slide along an internal unthreaded shank or
 tension rod which is welded to the thread-covered pipes at each end of
-the fastener.  (So they're only sliding to the extent that either the
-threads or the rod are deforming.)  This may reduce the screw's
+the fastener.  (So they’re only sliding to the extent that either the
+threads or the rod are deforming.)  This may reduce the screw’s
 tensile strength somewhat, because the shank is narrower than it would
 otherwise be — although the thread roots are no longer available as
 crack-initiation stress risers.  But it increases the impact

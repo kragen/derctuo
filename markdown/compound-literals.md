@@ -1,5 +1,5 @@
 ISO C99, and GCC since earlier, support [so-called compound
-literals][0].  I've written a number of C functions that look more or
+literals][0].  I’ve written a number of C functions that look more or
 less like this:
 
     static struct point point_at(int x, int y)
@@ -39,8 +39,8 @@ consider:
     ...
     printf("%d\n", distsq((point){2, -1}, (point){5, 3}));
 
-It's a shame that C doesn't have top-down type inference for this
-context, so we can't write `distsq({2, -1}, {5, 3})` and have the
+It’s a shame that C doesn’t have top-down type inference for this
+context, so we can’t write `distsq({2, -1}, {5, 3})` and have the
 compiler infer the `point` type.  Even OCaml fails us here — because
 its type inference is bottom-up, to infer types in such cases it
 requires the field names of record types to be unique, like 1970s C,
@@ -64,11 +64,11 @@ This is [in the OCaml FAQ][2].
 
 [2]: https://caml.inria.fr/pub/old_caml_site/FAQ/FAQ_EXPERT-eng.html#labels_surcharge
 
-(There's an interesting niche open for a language that uses structural
-subtyping like OCaml's object types and polymorphic variants, but for
+(There’s an interesting niche open for a language that uses structural
+subtyping like OCaml’s object types and polymorphic variants, but for
 records with an open set of field names — the kind of thing people do
 in JS or Lua or with JSON, but with static type checking.  I think
-OCaml didn't have subtyping at all at the time records were added, and
+OCaml didn’t have subtyping at all at the time records were added, and
 its use is still controversial.)
 
 Getting back to C, one of the more interesting uses for [so-called
@@ -88,7 +88,7 @@ by saying something like:
 of `struct foo` is some kind of aggregate, and I think it applies to
 arrays as well, and I think the requirement to have at least one
 initialized field has been removed in recent versions of C so `struct
-foo x = {};` works too, but I'm not sure of any of those.)
+foo x = {};` works too, but I’m not sure of any of those.)
 
 So if you have a struct with a large number of fields, you can specify
 that you want to initialize one or two of them:
@@ -97,7 +97,7 @@ that you want to initialize one or two of them:
 
 This kind of thing is especially useful to give named arguments to
 functions with a large number of optional arguments; maybe somewhere
-there's a `transform_image(&t, ...);` function you're going to invoke.
+there’s a `transform_image(&t, ...);` function you’re going to invoke.
 Of course, you always could have designed the interface with a bunch
 of functions:
 
@@ -107,14 +107,14 @@ of functions:
     it_set_max_depth(t, 8);
 
 But this has several drawbacks compared to the designated-initializer
-approach.  It's more code.  It introduces runtime failure into what
+approach.  It’s more code.  It introduces runtime failure into what
 could have been statically allocated memory, or
 statically-space-verified stack-allocated memory.  It takes time at
 runtime to execute the function calls, although initializing
 stack-allocated memory also takes time at runtime.  For
 statically-allocated objects, you need to somehow run the
 initialization code at startup, before anything uses the object.  It
-can't be used inside an expression — it forces the caller into an
+can’t be used inside an expression — it forces the caller into an
 imperative style.  And the implementor of the calling interface must
 write or macro-expand a large number of setter functions.
 
@@ -131,7 +131,7 @@ other 46, too.
 
 The astonishing thing, though, is that in C, all of these compound
 literals with automatic storage duration last to the end of their
-enclosing scope, while in C++ they're treated as temporaries and
+enclosing scope, while in C++ they’re treated as temporaries and
 disappear rather quickly.  This means you can build up arbitrarily
 complex nested structures this way, like Lisp.  Consider this
 expression of the S combinator in the λ calculus:

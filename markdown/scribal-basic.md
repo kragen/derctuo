@@ -6,37 +6,37 @@ making them *easy*.
 What BASIC was like
 -------------------
 
-One key aspect was the "IDE": you could interrupt the program at any
-time, type bits of code, inspect some variables (the "PRINT" command
-had a shortcut spelling "?" for this purpose, so you could type "?X3"
+One key aspect was the “IDE”: you could interrupt the program at any
+time, type bits of code, inspect some variables (the “PRINT” command
+had a shortcut spelling “?” for this purpose, so you could type “?X3”
 to see the value of X3, a feature important enough that FORTH spent
-the single-character word "?" on it as well), modify the program, and
+the single-character word “?” on it as well), modify the program, and
 continue from where you left off.  So in a sense you were always
-running "in the debugger", just as with Smalltalk, Lisp, and FORTH.
+running “in the debugger”, just as with Smalltalk, Lisp, and FORTH.
 
 Microsoft BASIC-80 had a set of vi-like line editing commands which I
-couldn't understand, because I couldn't see what was going on, so I
+couldn’t understand, because I couldn’t see what was going on, so I
 would modify the program by retyping lines of code from scratch, with
 the line number.  The 8086 version of Microsoft BASIC improved this
 because it had arrow keys and modeless screen editing, so you could
 use the arrow keys to move up to a previous output line (from LIST,
 say), modify it, and hit Enter, which worked like retyping the line.
-Because you could replace, say, line 30 of the program to say "INPUT
-X" by typing `30 INPUT X`, this had the effect of changing the program
-in memory to say what you'd edited that line to say, as if you were
+Because you could replace, say, line 30 of the program to say “INPUT
+X” by typing `30 INPUT X`, this had the effect of changing the program
+in memory to say what you’d edited that line to say, as if you were
 WYSIWYG-editing it through a tiny one-line-long window.
 
-Another aspect of BASIC's easiness was that it had no mutable data
+Another aspect of BASIC’s easiness was that it had no mutable data
 structures other than variables.  It had array variables, but no way
 to alias them.  There were no records, no containment, no foo.bar.baz,
 no pointers (other than indices you could potentially use to index
 arrays).  Strings were immutable.  This seems to have been important
 to usability; Joel Spolsky (?) reports that the `with` statement,
 which in VBA (as in Pascal or JS) imports the contents of a record
-into the variable namespace, was a significant boon to VBA's
-usability.  (I can't find Joel's post now.)
+into the variable namespace, was a significant boon to VBA’s
+usability.  (I can’t find Joel’s post now.)
 
-You also didn't have to deal with data types, and I didn't, except for
+You also didn’t have to deal with data types, and I didn’t, except for
 the distinction between strings and numbers, a distinction which Perl
 and JS eliminate.  More advanced BASIC programmers knew that by
 defining some or most of their variables as integers they could speed
@@ -54,19 +54,19 @@ different variables with the same name, or had code that worked at one
 point but then stopped working due to an unrelated change giving an
 uninitialized variable a nonsense value.
 
-BASIC-80 had a one-level parser that didn't need whitespace to
+BASIC-80 had a one-level parser that didn’t need whitespace to
 recognize keywords, but variable names were limited to only two
 characters.  The consequence was that you could write things like
 `ifx=ythen300elseprintx` and have it parse.  This was terrible for
-readability but probably also improved the language's "easiness" by
-making it more forgiving: you couldn't break your program by leaving
+readability but probably also improved the language’s “easiness” by
+making it more forgiving: you couldn’t break your program by leaving
 out whitespace.  Relatedly, if you wanted to PRINT multiple things on
 the same line, you were supposed to separate them with `;`, but
-BASIC-80 (and I think even GW-BASIC) didn't enforce that.
+BASIC-80 (and I think even GW-BASIC) didn’t enforce that.
 
 There was a strong distinction between the user program and the
-system, and the temptation was to think that "learning to program"
-meant memorizing the capabilities the language provided.  BASIC's
+system, and the temptation was to think that “learning to program”
+meant memorizing the capabilities the language provided.  BASIC’s
 extensibiilty was almost zilch.  GOSUB was the limit; if you defined a
 subroutine to draw a line, for example, you might invoke it as
 follows:
@@ -82,8 +82,8 @@ Color Computer, the IBM PC Jr, and the Zenith Z-100):
 [0]: http://www.antonis.de/qbebooks/gwbasman/line.html
 
 From the perpective of a 7-year-old, which I was when I started
-programming the CoCo, that's a huge difference.  I learned to define
-subroutines in Logo when I was 5 or 6; I didn't figure out how to
+programming the CoCo, that’s a huge difference.  I learned to define
+subroutines in Logo when I was 5 or 6; I didn’t figure out how to
 transfer that knowledge to BASIC until after learning Pascal (at 11),
 or maybe even later.
 
@@ -92,25 +92,25 @@ distinction was that, even if you did implement the code to draw a
 line in high-level BASIC, it would be so slow that you could see it
 drawing each individual pixel, even on the IBM PC Jr, which ran at
 almost 1 MIPS but only [about 0.2 Dhrystone MIPS][1].  So BASIC was
-too slow to be used as other than a "scripting language" in that
+too slow to be used as other than a “scripting language” in that
 sense.
 
 [1]: http://www.netlib.org/performance/html/dhrystone.data.col1.html
 
 However, the great *benefit* provided by the system-code/user-code
-distinction was that your BASIC program couldn't corrupt the system's
+distinction was that your BASIC program couldn’t corrupt the system’s
 structures, at least until you pierced the veil with PEEK and POKE.
 When you interrupted your program — a common thing to do to fix bugs
-you'd just noticed, or to recover from an infinite loop — BASIC would
+you’d just noticed, or to recover from an infinite loop — BASIC would
 tell you you were at some line number or other, not in the middle of
 some internal Bresenham-point-calculation routine invoked by LINE.  On
 one hand, this did not facilitate studying and extending the system,
 but on the other hand, it meant that the behavior you saw was always
-explicable in terms of your program — you didn't *have* to study and
+explicable in terms of your program — you didn’t *have* to study and
 extend the underlying system to debug your program.
 
 (Vaguely related thought: transactions simplify debugging and error
-recovery, at least as long as they don't make debugging impossible.
+recovery, at least as long as they don’t make debugging impossible.
 What if every subroutine call were a nested transaction?  It would
 simplify exception handling, too, since rolling back the transaction
 would eliminate any need for running user-defined cleanup code.  See
@@ -119,20 +119,20 @@ would eliminate any need for running user-defined cleanup code.  See
 So, thinking about BASIC and Logo, I wondered what a modern sort of
 BASIC would look like, one that was as easy as real BASIC in the ways
 that BASIC was easy, but easier in the ways that BASIC was hard.  And
-even though I've said above that a lot of the important aspects were
-the IDE — you were always running the program "in the debugger", you
-could stop and look at variables and fix it and CONTinue, etc. — I'm
+even though I’ve said above that a lot of the important aspects were
+the IDE — you were always running the program “in the debugger”, you
+could stop and look at variables and fix it and CONTinue, etc. — I’m
 going to focus on the purely linguistic aspects here.
 
 Syntax and control flow
 -----------------------
 
-From my experience with Logo, I don't think the absence of real
+From my experience with Logo, I don’t think the absence of real
 subroutines with parameters was really a key thing that made BASIC
 easier.  In fact, I think Logo might have made things *easier* by
 having named subroutines with parameters.
 
-But if you don't have records or other heterogeneous aggregate data
+But if you don’t have records or other heterogeneous aggregate data
 types (tuples or whatever) you need some way for a subroutine to
 return multiple atomic units of data.  In BASIC this was easy, because
 all the variables were global, so you could just change them.  Octave
@@ -142,20 +142,20 @@ header.  A different approach is to make parameters implicitly inout,
 for example by always using pass-by-reference.
 
 Another way to compensate for not having records is by using closures,
-but closures can be confusing.  But Smalltalk-like "blocks" don't have
-to be confusing; consider Logo's REPEAT 4 [FD :SIDE RT 90] — it's
+but closures can be confusing.  But Smalltalk-like “blocks” don’t have
+to be confusing; consider Logo’s REPEAT 4 [FD :SIDE RT 90] — it’s
 apparently easy enough for kids to use.
 
 So I propose that Scribal Basic should support CLU-like or Ruby-like
 block arguments, so you can define `repeat` in the language itself,
-although learners should be able to lock it so they don't end up in
+although learners should be able to lock it so they don’t end up in
 the middle of it when they interrupt the program:
 
     [repeat n]
     for i = 1 to n:
         yield
 
-I think Python's indentation-based syntax with colons has been shown
+I think Python’s indentation-based syntax with colons has been shown
 to be easier for learners to understand, but if not, you could spell
 this as follows:
 
@@ -177,15 +177,15 @@ Or, if the indentation goes away:
         rt 90
     }
 
-The block argument is invoked with `yield`, and because it's not a
-first-class object, it becomes a downward funarg; it can't be captured
+The block argument is invoked with `yield`, and because it’s not a
+first-class object, it becomes a downward funarg; it can’t be captured
 and stored for later use, so resources can be reclaimed with stack
 discipline.  This does require a little bit of trickiness with the
 calling convention: the block is running in the lexical context where
 it was defined, with access to variables like `side`, but the
 activation record of `repeat` is still active, so `fd` and `rt` get
-their activation records pushed on top of `repeat`'s.  And when we
-reach the end of the block we must "return" into the body of `repeat`,
+their activation records pushed on top of `repeat`’s.  And when we
+reach the end of the block we must “return” into the body of `repeat`,
 before it returns to the caller of `repeat` which contained the block.
 
 Because all the parameters are passed by reference, you can pass
@@ -200,9 +200,9 @@ problems come up:
 
 1. You could RETURN from inside a block without giving `repeat` or
    similar things a chance to clean up their activation records.  They
-   won't leak memory in the usual stack implementation — you just
+   won’t leak memory in the usual stack implementation — you just
    restore the stack pointer to what it was on entry to the subroutine
-   you're returning from — but you could imagine wanting, for example,
+   you’re returning from — but you could imagine wanting, for example,
    to unlock a lock or restore some graphics context state.  So
    whatever cleanup code is necessary would need to be activated.
 
@@ -226,9 +226,9 @@ and Y parameters as [X, Y] { ... }, for example.  Or you could put
 them after the colon if you use Python-style indented blocks with
 colons.
 
-But really you don't need parameters for blocks if parameters are
+But really you don’t need parameters for blocks if parameters are
 passed by reference.  You can just use out-parameters for the
-higher-order subroutine you're invoking:
+higher-order subroutine you’re invoking:
 
     eachpoint x y:
        print "x: " x "y: " y
@@ -262,9 +262,9 @@ store the coordinates and a bitmask of buttons via out parameters:
     if not within:
         buttons = 0            ' zero out the buttons so caller knows to ignore
 
-I'm not sure if a single block argument will be adequate, because you
-probably want to define things like "if this button is being clicked,
-do such and so", and that is difficult to express with a single block
+I’m not sure if a single block argument will be adequate, because you
+probably want to define things like “if this button is being clicked,
+do such and so”, and that is difficult to express with a single block
 if both the button geometry and its action are represented with
 blocks.  You could do something grody like this:
 
@@ -281,7 +281,7 @@ Other cases where you might want more than one block argument include
 clipping (an operation that takes a clipping path and a
 drawing — though this is handled in PostScript by having the `clip`
 operator change the current clipping path until the next `grestore`);
-looping constructs with a "final" block; exception handling with a
+looping constructs with a “final” block; exception handling with a
 handler block; union and difference of paths; and 3-D CSG.
 
 Naming all the block arguments might be a good idea:
@@ -331,7 +331,7 @@ In fact, it might be written with them:
         handler
     }
 
-But if we're using the Python-like indented-block syntax, you need
+But if we’re using the Python-like indented-block syntax, you need
 some kind of keyword to introduce the block:
 
     [onclick x y buttons &path then: &handler]
@@ -360,12 +360,12 @@ getting an error or an incorrect effect, or that you need to write
 
 Smalltalk uses keywords to separate arguments: ary at: pos put:
 element, which would read a little better as ary at=pos put=element or
-ary at: pos, put: element.  And I'm already considering that maybe
+ary at: pos, put: element.  And I’m already considering that maybe
 Scribal Basic should use such keywords to introduce block arguments,
 at least after the first one.
 
-For the time being I'm sticking to simple Logo-like juxtaposition of
-arguments despite infix syntax, but I'm noting this as a potential
+For the time being I’m sticking to simple Logo-like juxtaposition of
+arguments despite infix syntax, but I’m noting this as a potential
 trouble point.
 
 Data model
@@ -374,33 +374,33 @@ Data model
 I think the unification of strings with numbers as done in Perl, the
 Bourne shell, and Tcl is a significant improvement in usability,
 especially for novices, and worth keeping, although it undermines
-Scribal Basic's claim to be a Basic.  Awk and JS also try to do this,
+Scribal Basic’s claim to be a Basic.  Awk and JS also try to do this,
 but they do it by guessing when something is supposed to be a number
-and when it's not, and there are some operations that handle the two
+and when it’s not, and there are some operations that handle the two
 differently, notably comparisons and, in JS, `+`.  I think this is a
 mistake.
 
 I also think built-in hash tables (as in awk, Perl, Tcl, Lua, and JS)
 improve usability a lot, even without being first-class values, as
-they aren't in Tcl, Perl 4, and awk.
+they aren’t in Tcl, Perl 4, and awk.
 
 The possibility of passing a nonexistent hash table entry as an
 argument by reference as an argument suggests a lurking danger of
 autovivification.  This can be ameliorated by not making hash tables
 first-class values, so the question of what to do when reading
-a("foo")("bar") doesn't arise, and by adopting the Lua convention for
+a("foo")("bar") doesn’t arise, and by adopting the Lua convention for
 existence: a nonexistent hash-table entry is indistinguishable from
 one to which nil has been assigned.  This is bug-prone but probably
 better than the alternatives in this context.
 
-This way, if someone says `foo bar["baz"]` and bar doesn't have "baz"
-in it yet, we can safely insert a nil at "baz" into the hash table
+This way, if someone says `foo bar["baz"]` and bar doesn’t have “baz”
+in it yet, we can safely insert a nil at “baz” into the hash table
 `bar` before invoking `foo` with a pointer to that nil, which it can
 then set to something else if it wants.  However, this pretty picture
 is complicated by the possibility of needing to rehash the table to
 expand it before `foo` attempts to mutate it.
 
-This can be avoided, rustily, if it's impossible to insert anything
+This can be avoided, rustily, if it’s impossible to insert anything
 else into `bar` in the meantime, for example because no other
 reference to `bar` is passed to `foo` or used by a block argument of
 `foo`.  Alternatively, we could pass in a writing thunk rather than a
@@ -408,7 +408,7 @@ raw memory address, or apply a lock to `bar` to prevent insertion
 until `foo` returns, a lock the insertion routine would have to
 respect.
 
-If we're going to write subroutines that process arrays of numerical
+If we’re going to write subroutines that process arrays of numerical
 data, we need some way to pass the whole array as an argument.
 Traditionally in BASIC this is done, inefficiently, by sharing a
 global array, while in Algol 60 it was done with call-by-name,
@@ -422,8 +422,8 @@ allowing constructs analogous to the following:
 which could be invoked as, for example, `sum i 10 a(i)*b(i) dp` to put
 a dot product into `dp`.
 
-I think call-by-name is a terrible idea, though I'm not clear that
-it's really that much worse than implicit call-by-reference.  But the
+I think call-by-name is a terrible idea, though I’m not clear that
+it’s really that much worse than implicit call-by-reference.  But the
 alternative to call-by-name is to pass entire arrays by reference,
 which seems like the right choice:
 
@@ -435,8 +435,8 @@ which seems like the right choice:
 Much of the language design is aimed at pretty high and
 highly-predictable efficiency with a simple compiler: stack discipline
 for variable storage, limited pointers, no records, and so on.  But it
-seems that if you're going to make the language stringly-typed like
-Tcl, you're going to have to do some type inference to figure out
+seems that if you’re going to make the language stringly-typed like
+Tcl, you’re going to have to do some type inference to figure out
 which variables are really numbers.  This is going to be complicated
 by pervasive mutability and call-by-reference, since potentially any
 function you call with a variable could change the type of that
@@ -446,7 +446,7 @@ argument, including changing its type.
 
 But I think in most cases you can infer at least numeric or string
 nature for variables, and in, out, or inout mode for parameters.  Most
-subroutines won't take block arguments; most parameters won't be
+subroutines won’t take block arguments; most parameters won’t be
 modified; etc.
 
 Scoping
@@ -460,17 +460,17 @@ things by reference.  The usual annoying issues of producing closures
 in a loop (do they all alias the same underlying variable?) disappear
 with downward funargs.
 
-But mutable global variables probably are needed.  Ruby's solution of
+But mutable global variables probably are needed.  Ruby’s solution of
 prefixing them with `$` seems like the best tradeoff, avoiding the
-"action at a distance" effect of explicit declarations.
+“action at a distance” effect of explicit declarations.
 
 Imaging model
 -------------
 
 Making graphics was one of the most important aspects of both Logo and
 BASIC.  Even on the H89 I was making ASCII-art graphics.  Nearly all I
-did in Logo was make graphics, a fact which will surprise anyone who's
-seen my adult drawings.  Other people I've talked to about their
+did in Logo was make graphics, a fact which will surprise anyone who’s
+seen my adult drawings.  Other people I’ve talked to about their
 childhood Logo experience also talked about making graphics.  The
 graphics capability of IBM PC BASIC, Z-BASIC, and GW-BASIC was what I
 spent all my time on when I programmed those machines.  Proce55ing is
@@ -480,7 +480,7 @@ program][2] as follows:
 
 > ...I can talk about the Atari 800 I learned to program on.
 > 
-> Most games didn't use memory-intensive bitmaps, but a gridded
+> Most games didn’t use memory-intensive bitmaps, but a gridded
 > character mode. The graphics processor converted each byte to a
 > character glyph as the display was scanned out. By default these
 > glyphs looked like ASCII characters, but you could change them to
@@ -511,12 +511,12 @@ program][2] as follows:
 > hardware. The one sound and two video processors were doing the
 > heavy lifting: flashing colors, drawing characters, positioning
 > sprites, and reporting collisions. It was more than visuals and
-> audio; I didn't even think about where random numbers came
-> from. Well, that's not true: I know they came from reading memory
+> audio; I didn’t even think about where random numbers came
+> from. Well, that’s not true: I know they came from reading memory
 > location 53770 (it was a pseudo-random number generator that updated
 > every cycle).
 > 
-> When I moved to newer systems I found I wasn't nearly the hotshot
+> When I moved to newer systems I found I wasn’t nearly the hotshot
 > game coder I thought I was. I had taken for granted all the work
 > that the dedicated hardware handled, allowing me to experiment with
 > game design ideas.
@@ -526,12 +526,12 @@ program][2] as follows:
 A common observation of kids (and, to a lesser extent, novice adult
 programmers) is that they quickly pick up how to use the built-in
 facilities of the environment, but struggle to build their own
-abstractions for hierarchical composition, even when they aren't using
+abstractions for hierarchical composition, even when they aren’t using
 generalization-impaired environments like BASIC-80.  Later in the
 article quoted above, Hague describes his own process of learning to
-do this when thrust into "the cold expanse of real programming".
+do this when thrust into “the cold expanse of real programming”.
 
-So it's really important that you can do [this kind of thing in a
+So it’s really important that you can do [this kind of thing in a
 trivial amount of code in GW-BASIC][3]:
 
     10 screen 2:for i=0 to 20:line(i*31,0)-(0,i*9):next
@@ -539,7 +539,7 @@ trivial amount of code in GW-BASIC][3]:
 [3]: https://hwiegman.home.xs4all.nl/gw-man/SCREENS.html
 
 This generates a graceful string-art approximation of a quadratic
-Bézier curve when you RUN it, which is super cool when you're 8.  It's
+Bézier curve when you RUN it, which is super cool when you’re 8.  It’s
 only three bytes longer than a minimal Java program that does nothing
 at all:
 
@@ -566,15 +566,15 @@ the level of novice-accessibility it demonstrates:
         }
     }
 
-That's over an order of magnitude worse than the BASIC line-art
-program.  I don't think you can get it much more compact than that
-with Swing, and that's appalling.
+That’s over an order of magnitude worse than the BASIC line-art
+program.  I don’t think you can get it much more compact than that
+with Swing, and that’s appalling.
 
 So I think Scribal Basic, despite the name, would need to make it easy
 to draw graphics.  But I think most people will quickly get frustrated
 with the limits of 1980s-style opaque line-art polygons in 4 or 16
 flat colors, or even 24-bit flat colors, even for cartoons.  So I
-don't think GW-BASIC-style flood-fill and XORing into the framebuffer
+don’t think GW-BASIC-style flood-fill and XORing into the framebuffer
 is really going to get us very far.
 
 I think instead something like the PostScript/PDF/SVG imaging model is
@@ -587,10 +587,10 @@ programs, making JPEGs or PNGs or H.264 frames that are then loaded
 in, rendering from 3-D models, constraint solvers like SKETCHPAD and
 SolidWorks, and so on.
 
-But I'm going to focus on the most straightforwardly usable imperative
+But I’m going to focus on the most straightforwardly usable imperative
 programming approach to defining paths, which I think is either turtle
-graphics or moveto/lineto with numerical coordinates.  It's fairly
-straightforward to define one in terms of the other; here's the code
+graphics or moveto/lineto with numerical coordinates.  It’s fairly
+straightforward to define one in terms of the other; here’s the code
 for turtle graphics in PostScript I used for Heckballs:
 
     % Turtle graphics.
@@ -606,8 +606,8 @@ for turtle graphics in PostScript I used for Heckballs:
     pd  0 seth
 
 But of course the target audience for Scribal Basic is people who
-can't figure out how to write such an adaptor layer, so you'd want it
-to be part of the base system and one that they don't accidentally get
+can’t figure out how to write such an adaptor layer, so you’d want it
+to be part of the base system and one that they don’t accidentally get
 lost in.  In Scribal Basic as described so far, it would be
 something like this:
 
@@ -650,14 +650,14 @@ something like this:
     restoreturtle pen θ x y
 
 Though this is not as graceful as the PostScript, and a lot longer, I
-think it's actually easier to read.
+think it’s actually easier to read.
 
 The initialization code maybe needs to get invoked somehow, although
 by using a `$penup` instead of `$pendown` we could get the right
 defaults from default initialization to zero.
 
 The higher-order function `saveexcursion` suggests using the block
-facility as a substitute for PostScript's gsave/grestore, which save
+facility as a substitute for PostScript’s gsave/grestore, which save
 the current stroke width, color, point, path, and so on, and then
 restore them.  And, as mentioned above, this would also work for
 `fill`:
@@ -681,26 +681,26 @@ Sound
 
 Similarly, sound was always a big deal for motivating programming, but
 you can do a lot more sound now on a computer than you could in 1985.
-In the article of James Hague's I mentioned above, he was setting two
+In the article of James Hague’s I mentioned above, he was setting two
 registers on his Atari 800 to produce a musical tone, but now a cheap
 soundcard can produce literally any sound a human can hear, if you
 have a precomputed CD-DA recording of it.
 
 There are existing DSLs for computer music, such as CSound,
-SuperCollider, ChucK, Sporth, [Faust][4], and Pure Data.  Unfortunately I don't
+SuperCollider, ChucK, Sporth, [Faust][4], and Pure Data.  Unfortunately I don’t
 have enough experience with them to venture an opinion as to what
 subset of their capabilities could be reasonably replaced by a Scribal
 Basic embedded DSL.  Some of them, like Sporth, represent sounds as
 bits of code that execute (conceptually at least) on every sample;
-this is not harmonious with the way I've conceptualized Scribal Basic,
+this is not harmonious with the way I’ve conceptualized Scribal Basic,
 at least so far, although you could do it if you added some kind of
-threading.  Or you could set a global function as the "sound
-generator", which would be invoked to generate sound samples from some
+threading.  Or you could set a global function as the “sound
+generator”, which would be invoked to generate sound samples from some
 kind of event loop.
 
 [4]: https://ccrma.stanford.edu/~jos/faust/
 
-At a minimum, I'd think you need support for playing WAV and ogg files
+At a minimum, I’d think you need support for playing WAV and ogg files
 (with a built-in mixer), playing MIDI files (with a built-in
 soundfont), and playing sequences of pitches and durations computed by
 the program (using the same path as MIDI).  But it would be super cool

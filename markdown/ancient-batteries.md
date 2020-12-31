@@ -57,10 +57,10 @@ mercury and silver, despite the rather miserable voltages available.
 Gold probably *does* work
 -------------------------
 
-Above I said I didn't think gold would work, thinking it would be too
-inert to interact with electrolytes.  But gold here wouldn't be the
+Above I said I didn’t think gold would work, thinking it would be too
+inert to interact with electrolytes.  But gold here wouldn’t be the
 electrode that would need to dissolve, so Bernd Jendrissek tried some
 gold-plated copper contacts along the edge of an old SIMM with a paper
 towel soaked with salty vinegar and a copper wire on the other side of
 the paper towel, getting 0.3 V and a few microamps.  So, if
-Jendrissek's report is correct, it seems that gold *does* work.
+Jendrissek’s report is correct, it seems that gold *does* work.

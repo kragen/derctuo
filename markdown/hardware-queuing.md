@@ -12,13 +12,13 @@ CPU works through the highest-priority nonempty run queue,
 interleaving instruction by instruction.  Normally whenever you
 execute an instruction you enqueue the following instruction on the
 same priority run queue, so threads of the same priority are run in
-round-robin fashion, instruction by instruction, but there's a
+round-robin fashion, instruction by instruction, but there’s a
 mindelay field in the instruction encoding which forces the thread to
 pause for 1-4 cycles.  So each queue item is tagged with the earliest
 cycle when it is runnable.  This allows interleaved realtime tasks of
 the same priority to maintain precisely the same timing regardless of
 how many other tasks of that priority are running at any given time,
-as long as there aren't too many of them.
+as long as there aren’t too many of them.
 
 (Perhaps the delayed tasks should be initially stored in a separate
 queue, or perhaps each queue should practice EDF scheduling, although
@@ -27,10 +27,10 @@ that seems potentially tricky to do in hardware.)
 Interrupts are handled by enqueuing a new top-half task at high
 priority, either on a special interrupt queue or on the regular queue.
 In a sense an interrupt handler is just a thread that is usually
-asleep, but usually we don't allocate it hardware registers to store
+asleep, but usually we don’t allocate it hardware registers to store
 its state between invocations.
 
-There's an instruction to terminate a task, making its hardware state
+There’s an instruction to terminate a task, making its hardware state
 available for forking, and a Redcode-like SPL instruction to fork.
 
 If you have a hardware watchpoint facility, you could provide an
@@ -39,20 +39,20 @@ to, that location becoming one of the hardware watchpoints.  The store
 units simply need to check their destination address against the list
 of watchpoints and conditionally awaken a task.  As an alternative to
 external interrupts, you could simply sleep a thread until an I/O port
-is "written" by the outside world.
+is “written” by the outside world.
 
 The Tera MTA included a facility for a thread to preallocate a set of
 threads it was going to spawn off, which could atomically succeed or
 fail; if it succeeded, subsequent thread-spawning instructions from
 that preallocation were guaranteed to succeed.  (And I think that if
-you didn't use it, or exceeded the allocated capacity, they were
+you didn’t use it, or exceeded the allocated capacity, they were
 guaranteed to fail.)
 
 If trying to spawn a thread with SPL when all the thread slots are
 full is treated as a sort of processor exception, one of the possible
-ways to handle it is to invoke an "OS" that maybe "swaps" one or more
+ways to handle it is to invoke an “OS” that maybe “swaps” one or more
 threads to RAM, saving their architectural state — the usual OS
-context-switch code, that is.  It wouldn't even have to save the full
+context-switch code, that is.  It wouldn’t even have to save the full
 architectural state if the SPL instruction normally clobbers some of
 your registers, so it could be as efficient as a cooperative
 context-switch.
@@ -70,7 +70,7 @@ Hmm, what happens if we have run a mindelay-4 instruction from thread
 A, then a mindelay-3 instruction from thread B?  One or the other is
 going to miss their deadline!
 
-Here's an alternative: we have, say, 4 real-time "queues", A B C, each
+Here’s an alternative: we have, say, 4 real-time “queues”, A B C, each
 of which has up to one real-time task, and a fourth hardware task D, a
 best-effort task.  A runs every other cycle (or idles the machine), B
 runs every 4th cycle, and C and D run every 8th cycle; the sequence is
@@ -97,7 +97,7 @@ three threads with shift 3 or less, two threads with shift 2 or less,
 and one thread with shift 1.
 
 In this form it would be an error to try to change your shift to 1, or
-launch a shift-1 thread, if there's already a thread running in queue
+launch a shift-1 thread, if there’s already a thread running in queue
 A.  If the machine is running three real-time threads with shift 3, it
 will only be running real-time threads ⅜ of the time, ceding the
 others to the best-effort thread, but if it is running two real-time
@@ -107,10 +107,10 @@ shift-3 thread, then it will be running real-time threads ⅞ of the
 time.
 
 (Actually I guess thread D could also be running a shift-3 real-time
-thread, if it's not a best-effort thread; it might make sense to make
+thread, if it’s not a best-effort thread; it might make sense to make
 the best-effort thread be a separate thing.)
 
-In theory a shift-3 thread doesn't care whether it's in queue A, B, or
+In theory a shift-3 thread doesn’t care whether it’s in queue A, B, or
 C, because in any case it gets one out of every 8 cycles.  There might
 be phase offset questions it cares about.
 
@@ -132,7 +132,7 @@ it a task slot.
 four clock cycles, minimum, plus normally a three-cycle jump, and
 possibly finishing a multi-cycle instruction that was in progress when
 the interrupt fired: 7–9 cycles, plus 4 more cycles if it was in sleep
-mode, plus the wakeup time.  So maybe this isn't actually so bad.)
+mode, plus the wakeup time.  So maybe this isn’t actually so bad.)
 
 A perhaps more interesting approach is to have, say, 8 time slots that
 are rigidly round-robined among in this way, but to run a task at
@@ -142,7 +142,7 @@ thus diminishing the total number of real-time tasks by, respectively,
 slots can Voltron into a shift-2 time slot, and two shift-2 time slots
 can Voltron into a shift-1 time slot.
 
-In the simple form, there isn't an allocation policy that permits full
+In the simple form, there isn’t an allocation policy that permits full
 usage but makes fragmentation impossible — a simple adversarial
 allocation sequence guarantees maximal fragmentation:
 
@@ -157,7 +157,7 @@ allocation sequence guarantees maximal fragmentation:
 
 and so on until all 8 time slots are allocated with known
 buddy-pairings.  Then you can deallocate half the time slots (x001,
-x011, x101, and x111) in a way that doesn't permit any of them to be
+x011, x101, and x111) in a way that doesn’t permit any of them to be
 coalesced, because their buddies are still allocated; this permits no
 shift-2 or shift-1 tasks to start, even though the machine is still
 half idle.
@@ -165,10 +165,10 @@ half idle.
 Above it was suggested that *launching* threads might not be a
 real-time task, even if *running* them is.  A different take on that
 is that launching a thread can shift you into a different timeslot,
-causing a phase shift in whatever waveforms you're embroiled in — so
+causing a phase shift in whatever waveforms you’re embroiled in — so
 in the above adversarial example, whatever shift-3 thread tries to
 launch a shift-2 task can get reassigned to a different shift-3
-timeslot in order to defragment a shift-2 timeslot.  That doesn't,
+timeslot in order to defragment a shift-2 timeslot.  That doesn’t,
 however, allow you to launch a shift-1 timeslot.
 
 Another angle on that approach is suggested by Redcode: perhaps the
@@ -176,10 +176,10 @@ SPL instruction divides your previous timeslot between the two child
 threads, which I think is actually what the Padauk microcontrollers do
 in real life — initially the processor runs one thread at 8 MHz, but
 when it splits into two, each runs at 4 MHz.  In the above
-terminology, SPL raises your "shift" by 1 and spawns a child thread
-with the same new "shift".  This suggests that the way to deallocate
+terminology, SPL raises your “shift” by 1 and spawns a child thread
+with the same new “shift”.  This suggests that the way to deallocate
 is to run a MERGE or WAIT instruction which waits until the other
-thread executes DIE or HALT or whatever and then drops your "shift" by
+thread executes DIE or HALT or whatever and then drops your “shift” by
 1.  This incarnation of SPL requires no failure handling but may be
 somewhat inflexible.
 

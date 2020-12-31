@@ -1,18 +1,18 @@
-I haven't found a good explanation of what Modelica is, so here's my
-effort.  It's a *multi-domain* textual language for *numerical
+I haven’t found a good explanation of what Modelica is, so here’s my
+effort.  It’s a *multi-domain* textual language for *numerical
 simulation* of models of *continuous-time* systems *hierarchically*
 composed of *lumped* elements whose behavior is specified through
 *acausal equations*.  It is particularly suited for designed physical
 systems such as machines or chemical plants.  (Sometimes the term
-"cyber-physical systems" is used to emphasize the importance of
+“cyber-physical systems” is used to emphasize the importance of
 control systems.)  Also, it has aspects to facilitate graphical
 display of the models as block-and-line diagrams, and comes with a
 large library of standard components.  Its fundamental basis is
 ordinary differential algebraic equations of finite dimensionality,
 but it also supports hybrid simulation with discrete events.
 
-Here's my effort to explain my understanding of what this means,
-bearing in mind that I've never used Modelica, so some of this may be
+Here’s my effort to explain my understanding of what this means,
+bearing in mind that I’ve never used Modelica, so some of this may be
 laughably wrong.
 
 Multi-domain
@@ -62,13 +62,13 @@ components, is included in the standard library, and its accuracy has
 been validated to some extent against SPICE3 itself.
 
 However, there are a number of other things you might want to do with
-a model other than simulate it.  You might want to do "model
-identification" to estimate the model's parameters from measurements
+a model other than simulate it.  You might want to do “model
+identification” to estimate the model’s parameters from measurements
 of a real system; you might want to validate some behavior of the
 model for all possible scenarios rather than just one (for example,
 showing that the model is unconditionally stable); you might want to
 optimize the model to find out what parameter settings are in some
-sense "best"; you might want to rigorously prove that two models are
+sense “best”; you might want to rigorously prove that two models are
 equivalent, or show how they differ; and so on.  As far as I can tell,
 Modelica implementations do not typically support these other possible
 operations, or give them much lower priority.  Even operations on the
@@ -76,9 +76,9 @@ differential-equation system other than initial-value problems are
 generally unsupported.
 
 The nature of the simulation is fundamentally numerical; although
-discrete-time systems are supported, it's not really the focus of
-Modelica, and I'm not clear that you're going to be able to write a
-compiler or something in it.  I don't think there's any way to create
+discrete-time systems are supported, it’s not really the focus of
+Modelica, and I’m not clear that you’re going to be able to write a
+compiler or something in it.  I don’t think there’s any way to create
 new objects during the course of the simulation.
 
 Continuous-time
@@ -87,7 +87,7 @@ Continuous-time
 Fundamentally Modelica reduces your model, or at least the
 continuous-time part of it, to a set of differential algebraic
 equations which it can then numerically integrate with methods like
-Runge--Kutta.  So most of your model variables theoretically take on
+Runge–Kutta.  So most of your model variables theoretically take on
 an infinite number of values during the simulation.  This separates
 your model from the solver, allowing you to apply different solvers to
 the same model.
@@ -107,8 +107,8 @@ buck controller might contain transistors, diodes, and resistors.
 Modelica can in theory model at all of these levels, reducing them all
 to a single system of differential algebraic equations for simulation.
 
-I haven't quite seen any Modelica models with that level of detail,
-but I've seen people describe a number that come close to it.
+I haven’t quite seen any Modelica models with that level of detail,
+but I’ve seen people describe a number that come close to it.
 
 Lumped
 ------
@@ -121,13 +121,13 @@ transmission line, or the stress distribution in a strut, although if
 you discretize these things yourself you can get it to simulate the
 discretized approximation.
 
-In particular, I think there isn't even a way in Modelica to model a
+In particular, I think there isn’t even a way in Modelica to model a
 delay of a continuous-time signal, such as you might get from an
 improperly terminated cable.
 
-(However, I've seen people simulating, for example, the water-hammer
+(However, I’ve seen people simulating, for example, the water-hammer
 effect in a pipe with the proprietary Modelica simulator SimulationX;
-I assume they're using a discretized approximation of the pressure
+I assume they’re using a discretized approximation of the pressure
 waves.)
 
 Acausal equations
@@ -150,7 +150,7 @@ drop in a hydraulic system, for example.
 Etc.
 ----
 
-Modelica supports compile-time units checking, but I'm not yet clear
+Modelica supports compile-time units checking, but I’m not yet clear
 that its units support extends to full vector-space dimensional
 analysis.
 
@@ -159,10 +159,10 @@ affine arithmetic, or especially reduced affine arithmetic?
 
 I wish there was a way to describe an object like a hollow copper
 cylinder of such-and-such dimensions and have all of its properties
-potentially available --- but only if you ask for them.  For example:
+potentially available — but only if you ask for them.  For example:
 electrical resistance, flow resistance, cost, mass, stiffness, tensile
 strength, effective RF resistance with skin effect, volume,
-temperature, thermal insulation, and so on.  I don't think there's a
+temperature, thermal insulation, and so on.  I don’t think there’s a
 way to do this kind of thing in Modelica itself, but you could do it
 in a higher-level language that compiles to Modelica.
 
@@ -171,11 +171,11 @@ assembly-language disease where you have to invent a name for every
 intermediate value, worsened by the COBOL problem of DATA
 DIVISION. PROCEDURE DIVISION.  A model or other class is divided into
 a section of variable declarations (which can instantiate other
-classes used as components --- a circuit model, for example, might
+classes used as components — a circuit model, for example, might
 instantiate resistors and op-amps) and a section of equations, which
 can include connections between components.  (There are some other
 miscellaneous sections that are sometimes present as well.)  So, for
 example, in a circuit model you must give a name to every circuit
-component, even if it's something like "R37".  The standard rebuttal
+component, even if it’s something like “R37”.  The standard rebuttal
 to this complaint is that you should be using the graphical model
 editor anyway, which I do not find convincing.

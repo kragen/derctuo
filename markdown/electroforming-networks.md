@@ -9,24 +9,24 @@ dissolve the channels out of the copper, using alum solution for
 steel, or either hydrochloric acid or lye for aluminum.
 
 This is potentially useful for many things, such as heat exchangers,
-cooling jackets, heated floors, and "labs on a chip" in which a
+cooling jackets, heated floors, and “labs on a chip” in which a
 sequence of processes is carried out in tubes within a monolithic
 device.  Another similar application is making coils for induction
-heating: at high frequencies only the very surface of the coil's metal
+heating: at high frequencies only the very surface of the coil’s metal
 can be used, and you normally want to run water through it to keep it
 coool.
 
-In many cases like this, it's useful to have a minimum separation
+In many cases like this, it’s useful to have a minimum separation
 between the channels to prevent fluid flow between them.  For example,
-in a long serpentine coolant channel, a "short circuit" for the fluid
+in a long serpentine coolant channel, a “short circuit” for the fluid
 could eliminate one or more loops, producing a hot spot due to
 inadequate coolant flow; and, in an induction coil, unwanted contact
 between successive coils can produce an *electrical* short circuit,
 which can produce a hot spot due to a narrow resistive connection.
 
-To provide such a minimum separation, it's potentially useful to form
+To provide such a minimum separation, it’s potentially useful to form
 the original wire network using wires bearing a layer of flexible
-"spacer", similar to the insulation used on electrical wires.  Once
+“spacer”, similar to the insulation used on electrical wires.  Once
 the wires are all in place, you can remove the spacer, for example by
 burning it off with fire (if it is an organic chemical or, say,
 amorphous sulfur); dissolving it off with water (if it is a
@@ -35,7 +35,7 @@ carboxymethylcellulose, poly(ethylene glycol), poly(acrylic acid),
 xanthan or guar gum, or polyvinyl alcohol, or held together with a
 water-soluble binder; mixing some baking powder in may speed this
 process); melting it off, if it has a low enough melting temperature;
-degelling it by changing the pH, if it's a pH-dependent gel like
+degelling it by changing the pH, if it’s a pH-dependent gel like
 poly(acrylic acid) or some carrageenans; etc.  Once the spacer is
 gone, hopefully without the wires sagging much, the electroforming
 process can begin.

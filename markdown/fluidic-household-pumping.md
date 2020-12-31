@@ -15,7 +15,7 @@ square with a subtle breeze of 2 m/s flowing through it.  Evidently
 8 m³/s of air flows thus; at
 [1.225 kg/m³](https://en.wikipedia.org/wiki/Density_of_air) this is
 about 9.8 kg/s, a staggering rate of 35 tonnes per hour.  At typical
-air's isobaric mass heat capacity of
+air’s isobaric mass heat capacity of
 [1.012 J/g/K](https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities)
 this works out to 9900 watts per kelvin.  That is, if the air
 traveling through this aperture have a temperature a single degree
@@ -24,14 +24,14 @@ watts.  If the temperature difference be ten degrees, the power is 99
 kilowatts, and if it be 40°, the power is nearly 400 kilowatts.
 
 Air has some other remarkable advantages as a heat transfer medium,
-aside from its low viscosity.  It's less toxic than any other fluid.
-It's relatively non-corrosive up to 300° or so, and up to over 2000°
+aside from its low viscosity.  It’s less toxic than any other fluid.
+It’s relatively non-corrosive up to 300° or so, and up to over 2000°
 for oxides, phosphates, and fluorides.  It spans a wide range of
-temperatures in gaseous form, from -182° (oxygen's boiling point) to
+temperatures in gaseous form, from -182° (oxygen’s boiling point) to
 [some 1600° while preserving its nontoxic and noncorrosive
 character](https://en.wikipedia.org/wiki/NOx#Thermal), and up to an
 unlimited temperature if this is not important.  For the time being,
-it's easily available, and the cost is low.
+it’s easily available, and the cost is low.
 
 At temperatures between 0° and 100° we can direct the flow of air with
 nearly any everyday solid material, including polyethylene bags, waxed
@@ -78,7 +78,7 @@ achieve significant temperature rises and thus significant pressures.
 
 Such a comparatively high-pressure, low-volume flow can be called upon
 to fluidically pump larger volumes of air at lower pressures, as in
-the Dyson bladeless fan.  I'm not quite sure how to use this negative
+the Dyson bladeless fan.  I’m not quite sure how to use this negative
 gauge pressure to pump air *into* spaces at a zero or positive gauge
 pressure, particularly without sending the hot air into those areas;
 some ideas follow.
@@ -100,14 +100,14 @@ Bistable fluidic valves of the well-known design using the Coandǎ
 effect can be used to change the direction of flows for an arbitrarily
 long period of time with just a puff of air.
 
-If you're just using the vacuum to drive a closed-circuit
+If you’re just using the vacuum to drive a closed-circuit
 thermodynamic system, the problem vanishes; you can maintain the whole
 system at a negative gauge pressure and bring in nozzles of
-zero-gauge-pressure air as "compressed air" to blow the flow wherever
-it's desired.
+zero-gauge-pressure air as “compressed air” to blow the flow wherever
+it’s desired.
 
 One difficulty arises if your thermodynamic system is evolving some
-gases you don't want in your chimney, perhaps because they are toxic
+gases you don’t want in your chimney, perhaps because they are toxic
 or corrosive.  In some cases you can bubble them through limewater or
 something, but in other cases no such convenient outlet is available.
 In such a case some kind of pumping system like the ones I mentioned

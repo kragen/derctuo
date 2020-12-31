@@ -1,16 +1,16 @@
-I've previously written about [ultraslow radio for decentralized
+I’ve previously written about [ultraslow radio for decentralized
 global digital
 communication](https://www.mail-archive.com/kragen-tol@canonical.org/msg00303.html),
-but since then I've read a bit more about the topic, including a
+but since then I’ve read a bit more about the topic, including a
 little bit of the ample literature on amateur radio DX, QRP, and
 contesting.
 
 Due to skywave propagation, hams using MF and HF radio routinely
 [communicate 1000 km or more with transmit powers on the order of one
-watt][1] (there's a "thousand-miles-per-watt" award);
+watt][1] (there’s a “thousand-miles-per-watt” award);
 under exceptional conditions, transmissions of 1000 km on 1 mW
 of transmitted power have been reported.  Typical transmission modes
-include (very slow "QRSS") CW and the WSJT modes, many of which are around
+include (very slow “QRSS”) CW and the WSJT modes, many of which are around
 one bit per second.
 
 [1]: https://en.wikipedia.org/wiki/QRP_operation
@@ -45,9 +45,9 @@ GMRS radios commonly transmit at such powers; [GMRS] is permitted up
 to 50 watts, though WP says 1-5 watts is more common in practice, and
 FRS in the US was limited to 500 mW until 2017; FRS commonly gets a
 kilometer or so of range, though (again, WP says) tens of kilometers
-are possible "under exceptional conditions...such as hilltop to
-hilltop".  3G mobile phones also transmit 2 W.  So if there's no
-regulatory or interference problem, it's reasonable for even a
+are possible “under exceptional conditions...such as hilltop to
+hilltop”.  3G mobile phones also transmit 2 W.  So if there’s no
+regulatory or interference problem, it’s reasonable for even a
 handheld device to transmit at 1-2 watts.  (Most cellphones are, I
 think, up to 1 watt.)
 
@@ -62,7 +62,7 @@ like a long-distance phased array, which then handles the long-range
 communication.  Still, these short-range links might be able to reach
 many kilometers.  (LoRa at 915 MHz can reach 10 km in rural areas,
 though fewer km in cities; one-watt GSM cellphones can talk to a base
-station 35 km away, and a "timing advance limit" has been hacked into
+station 35 km away, and a “timing advance limit” has been hacked into
 some GSM equipment to extend that range further.)
 
 A handheld device is inevitably a point source of interference, with
@@ -78,7 +78,7 @@ GPS receivers cost a few dollars and receive signals at -125 dBm or
 less; some can lock in a signal at -142 dBm, which is quite impressive
 considering that the thermal noise on a 2-MHz-wide GPS channel is
 about -111 dBm.  They are made cheaper by the fact that they run at
-over 1 GHz, so they don't need large antennas.  Acquiring these
+over 1 GHz, so they don’t need large antennas.  Acquiring these
 signals is feasible because they are perfectly uncorrelated over long
 periods of time, like an LFSR.  Ultrawideband techniques have the same
 virtue.
@@ -86,7 +86,7 @@ virtue.
 Ultrawideband and frequency bands
 ---------------------------------
 
-Modern impulse radio ("ultrawideband") should be able to
+Modern impulse radio (“ultrawideband”) should be able to
 essentially eliminate interference with the nearly orthogonal narrowband signals
 conventionally used.  A commercial AM radio station, for example,
 might transmit at 10 to 100 kW over a bandwidth of 20 kHz, on the
@@ -105,14 +105,14 @@ transmission speed.
 Transmitting over the shortwave band from 2.3 to 26.1 MHz would permit
 multi-megabit transmissions, though of course subject to ionospheric
 conditions; there used to be 500-kW Voice of America broadcasting on
-this band, though I'm not sure there still is, but [Wikipedia tells
+this band, though I’m not sure there still is, but [Wikipedia tells
 me][0] there are 1200-kilowatt shortwave broadcasters, and I think
 their bandwidth may be 10 kHz.
 
 [0]: https://en.wikipedia.org/wiki/International_broadcasting
 
 (Commercial FM radio typically also transmits at a few tens of kW, but
-it's in the 87-105 MHz range, where there's no significant ionosphere
+it’s in the 87-105 MHz range, where there’s no significant ionosphere
 propagation.)
 
 ### Chirping and wider bands ###
@@ -121,12 +121,12 @@ Chirping the transmitted pulses, like LoRa or chirped radar, would
 avoid the need for high peak-to-average power ratios that might
 otherwise pose a difficulty, and would also reduce the time-domain
 artifacts that would otherwise appear to unintentional wideband
-receivers.  Straightforward chirping wouldn't help to avoid narrowband
+receivers.  Straightforward chirping wouldn’t help to avoid narrowband
 receivers, though; if you were to chirp from 526.5 kHz up to 1606.5
-kHz in 1.08 milliseconds, you're only chirping 1 kHz per microsecond,
+kHz in 1.08 milliseconds, you’re only chirping 1 kHz per microsecond,
 so you only spend 20 microseconds in each 20-kHz-wide AM station.
 This would only attenuate the part of the impulsive noise added to AM
-above 50 kHz, which the humans can't hear anyway.
+above 50 kHz, which the humans can’t hear anyway.
 
 You could imagine doing several simultaneous chirps, though, which
 might help more; one that sweeps from 526.5 kHz up to 548.1 kHz over
@@ -140,10 +140,10 @@ precision deriving from its >1MHz bandwidth.
 A more effective way to reduce interference might be simply spreading
 the signal over a wider bandwidth by using shorter pulses.  If the
 pulses were 30 ns instead of 1000 ns, for example, going up to 33 MHz
-instead of 1.5 MHz, you'd have 15 dB
-less power in any given station's 20 kHz band, 0.3 nW/Hz, about 95 dB
+instead of 1.5 MHz, you’d have 15 dB
+less power in any given station’s 20 kHz band, 0.3 nW/Hz, about 95 dB
 quieter than AM broadcasters --- 63 dB because of transmitting at
-63 dB lower power, plus 32 dB because it's spread across 17000 times
+63 dB lower power, plus 32 dB because it’s spread across 17000 times
 as much bandwidth.
 
 Phased-array transceivers
@@ -155,17 +155,17 @@ meters, and 300 kHz is 1 km.  However, phased-array transmission and
 reception from an antenna array distributed over a significant
 geographical area should be possible, and with practical numbers of
 transceivers (10 to 1000 transceivers) significant degrees of
-directionality should be possible; without understanding the math, I'm
+directionality should be possible; without understanding the math, I’m
 guessing it would be 10 to 30 dBi, with the additional advantage (for
 skywave propagation) that most of the energy would propagate
 horizontally.  (My intuitive reasoning is that in the direction of the
 wave, all 1000 transmitters are in phase, so the amplitude is 1000
 times higher than the wave from a single transmitter, while in other
-directions, it's only 32 times higher, so it's 32 times higher in the
+directions, it’s only 32 times higher, so it’s 32 times higher in the
 direction of transmission, which means 1000 times higher power.)
 
 How would you coordinate a phased array of radio transceivers to transmit data?
-It's a bit like the firing-squad problem in cellular automata; they
+It’s a bit like the firing-squad problem in cellular automata; they
 can use lower-power, higher-bandwidth, higher-frequency local radio
 among themselves to compute precise relative geolocations, synchronize
 their clocks, and buffer up bits to be sent in a phased-array fashion,
@@ -191,17 +191,17 @@ For the diffraction limit to be better than 30 dBi, so the phased
 array is limited by the number of transmitters rather than the
 aperture, the diffraction beam divergence needs to be less than 4
 pi/1000 steradians, very crudely, which I think means less than about
-110 milliradians, 6 degrees.  Suppose we're using 1.220λ/D, the Airy
+110 milliradians, 6 degrees.  Suppose we’re using 1.220λ/D, the Airy
 limit for a circular aperture, as an approximation, and we use 1 MHz
 for λ: 300 m.  So we want 1.220 300 m/D = 0.11, so D = 1.220 300 m /
 0.11 = 3.3 km, like, a transmitter every 100 m.  Or 10 km if we want
-to get all the way down to 300 kHz.  Normally we'd worry about
+to get all the way down to 300 kHz.  Normally we’d worry about
 sidelobes from spreading the transmitters too far apart, but I think
 that problem disappears with ultrawideband signals, since the
 sidebands for all the different frequencies are in different places.
 
 However, if the transceivers are all on the ground, which is nearly
-planar, we're still going to have massive diffraction in the vertical
+planar, we’re still going to have massive diffraction in the vertical
 direction, as our energy is spread across 30 degrees or more, even
 after half of it is reflected from the ground.
 
@@ -211,8 +211,8 @@ over some 700 km of width; this is perhaps 200 times the distance it
 was spread over originally, if the original phased array was 3.3 km,
 and of course it is also spread out vertically in a nonuniform way
 between the surface and the ionosphere.  200 times is a surprisingly
-modest -23 dB, although of course that's not the attenuation from the
-transmitter; it's the attenuation from the open spaces in the tens of
+modest -23 dB, although of course that’s not the attenuation from the
+transmitter; it’s the attenuation from the open spaces in the tens of
 meters between the transmitters to the place a quarter of the way
 around the world.
 
@@ -270,9 +270,9 @@ Low-duty-cycle communication
 
 Lower-duty-cycle communication might reduce the degree of interference
 with other systems, and would surely reduce the energy transmitted per
-bit.  As I understand it, there's no floor on energy transmitted per
+bit.  As I understand it, there’s no floor on energy transmitted per
 bit with a given noise floor, if you transmit slowly enough.  If
-you're doing pulse-position modulation with 100-nanosecond timeslots,
+you’re doing pulse-position modulation with 100-nanosecond timeslots,
 then you can transmit one bit in 2 timeslots, two bits in 4 timeslots,
 three bits in 8 timeslots, etc.; at some point your timing
 synchronization between the transmitter and receiver will start to
@@ -280,12 +280,12 @@ suffer, but a regular quartz crystal has drift of about 10 ppm, while
 a temperature-compensated crystal oscillator (TCXO) is typically
 around 1 ppm.  So you could imagine, for example, transmitting one
 pulse every 65536 timeslots (6.55 ms) to represent a 16-bit symbol.
-To get the same error probability per symbol, you'd need to send it at
+To get the same error probability per symbol, you’d need to send it at
 a higher amplitude than if you were sending one pulse every other
 timeslot, but I think only something like 6 times higher, assuming
 AWGN.  (XXX make this rigorous, or at least do some experiments)
 
-If that's correct, you get about 5x the energy efficiency per bit by
+If that’s correct, you get about 5x the energy efficiency per bit by
 using such a low-duty-cycle system, but you transmit 4096 times
 slower.  However, it might increase interference with existing
 licensed uses of the spectrum, for example introducing more audible
@@ -293,12 +293,12 @@ impulsive noise into AM radio.
 
 Low-duty-cycle communication has an interesting relationship with
 chirping, since the effect of chirping is precisely to extend the duty
-cycle.  On one hand, if the underlying signal you're trying to
-transmit isn't low-duty-cycle, chirping it won't do any good --- your
-chirps will overlap, and so you won't get the PAPR improvement you
+cycle.  On one hand, if the underlying signal you’re trying to
+transmit isn’t low-duty-cycle, chirping it won’t do any good --- your
+chirps will overlap, and so you won’t get the PAPR improvement you
 normally get from chirping.  On the other hand, that PAPR is precisely
 what allows you to leave your radio turned off most of the time and
-save power, so if you "improve" it too far, you will exceed your power
+save power, so if you “improve” it too far, you will exceed your power
 budget.
 
 Encoding
@@ -313,7 +313,7 @@ way to ensure non-interference is non-detectability.
 Estimating potential results at 1-100 megabaud
 ----------------------------------------------
 
-It's already commonplace for QRP hams to reach 1 bit per second
+It’s already commonplace for QRP hams to reach 1 bit per second
 transmitting 1000 km on 1 watt.  Conservatively, phased-array
 transmission should buy you 20 dB, while phased-array reception should
 buy you another 20 dB.  Supposing that those hams are not in the
@@ -324,22 +324,22 @@ out to 10 watts rather than 1 watt, giving you another 10 dB, for a
 total of 50 dB, or 100 kilobaud, per phased-array-to-phased-array
 link.  If you can talk to ten phased arrays at once, that should give
 you a megabaud.  But if the phased arrays miraculously work out to buy
-you 30 dB instead of 20, you'd have 100 megabaud.
+you 30 dB instead of 20, you’d have 100 megabaud.
 
 Alternative communication media
 -------------------------------
 
-Earth-moon-earth or "moonbounce" communication is already commonplace
+Earth-moon-earth or “moonbounce” communication is already commonplace
 among hams and sometimes is high enough bandwidth to hold voice
 conversations over.  Doing the equivalent using passive MEO satellites
 would require more precise and dynamic tracking, to the point that
-it's probably only practical at microwave frequencies, but would
+it’s probably only practical at microwave frequencies, but would
 suffer the d<sup>4</sup> loss of the moonbounce path over a much
 shorter distance, and still would cover most of a terrestrial
 hemisphere.  LEO satellites have an even shorter path loss and larger
 cross-section, but only cover a thousand km or so.  Meteor-trail
 communication is an existing well-known technique for high-bandwidth
-opportunistic communication at a similar range.  And the ocean's SOFAR
+opportunistic communication at a similar range.  And the ocean’s SOFAR
 channel, though it has only a few kHz of bandwidth, has better
 attenuation characteristics, more consistency, and lower noise than
 the ionosphere route.

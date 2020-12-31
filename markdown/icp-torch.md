@@ -48,13 +48,13 @@ creating a strong tendency for the plasma to propagate into
 unprotected areas of the torch, but this could be countered by a
 stronger negative advection divergence: all the gas closer to the
 induction coil would be moving too quickly for the plasma to spread
-into it.  I'm not sure if this is feasible.
+into it.  I’m not sure if this is feasible.
 
 In this scenario there is still radiative transfer of heat from the
 plasma to the ceramic walls, but this can easily be kept low enough to
 avoid wear to the ceramic.  If an arc between conventional graphite
 electrodes is used to initially ignite the plasma, the electrodes will
-erode somewhat, but if we're talking about one spark every 20 minutes
+erode somewhat, but if we’re talking about one spark every 20 minutes
 of use or something like that, it should be easy to make the
 electrodes big enough to last the life of the rest of the torch.
 

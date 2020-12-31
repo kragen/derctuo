@@ -24,7 +24,7 @@ possibly other things would work better.  Small molecules tend to
 volatilize before carbonizing (though any cook can tell you that even
 light vegetable oils will carbonize before volatilizing completely,
 though perhaps not before migrating to cooler parts of a surface where
-you don't want them), molecules with a lot of oxygen tend to produce
+you don’t want them), molecules with a lot of oxygen tend to produce
 more bubbles, and highly saturated molecules (like the ones in
 bitumen) and aromatic molecules are more resistant to pyrolysis, so
 perhaps the ideal substance would be a high-molecular weight, highly
@@ -62,8 +62,8 @@ Additives like alkali metals and halogens might accelerate
 decomposition as well, but would probably remain in the final product.
 
 Using thermosets such as the aforementioned vulcanizing polyisoprene
-has the advantage that you don't have to worry about the feedstock
-melting and running off the workpiece before charring, so you don't
+has the advantage that you don’t have to worry about the feedstock
+melting and running off the workpiece before charring, so you don’t
 need to prefer unsaturated aliphatic compounds.  Normally thermoset
 polymerization is tightly controlled to reduce the risk of heat
 degradation of the material produced, but in this context that ceases
@@ -78,8 +78,8 @@ Charring polymers into silicon carbide, silicon nitride, and silicon oxynitride
 
 [People have already done this since the 1970s][0], though, until
 recently, mostly to produce fibers such as Nicalon and Tyranno, and
-coatings.  The technique is called "preceramic polymers", "precursor
-ceramics", or "polymer-derived ceramics", though typically in that
+coatings.  The technique is called “preceramic polymers”, “precursor
+ceramics”, or “polymer-derived ceramics”, though typically in that
 technique the polymer shape is fully formed before pyrolysis
 begins — an approach that can be taken for all of the materials
 discussed in this note, including carbon and the metal oxides
@@ -93,10 +93,10 @@ the ideal for producing silicon carbide, so polymers that have been
 used instead include carbosilazane resin, poly(methylsilazane),
 poly(methylchlorosilane), and poly(carbosilane), which pyrolyze in
 nitrogen to silicon carbide, yielding a ceramic whose mass is some
-60–75% of that of the original polymer (the "ceramic residue yield").
+60–75% of that of the original polymer (the “ceramic residue yield”).
 
 An excess of silicon is preferable to an excess of carbon for
-producing high-temperature ceramics, since silicon melts at "only"
+producing high-temperature ceramics, since silicon melts at “only”
 1414°,
 (XXX [Cold Plasma](cold-plasma.md) says 1460°)
 while carborundum is stable to 2830° and graphite is stable to
@@ -114,13 +114,13 @@ An attractive aspect of these processes is widely reported to be that
 low temperatures, in the 1100°–1300° range, are sufficient to produce
 these ceramics by pyrolysis, while the standard sintering processes
 require 1800° or more, and additionally contaminates the ceramic
-produced with "sintering aids", in order to avoid even higher
+produced with “sintering aids”, in order to avoid even higher
 temperatures.  So not only can polymer-derived ceramics withstand
 higher temperatures than are required for their production, they can
-even withstand higher temperatures than the same ceramics when they're
+even withstand higher temperatures than the same ceramics when they’re
 processed conventionally!
 
-Some of these processes require a "curing" step in between plastic
+Some of these processes require a “curing” step in between plastic
 forming, such as spinning, and the pyrolysis step, in order to keep
 the plastic from melting before pyrolysis is complete.  This curing
 may happen by way of cross-linking, as in rubber vulcanization, or by
@@ -145,7 +145,7 @@ grossly by the positioning precision of the end-effector and only
 finely by shrinkage and wiggle.
 
 Of course, there are certain practical difficulties attending the
-construction of a "hotend" and manipulator that can function in an
+construction of a “hotend” and manipulator that can function in an
 environment that keeps the workpiece at 1100°–1300°.  A combination of
 liquid-cooling and refractory insulation for a manipulator arm would
 probably be necessary.  The thermal gradient near the deposition point
@@ -167,14 +167,14 @@ feedstock, as by fused deposition modeling, would give the reactive
 environment access even to material that is ultimately buried inside
 the part.
 
-Of special note here is HRL Laboratories' high-density
+Of special note here is HRL Laboratories’ high-density
 stereolithography resin, which produces almost-fully-dense silicon
-oxycarbide when pyrolyzed at 1000° in argon ("Additive manufacturing
-of polymer-derived ceramics", Science, January 2016, many authors and
+oxycarbide when pyrolyzed at 1000° in argon (“Additive manufacturing
+of polymer-derived ceramics”, Science, January 2016, many authors and
 Tobias Schaedler).  Their recipe is mercaptopropyl methylsiloxane and
 vinylmethysiloxane (in a 1:1 molar ratio of thiol to vinyl groups),
 plus the usual cocktail of stereolithography additives; pyrolysis
-resulted in "42% mass loss and 30% linear shrinkage" to amorphous
+resulted in “42% mass loss and 30% linear shrinkage” to amorphous
 SiO₁.₃₄C₁.₂₅S₀.₁₅ but apparently no porosity or surface cracks.  To
 reduce porosity and cracking, they limited feature size to 3 mm and
 heating to 20°/minute (or, according to their supplemental materials,
@@ -183,7 +183,7 @@ heating to 20°/minute (or, according to their supplemental materials,
 Metal and semimetal oxides
 --------------------------
 
-(For the purpose of the following, consider "metals" to include boron,
+(For the purpose of the following, consider “metals” to include boron,
 silicon, and aluminum as well as the usual metals.)
 
 A number of metal oxides form minerals with desirable properties, and
@@ -212,12 +212,12 @@ said in 2001:
 
 For this we need metal salts that decompose on heating, but ideally
 are [soluble] in water ([IUPAC-NIST database]); moreover, they
-probably need to be soluble *together* so they don't precipitate in
+probably need to be soluble *together* so they don’t precipitate in
 the nozzle.  Basically these are either metal cations with anions that
 decompose on heating — nitrate, sulfate, or organic anions — or
 ammonium or hydronium with metal-complex anions.  Tetramethylammonium
-is a possible alternative cation but for now I'm going to ignore it.
-Here's a list of candidates.
+is a possible alternative cation but for now I’m going to ignore it.
+Here’s a list of candidates.
 
 [soluble]: https://en.wikipedia.org/wiki/Solubility_table
 [IUPAC-NIST database]: https://srdata.nist.gov/solubility/index.aspx
@@ -231,7 +231,7 @@ Here's a list of candidates.
     |                  | sulfate       |          36 | 900°           |
     |                  | formate       |           6 |                |
     | chromium(III)    | nitrate       |          81 | 100°           |
-    |                  | sulfate       |   "readily" | 700° (to acid) |
+    |                  | sulfate       |   “readily” | 700° (to acid) |
     | ammonium         | dichromate    |        high |                |
     |                  | paratungstate |       high? | 600°           |
     | (hydronium)      | boric acid    |         low |                |
@@ -275,8 +275,8 @@ Here's a list of candidates.
     | lead(II)         | acetate       |          44 |                |
     |                  | nitrate       |          54 |                |
     |                  | sulfate       |        ≈0 ☹ |                |
-    | lead(IV)         | acetate       | "reversible |                |
-    |                  |               | hydrolysis" |                |
+    | lead(IV)         | acetate       | “reversible |                |
+    |                  |               | hydrolysis” |                |
     | nickel           | acetate       |       high? |                |
     |                  | nitrate       |          94 |                |
     |                  | sulfate       |          44 |                |
@@ -297,8 +297,8 @@ Here's a list of candidates.
     |                  | sulfate       |          21 |                |
     |                  | acetate       |           8 |                |
 
-I can't find any concrete information about ammonium aluminate; I
-suspect it doesn't exist, although a number of chemical suppliers have
+I can’t find any concrete information about ammonium aluminate; I
+suspect it doesn’t exist, although a number of chemical suppliers have
 it in their catalogs.  Ammonium silicate apparently does exist but is
 too finicky to be of any practical use.  Ammonium borate also seems to
 exist, but information about it is rare.
@@ -320,12 +320,12 @@ Titanium, zirconium, aluminum, magnesium, chromium
 Aluminum: nitrate (74%, decomposes at 150°) and sulfate (36%,
 decomposes below 900° to SO₃ and cubic γ-alumina) are highly soluble.
 Also occurs in soluble aluminates, but there is no aluminate of
-ammonia, so you can't get alumina by calcining it; strontium aluminate
+ammonia, so you can’t get alumina by calcining it; strontium aluminate
 is a glow-in-the-dark pigment and a refractory cement good to 2000°.
 
 Chromium: ammonium dichromate is fairly soluble.  Chromium(III)
 nitrate and especially sulfate are highly soluble; hexavalent chromium
-oxide too, but we don't want that.
+oxide too, but we don’t want that.
 
 Boric acid is fairly soluble in water at 100°, nearly half as much at
 50° (13% or so)
@@ -361,15 +361,15 @@ sulfate.
 
 Lithium acetate 40.8%; nitrate 70%; sulfate 34.8%; tartrate 27%.
 
-Nickel acetate "easily soluble", nitrate 94%; sulfate 44%; everything
+Nickel acetate “easily soluble”, nitrate 94%; sulfate 44%; everything
 else pyrolyzable almost insoluble.  (Its highly soluble chloride is
 not relevant.)  Hexaamminenickel chloride is soluble in anhydrous
 ammonia and decomposes with heat, presumably to yield nickel.
 
 Ammonium paratungstate pyrolyzes to tungsten trioxide at 600°, which
 is the soft mineral tungstite; the paratungstate ion has a tendency to
-precipitate from aqueous solution over time.  There's also a
-"metatungstate" oxyanion with 12 tungstens in it which is more soluble
+precipitate from aqueous solution over time.  There’s also a
+“metatungstate” oxyanion with 12 tungstens in it which is more soluble
 and stable in highly acidic solution.
 
 Tin sulfate 19%; nitrate?
@@ -412,12 +412,12 @@ Filled systems like this have a variety of advantages:
   it heats up to the pyrolysis temperature, even if the liquid does
   not cross-link to form a thermoset.
 - The filler may provide egress paths so the gases evolved during
-  pyrolysis don't crack the nascent ceramic structure, even if the
+  pyrolysis don’t crack the nascent ceramic structure, even if the
   filler itself burns out before pyrolysis of the ceramic precursors,
-  thus forming a porous green structure.  This is the "Ceramicore"
-  process by Weifeng Fei; it's also a traditional way of making
+  thus forming a porous green structure.  This is the “Ceramicore”
+  process by Weifeng Fei; it’s also a traditional way of making
   insulating refractory bricks from fired clay and organic fillers
-  like sawdust, but Fei's process infuses a liquid preceramic polymer
+  like sawdust, but Fei’s process infuses a liquid preceramic polymer
   into a continuous fibrous matrix.
 
 The point about controlled composites bears further exploration.  For
@@ -435,9 +435,9 @@ provide anisotropic mechanical properties — again, like bone, or wood.
 Ferromagnetic fillers like powdered iron can make a ferromagnetic bulk
 material with low electrical conductivity, but ceramic binders can
 maintain dimensions at different temperatures more precisely than the
-usual organic binders used for powdered-iron cores; also, iron's Curie
+usual organic binders used for powdered-iron cores; also, iron’s Curie
 temperature is 770°, which many ceramics can withstand easily, but
-organic binders can't even approach.  (And cobalt's is 1115°!)
+organic binders can’t even approach.  (And cobalt’s is 1115°!)
 
 The cheapest possible combinations would be sugar or flour with quartz
 sand or glass fiber, but at least in my low-temperature,

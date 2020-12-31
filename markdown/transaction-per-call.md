@@ -1206,7 +1206,7 @@ In a flat memory space in which transactional variables live at some
 write transactions would normally require every read access to a
 transactional variable to be indirected through the transaction
 system, so that it could give you the results that were valid at the
-point in time you've been transported to.  Although this is a
+point in time you’ve been transported to.  Although this is a
 reasonable cost, and one that most of the above discussion assumes we
 normally pay in every transaction, it might be nice to avoid it for
 real-time things like the VBI screen redraw transaction example.
@@ -1222,7 +1222,7 @@ log, so they can see updates that have happened since the real-time
 transaction began.
 
 To the extent that past states of the transactional variables are
-logged and don't suffer linkrot (for example, because logged past
+logged and don’t suffer linkrot (for example, because logged past
 states are not included as GC roots) you can also provide a time
 travel facility to allow not just debuggers but ordinary application
 programs to inspect past states, by explicitly running read-only

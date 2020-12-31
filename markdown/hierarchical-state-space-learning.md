@@ -1,16 +1,16 @@
 (Probably none of this is new and all of it is obvious to those who
-study such things, but I'm just beginning to learn about the area.)
+study such things, but I’m just beginning to learn about the area.)
 
 Suppose you can observe a time-varying set of inputs or stimuli to
 some system, like a stirred vat of reagents or a circuit or a
 vibrating string, and a corresponding time-varying set of outputs.
-How would you go about automatically "learning" the behavior of the
+How would you go about automatically “learning” the behavior of the
 system?
 
 If you suppose that the system is approximately linear and
 time-invariant, then the output vector *y<sub>t</sub>* is given by
 some direct-coupling matrix *D* multiplied by the input
-*u<sub>t</sub>* plus some output matrix *C* multiplied by the system's
+*u<sub>t</sub>* plus some output matrix *C* multiplied by the system’s
 internal state *x<sub>t</sub>*: *y<sub>t</sub>* = *Du<sub>t</sub>* +
 *Cx<sub>t</sub>*.  Unfortunately we cannot observe *x<sub>t</sub>*
 directly, and we may not even know what its dimensionality is, and it
@@ -22,7 +22,7 @@ stimuli at different points in the past, so *y<sub>t</sub>* =
 *Du<sub>t</sub>* + *C*Σ*ᵢAⁱBu*<sub>*t*-*i*</sub>, *i* > 0.
 
 If we factor the feedback matrix *A* with an eigendecomposition
-*QΛQ*⁻¹, the eigenvectors *Q* give us the "vibrational modes" of the
+*QΛQ*⁻¹, the eigenvectors *Q* give us the “vibrational modes” of the
 system, and the eigenvalues *Λ* tell us how fast they decay (or,
 possibly, grow).  We can fold the *Q* and *Q*⁻¹ matrices into the *C*
 and *B* matrices respectively to reduce *A* to the diagonal matrix of
@@ -49,24 +49,24 @@ residuals, ordinary least squares may work: we just take the
 derivative of the whole residual expression, set it to zero, and
 figure out what values of *A*, *B*, *C*, and *D* that gives us.  If
 there are less degrees of freedom in the observations *y<sub>t</sub>*
-than there are in the four matrices we're trying to estimate, I think
+than there are in the four matrices we’re trying to estimate, I think
 the problem is underdetermined.  For example, if we have single scalar
 observations at 100 points in time *y<sub>t<sub>* for a scalar-input
 system (i.e., *u<sub>t</sub>* is also one-dimensional), and we suppose
 that the state space *x<sub>t</sub>* is 10-dimensional, then *A* has
 100 degrees of freedom, *B* has 10, *C* has 10, and *D* has 1, so the
-system isn't fully determined.  But if we suppose that it is
-9-dimensional, it is now fully determined, and if it's 8-dimensional,
-it's overdetermined.  (In the underdetermined case, we could add extra
+system isn’t fully determined.  But if we suppose that it is
+9-dimensional, it is now fully determined, and if it’s 8-dimensional,
+it’s overdetermined.  (In the underdetermined case, we could add extra
 penalty terms for, for example, norms of the matrices involved, to get
-the "simplest" solution in some sense.)
+the “simplest” solution in some sense.)
 
 XXX okay smart guy, how can you derive 100 unknowns from a single
 equation?  you add all the squared residuals together, take the
 derivative, you have a sum of squared residual derivatives, you set it
-to zero, that's still one equation.  ohhh: you take the partial
+to zero, that’s still one equation.  ohhh: you take the partial
 derivative with respect to each design variable (*A*<sup>?</sup>₀₀,
-etc.), and that gives you N equations — but now we're faced with a
+etc.), and that gives you N equations — but now we’re faced with a
 different problem... I guess I need to go back and brush up on OLS and
 linear regression!
 
@@ -80,7 +80,7 @@ the previous approximation.
 
 Since, as explained above, we can assume without loss of generality
 that *A* is a (complex) diagonal matrix (of eigenvalues), the number
-of design variables we need to optimize doesn't actually increase
+of design variables we need to optimize doesn’t actually increase
 quadratically with the dimensionality of the state space, as I said it
 does above — it only increases linearly.  For example, if we have 3
 scalar inputs, 2 scalar outputs, and 20 hidden variables in the state
@@ -92,13 +92,13 @@ It should also be possible to use L1 basis pursuit algorithms in order
 to handle massively underdetermined systems, where we assume an
 absurdly large number of state-space dimensions, but privilege
 extremely sparse solutions.  This might require abandoning the
-eigenvalue-diagonal assumption about *A*, because, although that's the
+eigenvalue-diagonal assumption about *A*, because, although that’s the
 sparsest *A* can be, it might impose unreasonable constraints of
 non-sparsity on *B* and *C*.
 
 Of course, no real system is perfectly linear, so even without
-measurement noise, we'll have a nonzero residual signal, but hopefully
-we'll also have some kind of estimate of the internal state vector of
+measurement noise, we’ll have a nonzero residual signal, but hopefully
+we’ll also have some kind of estimate of the internal state vector of
 the system at each point in time, which will presumably be
 uncorrelated with the residual once our optimization has converged.
 But if we take the outer product of that state vector with itself, we
@@ -110,7 +110,7 @@ understand it, a more efficient generalization of this approach, and
 can be applied to learn more general system behaviors.
 
 While you could in theory apply this sort of approach to any black-box
-system at all, it won't work very well for extremely nonlinear systems
+system at all, it won’t work very well for extremely nonlinear systems
 like flip-flops.  For things like that, a hidden Markov model is
 probably a better sort of model, and that also has efficient
 algorithms for learning it; you can combine the two models by having
@@ -121,4 +121,4 @@ some useful merits.
 You can apply this to control systems (automatically tuning the model
 for model-predictive control to the plant), simulation (the
 plucked-string model alluded to earlier), or system identification
-(guessing what kind of circuit you're looking at), among other things.
+(guessing what kind of circuit you’re looking at), among other things.

@@ -1,6 +1,6 @@
 Plaster of Paris and lime mortar are widespread, cheap, rigid
 materials that can be easily shaped, especially before they harden.
-But they don't harden that much.  What if we could harden them
+But they don’t harden that much.  What if we could harden them
 further, once they were shaped, or otherwise strengthen them?
 
 In all of what follows, it’s worth keeping in mind that the material
@@ -14,7 +14,7 @@ have superior mechanical properties in some applications.
 Coating
 -------
 
-The simplest way to alter such objects' material properties is to coat
+The simplest way to alter such objects’ material properties is to coat
 them with a liquid or gel which then adheres to them.  For example,
 portland-cement mortar, calcium-aluminate mortar, magnesium-phosphate
 mortar, shellac, wax, sodium silicate, paint, or glued paper.  Often a
@@ -99,8 +99,8 @@ phosphoric acid at room temperature and pressure; after a couple of
 days no change was observable, and the plaster crumbled just as easily
 as before.  This is in retrospect completely obvious: commercial
 phosphoric acid is prepared by precisely this reaction, in reverse.
-I've now gradually added enough baking soda to mostly convert the
-phosphoric acid into some kind of gel; we'll see if the phosphate of
+I’ve now gradually added enough baking soda to mostly convert the
+phosphoric acid into some kind of gel; we’ll see if the phosphate of
 soda presumably now dominating the scene is any more effective at
 phosphating the calcium.
 
@@ -454,8 +454,8 @@ converting hydroxyapatite to fluoroapatite.  The fluoride of calcium,
 fluorspar, is both harder and less water-soluble than either its
 sulfate or its carbonate, and so a double metathesis with a soluble
 fluoride salt such as sodium fluoride might plausibly work to harden
-plaster bodies.  These salts are somewhat poisonous; NaF's LD₅₀ is
-[about 100 mg/kg, so it's used as rat poison,][39] but also in
+plaster bodies.  These salts are somewhat poisonous; NaF’s LD₅₀ is
+[about 100 mg/kg, so it’s used as rat poison,][39] but also in
 toothpaste and to treat osteoporosis.
 
 [39]: https://en.wikipedia.org/wiki/Sodium_fluoride

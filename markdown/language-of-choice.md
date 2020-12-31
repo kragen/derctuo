@@ -1,9 +1,9 @@
-I was reading over Darius Bacon's [The Language of Choice][0]
+I was reading over Darius Bacon’s [The Language of Choice][0]
 yesterday, which is an introduction to binary decision diagrams;
 chatting with Bacon, a couple of ideas came out that I thought I ought
 to write down.
 
-(I'm going to ignore tokenization and thus whitespace here, since it
+(I’m going to ignore tokenization and thus whitespace here, since it
 would add more heat than light.)
 
 [0]: https://codewords.recurse.com/issues/four/the-language-of-choice
@@ -25,24 +25,24 @@ and the other left-associative:
 
     <expr> ← <var> (if <expr> else <var>)*
 
-Of course, once you have a parse tree, it's a simple pattern-matching
+Of course, once you have a parse tree, it’s a simple pattern-matching
 exercise to construct a parse tree with a different associativity.
 
 XXX verify these
 
 In this form the language is missing a little bit of expressivity; it
 can only express an unbranching chain of single-variable choices, and
-it can't express negation.  You can enhance this with nesting to be
+it can’t express negation.  You can enhance this with nesting to be
 able to handle arbitrary boolean functions:
 
     <expr> ← ("(" <expr> ")" / <var> / <const>) (if <expr> else <expr>)?
     <const> ← 0 / 1
 
 I was thinking that this grammar might be a good example of when you
-benefit from Packrat's memoization, but in fact it's not, once the
-left recursion is factored out.  I'd like to figure out how to work
+benefit from Packrat’s memoization, but in fact it’s not, once the
+left recursion is factored out.  I’d like to figure out how to work
 this out rigorously: how can we know that a given memo-table entry can
-never be used?  Is there a single canonical answer that's practical to
+never be used?  Is there a single canonical answer that’s practical to
 compute, or is it more a question of a series of conservative
 approximations, progressively less simple?
 
@@ -60,7 +60,7 @@ memorylessness property:
     <when> ← <expr> (when <expr>)?
 
 Mizushima, Maeda, and Yamaguchi published a paper in 2010 where they
-insert a Prolog-style "cut" operator into PEGs, spelled ↑; the
+insert a Prolog-style “cut” operator into PEGs, spelled ↑; the
 construction `x ↑ y / z` is similar to `x y / z`, but although
 failures before the cut (in `x`) can backtrack to `z`, failures after
 the cut (in `y`) do not.  Analogously in `(x ↑ y)*` if there is a
@@ -75,39 +75,39 @@ string S such that `x` matches some prefix of S and `z` matches some
 in some trivial cases, like where `x` matches everything, so that the
 problem reduces to whether `z` can ever succeed on any input.  So they
 compute a conservative approximation that lets them insert enough cuts
-to get "mostly sequential space" on "practical grammars", including "a
-Java PEG and a JSON PEG" but not "an XML PEG."
+to get “mostly sequential space” on “practical grammars”, including “a
+Java PEG and a JSON PEG” but not “an XML PEG.”
 
 They also report that their cut-insertion improves error reporting
 from PEGs.
 
-Redziejowski wrote a 2016 paper "Cut points in PEG" where he uses a
-second kind of "cut" ↓, which I'm guessing he got from an earlier
+Redziejowski wrote a 2016 paper “Cut points in PEG” where he uses a
+second kind of “cut” ↓, which I’m guessing he got from an earlier
 Mizushima et al. paper: `a ↓ b ↑ c / d` backtracks and retries `d`
 only if the failure happens within `b`, so a failure after the
-ordinary cut ↑ doesn't backtrack, but *neither does the failure before
-the backwards cut ↓*.  I'm not yet sure what this is good for.
+ordinary cut ↑ doesn’t backtrack, but *neither does the failure before
+the backwards cut ↓*.  I’m not yet sure what this is good for.
 
-Cut insertion doesn't avoid sticking things into a memo table that we
+Cut insertion doesn’t avoid sticking things into a memo table that we
 are never going to need, but it does allow us to discard potential
-backtracking points off the stack as soon as we know we aren't going
+backtracking points off the stack as soon as we know we aren’t going
 to need them, which allows us to safely discard everything to the left
 of that point.
 
 Given a candidate criterion for not memoizing a callsite at all, we
 could test it by memoizing it anyway, then testing the parser on some
 input to see which callsites the criterion erred on — those whose memo
-entries were expected to be useless, but got used anyway.  It's maybe
-also worthwhile to examine which callsites don't need to *probe* the
-memo table because it's impossible for a memo-table entry to exist,
+entries were expected to be useless, but got used anyway.  It’s maybe
+also worthwhile to examine which callsites don’t need to *probe* the
+memo table because it’s impossible for a memo-table entry to exist,
 because no preceding attempt to parse the same text could have invoked
-that nonterminal at that position.  I haven't seen any research on
+that nonterminal at that position.  I haven’t seen any research on
 this aspect of the problem, but it seems like it would help a lot to
 reduce both the time usage and space usage of the memo table.
 
 *****
 
-There's a trick due to Warth, Douglas, and Millstein, which lets Packrat parse some
+There’s a trick due to Warth, Douglas, and Millstein, which lets Packrat parse some
 left-recursive grammars at the expense of their linear-time guarantee,
 which I think would enable Packrat to handle the original grammar in
 PEG form:
@@ -139,7 +139,7 @@ paper on this question.
 
 ----
 
-An earlier draft of Bacon's article, if I recall correctly, chose the
+An earlier draft of Bacon’s article, if I recall correctly, chose the
 symbols `←` and `→` rather than `0` and `1` for the Boolean values,
 and used infix rather than prefix syntax, so (if we interpret `←` as
 True and `→` as False) `a if b else c` would be written `a {b} c`,
@@ -162,7 +162,7 @@ the whole canonical evaluation ruleset as follows:
     ()() -> ()
     (()) ->
 
-That is, two empty sets of parentheses ("crosses" in LoF jargon)
+That is, two empty sets of parentheses (“crosses” in LoF jargon)
 juxtaposed can be rewritten as a single empty set of parentheses, and
 a parenthesized empty parenthesis can be rewritten as an empty string.
 
@@ -178,6 +178,6 @@ While the notation is pleasantly straightforward for explicit
 evaluation, my attempts to formulate normalization rules such as CNF
 normalization as tree rewriting rules for LoF notation were not very
 fruitful — they seemed to come out a great deal less clear than in
-traditional Boolean logic, and at the time I wasn't able to get them
+traditional Boolean logic, and at the time I wasn’t able to get them
 working.
 

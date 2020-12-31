@@ -1,18 +1,18 @@
 A4 paper is a rep-2 rectangle: by putting two sheets of A4 paper next
-to each other, you get a larger sheet that's the same shape as A4 if
+to each other, you get a larger sheet that’s the same shape as A4 if
 you turn it 90°, but twice as big.  The whole A0/A1/A2 etc. system is
-designed that way.  In the A-size papers, you're never more than √2
+designed that way.  In the A-size papers, you’re never more than √2
 away from the ideal size for your application.  If you add the B-size
-papers, which have √2 area relation to the A-size papers, you're never
+papers, which have √2 area relation to the A-size papers, you’re never
 more than ∜2 away.
 
-I'm thinking about how to pack together boxes to make a portable
+I’m thinking about how to pack together boxes to make a portable
 electronics lab (see [Ghettobotics Nonshopping
 List](ghettobotics-nonshopping-list.md)) and it occurred to me that it
 would be nice to have boxes with volumes that were powers of 2.  That
 way, a small number of box designs would cover several orders of
-magnitude, and I could always "buddy-system" two boxes of one size
-together to fit into a space the next size up.  It's an attempt to
+magnitude, and I could always “buddy-system” two boxes of one size
+together to fit into a space the next size up.  It’s an attempt to
 minimize space fragmentation in the toolbox.
 
 One way (maybe the only way) to make a rep-2 box in three dimensions
@@ -26,7 +26,7 @@ To approximate a 200-mℓ box, reasonable values are 46 mm × 58 mm ×
 rounding and exponentiation, is [12, 15, 18, 23, 29, 37, 46, 58, 74,
 93, 117, 147, 186, 234]; the resulting box volumes in mℓ are [3.24,
 6.21, 12.006, 24.679, 49.358, 98.716, 197.432, 399.156, 805.194,
-1599.507, 3199.014].  There's clearly some approximation in there; you
+1599.507, 3199.014].  There’s clearly some approximation in there; you
 can put together two 12×15×18 boxes into a 15×18×24 box, a millimeter
 over; two 15×18×23 boxes make an 18×23×30 box, slightly over 18×23×29,
 and so on.
@@ -35,11 +35,11 @@ Perhaps a more reasonable approach is to just start with some small
 dimensions and double them exactly.  For example, [18, 24, 29, 36, 48,
 58, 72, 96, 116, 144, 192, 232] mm gives us [12.528, 25.056, 50.112,
 100.224, 200.448, 400.896, 801.792, 1603.584, 3207.168] mℓ.  I
-probably only really need the first seven of those sizes, and they're
+probably only really need the first seven of those sizes, and they’re
 actually closer to the ideal volumes than the ones given above,
 although their ratios are a little more imperfect.
 
-There's no real need to have 200 mℓ be on the list, though.  I could
+There’s no real need to have 200 mℓ be on the list, though.  I could
 just look for the best triplet under about 35, which turns out to have
 only about 1% error from the real cube root of 2:
 
@@ -62,9 +62,9 @@ size, 27×34×43 has more precise ∛2 proportions, erring by +0.4% in the
 On that basis, the dimensions should be [27, 34, 43, 54, 68, 86, 108,
 136, 172, 216, 272, 344] mm and [39.474, 78.948, 157.896, 315.792,
 631.584, 1263.168, 2526.336, 5052.672, 10105.344] mℓ.  I probably
-won't need anything bigger than the 1.26-ℓ box!  So the sizes are:
+won’t need anything bigger than the 1.26-ℓ box!  So the sizes are:
 
-- 27×34×43 mm: 39.47 mℓ; call it "one bix"
+- 27×34×43 mm: 39.47 mℓ; call it “one bix”
 - 34×43×54: 79 mℓ, two bixes
 - 43×54×68: 158 mℓ, four bixes
 - 54×68×86: 316 mℓ, eight bixes
@@ -75,4 +75,4 @@ So with six box sizes I should be able to cover pretty much the whole
 portable-lab size spectrum, with boxes always within √2 of the ideal
 volume, and packing together nicely.  The 40-ℓ toolchest I was
 spitballing works out to about 1013 bixes, so rounding it up to 1024
-is probably more pleasant.  It won't be bix-shaped itself.
+is probably more pleasant.  It won’t be bix-shaped itself.

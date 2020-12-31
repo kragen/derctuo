@@ -4,35 +4,35 @@ can produce such devices at high speeds and high precision.  And
 bending wire manually is often expedient and relatively easy.
 Galvanized mild steel wire is widely available at very low cost, and
 rusty mild steel wire is constantly discarded by the side of the road.
-And in both US English and Argentine Spanish, there's a common figure
+And in both US English and Argentine Spanish, there’s a common figure
 of speech for an expedient, low-quality solution that refers to it:
-"duct tape and baling wire" and "atar con alambre", respectively.
+“duct tape and baling wire” and “atar con alambre”, respectively.
 
 Straightening with two plates
 -----------------------------
 
 You can straighten a piece of wire by rolling it back and forth
-between two flat surfaces after approximate straightening; it's
-helpful to feed it in incrementally so that you're only straightening
-a little bit at once.  I've used a slab of granite and the back of a
+between two flat surfaces after approximate straightening; it’s
+helpful to feed it in incrementally so that you’re only straightening
+a little bit at once.  I’ve used a slab of granite and the back of a
 scrap ceramic floor tile in this way, getting bent-up wire to
-sub-diameter deviations from straightness over short lengths.  It's
+sub-diameter deviations from straightness over short lengths.  It’s
 easier if your wire is round rather than needing to be twisted to
 approximate roundness.
 
 Work-hardening and annealing
 ----------------------------
 
-Mild steel can't be hardened martensitically, but it can experience
+Mild steel can’t be hardened martensitically, but it can experience
 considerable work-hardening, and this plays a significant role in
 shaping things from mild-steel wire by hand, for example with
 needlenose pliers.
 
-It's usually a difficulty: once you bend some wire, you ain't never
+It’s usually a difficulty: once you bend some wire, you ain’t never
 gonna unbend it, because the place you bent is harder than the rest of
-the wire.  But if you buy some wire, it doesn't come straight.  It's
-coiled, if you're lucky.  If you grab discarded rusty wire off the
-street, it's gonna be bent all to hell, and that's going to introduce
+the wire.  But if you buy some wire, it doesn’t come straight.  It’s
+coiled, if you’re lucky.  If you grab discarded rusty wire off the
+street, it’s gonna be bent all to hell, and that’s going to introduce
 some unpredictability.
 
 CNC wire-bending machines deal with this problem by bending the wire
@@ -45,12 +45,12 @@ uniformly hardened wire is uniformly harder to bend, too.
 Maybe a better approach is to anneal the wire.  Annealing steel
 properly is a pain in the ass.  You [need to austenitize it][2], which
 [takes temperatures ranging from 738° to 900° for mild steels][1],
-with the highest temperature being pure iron; in itself that's not too
+with the highest temperature being pure iron; in itself that’s not too
 hard, but then the recommended cooling rate is about 11 mK/s, or
 11°/kilosecond.  Not only does this take all day, it also demands a
 degree of temperature control well beyond the capability of a stove
 burner or butane torch, which can easily heat the wire up to 1000°,
-high enough to anneal steel, but probably can't cool it down any
+high enough to anneal steel, but probably can’t cool it down any
 slower than about 1°/s, 90 times faster.
 
 [1]: http://threeplanes.net/toolsteel.html
@@ -88,7 +88,7 @@ a creepage allowance; tight bends are not ideal points, but curves.
 Tighter and more precisely placed bends can be achieved, at the
 expense of strength and stiffness, by nicking the wire at the desired
 bend location.  This permits bends whose radius is less than a single
-wire diameter.  However, imprecision in nicking (I'm using needlenose
+wire diameter.  However, imprecision in nicking (I’m using needlenose
 pliers) can result in either a failed bend or a cut wire.  This takes
 about a joule with these needlenose pliers and this baling wire I have
 here, which is about 1.7 mm in diameter; but it depends on the shape
@@ -126,9 +126,9 @@ less rigid.
 When two or more wires are twisted together, they spring back when you
 stop twisting, loosening their grip on one another.  Thereafter they
 are connected with a screw joint with substantial backlash.  I think
-it's possible to take the backlash out; the usual way is to preload
+it’s possible to take the backlash out; the usual way is to preload
 two coaxial screw joints with a spring under axial compression, though
-tension works just as well.  I haven't tried this with twisted wire
+tension works just as well.  I haven’t tried this with twisted wire
 yet, but I suspect it will be difficult.
 
 Wireframe design as graph traversal
@@ -136,7 +136,7 @@ Wireframe design as graph traversal
 
 Suppose you want to make a regular rhombic dodecahedron of a given
 size with a minimal amount of wire and no unnecessary cuts, outlining
-its edges in wire.  By Euler's theorem about the bridges of Königsberg
+its edges in wire.  By Euler’s theorem about the bridges of Königsberg
 (pbuh), you cannot do it with no cuts and no repeated edge traversals;
 for all that the rhombic dodecahedron has 6 vertices of degree 4, it
 also has 8 vertices of degree 3, and each of those vertices requires
@@ -166,7 +166,7 @@ clearly demonstrates the difficulties introduced by odd-degree
 vertices in hand-twisted baling wire.  If you are designing a
 wireframe *de novo* rather than using one Archimedes thought up, you
 may prefer to avoid odd vertices entirely.  For example, if you create
-a so-called "geodesic dome" by subdividing the triangles of an
+a so-called “geodesic dome” by subdividing the triangles of an
 octahedron rather than the traditional icosahedron, you will have
 greater inequality in strut lengths, but no odd vertices.  The
 curvature will be provided ultimately by degree-4 vertices rather than
@@ -176,13 +176,13 @@ You might think that an alternative basis for subdivision may be the
 cuboctahedron, the polyhedral dual of the rhombic dodecahedron, since
 all its vertices are degree-4; but, by the time you eliminate its
 square faces as an offense against omnitriangulation, you are back to
-having a subdivided octahedron.  It's a distinction without a
+having a subdivided octahedron.  It’s a distinction without a
 difference.
 
 Dimensional stability
 ---------------------
 
-Even baling wire is fairly dimensionally stable, due to steel's
+Even baling wire is fairly dimensionally stable, due to steel’s
 temperature coefficient of expansion of some 12 ppm/°, compared to
 most other common materials.  Brick and glass (even soda-lime) exceed
 its dimensional stability, as does the lengthwise dimension of wood.
@@ -190,13 +190,13 @@ its dimensional stability, as does the lengthwise dimension of wood.
 Kinematic pairs and flexures
 ----------------------------
 
-It's easy enough to twist some baling wire into a tight helix that
+It’s easy enough to twist some baling wire into a tight helix that
 another piece of wire can fit through, forming a cylindrical joint.
 But its translational motion is highly unsatisfactory, due to the
 usual problems of translational motion in kinematic pairs between
 rigid bodies, but exacerbated by the compliance of the wire.  As a
-revolute joint it works better, but it's somewhat prone to unwanted
-translational motion.  I think it's usually possible to overcome this,
+revolute joint it works better, but it’s somewhat prone to unwanted
+translational motion.  I think it’s usually possible to overcome this,
 but it takes some doing.
 
 In many cases, though, I think a flexure design may be more suitable

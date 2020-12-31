@@ -8,8 +8,8 @@ As a result, when they heat up and cool down, they tend to crack.
 
 The Neolithic solution to this was to pit-fire pottery: you bury it in
 a pit and throw burning coals on it, then, perhaps, cover up the pit,
-partly or fully, with dirt.  It's fine if the dirt is brittle and
-cracks, because it's already powder; you aren't demanding any strength
+partly or fully, with dirt.  It’s fine if the dirt is brittle and
+cracks, because it’s already powder; you aren’t demanding any strength
 of it.  If it crumbles, it crumbles onto the other dirt and pot
 underneath it.
 
@@ -20,9 +20,9 @@ either to partly melt or soften them, or to provoke some reaction.
 It occurred to me that you can do this with heating elements in the
 salt or sand, thus achieving a high-temperature capability without
 constructing a castable refractory with any kind of strength.  Quartz
-sand is cheap, and olivine sand isn't that expensive.  You can jam
+sand is cheap, and olivine sand isn’t that expensive.  You can jam
 temperature sensors into the sand too, and they might be able to be at
-a significant distance from the thing that's heating up, so they can
+a significant distance from the thing that’s heating up, so they can
 be at a lower temperature.
 
 Vermiculite, charcoal, ash, cat litter, and plaster of paris may also
