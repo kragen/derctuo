@@ -6,7 +6,6 @@ Just ganked from Dercuano.
 Urgent to fix:
 
 - import notes
-- fix .md links
 - put .jpeg and .png into liabilities and fix links to them.  or just into notes
 - does it include library/?
 - write introduction?
@@ -18,6 +17,10 @@ Urgent to fix:
 - add machine-teeth and language-of-choice subtitles
 - fix rigid-glider typo
 - fix missing link [8] in multimeter-metrology
+
+Watch for:
+
+- fix .md links
 
 Next up:
 
@@ -491,6 +494,8 @@ def note_html(bundle, note_title, body, footers):
                     footers))
 
 ad_hoc_link_re = re.compile(r'(?:[fF]ile\s+)?<code>(.*?)</code>')
+markdown_local_link_re = re.compile(r'<a href="([^"/]*).md"')
+markdown_local_link_repl = r'<a href="\1.html"'
 def markdown_replacing_links(bundle):
     def replace(s):
         def repl(mo):
@@ -502,7 +507,10 @@ def markdown_replacing_links(bundle):
         if isinstance(s, bytes):
             s = s.decode('utf-8')
 
-        return ad_hoc_link_re.sub(repl, markdown.markdown(s))
+        md = markdown.markdown(s)
+        md = ad_hoc_link_re.sub(repl, md)
+        md = markdown_local_link_re.sub(markdown_local_link_repl, md)
+        return md
 
     return replace
 
