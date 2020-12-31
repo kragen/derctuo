@@ -185,7 +185,7 @@ That is, two empty sets of parentheses (“crosses” in LoF jargon)
 juxtaposed can be rewritten as a single empty set of parentheses, and
 a parenthesized empty parenthesis can be rewritten as an empty string.
 
-This is essentially the same as the Sheffer (spelling?) stroke or NOR
+This is essentially the same as the Sheffer stroke or NOR
 logic, but with a notation that exploits a homeomorphism between the
 empty string being the identity element in the free monad and
 falsehood being the identity element for Boolean OR.  (LoF itself is

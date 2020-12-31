@@ -185,7 +185,7 @@ and “commit”) and “event”.
 Detached and batched signatures
 -------------------------------
 
-As Remosi pointed out when I brought it up, it might be useful to
+As Perry Lorier pointed out when I brought it up, it might be useful to
 separate the signature from the page, so that a single
 signature-verification operation is sufficient to validate all pages
 up to a given point in the journal.  Moreover, a Merkle chain over the
@@ -206,4 +206,4 @@ pages.
 Thanks
 ------
 
-To Remosi for a very helpful discussion.
+To Perry Lorier for a very helpful discussion.

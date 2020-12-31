@@ -1,4 +1,4 @@
-derctuo version 020201231
+derctuo version 020201231pre0
     by Kragen+Javier+Sitaker
 
 # Popular categories from Dercuano:
@@ -18,7 +18,7 @@ yablochkov-arc-cutter written 02020-12-09
     concerns materials plasma history contrivances
 
 wire-machines written 02020-10-13
-    updated 02020-10-13
+    updated 02020-12-31
     concerns ghettobotics practical mechanical self-replication flexures contrivances
 
 wang-tile-chemicals written 02020-09-30
@@ -147,7 +147,7 @@ shopping-list written 02020-09-25
 single-bridge-tor-deanonymization written 02020-10-07
     updated 02020-10-07
     titled Single-bridge+Tor+deanonymization?
-    concerns security traffic-analysis tor
+    concerns security traffic-analysis tor protocols
 
 single-output-build written 02020-05-19
     updated 02020-05-19
@@ -356,7 +356,7 @@ programming-in-the-debugger written 02020-12-15
 
 punk-zine-look written 02020-11-28
     updated 02020-11-28
-    concerns aesthetics history nostalgia
+    concerns art history nostalgia
 
 pure-functional-ui written 02020-04-21
     updated 02020-04-21
@@ -426,7 +426,7 @@ migrating-app-snapshots written 02020-07-10
 
 mild-bases written 02020-09-23
     updated 02020-10-01
-    concerns materials toxicology
+    concerns materials toxicology copper lime
 
 minimal-cost-computer written 02020-10-23
     updated 02020-12-01
@@ -533,7 +533,7 @@ letter-hamming-code written 02020-12-06
 
 level-shifter written 02020-10-08
     updated 02020-10-10
-    concerns electronics contrivances
+    concerns electronics contrivances falstad
 
 light-pen-latency written 02020-12-23
     updated 02020-12-28
@@ -602,7 +602,7 @@ ancient-batteries written 02020-09-23
 
 ancient-machinists written 02020-10-08
     updated 02020-10-08
-    concerns egypt history manufacturing facepalm crackpots collapse archaeology
+    concerns egypt history manufacturing facepalm crackpots collapse archaeology epistemology
 egypt category-titled Egypt    
 
 atkinson-differential-blower written 02020-10-14
@@ -853,7 +853,7 @@ foam-electro-etching written 02020-11-26
 
 foaming-infiltration written 02020-11-06
     updated 02020-11-06
-    concerns foaming materials waterglass
+    concerns foaming materials waterglass composites
 
 foil-marking-glass written 02020-08-18
     updated 02020-08-18

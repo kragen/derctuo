@@ -67,10 +67,6 @@ per second.  Subsequent bending happened preferentially at the
 annealed spots, showing that they were softer than the rest of the
 wire.
 
-(Nevertheless, OdinYggd on ##electronics tells me that this is not
-enough to reach full softness, and I should raise them to orange heat
-in charcoal, then smother it to let it cool for hours.)
-
 Work hardening is not all bad, though.  When you bend wire, it bends
 into a smooth curve instead of kinking like a drinking straw because
 the parts that have bent least are the softest.  (In a drinking straw,
