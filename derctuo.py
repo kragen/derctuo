@@ -5,9 +5,8 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- import notes
+- why are there no topics pages?
 - write introduction?
-- divide notes by month
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
@@ -16,10 +15,12 @@ Urgent to fix:
 
 Watch for problems with:
 
+- import notes
 - fix .md links
 - put .jpeg and .png into notes
 - library/ directory copied
 - prefix 0 to dates
+- divide notes by month
 
 Next up:
 
