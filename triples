@@ -15,186 +15,271 @@ derctuo version 020201231
 
 yablochkov-arc-cutter written 02020-12-09
     updated 02020-12-09
+    concerns materials plasma history contrivances
 
 wire-machines written 02020-10-13
     updated 02020-10-13
+    concerns ghettobotics practical mechanical self-replication flexures contrivances
 
 wang-tile-chemicals written 02020-09-30
     updated 02020-09-30
+    concerns math automata-theory physical-computation materials
 
 virtual-machine-setup written 02020-07-10
     updated 02020-07-14
+    concerns practical linux programming qemu virtual-machines latency performance
+qemu category-titled QEMU
 
 vga-oscilloscope written 02020-10-13
     updated 02020-10-13
     titled VGA+oscilloscope?
+    concerns oscilloscopes metrology electronics contrivances radio
 
 veskeno-outline written 02020-06-17
     updated 02020-07-10
+    concerns derctuo veskeno reproducibility instruction-sets asm testing
+    concerns performance errors brainfuck archival urbit lua file-formats
+    concerns calculation sa compilers chifir lisp corewar fpgas
+asm category-titled Assembly+language
 
 vector-vm written 02020-04-21
     updated 02020-06-17
     titled A+reproducible+vector-instruction+VM?
-    concerns derctuo reproducibility arrays performance numpy python lush chifir c simd octave r
+    concerns derctuo reproducibility arrays performance numpy python
+    concerns lush chifir c simd octave r
 simd category-titled SIMD
 
 ultra-machining written 02020-07-06
     updated 02020-07-18
+    concerns manufacturing materials control metrology sensors the-future
 
 truth-table-search written 02020-12-09
     updated 02020-12-09
+    concerns digital-logic constraints optimization physical-computation
 
 transaction-per-call written 02020-12-15
     updated 02020-12-23
+    concerns algorithms transactions performance concurrency latency hci guis
+    concerns incremental-computation programming errors debugging
+    concerns clusters protocols sa caching compilers rest databases build-systems
+    concerns distributed-systems interrupts
+rest category-titled The+REST+architectural+style
 
 toolpath-optimization written 02020-09-27
     updated 02020-09-30
+    concerns optimization manufacturing cam simulation incremental-computation
+    concerns coordinate-descent control
+simulation category-titled Physical+system+simulation
+cam category-titled CAM+(computer-aided+manufacturing)
+optimization category-titled Mathematical+optimization
 
 tiny-memory-dictionary written 02020-11-12
     updated 02020-11-12
     titled Dictionary+data+structures+for+tiny+memories
+    concerns programming algorithms performance embedded-programming sorting
 
 time-scale-material-processing written 02020-12-22
     updated 02020-12-22
     titled Time-scale+material+processing
+    concerns materials the-future
 
 thermistors written 02020-10-14
     updated 02020-11-06
     titled Thermistors,+resistance+temperature+detectors,+and+other+thermal+sensors
+    concerns electronics metrology ghettobotics contrivances
 
 thermal-expansion-speaker written 02020-11-06
     updated 02020-11-06
+    concerns electronics physics contrivances
 
 screens written 02020-11-16
     updated 02020-11-17
     titled Improvised+display+options+for+embedded+hardware+development
+    concerns electronics ghettobotics embedded-programming
 
 scribal-basic written 02020-12-12
     updated 02020-12-15
     titled Scribal+Basic:+a+1960s+language+for+the+02020s
+    concerns programming-languages hci basic python clu logo debugging
+    concerns tcl nostalgia perl js imgui music
+js category-titled The+JS+language
 
 secure-scuttlebutt written 02020-10-02
     updated 02020-11-06
     titled Secure+Scuttlebutt+is+a+cool+idea+whose+realization+has+fatal+flaws
-    concerns protocols security chat
+    concerns protocols security chat facepalm
 
 segments-and-blocks written 02020-06-20
     updated 02020-12-16
+    concerns virtual-machines veskeno performance transactions instruction-sets
+    concerns caching incremental-computation clusters security arrays l4 history
+    concerns smalltalk keykos forth microcontrollers avr stm32 copy-on-write sa
+    concerns automatic-differentiation concurrency debugging distributed-systems
+    concerns jvm
+avr category-titled The+AVR+microcontroller
+jvm category-titled Java+Virtual+Machine
+keykos category-titled KeyKOS
 
 sentential-database written 02020-11-06
     updated 02020-12-31
     concerns hci programming databases logic prolog programming-languages
-    concerns file-formats
+    concerns file-formats constraints end-user-programming
+end-user-programming category-titled End-user+programming
+constraints category-titled Constraint+satisfaction
 
 sequestered-co2-volume written 02020-10-25
     updated 02020-10-25
     titled Sequestered+CO₂+would+fill+many+oil+fields
+    concerns co2 environment global-warming atmospheric-carbon-capture
+co2 category-titled CO₂
 
 shopping-list-in-tex written 02020-06-05
     updated 02020-06-05
     titled Writing+a+shopping+list+in+TeX
+    concerns hci emacs practical tex r
 
 shopping-list written 02020-09-25
     updated 02020-12-20
     titled Materials+shopping+list
+    concerns materials
 
 single-bridge-tor-deanonymization written 02020-10-07
     updated 02020-10-07
     titled Single-bridge+Tor+deanonymization?
+    concerns security traffic-analysis tor
 
 single-output-build written 02020-05-19
     updated 02020-05-19
+    concerns incremental-computation build-systems caching
 
 skip-list-variants written 02020-10-12
     updated 02020-10-12
+    concerns algorithms skip-lists b-trees
+b-trees category-titled B-trees
 
 slide-rule-addition written 02020-06-22
     updated 02020-06-22
+    concerns math nostalgia calculation contrivances slide-rules
 
 smart-plumbing written 02020-09-10
     updated 02020-09-12
+    concerns household desiccants energy cooling heating energy
+    concerns hippies earthships plumbing thermodynamics materials thermal-storage
 
 sm-scraping written 02020-10-01
     updated 02020-10-05
     titled Scraping+Sciencemadness
+    concerns practical materials web-scraping
 
 sodium-silicate written 02020-06-04
     updated 02020-06-04
+    concerns waterglass materials pricing concrete paint minerals book-notes
+    concerns strength foaming ceramic
+strength category-titled Strength+of+materials
 
 solar-furnace-cpc written 02020-05-16
     updated 02020-05-16
     titled Solar+furnace+CPC
+    concerns solar energy thermodynamics physics optics nio pocket-furnaces contrivances
+    concerns etendue
+nio category-titled Non-imaging+optics
+etendue category-titled Étendue
 
 solar-netting written 02020-09-23
     updated 02020-09-23
+    concerns solar materials pricing strength
 
 spark-gap-logic written 02020-09-20
     updated 02020-12-16
+    concerns electronics physical-computation spark-gaps marx-generators oscillators
+    concerns physics contrivances
 
 sparse-sinc written 02020-09-17
     updated 02020-09-17
+    concerns math dsp octave
 
 specular-photogrammetry written 02020-11-11
     updated 02020-11-11
+    concerns sensors cameras algorithms optimization graphics
 
 steinmetz-quote written 02020-09-10
     updated 02020-09-10
     titled Notable+quotes+from+Steinmetz’s+1892+hysteresis+paper
+    concerns book-notes history electronics
 
 stepped-planetary written 02020-07-28
     updated 02020-08-02
     titled The+orbital+drive+and+stepped+planetary+drive
     concerns mechanical gearing
+mechanical category-titled Mechanical+things
 
 stm32duino written 02020-11-06
     updated 02020-11-06
     titled Arduino+support+for+STM32
+    concerns arduino stm32 electronics embedded-programming practical microcontrollers
+    concerns experiment-report
+stm32 category-titled The+STM32+microcontroller+family
 
 stochastic-fractional-delay-lines written 02020-12-26
     updated 02020-12-26
+    concerns karplus-strong dsp music math graphics paeth-rotation algorithms performance
 
 successive-approximation-ui written 02020-12-28
     updated 02020-12-28
     titled Successive-approximation+UI+design
+    concerns hci sketchpad graphics
+sketchpad category-titled SKETCHPAD
 
 swashplate-screwdriver written 02020-11-06
     updated 02020-11-06
+    concerns mechanical contrivances
 
 random-synchronous-motor written 02020-11-11
     updated 02020-11-11
+    concerns hardware motors ghettobotics
 
 rebraining written 02020-11-16
     updated 02020-12-06
+    concerns independence electronics ghettobotics microcontrollers
 
 recursive-bloom-filters written 02020-05-13
     updated 02020-05-13
+    concerns algorithms performance databases bloom-filters programming
 
 reducing-sucrose written 02020-09-30
     updated 02020-09-30
+    concerns materials thermodynamics
 
 relay-buzzer written 02020-11-23
     updated 02020-11-23
+    concerns electronics contrivances experiment-report falstad
 
 rep-2-cuboid written 02020-11-13
     updated 02020-11-13
     titled The+rep-2+cuboid
+    concerns math ghettobotics household contrivances
 
 retro-teletext written 02020-07-18
     updated 02020-07-23
+    concerns history electronics performance microcontrollers contrivances
 
 reuleaux written 02020-10-15
     updated 02020-10-18
+    concerns mechanical history book-notes gearing
 
 reversible-parsing written 02020-05-11
     updated 02020-05-11
+    concerns parsing algorithms prolog c pegs
 
 rigid-glider written 02020-10-12
     updated 02020-10-12
+    concerns mechanical submarines contrivances flying-machines
 
 rns written 02020-10-26
     updated 02020-10-26
     titled Residue+number+systems
-    concerns math
+    concerns math dsp performance
+dsp category-titled Digital+signal+processing
 
 rosining-chip written 02020-11-08
     updated 02020-11-08
@@ -203,55 +288,73 @@ rosining-chip written 02020-11-08
 
 table-text written 02020-12-31
     updated 02020-12-31
-    concerns file-formats hci
+    concerns file-formats hci text-editors layout
 
 taking-screenshots written 02020-11-27
     updated 02020-12-20
+    concerns derctuo programming elisp linux emacs practical
 
 the-programmable-world written 02020-09-10
     updated 02020-09-10
+    concerns the-future hci physical-computation contrivances
 
 pandemic-collapse written 02020-05-17
     updated 02020-12-16
+    concerns the-future history covid politics facepalm collapse
 
 peg-memo-sparsity written 02020-12-24
     updated 02020-12-28
     titled The+sparsity+of+PEG+memoization+utility
+    concerns parsing algorithms performance pegs
+pegs category-titled Parsing+expression+grammars
 
 penalized-bits written 02020-09-10
     updated 02020-09-10
+    concerns optimization automatic-differentiation gradient-descent
 
 peroxide-and-bleach written 02020-08-15
     updated 02020-08-15
+    concerns materials facepalm
 
 pet-dielectric-spectroscopy written 02020-11-11
     updated 02020-11-11
     titled Improvised+humidity+sensors+with+PET+dielectric+spectroscopy
+    concerns electronics ghettobotics metrology contrivances
 
 phosphate-precipitation written 02020-09-10
     updated 02020-09-10
+    concerns materials strength pricing politics thoughtcrime phosphates
 
 pit-firing written 02020-11-06
     updated 02020-11-06
+    concerns heating refractory materials contrivances
 
 plaster-foam written 02020-10-16
     updated 02020-11-08
+    concerns refractory alabaster materials foaming waterglass experiment-report
 
 png-circuit-diagrams written 02020-11-06
     updated 02020-11-06
     titled Machine-readable+PNG+circuit+diagram+watermarks
+    concerns steganography nostalgia file-formats coding communication
+    concerns falstad electronics
 
 prate-thoughts written 02020-10-02
     updated 02020-12-30
+    concerns chat protocols security merkle-graphs sa feeds
 
 printf-tracebacks written 02020-11-11
     updated 02020-11-11
+    concerns programming debugging imgui
+imgui category-titled Immediate-mode+GUIs
 
 programming-in-the-debugger written 02020-12-15
     updated 02020-12-15
+    concerns end-user-programming programming-by-example hci debugging
 
 punk-zine-look written 02020-11-28
     updated 02020-11-28
+    concerns aesthetics history nostalgia
 
 pure-functional-ui written 02020-04-21
     updated 02020-04-21
@@ -263,316 +366,429 @@ hci category-titled HCI
 pure-functional-vm written 02020-04-21
     updated 02020-04-21
     titled Pure+functional+VM
-    concerns derctuo reproducibiity instruction-sets urbit bicicleta
+    concerns derctuo reproducibility instruction-sets urbit bicicleta sa
 
 pyrolysis-3d-printing written 02020-08-02
     updated 02020-11-24
     titled Pyrolysis+3-D+printing
+    concerns digital-fabrication materials silicone composites
+composites category-titled Composite+materials
 
 machine-readable-microcontroller-output written 02020-11-26
     updated 02020-11-26
+    concerns microcontrollers embedded-programming electronics nostalgia protocols
+    concerns dsp coding communication ultrasound avr arduino leds radio
 
 machine-teeth written 02020-08-02
     updated 02020-08-17
+    concerns materials strength carborundum sapphire zirconia self-replication
+    concerns digital-fabrication mechanical steel contrivances archaeology
 
 magnesium-fuel written 02020-09-23
     updated 02020-10-09
+    concerns energy thermodynamics materials magnesium
 
 majority-dram-logic written 02020-12-09
     updated 02020-12-09
     titled Majority+logic+with+DRAM+sense+amps
+    concerns electronics metrology physical-computation contrivances
 
 materials-youtube written 02020-12-16
     updated 02020-12-17
     titled Materials+YouTube
+    concerns practical materials
 
 merkle-ropes written 02020-10-09
     updated 02020-10-09
+    concerns algorithms security merkle-graphs performance lsm-trees merging ropes leveldb
+lsm-trees category-titled LSM-trees+(log-structured+merge+trees)
+ropes category-titled Ropes+(the+data+structure)
+leveldb category-titled LevelDB
 
 mica-composites written 02020-11-14
     updated 02020-11-14
+    concerns history gelbart materials ghettobotics composites refractory pricing
 
 microcontroller-inventory written 02020-11-18
     updated 02020-11-28
+    concerns microcontrollers arduino stm32 avr facepalm practical
 
 micro-material-sorting written 02020-09-12
     updated 02020-09-12
+    concerns self-replication materials mining metrology independence purification
 
 migrating-app-snapshots written 02020-07-10
     updated 02020-07-11
+    concerns sa caching performance virtual-machines protocols distributed-systems
+    concerns latency app-migration security qemu copy-on-write docker containers
 
 mild-bases written 02020-09-23
     updated 02020-10-01
+    concerns materials toxicology
 
 minimal-cost-computer written 02020-10-23
     updated 02020-12-01
+    concerns independence electronics pricing padauk small-is-beautiful microcontrollers
+    concerns embedded-programming c energy performance stm32 energy-harvesting
+    concerns bootstrapping contrivances
 
 modelica-notes written 02020-07-06
     updated 02020-07-07
+    concerns modelica simulation calculation end-user-programming hci
 
 modern-material-processing written 02020-09-24
     updated 02020-09-26
+    concerns the-future materials zirconia sapphire lucalox yttria mechanical 
+    concerns plumbing contrivances purification
 
 monoid-prefix-sum written 02020-06-05
     updated 02020-06-05
+    concerns algorithms performance prefix-sums math ropes crdts fp-persistent
+    concerns text-editors programming parsing automata-theory js monoids
+crdts category-titled Conflict-free+replicated+data+types+(CRDTs)
 
 muldiv written 02020-11-26
     updated 02020-11-26
+    concerns instruction-sets digital-logic performance
 
 multimeter-metrology written 02020-11-01
     updated 02020-11-27
+    concerns metrology electronics history microcontrollers physics pricing
 
 muriate-thermal-mass written 02020-10-18
     updated 02020-10-28
+    concerns desiccants thermal-storage household materials muriate-of-lime
+    concerns pricing thermodynamics minerals heating cooling drying cooking
+    concerns physics efficiency
+efficiency category-titled Energy+efficiency
 
 my-very-first-opamp written 02020-11-27
     updated 02020-11-27
+    concerns analog electronics experiment-report contrivances falstad
 
 one-big-text-file written 02020-06-04
     updated 02020-06-06
+    concerns hci end-user-programming derctuo text-editors history org-mode hypertext
+    concerns constraints jupyter notebooks explorables observablehq r build-systems
+    concerns lucet urbit docker nix guix programming-by-example caching sa basic
+    concerns layout tex reproducibility spreadsheets falstad
+tex category-titled TeX
+observablehq category-titled ObservableHQ
+falstad category-titled Falstad’s+circuit+simulator
+org-mode category-titled Org-mode
 
 one-pass-sort written 02020-05-16
     updated 02020-05-16
+    concerns sorting algorithms performance ssds merging sa lsm-trees
+ssds category-titled SSDs
 
 optimized-finger-joints written 02020-05-16
     updated 02020-05-16
+    concerns mechanical sheet-cutting digital-fabrication contrivances
 
 osccal-fm-radio written 02020-11-26
     updated 02020-11-26
     titled AVR+OSCCAL+probably+won’t+give+you+an+FM+radio
+    concerns avr microcontrollers electronics radio communication embedded-programming
 
 oscillating-flexion written 02020-10-15
     updated 02020-10-16
+    concerns physics mechanical math flexures materials strength contrivances
 
 oxygen-generator-rocket written 02020-09-10
     updated 02020-09-10
+    concerns energy materials physics rockets facepalm contrivances flying-machines
 
 language-of-choice written 02020-12-09
     updated 02020-12-09
+    concerns logic programming algorithms performance pegs parsing laws-of-form
+    concerns prolog notations
 
 lantern-gears written 02020-06-20
     updated 02020-06-28
+    concerns mechanical gearing history
 
 lava-time-capsule written 02020-11-24
     updated 02020-11-24
+    concerns long-now refractory materials art archival alabaster minerals pricing
+    concerns radio communication energy-harvesting physics contrivances
+long-now category-titled The+Long+Now+Foundation
 
 led-computation written 02020-10-25
     updated 02020-10-25
-    titled LED+computation
+    titled LED+computation?
+    concerns physical-computation analog electronics silly leds
 
 lenticular-air-bearing written 02020-11-24
     updated 02020-11-24
+    concerns manufacturing mechanical bearings contrivances
 
 letter-hamming-code written 02020-12-06
     updated 02020-12-16
     titled A+letter-by-letter+Hamming+code+for+manual+ECC+computation
+    concerns communication coding archival
 
 level-shifter written 02020-10-08
     updated 02020-10-10
+    concerns electronics contrivances
 
 light-pen-latency written 02020-12-23
     updated 02020-12-28
+    concerns sensors hci latency electronics sketchpad music audio dynamicland
+    concerns analog crts ghettobotics projectors pricing metrology ultrasound leds
+    concerns contrivances
+crts category-titled Cathode-ray+tubes+(CRTs)
+leds category-titled LEDs
 
 linear-ocr written 02020-11-06
     updated 02020-11-06
     titled OCR+with+linear+optimization
+    concerns optimization gradient-descent
 
 line-numbered-isam-buffers written 02020-07-18
     updated 02020-07-23
     titled Line-numbered+ISAM+buffers
+    concerns text-editors algorithms performance emacs ropes history b-trees
+    concerns fp-persistent monoids prefix-sums layout
+fp-persistent category-titled FP-persistent+data+structures
 
 lithium-fuel written 02020-10-04
     updated 02020-10-04
+    concerns energy materials thermodynamics pidgeon-process
 
 logsl written 02020-10-07
     updated 02020-10-09
     titled LOGSL:+Lisp+object-graph+serialization+language
+    concerns file-formats security python
 
 long-distance-radio written 02020-07-17
     updated 02020-07-17
+    concerns radio communication independence physics energy-harvesting solar photovoltaic
+    concerns coding naomi-wu
+naomi-wu category-titled Naomi+Wu
 
 abbe-limited-dro written 02020-10-24
     updated 02020-10-24
     titled Abbe-limited+DRO
-    concerns metrology mechanical digital-fabrication manufacturing
+    concerns metrology mechanical digital-fabrication manufacturing contrivances
 
 adiabatic-separation written 02020-11-12
     updated 02020-11-14
+    concerns materials thermoacoustics physics retia-mirabilia plumbing contrivances
+    concerns purification
 
 alien-screws written 02020-11-06
     updated 02020-11-11
+    concerns mechanical contrivances
 
 all-pass-fonts written 02020-05-18
     updated 02020-05-18
     titled Font+rendering+with+all-pass+filters
-    concerns performance graphics fonts all-pass-filters dsp
+    concerns performance graphics fonts all-pass-filters dsp convolution algorithms
 
 aluminum-air-batteries written 02020-09-23
     updated 02020-09-23
     titled Aluminum-air+batteries
-    concerns materials energy electrolysis electronics
+    concerns materials energy electrolysis electronics batteries contrivances
 
 ancient-batteries written 02020-09-23
     updated 02020-10-12
+    concerns electrolysis history batteries materials experiment-report
 
 ancient-machinists written 02020-10-08
     updated 02020-10-08
-    concerns egypt history manufacturing facepalm crackpots
+    concerns egypt history manufacturing facepalm crackpots collapse
 egypt category-titled Egypt    
 
 atkinson-differential-blower written 02020-10-14
     updated 02020-10-15
+    concerns mechanical thermodynamics plumbing heat-engines contrivances
 
 audio-vector-image written 02020-11-04
     updated 02020-11-04
+    concerns ultrasound communication
 
 ballpoint-spif written 02020-04-25
     updated 02020-04-25
     titled Ballpoint+SPIF
-    concerns mechanical manufacturing physics digital-fabrication
+    concerns mechanical manufacturing physics digital-fabrication bearings
+    concerns steel strength
 
 bitwise-reproducibility written 02020-04-25
     updated 02020-04-25
-    concerns derctuo reproducibiity sa
+    concerns derctuo reproducibility sa
 sa category-titled Systems+architecture
 
 bluepill-aspirations written 02020-10-30
     updated 02020-11-01
+    concerns electronics pricing microcontrollers stm32 experiment-report
 
 bok-outline written 02020-06-06
     updated 02020-10-28
     titled Tentative+outline+of+a+body+of+knowledge
-    concerns derctuo
+    concerns derctuo archival wikipedia creative-commons public-domain textbooks
 
 buck-speaker written 02020-06-29
     updated 02020-06-29
     titled Trying+to+drive+a+speaker+with+a+buck+converter
-    concerns audio electronics facepalm
+    concerns analog audio electronics facepalm contrivances
 
 caching-layout written 02020-12-03
     updated 02020-12-03
+    concerns guis caching graphics layout incremental-computation performance latency
 
 calcium-strengthening written 02020-10-21
     updated 02020-10-24
+    concerns foaming materials alabaster lime foaming phosphates waterglass composites
+    concerns digital-fabrication self-replication experiment-report minerals concrete
+    concerns refractory ceramic
 
 capacitor-meter written 02020-11-16
     updated 02020-12-03
+    concerns electronics metrology microcontrollers embedded-programming analog
+    concerns ghettobotics avr stm32 contrivances
 
 ccn-static-hypertext written 02020-05-16
     updated 02020-05-16
     titled Static+hypertext+on+CCN
-    concerns ccn protocols
+    concerns ccn protocols security hypertext
 
 ccn-streams written 02020-05-16
     updated 02020-05-16
     titled Feeds+or+streams+on+CCNs
-    concerns sa ccn feeds kafka protocols merkle-graphs economics
+    concerns sa ccn feeds kafka protocols merkle-graphs economics security
 ccn category-titled Content-centric+networking/named-data+networking    
 
 cheapest-ics written 02020-10-27
     updated 02020-10-30
     titled Some+of+the+cheapest+memory+ICs
+    concerns electronics pricing
 
 cheating-etendue written 02020-12-26
     updated 02020-12-26
     titled Cheating+étendue?
+    concerns physics optics thermodynamics facepalm etendue
 
 circle-portal-gui-ii written 02020-12-22
     updated 02020-12-23
     titled Circle-portal+GUI+Ⅱ
-    concerns guis hci small-is-beautiful
+    concerns guis hci small-is-beautiful hypertext graphics
 
 circuit-text written 02020-11-11
     updated 02020-11-26
     titled A+compact+textual+format+for+interchange+of+electronic+circuit+designs
+    concerns file-formats electronics falstad
 
 cmg-walker written 02020-10-11
     updated 02020-10-12
     titled A+seamless+CMG-driven+walker
+    concerns mechanical physics contrivances
 
 cold-plasma written 02020-11-08
     updated 02020-11-24
+    concerns materials manufacturing magnesium aluminum rutile plasma
+    concerns zirconia iron pidgeon-process
 
 commit-log-transfer written 02020-05-16
     updated 02020-05-16
-    concerns kafka protocols performance sa flatbuffers pubsub
+    concerns kafka protocols performance sa flatbuffers feeds
+feeds category-titled Publish/subscribe+feeds
 
 compound-literals written 02020-11-27
     updated 02020-11-27
     titled Using+C99+compound+literals+unjustifiably
+    concerns regrettable c programming ocaml
 
 compressed-imaging written 02020-12-06
     updated 02020-12-06
+    concerns projectors actuators leds math graphics sparkle optimization optics
 
 compressed-sensing-oscilloscope written 02020-11-17
     updated 02020-11-17
     titled Oscilloscope+superresolution+via+compressed+sensing?
+    concerns oscilloscopes stm32 electronics metrology optimization
+    concerns compressed-sensing contrivances
 
 convincingness written 02020-06-20
     updated 02020-06-20
+    concerns epistemology crackpots dijkstra
 
 copper-salts written 02020-09-21
     updated 02020-09-23
+    concerns copper materials toxicology photovoltaic electrolysis
 
 copper-segelin written 02020-11-06
     updated 02020-11-08
     titled Copper+segelín
-    concerns digital-fabrication electronics
+    concerns digital-fabrication electronics contrivances thermodynamics
+    concerns physics control falstad
 
 covid-deaths written 02020-07-10
     updated 02020-07-10
     titled Importing+the+WHO’s+COVID-19+data+into+SQLite
-    concerns covid sql derctuo
+    concerns covid sql derctuo practical web-scraping
+sql category-titled SQL
 
 covid-vitamin-d written 02020-10-27
     updated 02020-10-28
     titled COVID-19+risk+and+vitamin+D
-    concerns health covid household
+    concerns practical household covid health
 
 cutting-steel-with-steam written 02020-11-11
     updated 02020-11-11
+    concerns manufacturing materials steel contrivances
 
 cyclic-fabrication-systems written 02020-08-17
     updated 02020-09-10
-    concerns independence metrology manufacturing digital-fabrication materials the-future thermodynamics utopias edm ecm
+    concerns independence metrology manufacturing digital-fabrication materials
+    concerns self-replication the-future thermodynamics utopias edm ecm foaming
 edm category-titled Electric+discharge+machining
 ecm category-titled Electrochemical+machining
 
 cyclopaedia-1880 written 02020-09-17
     updated 02020-10-23
     titled An+index+of+the+1880+edition+of+Cooley’s+Cyclopædia
-    concerns materials history
+    concerns materials history book-notes
 
 datasheets written 02020-11-02
     updated 02020-12-22
+    concerns regrettable practical electronics
 
 dead-bugging written 02020-11-04
     updated 02020-11-04
+    concerns electronics ghettobotics experiment-report
 
 desiccant-climate-control written 02020-10-27
     updated 02020-11-24
+    concerns muriate-of-lime thermal-storage thermodynamics desiccants food-storage
+    concerns materials heating cooling drying singapore mechanical garbage sewage
+    concerns independence alabaster pricing solar photovoltaic energy ghettobotics
+    concerns utility-scale-energy-storage minerals contrivances
 
 differential-dividing-plate written 02020-12-31
     updated 02020-12-31
+    concerns metrology mechanical manufacturing geometry ternary contrivances
 
 digital-dagarti written 02020-09-23
     updated 02020-09-23
     titled A+digital+Dagarti+might+save+your+life
+    concerns security physics embedded-programming the-future
 
 diode-thermometer written 02020-11-27
     updated 02020-11-27
-    titled A+revere-biased+diode+thermometer
-    concerns metrology electronics
+    titled A+reverse-biased+diode+thermometer
+    concerns metrology electronics contrivances
 
 dns-rendezvous written 02020-10-07
     updated 02020-10-07
     titled DNS+Cache+Rendezvous:+a+permissionless+signaling+channel+for+bootstrapping+end-to-end+connections
-    concerns protocols security dns
+    concerns protocols security dns independence
 dns category-titled DNS
 
 e12-music written 02020-11-17
     updated 02020-12-26
     titled Representing+E12+electronic+component+values+musically
+    concerns music electronics metrology hci audio
 
 ecm-engraving written 02020-12-31
     updated 02020-12-31
@@ -586,6 +802,7 @@ electrodeposition-3d-printing written 02020-08-15
 
 electrodeposition-welding written 02020-12-31
     updated 02020-12-31
+    concerns manufacturing electrolysis materials digital-fabrication ecm
 
 electro-etching-graded-index-optics written 02020-12-31
     updated 02020-12-31
@@ -594,13 +811,15 @@ electro-etching-graded-index-optics written 02020-12-31
 
 electroforming-networks written 02020-12-22
     updated 02020-12-22
+    concerns electrolysis manufacturing materials
 
 electronics-kit written 02020-05-23
     updated 02020-12-20
-    concerns electronics ghettobotics metrology
+    concerns electronics ghettobotics metrology nostalgia radio leds
 
 electronics-next-project written 02020-12-21
     updated 02020-12-22
+    concerns electronics ghettobotics microcontrollers relays independence
 
 estimation written 02020-04-20
     updated 02020-04-20
@@ -611,22 +830,28 @@ bubbleos category-titled BubbleOS
 field-programmable-rtl-array written 02020-11-26
     updated 02020-11-27
     titled A+field-programmable+RTL+array:+a+more+efficient+alternative+to+FPGAs?
+    concerns digital-logic bootstrapping minsky-algorithm sketchpad graphics
+    concerns algorithms efficiency math physical-computation history
+    concerns electronics mechanical-computation calculation fpgas contrivances
+fpgas category-titled FPGAs
 
 fluidic-household-pumping written 02020-10-18
     updated 02020-10-19
+    concerns earthships household thermodynamics physics air heating cooling fluidics
 
 foam-electro-etching written 02020-11-26
     updated 02020-12-31
     titled Foam+electro-etching+and+related+techniques
-    concerns electrolysis digital-fabrication materials
+    concerns electrolysis digital-fabrication foaming materials
 
 foaming-infiltration written 02020-11-06
     updated 02020-11-06
+    concerns foaming materials waterglass
 
 foil-marking-glass written 02020-08-18
     updated 02020-08-18
     titled Foil-marking+glass
-    concerns manufacturing materials
+    concerns manufacturing materials digital-fabrication glass
 
 fossil-geothermal written 02020-08-02
     updated 02020-11-13
@@ -635,12 +860,16 @@ fossil-geothermal written 02020-08-02
 garden-light-panel written 02020-11-17
     updated 02020-12-01
     titled A+solar+panel+from+an+LED+garden+light
+    concerns electronics pricing energy photovoltaic solar energy experiment-report
 
 geomagnetic-energy-harvesting written 02020-11-24
     updated 02020-11-24
+    concerns energy mole-people physics energy-harvesting
 
 ghettobotics-nonshopping-list written 02020-11-04
     updated 02020-12-21
+    concerns ghettobotics electronics metrology experiment-report practical
+    concerns microcontrollers hand-computers edc
 
 ghettobotics-soldering-iron written 02020-06-17
     updated 02020-06-17
@@ -648,53 +877,73 @@ ghettobotics-soldering-iron written 02020-06-17
 
 globoflexia written 02020-10-05
     updated 02020-10-10
+    concerns balloons composites hci foaming refractory concrete algorithms
+    concerns sensors cameras materials waterglass strength ceramic casting
 
 guecs written 02020-07-18
     updated 02020-07-18
-    concerns sa simulation programming muds
+    concerns sa programming muds
 muds category-titled MUDs    
 
 hacker-calendar written 02020-06-28
     updated 02020-12-03
+    concerns utopias history
 
 hard-sticky-balls written 02020-11-06
     updated 02020-11-06
+    concerns digital-fabrication manufacturing bearing-balls
 
 hardware-queuing written 02020-11-26
     updated 02020-12-16
+    concerns instruction-sets concurrency latency padauk multithreading asm
+    concerns interrupts microcontrollers hard-real-time avr performance tera
+    concerns corewar
 
 hierarchical-state-space-learning written 02020-12-14
     updated 02020-12-14
+    concerns optimization math simulation electronics gradient-descent control
 
 hot-fabrication written 02020-09-21
     updated 02020-09-23
+    concerns manufacturing materials casting refractory graphite carborundum
+    concerns pricing minerals digital-fabrication pocket-furnaces yttria
+    concerns zirconia shs thermodynamics powder-bed rutile
+shs category-titled SHS+(self-propagating+high-temperature+synthesis)
 
 icp-torch written 02020-09-10
     updated 02020-09-10
     titled Inductively-coupled+plasma+torches
+    concerns plasma materials physics refractory contrivances
 
 inorganic-burnout written 02020-09-11
     updated 02020-09-12
-    concerns materials digital-fabrication
+    concerns foaming materials digital-fabrication
 
 inspiration written 02020-10-15
     updated 02020-10-15
+    concerns art quotes
 
 intervals-and-gradients written 02020-10-16
     updated 02020-10-16
+    concerns quotes graphics math optimization raytracing intervals automatic-differentiation
+intervals category-titled Interval+and+affine+arithmetic
 
 jigsaw-blades written 02020-12-31
     updated 02020-12-31
+    concerns mechanical self-replication steel strength ultrasound
 
 keyboard-object-environment written 02020-11-19
     updated 02020-11-19
+    concerns quasimodes hci calculation embedded-programming
 
 knuth-paeth-minsky-rotation written 02020-12-23
     updated 02020-12-26
+    concerns math graphics karatsuba performance minsky-algorithm paeth-rotation
 
 nodebook written 02020-10-07
     updated 02020-10-07
     titled Nodebook:+autotagging+quantities+for+ad-hoc+calculation+and+example-based+end-user+programming
+    concerns end-user-programming hci file-formats calculation programming-by-example
 
 non-numerical-numpy written 02020-06-29
     updated 02020-06-30
