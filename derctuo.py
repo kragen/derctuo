@@ -5,7 +5,7 @@ Just ganked from Dercuano.
 
 Urgent to fix:
 
-- no PDF
+- link in stepped-planetary to lantern-gears fails in PDF
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
@@ -24,6 +24,8 @@ Watch for problems with:
 - prefix 0 to dates
 - divide notes by month
 - topics pages
+- PDF generation
+- PDF failed on mismatched tag in lithium-fuel, no tidylib; also stm32duino (not well-formed) and sentential-database (mismatched tag) and hierarchical-state-space-learning (mismatched tag)
 
 Next up:
 

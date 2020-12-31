@@ -143,6 +143,8 @@ steinmetz-quote written 02020-09-10
 
 stepped-planetary written 02020-07-28
     updated 02020-08-02
+    titled The+orbital+drive+and+stepped+planetary+drive
+    concerns mechanical gearing
 
 stm32duino written 02020-11-06
     updated 02020-11-06
@@ -255,11 +257,13 @@ pure-functional-ui written 02020-04-21
     updated 02020-04-21
     titled Pure+functional+UI
     concerns guis hci caching
+guis category-titled GUIs
+hci category-titled HCI
 
 pure-functional-vm written 02020-04-21
     updated 02020-04-21
     titled Pure+functional+VM
-    concerns derctuo reproducibiity instruction-sets
+    concerns derctuo reproducibiity instruction-sets urbit bicicleta
 
 pyrolysis-3d-printing written 02020-08-02
     updated 02020-11-24

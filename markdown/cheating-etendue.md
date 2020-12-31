@@ -50,10 +50,10 @@ brightness in the cavity will follow the brightness of the emitter
 much more quickly than it decays by escaping through the pinhole.
 
 (You could argue that a Lambertian diffuser doesn’t conserve étendue,
-and is thus cheating, but ⓐ you can do an adequate imitation of a
+and is thus cheating, but (a) you can do an adequate imitation of a
 Lambertian diffuser with a pockmarked mirror, with lots and lots of
 little reflective craters covering its surface, and such a mirror
-*does* conserve étendue; ⓑ a Lambertian diffuser *increases* étendue,
+*does* conserve étendue; (b) a Lambertian diffuser *increases* étendue,
 while the cavity system described above seemed interesting because of
 the possibility of *decreasing* étendue.)
 

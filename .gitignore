@@ -2,3 +2,5 @@
 /derctuo-020201230.tar.gz
 /derctuo-020201230/
 *.pyc
+/derctuo.tmp.pagenos
+/derctuo.tmp.pdf
