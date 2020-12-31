@@ -1,7 +1,7 @@
 Derctuo†: a repository of 10 megabytes of notes as a sequel to Dercuano
 =====================================================================================================================
 
-> Sitaker, Kragen Javier. (2020). Dercuano (Version 020201231).
+> Sitaker, Kragen Javier. (2020). Derctuo (Version 020201231).
   Zenodo. <http://doi.org/10.5281/zenodo.4408470>
 
 You can download the final build, full of prerendered HTML, at
