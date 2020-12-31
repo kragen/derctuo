@@ -10,7 +10,7 @@ with a differently reactive metal, even very shallow electro-etching
 ought to be able to produce dramatic visual effects by selectively
 removing the plating, followed by a subsequent treatment such as acid
 etching, etching with alum, bluing, toning with sulfur, or possibly
-even autocatalytic "electroless" plating.  This ought to enable
+even autocatalytic “electroless” plating.  This ought to enable
 strongly nonlinear threshold effects as well: where the plating is
 completely removed, the reactive surface is the substrate, and where
 it is not completely removed, the reactive surface is the plating.
@@ -32,25 +32,26 @@ processes (anodization, electro-etching, electroplating,
 electroforming, batteries, and so on) where the bubbles form from
 electrolysis of the liquid; generally this is considered a nuisance,
 since the bubbles spawn at unpredictable places, and in batteries
-"depolarizers" like manganese dioxide are used to counter it.  But it
+“depolarizers” like manganese dioxide are used to counter it.  But it
 might also provide an interesting artistic texture.
 
 In addition to soap bubbles, there are several other
 surface-patterning approaches that come to mind.
 
 Stamping patterns onto the surface of metal with a conductive rubber
-stamp (graphite-filled or copper-filled, say) and electrolyte "ink" is
+stamp (graphite-filled or copper-filled, say) and electrolyte “ink” is
 another possible form of electrolytic rapid patterning of metal
 surfaces.
 
-Earlier I'd suggested selective electro-etching or electrodeposition
+Earlier I’d suggested selective electro-etching or electrodeposition
 with one or many moving electrodes very close to a metal workpiece as
 a way to produce precise surface contours, or similarly electrolytic
 anodization as a way to precisely produce colors.  The above-suggested
-methods of "developing" an extremely thin initial etch or plating with
+methods of “developing” an extremely thin initial etch or plating with
 nonlinear effects should enable this process to pattern a surface
 orders of magnitude faster, either by selectively etching away part of
-a surface coating, by selectively depositing plating, or both.
+a surface coating, by selectively depositing plating, or both.  (See
+also [the note on ECM engraving](ecm-engraving.md).
 
 Another possible way to selectively electroplate a surface is with
 localized laser heating; for example, in a standard acid blue vitriol
@@ -58,7 +59,7 @@ electroplating solution, even a [5-watt blue laser has been reported
 to produce this effect][0] by locally heating the solution and thus
 slightly shifting the electrode potentials.
 
-[0]: https://www.youtube.com/watch?v=w3jV58_Vv24 "02020-11-09 video by 'Breaking Taps' citing Al‐Sufi, A. K., et al. 'Laser induced copper plating.' Journal of Applied Physics 54.6 (1983): 3629-3631."
+[0]: https://www.youtube.com/watch?v=w3jV58_Vv24 "02020-11-09 video by ‘Breaking Taps’ citing Al‐Sufi, A. K., et al. ‘Laser induced copper plating.’ Journal of Applied Physics 54.6 (1983): 3629-3631."
 
 The more common way to modify a metal surface with a laser is of
 course to heat it up in the air, which, depending on the degree of
@@ -98,21 +99,21 @@ steepen its boundaries, and then apply some other reaction, specific
 to either the oxide or the underlying metal, to use the pattern thus
 deposited.  As another example, you could selectively deposit aluminum
 in an argon atmosphere by plasma-vaporizing it, then use an oxidizing
-atmosphere to selectively oxidize areas where you don't want the
+atmosphere to selectively oxidize areas where you don’t want the
 aluminum.
 
 Using a cold plasma pencil instead of just a glow discharge may permit
 more flexibility, for example by allowing a higher degree of
 ionization than a glow discharge can achieve, or allowing short-lived
-ionized species to decay.  But it probably can't achieve as fine
+ionized species to decay.  But it probably can’t achieve as fine
 precision.
 
 Another way to pattern a surface by local heating is by resistance
 heating, like a spot welder does.  At short distances you can invoke
 field electron emission (20–40 V/μm, lower with a low-work-function
 coating) or thermionic emission to liberate electrodes from your
-"write head" with which to bombard the surface.  (At short distances
-at atmospheric pressures there isn't enough gas to sustain an
+“write head” with which to bombard the surface.  (At short distances
+at atmospheric pressures there isn’t enough gas to sustain an
 avalanche discharge.)  This is actually the same process described
 above for generating plasma, but with a different purpose, of heating
 the surface rather than generating ions, so the current is in the
@@ -147,9 +148,9 @@ resulting perforated metal foil as a photolithography mask.  A
 three-layer technique may be the best solution here: first a massive,
 rigid, etchable substrate; then a uniform thin foil of microns up to
 hundreds of microns, which is also etchable, but resists at least one
-etchant that attacks the substrate; then a "resist" mask, perhaps of
+etchant that attacks the substrate; then a “resist” mask, perhaps of
 metal or metal oxide, deposited on top and patterned with submicron
-thickness.  Once the "resist" is patterned, you etch the foil away
+thickness.  Once the “resist” is patterned, you etch the foil away
 where it is exposed by the resist; once the foil has been etched all
 the way through, you switch etchants and etch away the substrate while
 leaving the foil unharmed.
