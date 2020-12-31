@@ -1,7 +1,15 @@
 Derctuo†: a repository of 10 megabytes of notes as a sequel to Dercuano
 =====================================================================================================================
 
-[Dercuano]: http://canonical.org/~kragen/dercuano
+> Sitaker, Kragen Javier. (2020). Dercuano (Version 020201231).
+  Zenodo. <http://doi.org/10.5281/zenodo.4408470>
+
+You can download the final build, full of prerendered HTML, at
+<http://canonical.org/~kragen/derctuo/derctuo-020201231.tar.gz>.  It’s also at
+<https://perma.cc/ERY5-QN2H>.  For hand computers that can’t handle
+tarballs of HTML, there’s a PDF at
+<http://canonical.org/~kragen/derctuo/derctuo-020201231.pdf>, also at
+<https://perma.cc/F73U-9F2Q>.
 
 I collected [Dercuano] last year, 02019 CE, and wrote some of it; but
 I wrote most of it over the 14 years leading up to 02019.  Many of
@@ -20,7 +28,7 @@ exploited browser facilities extensively for things like diagrams and
 tables of contents — a decision that came back to bite me when I
 hacked together a PDF version in the last few days of 02019.
 
-So what’s my vision for Derctuo?  How would I like it to be similar or
+So what was my vision for Derctuo?  How did I want it to be similar or
 different?
 
 [Hamming said](https://www.cs.virginia.edu/~robins/YouAndYourResearch.html):
@@ -253,7 +261,8 @@ the notes to fail to render to PDF.
 PDF generation also depends on the PIL library to include inline
 images in the PDF file.  I’m using 1.1.7.
 
-To build the HTML tarball and the PDF, type `make`.
+To build the HTML tarball and the PDF, type `make`.  To get the
+correct page numbers in the PDF, type `make` a second time.
 
 Errata
 ------
