@@ -1,371 +1,371 @@
 derctuo version 020201230
     by Kragen+Javier+Sitaker
 
-yablochkov-arc-cutter written 2020-12-09
-    updated 2020-12-09
+yablochkov-arc-cutter written 02020-12-09
+    updated 02020-12-09
 
-wire-machines written 2020-10-13
-    updated 2020-10-13
+wire-machines written 02020-10-13
+    updated 02020-10-13
 
-wang-tile-chemicals written 2020-09-30
-    updated 2020-09-30
+wang-tile-chemicals written 02020-09-30
+    updated 02020-09-30
 
-virtual-machine-setup written 2020-07-10
-    updated 2020-07-14
+virtual-machine-setup written 02020-07-10
+    updated 02020-07-14
 
-vga-oscilloscope written 2020-10-13
-    updated 2020-10-13
+vga-oscilloscope written 02020-10-13
+    updated 02020-10-13
     titled VGA+oscilloscope?
 
-veskeno-outline written 2020-06-17
-    updated 2020-07-10
+veskeno-outline written 02020-06-17
+    updated 02020-07-10
 
-vector-vm written 2020-04-21
-    updated 2020-06-17
+vector-vm written 02020-04-21
+    updated 02020-06-17
     titled A+reproducible+vector-instruction+VM?
 
-ultra-machining written 2020-07-06
-    updated 2020-07-18
+ultra-machining written 02020-07-06
+    updated 02020-07-18
 
-truth-table-search written 2020-12-09
-    updated 2020-12-09
+truth-table-search written 02020-12-09
+    updated 02020-12-09
 
-transaction-per-call written 2020-12-15
-    updated 2020-12-23
+transaction-per-call written 02020-12-15
+    updated 02020-12-23
 
-toolpath-optimization written 2020-09-27
-    updated 2020-09-30
+toolpath-optimization written 02020-09-27
+    updated 02020-09-30
 
-tiny-memory-dictionary written 2020-11-12
-    updated 2020-11-12
+tiny-memory-dictionary written 02020-11-12
+    updated 02020-11-12
     titled Dictionary+data+structures+for+tiny+memories
 
-time-scale-material-processing written 2020-12-22
-    updated 2020-12-22
+time-scale-material-processing written 02020-12-22
+    updated 02020-12-22
     titled Time-scale+material+processing
 
-thermistors written 2020-10-14
-    updated 2020-11-06
+thermistors written 02020-10-14
+    updated 02020-11-06
     titled Thermistors,+resistance+temperature+detectors,+and+other+thermal+sensors
 
-thermal-expansion-speaker written 2020-11-06
-    updated 2020-11-06
+thermal-expansion-speaker written 02020-11-06
+    updated 02020-11-06
 
-screens written 2020-11-16
-    updated 2020-11-17
+screens written 02020-11-16
+    updated 02020-11-17
     titled Improvised+display+options+for+embedded+hardware+development
 
-scribal-basic written 2020-12-12
-    updated 2020-12-15
-    titled Scribal+Basic:+a+1960s+language+for+the+2020s
+scribal-basic written 02020-12-12
+    updated 02020-12-15
+    titled Scribal+Basic:+a+1960s+language+for+the+02020s
 
-secure-scuttlebutt written 2020-10-02
-    updated 2020-11-06
+secure-scuttlebutt written 02020-10-02
+    updated 02020-11-06
     titled Secure+Scuttlebutt+is+a+cool+idea+whose+realization+has+fatal+flaws
 
-segments-and-blocks written 2020-06-20
-    updated 2020-12-16
+segments-and-blocks written 02020-06-20
+    updated 02020-12-16
 
-sentential-database written 2020-11-06
-    updated 2020-11-18
+sentential-database written 02020-11-06
+    updated 02020-11-18
 
-sequestered-co2-volume written 2020-10-25
-    updated 2020-10-25
+sequestered-co2-volume written 02020-10-25
+    updated 02020-10-25
     titled Sequestered+CO₂+would+fill+many+oil+fields
 
-shopping-list-in-tex written 2020-06-05
-    updated 2020-06-05
+shopping-list-in-tex written 02020-06-05
+    updated 02020-06-05
     titled Writing+a+shopping+list+in+TeX
 
-shopping-list written 2020-09-25
-    updated 2020-12-20
+shopping-list written 02020-09-25
+    updated 02020-12-20
     titled Materials+shopping+list
 
-single-bridge-tor-deanonymization written 2020-10-07
-    updated 2020-10-07
+single-bridge-tor-deanonymization written 02020-10-07
+    updated 02020-10-07
     titled Single-bridge+Tor+deanonymization?
 
-single-output-build written 2020-05-19
-    updated 2020-05-19
+single-output-build written 02020-05-19
+    updated 02020-05-19
 
-skip-list-variants written 2020-10-12
-    updated 2020-10-12
+skip-list-variants written 02020-10-12
+    updated 02020-10-12
 
-slide-rule-addition written 2020-06-22
-    updated 2020-06-22
+slide-rule-addition written 02020-06-22
+    updated 02020-06-22
 
-smart-plumbing written 2020-09-10
-    updated 2020-09-12
+smart-plumbing written 02020-09-10
+    updated 02020-09-12
 
-sm-scraping written 2020-10-01
-    updated 2020-10-05
+sm-scraping written 02020-10-01
+    updated 02020-10-05
     titled Scraping+Sciencemadness
 
-sodium-silicate written 2020-06-04
-    updated 2020-06-04
+sodium-silicate written 02020-06-04
+    updated 02020-06-04
 
-solar-furnace-cpc written 2020-05-16
-    updated 2020-05-16
+solar-furnace-cpc written 02020-05-16
+    updated 02020-05-16
     titled Solar+furnace+CPC
 
-solar-netting written 2020-09-23
-    updated 2020-09-23
+solar-netting written 02020-09-23
+    updated 02020-09-23
 
-spark-gap-logic written 2020-09-20
-    updated 2020-12-16
+spark-gap-logic written 02020-09-20
+    updated 02020-12-16
 
-sparse-sinc written 2020-09-17
-    updated 2020-09-17
+sparse-sinc written 02020-09-17
+    updated 02020-09-17
 
-specular-photogrammetry written 2020-11-11
-    updated 2020-11-11
+specular-photogrammetry written 02020-11-11
+    updated 02020-11-11
 
-spiral-house written 2020-10-30
-    updated 2020-10-30
+spiral-house written 02020-10-30
+    updated 02020-10-30
 
-steinmetz-quote written 2020-09-10
-    updated 2020-09-10
+steinmetz-quote written 02020-09-10
+    updated 02020-09-10
     titled Notable+quotes+from+Steinmetz’s+1892+hysteresis+paper
 
-stepped-planetary written 2020-07-28
-    updated 2020-08-02
+stepped-planetary written 02020-07-28
+    updated 02020-08-02
 
-stm32duino written 2020-11-06
-    updated 2020-11-06
+stm32duino written 02020-11-06
+    updated 02020-11-06
     titled Arduino+support+for+STM32
 
-stochastic-fractional-delay-lines written 2020-12-26
-    updated 2020-12-26
+stochastic-fractional-delay-lines written 02020-12-26
+    updated 02020-12-26
 
-successive-approximation-ui written 2020-12-28
-    updated 2020-12-28
+successive-approximation-ui written 02020-12-28
+    updated 02020-12-28
     titled Successive-approximation+UI+design
 
-swashplate-screwdriver written 2020-11-06
-    updated 2020-11-06
+swashplate-screwdriver written 02020-11-06
+    updated 02020-11-06
 
-random-synchronous-motor written 2020-11-11
-    updated 2020-11-11
+random-synchronous-motor written 02020-11-11
+    updated 02020-11-11
 
-rebraining written 2020-11-16
-    updated 2020-12-06
+rebraining written 02020-11-16
+    updated 02020-12-06
 
-recursive-bloom-filters written 2020-05-13
-    updated 2020-05-13
+recursive-bloom-filters written 02020-05-13
+    updated 02020-05-13
 
-reducing-sucrose written 2020-09-30
-    updated 2020-09-30
+reducing-sucrose written 02020-09-30
+    updated 02020-09-30
 
-relay-buzzer written 2020-11-23
-    updated 2020-11-23
+relay-buzzer written 02020-11-23
+    updated 02020-11-23
 
-rep-2-cuboid written 2020-11-13
-    updated 2020-11-13
+rep-2-cuboid written 02020-11-13
+    updated 02020-11-13
 
-retro-teletext written 2020-07-18
-    updated 2020-07-23
+retro-teletext written 02020-07-18
+    updated 02020-07-23
 
-reuleaux written 2020-10-15
-    updated 2020-10-18
+reuleaux written 02020-10-15
+    updated 02020-10-18
 
-reversible-parsing written 2020-05-11
-    updated 2020-05-11
+reversible-parsing written 02020-05-11
+    updated 02020-05-11
 
-rigid-glider written 2020-10-12
-    updated 2020-10-12
+rigid-glider written 02020-10-12
+    updated 02020-10-12
 
-rns written 2020-10-26
-    updated 2020-10-26
+rns written 02020-10-26
+    updated 02020-10-26
     titled Residue+number+systems
 
-rosining-chip written 2020-11-08
-    updated 2020-11-08
+rosining-chip written 02020-11-08
+    updated 02020-11-08
     titled Rosining+chips
 
-table-text written 2020-12-31
-    updated 2020-12-31
+table-text written 02020-12-31
+    updated 02020-12-31
 
-taking-screenshots written 2020-11-27
-    updated 2020-12-20
+taking-screenshots written 02020-11-27
+    updated 02020-12-20
 
-the-programmable-world written 2020-09-10
-    updated 2020-09-10
+the-programmable-world written 02020-09-10
+    updated 02020-09-10
 
-pandemic-collapse written 2020-05-17
-    updated 2020-12-16
+pandemic-collapse written 02020-05-17
+    updated 02020-12-16
 
-peg-memo-sparsity written 2020-12-24
-    updated 2020-12-28
+peg-memo-sparsity written 02020-12-24
+    updated 02020-12-28
     titled The+sparsity+of+PEG+memoization+utility
 
-penalized-bits written 2020-09-10
-    updated 2020-09-10
+penalized-bits written 02020-09-10
+    updated 02020-09-10
 
-peroxide-and-bleach written 2020-08-15
-    updated 2020-08-15
+peroxide-and-bleach written 02020-08-15
+    updated 02020-08-15
 
-pet-dielectric-spectroscopy written 2020-11-11
-    updated 2020-11-11
+pet-dielectric-spectroscopy written 02020-11-11
+    updated 02020-11-11
     titled Improvised+humidity+sensors+with+PET+dielectric+spectroscopy
 
-phosphate-precipitation written 2020-09-10
-    updated 2020-09-10
+phosphate-precipitation written 02020-09-10
+    updated 02020-09-10
 
-pit-firing written 2020-11-06
-    updated 2020-11-06
+pit-firing written 02020-11-06
+    updated 02020-11-06
 
-plaster-foam written 2020-10-16
-    updated 2020-11-08
+plaster-foam written 02020-10-16
+    updated 02020-11-08
 
-png-circuit-diagrams written 2020-11-06
-    updated 2020-11-06
+png-circuit-diagrams written 02020-11-06
+    updated 02020-11-06
     titled Machine-readable+PNG+circuit+diagram+watermarks
 
-prate-thoughts written 2020-10-02
-    updated 2020-12-30
+prate-thoughts written 02020-10-02
+    updated 02020-12-30
 
-printf-tracebacks written 2020-11-11
-    updated 2020-11-11
+printf-tracebacks written 02020-11-11
+    updated 02020-11-11
 
-programming-in-the-debugger written 2020-12-15
-    updated 2020-12-15
+programming-in-the-debugger written 02020-12-15
+    updated 02020-12-15
 
-programming-languages written 2020-04-25
-    updated 2020-04-25
+programming-languages written 02020-04-25
+    updated 02020-04-25
 
-punk-zine-look written 2020-11-28
-    updated 2020-11-28
+punk-zine-look written 02020-11-28
+    updated 02020-11-28
 
-pure-functional-ui written 2020-04-21
-    updated 2020-04-21
+pure-functional-ui written 02020-04-21
+    updated 02020-04-21
     titled Pure+functional+UI
 
-pure-functional-vm written 2020-04-21
-    updated 2020-04-21
+pure-functional-vm written 02020-04-21
+    updated 02020-04-21
     titled Pure+functional+VM
 
-pyrolysis-3d-printing written 2020-08-02
-    updated 2020-11-24
+pyrolysis-3d-printing written 02020-08-02
+    updated 02020-11-24
     titled Pyrolysis+3-D+printing
 
-machine-readable-microcontroller-output written 2020-11-26
-    updated 2020-11-26
+machine-readable-microcontroller-output written 02020-11-26
+    updated 02020-11-26
 
-machine-teeth written 2020-08-02
-    updated 2020-08-17
+machine-teeth written 02020-08-02
+    updated 02020-08-17
 
-magnesium-fuel written 2020-09-23
-    updated 2020-10-09
+magnesium-fuel written 02020-09-23
+    updated 02020-10-09
 
-majority-dram-logic written 2020-12-09
-    updated 2020-12-09
+majority-dram-logic written 02020-12-09
+    updated 02020-12-09
     titled Majority+logic+with+DRAM+sense+amps
 
-materials-youtube written 2020-12-16
-    updated 2020-12-17
+materials-youtube written 02020-12-16
+    updated 02020-12-17
     titled Materials+YouTube
 
-merkle-ropes written 2020-10-09
-    updated 2020-10-09
+merkle-ropes written 02020-10-09
+    updated 02020-10-09
 
-mica-composites written 2020-11-14
-    updated 2020-11-14
+mica-composites written 02020-11-14
+    updated 02020-11-14
 
-microcontroller-inventory written 2020-11-18
-    updated 2020-11-28
+microcontroller-inventory written 02020-11-18
+    updated 02020-11-28
 
-micro-material-sorting written 2020-09-12
-    updated 2020-09-12
+micro-material-sorting written 02020-09-12
+    updated 02020-09-12
 
-migrating-app-snapshots written 2020-07-10
-    updated 2020-07-11
+migrating-app-snapshots written 02020-07-10
+    updated 02020-07-11
 
-mild-bases written 2020-09-23
-    updated 2020-10-01
+mild-bases written 02020-09-23
+    updated 02020-10-01
 
-minimal-cost-computer written 2020-10-23
-    updated 2020-12-01
+minimal-cost-computer written 02020-10-23
+    updated 02020-12-01
 
-modelica-notes written 2020-07-06
-    updated 2020-07-07
+modelica-notes written 02020-07-06
+    updated 02020-07-07
 
-modern-material-processing written 2020-09-24
-    updated 2020-09-26
+modern-material-processing written 02020-09-24
+    updated 02020-09-26
 
-monoid-prefix-sum written 2020-06-05
-    updated 2020-06-05
+monoid-prefix-sum written 02020-06-05
+    updated 02020-06-05
 
-muldiv written 2020-11-26
-    updated 2020-11-26
+muldiv written 02020-11-26
+    updated 02020-11-26
 
-multimeter-metrology written 2020-11-01
-    updated 2020-11-27
+multimeter-metrology written 02020-11-01
+    updated 02020-11-27
 
-muriate-thermal-mass written 2020-10-18
-    updated 2020-10-28
+muriate-thermal-mass written 02020-10-18
+    updated 02020-10-28
 
-my-very-first-opamp written 2020-11-27
-    updated 2020-11-27
+my-very-first-opamp written 02020-11-27
+    updated 02020-11-27
 
-one-big-text-file written 2020-06-04
-    updated 2020-06-06
+one-big-text-file written 02020-06-04
+    updated 02020-06-06
 
-one-pass-sort written 2020-05-16
-    updated 2020-05-16
+one-pass-sort written 02020-05-16
+    updated 02020-05-16
 
-optimized-finger-joints written 2020-05-16
-    updated 2020-05-16
+optimized-finger-joints written 02020-05-16
+    updated 02020-05-16
 
-osccal-fm-radio written 2020-11-26
-    updated 2020-11-26
+osccal-fm-radio written 02020-11-26
+    updated 02020-11-26
     titled AVR+OSCCAL+probably+won’t+give+you+an+FM+radio
 
-oscillating-flexion written 2020-10-15
-    updated 2020-10-16
+oscillating-flexion written 02020-10-15
+    updated 02020-10-16
 
-oxygen-generator-rocket written 2020-09-10
-    updated 2020-09-10
+oxygen-generator-rocket written 02020-09-10
+    updated 02020-09-10
 
-language-of-choice written 2020-12-09
-    updated 2020-12-09
+language-of-choice written 02020-12-09
+    updated 02020-12-09
 
-lantern-gears written 2020-06-20
-    updated 2020-06-28
+lantern-gears written 02020-06-20
+    updated 02020-06-28
 
-lava-time-capsule written 2020-11-24
-    updated 2020-11-24
+lava-time-capsule written 02020-11-24
+    updated 02020-11-24
 
-led-computation written 2020-10-25
-    updated 2020-10-25
+led-computation written 02020-10-25
+    updated 02020-10-25
     titled LED+computation
 
-lenticular-air-bearing written 2020-11-24
-    updated 2020-11-24
+lenticular-air-bearing written 02020-11-24
+    updated 02020-11-24
 
-letter-hamming-code written 2020-12-06
-    updated 2020-12-16
+letter-hamming-code written 02020-12-06
+    updated 02020-12-16
     titled A+letter-by-letter+Hamming+code+for+manual+ECC+computation
 
-level-shifter written 2020-10-08
-    updated 2020-10-10
+level-shifter written 02020-10-08
+    updated 02020-10-10
 
-light-pen-latency written 2020-12-23
-    updated 2020-12-28
+light-pen-latency written 02020-12-23
+    updated 02020-12-28
 
-linear-ocr written 2020-11-06
-    updated 2020-11-06
+linear-ocr written 02020-11-06
+    updated 02020-11-06
     titled OCR+with+linear+optimization
 
-line-numbered-isam-buffers written 2020-07-18
-    updated 2020-07-23
+line-numbered-isam-buffers written 02020-07-18
+    updated 02020-07-23
     titled Line-numbered+ISAM+buffers
 
-lithium-fuel written 2020-10-04
-    updated 2020-10-04
+lithium-fuel written 02020-10-04
+    updated 02020-10-04
 
-logsl written 2020-10-07
-    updated 2020-10-09
+logsl written 02020-10-07
+    updated 02020-10-09
     titled LOGSL:+Lisp+object-graph+serialization+language
 
-long-distance-radio written 2020-07-17
-    updated 2020-07-17
+long-distance-radio written 02020-07-17
+    updated 02020-07-17

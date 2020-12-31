@@ -8,7 +8,6 @@ Urgent to fix:
 - import notes
 - write introduction?
 - divide notes by month
-- prefix 0 to dates
 - fix sentential-database and  line-numbered-isam-buffers markdown syntax
 - delete spiral-house programming-languages
 - ugh, is there a way to include jpegs and pngs in the PDF?
@@ -20,6 +19,7 @@ Watch for problems with:
 - fix .md links
 - put .jpeg and .png into notes
 - library/ directory copied
+- prefix 0 to dates
 
 Next up:
 
