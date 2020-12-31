@@ -27,3 +27,7 @@ rather than on the substrate.  This sequence of reagents itself can
 constitute an input stream being processed massively in parallel, but
 for the basic Wang-tile abstraction, you just need to cycle through
 all the reagents repeatedly enough times.
+
+(This turns out to have been [Erik Winfree's 1998 PhD
+thesis](https://thesis.library.caltech.edu/1866/1/winfree_thesis.pdf).
+Thanks to Darius Bacon for the heads up!)
