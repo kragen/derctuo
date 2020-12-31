@@ -1,4 +1,4 @@
-"Cyclic fabrication systems" is a term Matthew Moses, Hiroshi
+“Cyclic fabrication systems” is a term Matthew Moses, Hiroshi
 Yamaguchi, and Gregory Chirikjian invented to describe a collection of
 materials, tools, and processes capable of reproducing itself.  A CFS
 is the keystone of economic autarky, of resilience against faraway
@@ -16,15 +16,15 @@ years.
 
 With that in mind, I thought it would be worthwhile to survey
 historically and potentially existing CFSs.  There are various aspects
-of cyclicity: there's the simple geometric question of how a machine
+of cyclicity: there’s the simple geometric question of how a machine
 can reproduce the shapes of its own parts in the same materials;
-there's the metrology question of how to measure half a millimeter on
-a ruler measured in millimeters; there's the control question of how a
+there’s the metrology question of how to measure half a millimeter on
+a ruler measured in millimeters; there’s the control question of how a
 negative-feedback system can produce another working active
-negative-feedback system, there's the chemistry question of how to
+negative-feedback system, there’s the chemistry question of how to
 produce a large amount of materials with the necessary degree of
 purity, starting from impure and unknown natural materials and a small
-amount of known and pure materials; and there's the energy question of
+amount of known and pure materials; and there’s the energy question of
 how such an assemblage of machines can continue harvesting energy from
 its environment, for example building an engine that can harness the
 available solar or chemical energy.
@@ -33,7 +33,7 @@ Geometry
 --------
 
 The first category of CFSs to survey are those concerned with imposing
-some existing geometry on some existing material.  For now we're not
+some existing geometry on some existing material.  For now we’re not
 so concerned with how the geometry or the material is created.
 
 A feature common to many geometry CFSs is a sort of
@@ -43,7 +43,7 @@ used to shape that other material.
 
 For example, you can melt wax into a pewter mold, you can melt pewter
 into a steel mold, and you can melt steel into a greensand mold; but
-you can't melt greensand into any kind of mold, both because it
+you can’t melt greensand into any kind of mold, both because it
 requires unreasonably high temperatures and because it ceases to be
 greensand when you melt it.  Instead we rely on the fact that
 greensand at room temperature is soft enough to be rammed around
@@ -57,7 +57,7 @@ system cyclic.
 ### Flintknapping ###
 
 Since the Paleolithic, the humans have shaped tools by banging rocks
-together, a process called "knapping".  Arguably this is not a CFS,
+together, a process called “knapping”.  Arguably this is not a CFS,
 because typically the hammerstones and other flintknapping tools such
 as antlers and copper pressure-flaking tools are not themselves shaped
 by flintknapping or flintknapped tools.
@@ -85,17 +85,17 @@ From a CFS perspective, there are several great features of grinding.
 One is that the geometry of the workpiece can be more precise than the
 geometry of the tool, because it is determined primarily by the
 *movement* of the tool, as constrained by the workpiece and other
-external systems, rather than the tool's geometry.  Another is that,
+external systems, rather than the tool’s geometry.  Another is that,
 by grinding three surfaces against each other with abrasive between, a
 precisely flat surface can be achieved without any flatness reference.
 A third is that some hard materials are relatively easy to break, so
 we can get a rock-paper-scissors cycle with only two materials: a
 hard, brittle abrasive such as sapphire or quartz and a softer,
 tougher hammering material such as copper or iron.  A fourth is that,
-because of the aforementioned movement feature, it's actually possible
+because of the aforementioned movement feature, it’s actually possible
 to get a CFS with just a single material such as sandstone or
 concrete; you can dress a grinding wheel with an abrasive dressing
-stick just by moving the stick back and forth across the wheel's face
+stick just by moving the stick back and forth across the wheel’s face
 while spinning it.  A fifth is that grinding generally does not
 require heat or a minimum tool pressure, so it can be done while the
 workpiece is not deformed, providing more precise geometry than other
@@ -115,7 +115,7 @@ that are too hard to drill or cut on the mill or lathe.
 ### Pottery ###
 
 Since the late Paleolithic or early Neolithic, the humans have made
-pottery by sintering ("firing") composites of clays, sintering aids,
+pottery by sintering (“firing”) composites of clays, sintering aids,
 fillers, and sand into a sort of ceramic.  Sintering in general has the
 advantage that the sintered material can remain solid at temperatures
 exceeding those necessary to sinter it in the first place (for
@@ -128,23 +128,23 @@ and then assembling them into a kiln.
 
 Clays go through a series of states of plasticity according to their
 hydration.  Above about 25% water, they are colloidal liquids called
-"slips"; around 22%, purely plastic solids or thixotropic liquids,
+“slips”; around 22%, purely plastic solids or thixotropic liquids,
 which shrink substantially as they dry further; around 20%, they
 remain plastic over a large range of deformations but become capable
-of brittle fracture ("leather-hard") and almost do not shrink upon
+of brittle fracture (“leather-hard”) and almost do not shrink upon
 further drying; and below about 18%, they are fragile, brittle solids,
 which do not shrink on further drying.  (The precise transition points
 vary by clay composition, soaking time, and aqueous solute content.)
 Firing results in further shrinkage.  The other components of the
-so-called "clay body" can enhance plasticity and reduce sintering
+so-called “clay body” can enhance plasticity and reduce sintering
 temperatures, and they tend to decrease shrinkage.  The sintered clay
 body is much stronger and can be nonporous, especially if sintered a
-second time coated with a so-called "glaze" which melts fully rather
+second time coated with a so-called “glaze” which melts fully rather
 than just sintering; typically this results in further shrinkage.
 
 Because fired or even dried clay can plastically deform leather-hard
 or fully plastic clay, it is straightforward to use so-called clay
-"seals" to reproduce geometry (in negative), and such "bullae" have
+“seals” to reproduce geometry (in negative), and such “bullae” have
 been a key security measure for commercial transactions for some 12
 millennia, since the beginning of agriculture if not before; recently
 metals are more commonly used instead of clay, but this innovation was
@@ -153,7 +153,7 @@ can be carried through multiple generations of clay seals, though not
 without significant loss of fidelity, including, in particular,
 shrinkage.
 
-Such a clay-on-clay "sealing" process is probably responsible for the
+Such a clay-on-clay “sealing” process is probably responsible for the
 oldest instance of movable-type printing, the Phaistos disk; and of
 course movable type in Asia was made from pottery long before
 Gutenberg.
@@ -165,7 +165,7 @@ blades made of fired clay also work.  Because most of the shrinkage
 has already happened, forming clay in the leather-hard state results
 in much more precise dimensions.
 
-Clay is commonly "slipcast" in porous molds made of plaster of Paris:
+Clay is commonly “slipcast” in porous molds made of plaster of Paris:
 a slip is poured into a mold, and the absorption of water into the
 mold solidifies a layer of the slip in contact with the mold.  The
 remaining slip is poured out, and the cast piece contracts as it dries
@@ -204,7 +204,7 @@ weight, impede crack propagation, and improve its thermal insulating
 capabilities, and at higher void fractions permit easy fluid flow
 through the fired piece.  Because of the crack-propagation
 improvement, the foamed pottery can be cut to shape almost as if it
-were wood.  I've tried void fractions from 50% yerba up to 85% yerba,
+were wood.  I’ve tried void fractions from 50% yerba up to 85% yerba,
 which last was quite fragile; above 66% yerba, the material permitted
 easy airflow.  This porosity can be beneficial to the firing process
 in allowing the fabrication of thicker shapes without steam
@@ -241,18 +241,18 @@ iron and steel.
 
 There are several ways to harden ferrous metals, but nearly all of
 them involve a great deal of heat, and so impose a certain amount of
-uncontrolled deformation.  "Case hardening" by diffusing carbon (and
+uncontrolled deformation.  “Case hardening” by diffusing carbon (and
 possibly nitrogen) into the surface of iron is a form of
 solid-solution hardening known for two or three millennia;
-"quenching", applicable to carbon steels, is another.  In quenching,
+“quenching”, applicable to carbon steels, is another.  In quenching,
 the metal is heated until it converts from ferrite to austenite, then
 cooled too rapidly for it to reform ferrite at the surface, leaving it
 in the metastable state of martensite, which is much harder than
-ferrite.  (Sometimes the term "case hardening" is also used for
+ferrite.  (Sometimes the term “case hardening” is also used for
 quenching only the surface of a piece of metal.)
 
-Another is "work hardening" by hammering the surface ("cold working"
-or "cold forging"), but typically the resulting hardening is
+Another is “work hardening” by hammering the surface (“cold working”
+or “cold forging”), but typically the resulting hardening is
 relatively small.  Cutting highly work-hardenable metals like copper
 is difficult, because work hardening hardens the surface as soon as
 you have cut it, and perhaps even before; consequently, the
@@ -289,7 +289,7 @@ its expansivity is not a problem.
 
 Aside from the raw materials, sandcasting requires minimally a
 pattern, a riddle, a ram, a flask, a crucible, and a kiln (called a
-"furnace").  The crucible and the furnace are necessarily formed of
+“furnace”).  The crucible and the furnace are necessarily formed of
 refractory materials, and in usual practice must be exposed to air, so
 pottery is the traditional material for them, making this CFS
 dependent on the pottery CFS when used for ferrous metals; the
@@ -319,7 +319,7 @@ pottery.  This does not permit the reuse of the pattern, but can
 reproduce finer details than sandcasting, though with worse
 dimensional precision.
 
-A modern innovation in these processes is "lost foam casting", where
+A modern innovation in these processes is “lost foam casting”, where
 the pattern is burned out as with lost-wax casting, but the mold is
 sand as with sand casting.  By making the pattern from an organic foam
 such as styrofoam, it produces little enough gas that it need not be
@@ -328,13 +328,13 @@ hot metal; this eliminates the need for a binder and the need to
 disassemble the flask, and styrofoam is easier to cut than the
 traditional wood or, especially, metal.
 
-### Die-sink/ram and small-hole EDM ("electric discharge machining") ###
+### Die-sink/ram and small-hole EDM (“electric discharge machining”) ###
 
 EDM is capable of holding very tight tolerances (on the order of a micron,
 or somewhat higher at larger material removal rates)
 and cutting very hard materials, even diamond.
 You bring an electrically conductive workpiece together
-with a tool ("die") in an insulating liquid, such as diesel fuel or
+with a tool (“die”) in an insulating liquid, such as diesel fuel or
 deionized water, holding a voltage across them, until a spark occurs,
 vaporizing some of both the workpiece and the die.  The vapor
 immediately condenses in the liquid, and some time later you move them
@@ -345,7 +345,7 @@ surface layer, so the deformations that limit the precision of
 mechanical cutting processes are absent.
 
 The die can be of the same material as the workpiece.  However, to
-minimize the necessity to manufacture new dies, it's desirable to use
+minimize the necessity to manufacture new dies, it’s desirable to use
 die materials that are eroded less than the workpiece because of
 having higher boiling points, higher enthalpy of fusion and/or
 vaporization, or higher thermal conductivity; graphite, copper, brass, and
@@ -358,8 +358,8 @@ In particular, copper and graphite electrodes can cut steel with
 almost no wear, removing more than 100× as much workpiece as
 electrode.
 
-"Small hole EDM" is a variant of this approach, usually categorized
-separately, in which the tool electrode is a thin tube used to "drill"
+“Small hole EDM” is a variant of this approach, usually categorized
+separately, in which the tool electrode is a thin tube used to “drill”
 a hole into or through the workpiece.  Dielectric fluid is fed through
 the tool at high speed.  The tool is rotated as it is fed into the
 hole, eliminating circumferential variation, and also permitting the
@@ -379,9 +379,9 @@ extruded.  The end of the die might be consumed in the
 process, but, especially for through holes, this is unimportant.
 
 An EDM die can also be moved to cut out a shape as if it were an end
-mill, known as "orbiting"; if this is done with a die with a thread
-profile ("EDM tapping"), it cuts a thread into the hole it's in with
-the same thread pitch as the die's thread, but a larger diameter.
+mill, known as “orbiting”; if this is done with a die with a thread
+profile (“EDM tapping”), it cuts a thread into the hole it’s in with
+the same thread pitch as the die’s thread, but a larger diameter.
 Small pits in the threads of the die are unimportant, as they will be
 covered by the orbital motion.
 
@@ -397,10 +397,10 @@ grinding wheels; as with grinding wheels, small irregularities in the
 wheel surface are inconsequential, so they can make surfaces that are
 more accurately cylindrical than they are themselves.  Presumably
 these EDM wheels must periodically be dressed like grinding wheels,
-but using EDM rather than grinding.  Vollmer calls this process "disc
-erosion", and their process uses copper-tungsten wheels and an oil
+but using EDM rather than grinding.  Vollmer calls this process “disc
+erosion”, and their process uses copper-tungsten wheels and an oil
 dielectric to sharpen cutting tools made of polycrystalline diamond or
-tungsten carbide, while Setco calls it "spark erosion grinding" and
+tungsten carbide, while Setco calls it “spark erosion grinding” and
 uses cold-rolled steel wheels and I think a water dielectric to cut
 delicate metal honeycomb parts for jet engines.
 
@@ -456,17 +456,17 @@ microns around its surface, thus potentially permitting a speedup of a
 thousand or so.
 
 Wire EDM and small-hole EDM can cut through a meter or more of
-material in a single operation, so it's straightforward to imagine a
+material in a single operation, so it’s straightforward to imagine a
 sheet-cutting operation producing 20,000 identical parts from
 50-μm-thick sheet stock in a single operation.  (Other sheet-cutting
 processes, like waterjet, plasma, oxy-gas, bandsaw, and laser, are not
-so flexible; they tend to blow the layers apart.)  But it's not clear
+so flexible; they tend to blow the layers apart.)  But it’s not clear
 that this would be an especially fast or cheap way to do it.
 
 A CFS based on wire EDM could surely cut most of the parts of the EDM
 machine itself from steel or brass stock, then assemble them using an
 assembly system made similarly.  The wire itself, if not treated as a
-"vitamin" provided from outside the system, could be drawn from brass
+“vitamin” provided from outside the system, could be drawn from brass
 stock using EDM-cut drawing dies.  (These might even be workable
 without small-hole EDM.)  Again, I will postpone the question of the
 necessary control electronics, and again an insulator is required.
@@ -477,13 +477,13 @@ As mentioned earlier, grinding plays an important role in modern
 machining, as does hardening of steels for cutting tools, but its
 overall cycle is more complex.  Metal is mostly cut with a lathe,
 drill press, milling machine, or hand file, using ceramic/cermet
-("hardmetal") or hardened steel cutting tools ("machining").  These
+(“hardmetal”) or hardened steel cutting tools (“machining”).  These
 tools are typically shaped and resharpened with a grinding wheel,
-which can be silicon carbide, cubic boron nitride ("borazon" or
-"qingsongite"), or diamond, or (for hardened steel tools only)
+which can be silicon carbide, cubic boron nitride (“borazon” or
+“qingsongite”), or diamond, or (for hardened steel tools only)
 aluminum oxide, garnet, or zirconia†.  Aluminum oxide, zirconia, and
 silicon carbide are the usual materials.  This grinding wheel wears
-and loads, and must be brought back to shape ("dressed") periodically;
+and loads, and must be brought back to shape (“dressed”) periodically;
 [Adam Martin of Helical Solutions explains][1] that a diamond grinding
 wheel requires dressing every 500 to 600 tungsten-carbide tools.‡
 Dressing a diamond or silicon-carbide wheel can be done with another
@@ -512,7 +512,7 @@ of cements work at low speeds.  Historically, grinding wheels were
 often simply cut from sandstone, whose quartz grains are hard enough
 to cut steel but not tungsten carbide; they are typically bonded
 together by calcite deposited hydrothermally.  Wheels using the
-"superabrasives", diamond and cubic boron nitride, commonly use metals
+“superabrasives”, diamond and cubic boron nitride, commonly use metals
 as binders.
 
 As mentioned above, bonded-abrasive sticks can also be used to dress
@@ -532,11 +532,11 @@ forms an impermeable boria layer (though this melts at 490° and starts
 vaporizing at 1100°, well below its boiling point of 1860°), then
 begins to react with transition metals around 1400°.
 
-Silicon carbide abrasives don't last as long as alumina, accounting
+Silicon carbide abrasives don’t last as long as alumina, accounting
 for their lower popularity despite their higher hardness.
 
 Sometimes the ratio between the workpiece wear and the grinding-wheel
-wear is called the "G ratio"; the G ratio depends on the abrasive
+wear is called the “G ratio”; the G ratio depends on the abrasive
 material, the bond, machining speed, feed rate, and workpiece
 material.  Typical G ratios are 2–200, but can even be smaller than
 unity.  This is orders of magnitude smaller than the ratio between the
@@ -559,13 +559,13 @@ silicon-carbide wheels; and many variations.
 
 Tungsten carbide cutters are themselves mostly shaped by other
 processes and may not be ground at all; in particular, they are mostly
-made by hot isostatic pressing ("HIP") of tungsten-carbide powder,
+made by hot isostatic pressing (“HIP”) of tungsten-carbide powder,
 cemented with cobalt.  This is done mostly with steel equipment made
 by the processes described above.
 
 [1]: https://www.youtube.com/watch?v=rXA4x5Cjfg8
 
-† I'm not sure whether zirconia can be used to cut tungsten carbide,
+† I’m not sure whether zirconia can be used to cut tungsten carbide,
 why nobody makes grinding wheels out of tungsten carbide, or why
 zirconia is usually used together with aluminum oxide instead of
 alone.
@@ -574,7 +574,7 @@ alone.
 is made by sintering tungsten with cobalt, so he may not be an
 entirely reliable narrator.
 
-### Electrochemistry, including ECM ("electrochemical machining") and electrodeposition ###
+### Electrochemistry, including ECM (“electrochemical machining”) and electrodeposition ###
 
 This involves several different applications of the same process, one
 which is somewhat less familiar from daily life than grinding,
@@ -595,11 +595,11 @@ In this case the sodium does not deposit on the cathode because it is
 much easier to ionize — its ionization energy is 495.8 kJ/mol, its
 reduction potential is -2.71 volts, and its [electronegativity][2] is
 0.93 Pauling units — not only than the nickel, but even than the water
-itself.  Nickel's ionization energy is 737.1 kJ/mol (and its second
+itself.  Nickel’s ionization energy is 737.1 kJ/mol (and its second
 ionization energy is 1753.0 kJ/mol), its reduction potential to the
 hydroxide is -0.72 volts, its reduction potential to the nickel(II)
 ion is -0.25 volts, and its electronegativity is 1.91 Pauling units.
-Water's reduction potential to electrolyze hydrogen is -0.8277 volts.
+Water’s reduction potential to electrolyze hydrogen is -0.8277 volts.
 So nickel precipitates at a lower voltage than is required to produce
 hydrogen, and hydrogen is produced at a lower voltage than is required
 to produce sodium, although mercury electrodes can change the
@@ -607,7 +607,7 @@ situation by amalgamating the produced sodium.
 
 [2]: https://en.wikipedia.org/wiki/Electronegativity
 
-(I'm not sure about this, for a couple of reasons.  Nickel cations go
+(I’m not sure about this, for a couple of reasons.  Nickel cations go
 into the solution, turning it light green, but the bulk solution does
 not become positively charged like a positive electret, so either it
 must be losing other cations like the sodium, or it must be gaining
@@ -615,16 +615,16 @@ additional anions to compensate, which would have to be hydroxyl
 anions formed by producing hydrogen gas.  But nickel chloride is
 highly acidic, not basic.)
 
-Because the nickel's crystal structure is relatively compatible with
-the steel's, it can form a strongly adherent film on the surface.
+Because the nickel’s crystal structure is relatively compatible with
+the steel’s, it can form a strongly adherent film on the surface.
 
 This process, and analogous processes using other metals, is used in
 seven main ways, three of which are more or less geometry production:
 
 1. **Electroplating** of a thin film of metal on the surface of some
 substrate, which might even be a film of graphite paint.  This can be
-used for appearance's sake (as in the case of gold-plating base metals
-for costume jewelry) or to modify some other aspect of the object's
+used for appearance’s sake (as in the case of gold-plating base metals
+for costume jewelry) or to modify some other aspect of the object’s
 properties.  For example, steel thus plated with nickel or chrome is
 harder and less prone to corrosion.  (I think it might also be less
 prone to fatigue.)
@@ -638,8 +638,8 @@ outside of a mandrel in the shape of the desired object, but nowadays
 it should feasible to use electronic control of anode position and
 current to deposit metal selectively.  Electroforming can hit
 nanometer tolerances, thus being suitable for reproduction even of
-holograms.  Sometimes the term "electroforming" is limited to the case
-where the mandrel or mold is conductive and "electrotyping" to the
+holograms.  Sometimes the term “electroforming” is limited to the case
+where the mandrel or mold is conductive and “electrotyping” to the
 case where it is not.
 
 3. **Electrochemical machining** simply reverses the roles of the
@@ -660,7 +660,7 @@ electrowinning of metals, which are not geometry-reproduction
 processes and so do not concern us here.
 
 There is a gray area between electroforming and electroplating,
-"dimensional recovery", where a film is plated onto a metal part to
+“dimensional recovery”, where a film is plated onto a metal part to
 enlarge it by microns to hundreds of microns.  Since the non-mandrel
 side of the electroformed object has relatively uncontrolled geometry,
 this is usually preliminary to a later subtractive process such as
@@ -672,17 +672,17 @@ limited by ionic availability, especially for deposition, and by
 voltage.  Generally the deposits are smoother when the limit is from
 ionic availability, while voltage limits tend to deposit dendrites (I
 do not understand why) so it is common to add organic thickeners to
-the water as "leveler brighteners" — originally gelatin and nowadays
+the water as “leveler brighteners” — originally gelatin and nowadays
 mostly secret chemicals, although some people have reported success
 with things like dishwashing detergent, vanillin, and corn syrup.
-(There are other kinds of "brighteners" also used in electroplating
+(There are other kinds of “brighteners” also used in electroplating
 which work by other means.)
 
 There have been some experiments using electrochemical machining to
 shape nonconductive materials such as soda-lime glass; the idea is
 that the electric field through the workpiece is balanced by an
 accumulation of ions on its opposite surfaces, one of which (in close
-proximity to a "cutting" electrode) is attacked by them.  Since this
+proximity to a “cutting” electrode) is attacked by them.  Since this
 section is dedicated to CFSs that are demonstrated to work, I will not
 further consider here these experiments, nor other possibilities like
 using anodic dissolution as a source of divalent cations to
@@ -691,8 +691,8 @@ precipitate silicates, phosphates, organic anions, and so on.
 In cases where dissolution of an anode is unacceptable, for example
 because no suitable anode is available, anodes of graphite, amorphous
 carbon, platinum, or palladium can be used; these will not dissolve
-anodically.  I assume this is because they're held together by
-covalent bonds rather than metallic bonds, but I don't really know.
+anodically.  I assume this is because they’re held together by
+covalent bonds rather than metallic bonds, but I don’t really know.
 
 Deposition of metal onto the cathode is unavoidable — even coal and
 graphite can be electroplated, and have been since the very inception
@@ -742,7 +742,7 @@ Selective etching is widely used in semiconductor and MEMS
 manufacturing; for example, hydrofluoric acid removes silicon dioxide,
 but not silicon or organic photoresists, while piranha removes organic
 photoresists but none of the layers in chips, including silicon
-dioxide.  But it's also used in more prosaic ways: hot water with alum
+dioxide.  But it’s also used in more prosaic ways: hot water with alum
 in it, for example, will eat steel but not aluminum, copper, tin, or
 zinc, a fact commonly used to remove broken drillbits; so you could
 imagine a CFS using alum in place of grinding to shape steel cutting
@@ -758,7 +758,7 @@ atmosphere produces carbon foam, which is refractory to 6000°, more
 than hot enough to bake more bread in and even calcine it, or for that
 matter for casting metals, carbothermic reduction of iron, or even
 carbothermic reduction of aluminum.  On Earth such a device may
-oxidize on the outside during operation, where it's exposed to air,
+oxidize on the outside during operation, where it’s exposed to air,
 but this can be tolerated in various ways: making it large enough to
 survive one or more operations, coating the outside with a layer of
 something more resistant to oxidation (but not necessarily heat), or
@@ -782,8 +782,8 @@ control; thus you can form a furnace capable of doing more of the same
 kind of sintering.
 
 I have previously written about the possibility of using
-solid-solution "hardening" on sintered objects.  The general outline
-of the process is that, before sintering, the "green" object contains
+solid-solution “hardening” on sintered objects.  The general outline
+of the process is that, before sintering, the “green” object contains
 at least a low-melting sintering aid and a high-melting filler; during
 sintering, the sintering aid solidifies and densifies the object
 (perhaps without fully melting, and perhaps partly dissolving the
@@ -798,8 +798,8 @@ even up to considerably higher temperatures.
 
 If you squint hard enough, you could describe the hardening process of
 plaster of paris in this way; calcium sulfate hemihydrate is the
-"filler", water is the "sintering aid", and room temperature is the
-"sintering temperature" at which the water dissolves into the plaster,
+“filler”, water is the “sintering aid”, and room temperature is the
+“sintering temperature” at which the water dissolves into the plaster,
 forming calcium sulfate dihydrate as the solid solution, which then
 remains stable up to some 150°.  I suspect a similar dynamic is at
 play in the well-known use of boron donors as fluxes for soda-lime
@@ -813,7 +813,7 @@ If the sintering aid forms a eutectic with the filler, it need not
 even be lower-melting; for example, a tiny amount of table salt can be
 used in this way to stick ice cubes together at temperatures between
 the melting points of the eutectic (-21.2°) and pure water ice (0°),
-even though salt's melting point is higher.  The eutectic water-salt
+even though salt’s melting point is higher.  The eutectic water-salt
 solution is initially liquid at the interface between ice and salt
 crystals, but after several minutes the salt diffuses into the ice
 until no salt or eutectic is left.  So you can do this process at -20°
@@ -832,9 +832,9 @@ example, you could thus use salted ice as a binder for sawdust
 powder, chopped fiber, hollow spheres, solid spheres, some other
 shape, or some combination).
 
-This is classified as a "geometry" possibility, since the circularity
+This is classified as a “geometry” possibility, since the circularity
 involved is that of using, say, brass tools to give the desired
-geometry to a "brass clay", which are then fired in a brass furnace
+geometry to a “brass clay”, which are then fired in a brass furnace
 made from the same material, to produce finished brass parts.
 
 Stick, flame, wire, or friction welding might be a plausible way to
@@ -849,7 +849,7 @@ to harden metal so that it can cut or hammer out copies of itself,
 because the hardening process takes place during cutting or hammering.
 This may be less of a concern for cyclic fabrication systems than for
 traditional production systems, because the objective is to maximize
-reproductive rate rather than tool life, but there's also another
+reproductive rate rather than tool life, but there’s also another
 possibility: bending and forming.  You could imagine, for example,
 folding fingers out of aluminum foil which were sufficiently stiff to
 grasp other aluminum foil and fold it into more fingers, or bending a
@@ -864,7 +864,7 @@ bending evenly along a curve instead of concentrating it at a kink, as
 happens when you try to bend a drinking straw.
 
 (Aluminum foil in particular is an appealing raw material for
-experimentation because it's cheaply and easily available, ships
+experimentation because it’s cheaply and easily available, ships
 pre-annealed, work-hardens readily, has good mechanical properties in
 the tempered state, and is typically of some 10 μm in thickness, with
 submicron roughness on one side.)
@@ -880,7 +880,7 @@ cutting properties.  Sintering clay or other materials causes them to
 shrink, and not perfectly uniformly, so it is common to grind sintered
 parts to precise dimensions after sintering.  Foaming greatly
 facilitates such cutting because the bubbles tend to arrest crack
-propagation and reduce the material's hardness.  The 25%-dense foamed
+propagation and reduce the material’s hardness.  The 25%-dense foamed
 pottery I made was soft enough to be carved with a fingernail, and it
 is common for people to cut foamed refractory silica-alumina
 firebricks with woodcutting tools.  Foams also tend to have a Poisson
@@ -891,8 +891,8 @@ can facilitate the use of flexures.
 
 Polymer-derived ceramics are a very interesting possibility discussed
 in some detail in [Pyrolysis 3-D printing](pyrolysis-3d-printing.md),
-which also mentions another "supersintering" alternative to the
-diffusion-based system mentioned earlier: if the "sintering aid"
+which also mentions another “supersintering” alternative to the
+diffusion-based system mentioned earlier: if the “sintering aid”
 responds to heat by pyrolyzing into a solid substance that is stable
 to higher temperatures, like the bread dough mentioned earlier, it
 will produce a solid object with geometry stable up to those higher
@@ -900,7 +900,7 @@ temperatures.  Depending on the geometry and strength of the filler
 particles, the pyrolysis products need not even be particularly strong
 to produce a strong object.
 
-I've previously written about using various kinds of chemical cements
+I’ve previously written about using various kinds of chemical cements
 for 3-D printing, whether powder-bed or extrusion, focusing on those
 that can be activated relatively quickly, including things like
 double-metathesis reactions, pH-activated gelling agents, heat-induced
@@ -908,8 +908,8 @@ solvent evaporation, and the precipitation induced by divalent cations
 in a number of aqueous ionic systems.  Almost any of these approaches,
 if workable, would provide a CFS.
 
-For example, in "Likely-feasible non-flux-deposition powder-bed 3-D
-printing processes" in Dercuano, I suggested selectively jetting water
+For example, in “Likely-feasible non-flux-deposition powder-bed 3-D
+printing processes” in Dercuano, I suggested selectively jetting water
 onto a powder bed consisting of 1.6 kg/l quartz sand, 170 g/l
 unfired-bentonite clumping cat litter, 270 g/l calcium chloride, and
 190 g/l diammonium phosphate, with the calcium chloride wet-mixed with

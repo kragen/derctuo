@@ -33,7 +33,7 @@ promote cross-linking, which helps to prevent volatilization and
 melting before pyrolysis.)
 
 Moreover, it would at least remain viscous at pyrolysis temperatures,
-like polycaprolactone (not to be confused with polycaprolact_am_,
+like polycaprolactone (not to be confused with polycaprolact*am*,
 which is common nylon 6 and not viscous at all), though
 polycaprolactone itself is saturated and contains oxygen.  Something
 that solidifies before reaching pyrolysis would be even better (see
