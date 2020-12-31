@@ -312,7 +312,7 @@ is one of the great UI benefits of logic programming in general.  But
 sometimes you do need nesting in order to be able to correctly reason
 about complicated propositions, especially without existentials.
 
-A really simple approach, which doesn't go far, is to allow variables
+A really simple approach, which doesn’t go far, is to allow variables
 to match arbitrary sequences of words instead of single words:
 
     Bob Smith is a person
@@ -341,8 +341,8 @@ by studying users.
 
 ### Regexps ###
 
-If you're trying to apply this kind of tool to parsing text that it
-wasn't intended for, it might be convenient to specify a regex to
+If you’re trying to apply this kind of tool to parsing text that it
+wasn’t intended for, it might be convenient to specify a regex to
 constrain the matches.
 
     start 'year/\d+/'-'month/\d+/'-'day/\d+/'
@@ -359,7 +359,7 @@ The abbreviation facility above suggests writing:
         bananas
         apples
 
-to create three facts.  But what if we're trying to assimilate
+to create three facts.  But what if we’re trying to assimilate
 something like
 
     I should buy red peppers, bananas, apples
@@ -378,11 +378,11 @@ Syntax
 Especially for a textual system, syntax is important for UI.  Some
 alternatives to the strawman syntax above:
 
-- Alternative syntax for variables.  Above I've only stuck sigils on
+- Alternative syntax for variables.  Above I’ve only stuck sigils on
   variables to indicate their variable nature the first time they
   occur, but it might be worthwhile to use the sigil every time for
   readability; Tcl and bash seem to suffer in usability compared to
-  PHP and Perl's more universal sigil usage.  Here are some possible
+  PHP and Perl’s more universal sigil usage.  Here are some possible
   alternatives:
 
         'It' is made of 'unobtainium'   # example above
@@ -425,13 +425,13 @@ alternatives to the strawman syntax above:
     <b>It</b> is made of <b>unobtainium</b>, or
     <span style="color: #666">It</span> is made of
     <span style="color: #666">unobtainium</span> instead.
-   (Note that if you're viewing
+   (Note that if you’re viewing
     this on GitLab some of the formatting in this paragraph gets
     mangled by their buggy Markdown parser.)
 
 - Alternative syntax for deduction.  The line of dashes echoes the
-  sequent calculus but it's kind of heavyweight, and how many dashes
-  do you use, anyway?  Does it matter?  And then there's the question
+  sequent calculus but it’s kind of heavyweight, and how many dashes
+  do you use, anyway?  Does it matter?  And then there’s the question
   of how far its scope extends (above, to the first blank line).  And
   should the premises come before the conclusion, as above, or after
   it?  Here is the original and some strawman alternatives:
@@ -469,18 +469,18 @@ alternatives to the strawman syntax above:
 
     Although I like the one with “:.”, the closest ASCII equivalent of
     “∴”, I think the last one with “=>”, due to deltab, is better.
-    They both avoid spurious visual suggestions of nesting, it's
-    compact, and there's only one way to do (each of) them.  The
+    They both avoid spurious visual suggestions of nesting, it’s
+    compact, and there’s only one way to do (each of) them.  The
     `premises { conclusion }` idea, also due to deltab, is also very
     nice, but like the turnstile `|-` it clashes somewhat with the
     overall line-oriented style.
 
 - Alternative syntax for formulas.  I think most formulas will
-  probably be fairly simple affairs, so it's nice to be able to
+  probably be fairly simple affairs, so it’s nice to be able to
   introduce them with just a single character instead of nested
   delimiters; `=total(cost)` beats `[total(cost)]` on visual noise.
   And the `=` syntax is familiar from Excel, having replaced
-  Visicalc's `@` syntax (also used in Lotus 1-2-3, though with one
+  Visicalc’s `@` syntax (also used in Lotus 1-2-3, though with one
   less period for ranges): `+B1-SUM(C2...C8)`.  Still, you could
   imagine other syntaxes.  ES5 template strings use `${2 * a + b}`.
 
@@ -539,7 +539,7 @@ trichotomous: either {T} < {M}, {T} == {M}, or {T} > {M}.  But for
 interval-valued quantities, this may not be the case; if the
 temperature of some water is known to be between -4° and +4°, we
 cannot conclude either that it is liquid or solid.  (Or gaseous, of
-course; a more powerful modal reasoning system than what I'm proposing
+course; a more powerful modal reasoning system than what I’m proposing
 could demonstrate that it is not gaseous, and that if the temperature
 is >0°, it is liquid.)
 
@@ -570,7 +570,7 @@ Arrays and dynamical systems
 ----------------------------
 
 Computers are great at iteration.  You can integrate a system of
-ordinary differential equations with Euler's method in Python in a
+ordinary differential equations with Euler’s method in Python in a
 minute or two of programming, using a fraction of a second of CPU
 time:
 
@@ -608,7 +608,7 @@ Given how easy this is, it might be worthwhile to have an implicit
 loop limit you can override to avoid accidental looping.  Like, in a
 sense this is just transitive closure, right?
 
-This kind of explicit indexing can be used for things that aren't
+This kind of explicit indexing can be used for things that aren’t
 iterative, too, but rather data-parallel:
 
     {It} emits {x} watts per square meter per nm in band {λ}
@@ -616,15 +616,15 @@ iterative, too, but rather data-parallel:
     => {It} emits =mean({x} * {w}) lumens
 
 This is easy to distinguish from the dangerous case above because the
-derivation chain doesn't go through the same rule over and over again.
-However, I'm not entirely sure how to tell the difference between the
+derivation chain doesn’t go through the same rule over and over again.
+However, I’m not entirely sure how to tell the difference between the
 (safe) transitive closure of a finite relation produced in some other
-way, and the (unsafe) looping case above.  So it isn't obvious how to
-implement something like Turner's Total Functional Programming.
+way, and the (unsafe) looping case above.  So it isn’t obvious how to
+implement something like Turner’s Total Functional Programming.
 
-There's a practical concern for how to get these arrays of data into
+There’s a practical concern for how to get these arrays of data into
 the system as a large set of assertions like the example above in the
-first place.  But the solution for that doesn't have to be elegant; it
+first place.  But the solution for that doesn’t have to be elegant; it
 just has to be practical.
 
 Consider this Numerical Python example, where I wanted to see the
@@ -642,7 +642,7 @@ thresholds:
     0.25, 0.24, 0.22, 0.21, 0.2, 0.19, 0.17, 0.16, 0.15, 0.14, 0.13,
     0.12, 0.11, 0.09, 0.08, 0.07, 0.06, 0.05, 0.04, 0.03, 0.02, 0.01]
 
-This is awkward to do in Numpy because Numpy doesn't have output
+This is awkward to do in Numpy because Numpy doesn’t have output
 format control, so I had to resort to a regular Python list
 comprehension.
 
@@ -695,17 +695,17 @@ match.)
 
 N3 is, of course, capable of expressing enormously more powerful forms
 of inference than that, including anonymous entities and so on.  But I
-don't think that's an excuse for it to read like line noise.
+don’t think that’s an excuse for it to read like line noise.
 
 Naming
 ------
 
 Names considered: Heef Jumbus, Spungot (file extension: .spug),
-Facdotum, Axiopolis, Expressum, Shuntence, Nollidge, Ret-o'-Rick,
+Facdotum, Axiopolis, Expressum, Shuntence, Nollidge, Ret-o’-Rick,
 Infoflow, Conceptium, Polythink, Knecksus, Mirrorgation, The Mind
-Machine, Databog, Thinksluice, Monad's Revenge, Itshift,
+Machine, Databog, Thinksluice, Monad’s Revenge, Itshift,
 Cherry-go-Round, Connectionalismus, Meshotron, Cogtionary,
-Equationsheet, Mathbox, Logivox, Neotinker, The Bitsmith's Forge,
+Equationsheet, Mathbox, Logivox, Neotinker, The Bitsmith’s Forge,
 Omnilathe, Spinfluence, Elementalis, Wonderiensis, Bowdos, Monkin,
 Fleuf, Trurbus, Ploomish, Grufty, Rencum, Dolus, Mujimbo, Stooshiong,
 Treebus, Widgity, Cleophlembic, Entrisculi, Quimbrus, or Factpool?
